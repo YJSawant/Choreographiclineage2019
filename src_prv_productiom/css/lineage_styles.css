@@ -1,0 +1,196 @@
+#my_network {
+	background-color: #ffffff;
+	height: 90%;
+
+	margin-right: 0;
+	padding-right: 0;
+	padding-left: 0;
+	position: relative;
+	cursor: -webkit-grab;
+	z-index: 1;
+}
+
+#tab_bar_row {
+	height: 10%;
+	position: relative;
+	margin-left: 0;
+	margin-right: 0;
+	padding-right: 0;
+	padding-left: 0;
+}
+
+.limit400 #influenced_by_tab {
+
+}
+
+#tab_bar_row .tablinks {
+	margin-right: 0;
+	padding-right: 0;
+	padding-left: 0;
+	font-family: 'Open Sans Condensed', sans-serif;
+}
+
+#network_display_div {
+	height: 100%;
+	position: relative;
+	margin-right: 0;
+	padding-right: 0;
+	padding-left: 0;
+}
+
+/* Style the tab */
+div.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+#network_row {
+	background-color: #ffffff;
+	height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+#network_div {
+	height: 69%;
+}
+
+#filter_div {
+	height: 100%;
+	border-right: 1px solid #cccccc;
+	padding-right: 0;
+}
+
+#load {
+	padding-right: 0;
+	padding-left: 0;
+	height: 100%;
+	position: absolute;
+	z-index: 2;
+}	    
+
+#loader_circles_div {
+	top: 35%;
+	left: 63%;
+	position: relative;
+}
+
+.loader1,.loader2 {
+	position: absolute;
+	border: 5px solid transparent;
+	border-radius: 50%;
+}
+.loader1 {
+	width: 80px;
+	height: 80px;
+	border-top: 5px solid darkturquoise;
+	border-bottom: 5px solid darkturquoise;
+	animation: clockwisespin 2s linear 1000;
+}
+
+.loader2 {
+	width: 50px;
+	height: 50px;
+	border-left: 5px solid darkturquoise;
+	border-right: 5px solid darkturquoise;
+	top: 15px; left: 15px;
+	animation: anticlockwisespin 2s linear 1000;
+}
+
+.filter_legend_title {
+	color: #002F36;
+	font-size: 13px;
+	font-weight: 700;
+	font-family: Arial,sans-serif;
+	height: 20px;
+	margin-bottom: 0;
+}
+
+.item {
+	height: 20px;
+}
+
+.filter_item_label {
+	color: #002F36;
+	font-size: 13px;
+	font-weight: 400;
+	font-family: Arial,sans-serif;
+}
+
+#searchbox_row {
+	margin-right: 0;
+}
+
+nav {
+	margin-bottom: 0px;
+}
+
+@keyframes clockwisespin {
+	from {transform: rotate(0deg);}
+	to {transform: rotate(360deg);}
+}
+
+@keyframes anticlockwisespin {
+	from {transform: rotate(0deg);}
+	to {transform: rotate(-360deg);}
+}		
+
+@media screen and (min-width : 0px) and (max-width : 1023px){
+	#loader_circles_div {
+		top: 50%;
+		left: 45%;
+		position: relative;
+	}
+
+	#filter_div {
+		height: 20%;
+		border-right: 0;
+		border-bottom: 1px solid #cccccc;;
+	}
+
+	#tab_bar_row {
+		height:15%;
+	}
+
+	.tablinks {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	#my_network {
+		height: 80%;
+	}
+}	

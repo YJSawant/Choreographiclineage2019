@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>DanceWorx</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="bootstrap-3.3.2/css/bootstrap.min.css">
+            <link rel="stylesheet" href="css/add-on.css">
+            <link rel="stylesheet" href="js/datepicker/css/datepicker.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+            <script src="bootstrap-3.3.2/js/bootstrap.min.js"></script>
+            <script src="js/datepicker/js/bootstrap-datepicker.js"></script>
+            <script>$('.datepicker').datepicker();</script>
+            <script>
+                var k = 1;
+                function addDate(thisid) {
+                    var m = thisid.parentNode.id.toString()[6];
+                    if (k==1) {
+                       k = thisid.parentNode.id.toString()[7];
+                    }
+                    //alert ("This id is " + thisid.parentNode.id.toString()[6] + " and " + thisid.parentNode.id.toString()[7] );
+                    k++;
+                   
+                    //alert ("Parent is " + document.getElementById(thisid).parentNode.id);
+                    //var dateBlock='<div id="s-date1'+k+'"> <label for="s-date-id1'+k+'">Start</label> <input type="text" class="input-sm" id="s-date-id1'+k+'" placeholder="mm/dd/yyyy"> <label for="e-date-id1'+k+'" style="margin-left: 2%;">End</label> <input type="text" class="input-sm" id="e-date-id1'+k+'" placeholder="mm/dd/yyyy"> <button style="float:right;" type="button" class="btn btn-link" onclick="removeThisDate('+k+')">Remove This</button> <br> <br> </div>';
+                    var dateBlock='<div id="s-date' + m + k + '"> <label for="s-date-id' + m + k + '">Start</label> <input type="text" class="input-sm" id="s-date-id' + m + k + '" placeholder="mm/dd/yyyy"> <label for="e-date-id' + m + k + '" style="margin-left: 2%;">End</label> <input type="text" class="input-sm" id="e-date-id' + m + k + '" placeholder="mm/dd/yyyy"> <button  style="float:right;" type="button" class="btn btn-link" onclick="removeThisDate(this)">Remove This</button> <br> <br> </div>';
+                    $("#col-date"+m).append(dateBlock);         // Append the new elements
+
+                }
+                function removeThisDate(thisid) {
+                    //var m = thisid.parentNode.id.toString()[6];
+                    var m = thisid.parentNode.id.toString()[9];
+                    //var k = thisid.id.toString()[10];
+                    //alert ("This id is " + m + " and " + k );
+                    var thisid_par = thisid.parentNode;
+                    thisid_par.parentNode.removeChild(thisid_par);
+                    //if (k>1) {
+                    //    elemname='s-date'+m+k;
+                    //    var element = document.getElementById(elemname);
+                    //    element.parentNode.removeChild(element);
+                    //}
+                }
+            </script>
+
+            <script>
+                var m = 1;
+                function addArtist() {
+                    m++;
+                    var artistBlock='<div id="artist'+m+'"><h4> Lineal Artist - '+m+'</h4> <br> <div id="gr'+m+'"> <table style="width:100%;" class="table-condensed table-responsive"> <tr> <td> <label for="gr-fn'+m+'" class="col-sm-3 control-label"> First Name </label> <input id="gr-fn'+m+'" class="col-sm-3 width-60" type="text" placeholder="Ex- Steve"> </td> <td> <label for="gr-ln'+m+'" class="col-sm-3 control-label"> Last Name </label> <input id="gr-ln'+m+'" class="col-sm-3 width-60" type="text" placeholder="Ex- Kole"> </td> </tr> <tr> <td> <label for="gr-em'+m+'" class="col-sm-3 control-label"> EMail </label> <input id="gr-em'+m+'" class="col-sm-3 width-60" type="text" placeholder="Ex- steve@gmail.com"> </td> <td> <label for="gr-we'+m+'" class="col-sm-3 control-label">Website</label> <input id="gr-we'+m+'" class="col-sm-3 width-60" type="text" placeholder="Ex- http://www.stevekole.me"> </td> </tr> </table> </div> <br> <br> <label for="genre'+m+'" class="col-sm-3 control-label">Genre *</label> <input id="genre'+m+'" class="col-sm-3" type="text" placeholder="Ex- XYZ"> <br> <br> <h5>Relationship</h5> <div class="radio-inline"> <label> <input type="radio" name="relation'+m+'" id="rel-sw'+m+'" value="SW"> Studied With </label> </div> <div class="radio-inline"> <label> <input type="radio" name="relation'+m+'" id="rel-df'+m+'" value="DF"> Danced For </label> </div> <div class="radio-inline"> <label> <input type="radio" name="relation'+m+'" id="rel-cw'+m+'" value="CW"> Collaborated With</label> </div> <div class="radio-inline"> <label> <input type="radio" name="relation'+m+'" id="rel-ib'+m+'" value="IB"> Influenced By </label> </div> <br> <br> <h5 style="display: inline-block;"> Date Range </h5> <br> <br> <div id="col-date'+m+'"> <div id="s-date'+m+'1"> <label for="s-date-id'+m+'1">Start</label> <input type="text" class="input-sm" id="s-date-id'+m+'1" placeholder="mm/dd/yyyy"> <label for="e-date-id'+m+'1" style="margin-left: 2%;">End</label> <input type="text" class="input-sm" id="e-date-id'+m+'1" placeholder="mm/dd/yyyy"> <button style="float:right;" type="button" class="btn btn-link" onclick="addDate(this)">Add Another Date</button> <br> <br> </div> </div> <br> <br> <div> <p>Duration: If you don\'t know the exact dates, notate your best estimate of the total duration with which you studied with, Danced for or Collaborated with someone. Use the days, weeks, months or years fields as appropriate </p> </div> <div id="col-duration"> <label for="col-yr'+m+'">Years</label> <input type="text" class="input-sm" id="col-yr'+m+'" placeholder="2"> <label for="col-mo'+m+'" style="margin-left: 4%;">Months</label> <input type="text" class="input-sm" id="col-mo'+m+'" placeholder="6"> <label for="col-we'+m+'" style="margin-left: 4%;">Weeks</label> <input type="text" class="input-sm" id="col-we'+m+'" placeholder="3"> <label for="col-da'+m+'" style="margin-left: 4%;">Days</label> <input type="text" class="input-sm" id="col-da'+m+'" placeholder="4"> <br> <br> </div> </div>';
+                    $("#form6").append(artistBlock);         // Append the new elements
+
+                }
+                function removeThisArtist(z) {
+                    m--;
+                    if (z>1) {
+                        elemname='artist'+z;
+                        var element = document.getElementById(elemname);
+                        element.parentNode.removeChild(element);
+                    }
+                }
+            </script>
+            <script>
+            $(document).ready(function(){
+                $('#saveButton6').click(function(){
+                    if (!document.getElementById("submit-check-form6-id").checked)
+                        $("#submit-check-form6-id").click();
+                    //if (document.getElementById('other_rad_form3').checked) {
+                    //    getOtherGenderBox();
+                    //}
+                    getData();
+                    $("#form6").submit();
+                });
+            });
+            
+            function getData () {
+                getFName();
+                getLName();
+                getEmail();
+                getWeb();
+                getGenre();
+                getRel();
+                getYearsOfRelation();
+                getMonthsOfRelation();
+                getWeeksOfRelation();
+                getDaysOfRelation();
+                getDateRange();
+                //alert ("Submitting the form");
+                
+            }
+            function getFName() {
+                var i = 1;
+                var fName = "";
+                while(i < 10) {
+                    var div_id = 'gr-fn'+i.toString();
+                    var div_elem = document.getElementById(div_id);
+                    if (div_elem !== null) {
+                        fName = fName + div_elem.value + "#";
+                    }
+                    i++;
+                }
+                document.getElementById("fNameBox").setAttribute("value", fName);
+            }
+            function getLName() {
+                var i = 1;
+                var lName = "";
+                while(i < 10) {
+                    var div_id = 'gr-ln'+i.toString();
+                    var div_elem = document.getElementById(div_id);
+                    if (div_elem !== null) {
+                        lName = lName + div_elem.value + "#";
+                    }
+                    i++;
+                }
+                document.getElementById("lNameBox").setAttribute("value", lName);
+            }
+            function getEmail() {
+                var i = 1;
+                var eMail = "";
+                while(i < 10) {
+                    var div_id = 'gr-em'+i.toString();
+                    var div_elem = document.getElementById(div_id);
+                    if (div_elem !== null) {
+                        eMail = eMail + div_elem.value + "#";
+                    }
+                    i++;
+                }
+                document.getElementById("emailBox").setAttribute("value", eMail);
+                //alert ("eMail is " + eMail);
+            }
+           function getWeb() {
+                var i = 1;
+                var Website = "";
+                while(i < 10) {
+                    var div_id = 'gr-we'+i.toString();
+                    var div_elem = document.getElementById(div_id);
+                    if (div_elem !== null) {
+                        Website = Website + div_elem.value + "#";
+                    }
+                    i++;
+                }
+                document.getElementById("websiteBox").setAttribute("value", Website);
+                //alert ("Website is " + Website);
+            }
+           function getGenre() {
+                var i = 1;
+                var genre = "";
+                while(i < 10) {
+                    var div_id = 'genre'+i.toString();
+                    var div_elem = document.getElementById(div_id);
+                    if (div_elem !== null) {
+                        genre = genre + div_elem.value + "#";
+                    }
+                    i++;
+                }
+                document.getElementById("genreBox").setAttribute("value", genre);
+                //alert ("genre is " + genre);
+            }
+            function getRel() {
+                var i = 1;
+                var rel = "";
+                while(i < 10) {
+                    if (document.getElementById('rel-sw'+i) !== null ) {
+                        var sw_val = document.getElementById('rel-sw'+i).checked.toString();
+                        var df_val = document.getElementById('rel-df'+i).checked.toString();
+                        var cw_val = document.getElementById('rel-cw'+i).checked.toString();
+                        var ib_val = document.getElementById('rel-ib'+i).checked.toString();
+                    
+                        if (sw_val === 'true') rel = rel + "1#";
+                        else if (df_val === 'true') rel = rel + "2#";
+                        else if (cw_val === 'true') rel = rel + "3#";
+                        else if (ib_val === 'true') rel = rel + "4#";            
+                    }
+                    i++;
+                }
+                //document.getElementByName("relation")[0].setAttribute("value", rel);
+                document.getElementById("relBox").setAttribute("value", rel);
+            }
+            function getYearsOfRelation() {
+                var i = 1;
+                var years = "";
+                while(i < 10) {
+                    var div_id = 'col-yr'+i.toString();
+                    var div_elem = document.getElementById(div_id);
+                    if (div_elem !== null) {
+                        years = years + div_elem.value + "#";
+                    }
+                    i++;
+                }
+                document.getElementById("durationyearsbox").setAttribute("value", years);
+                //alert ("Years are " + years);
+            }
+            
+            function getMonthsOfRelation() {
+                var i = 1;
+                var months = "";
+                while(i < 10) {
+                    var div_id = 'col-mo'+i.toString();
+                    var div_elem = document.getElementById(div_id);
+                    if (div_elem !== null) {
+                        months = months + div_elem.value + "#";
+                    }
+                    i++;
+                }
+                document.getElementById("durationmonthsbox").setAttribute("value", months);
+                //alert ("Months are " + months);
+            }
+            
+            function getWeeksOfRelation() {
+                var i = 1;
+                var weeks = "";
+                while(i < 10) {
+                    var div_id = 'col-we'+i.toString();
+                    var div_elem = document.getElementById(div_id);
+                    if (div_elem !== null) {
+                        weeks = weeks + div_elem.value + "#";
+                    }
+                    i++;
+                }
+                document.getElementById("durationweeksbox").setAttribute("value", weeks);
+                //alert ("Number of weeks are " + weeks);
+            }
+            
+            function getDaysOfRelation() {
+                var i = 1;
+                var days = "";
+                while(i < 10) {
+                    var div_id = 'col-da'+i.toString();
+                    var div_elem = document.getElementById(div_id);
+                    if (div_elem !== null) {
+                        days = days + div_elem.value + "#";
+                    }
+                    i++;
+                }
+                document.getElementById("durationdaysbox").setAttribute("value", days);
+                //alert ("Number of days are " + days);
+            }
+            
+            function getDateRange() {
+                var i = 1;
+                var s_date = "";
+                var e_date = "";
+                while (i < 10) {
+                    var j = 1;
+                    
+                    while (j < 10) {
+                        var s_div_id = 's-date-id' + i.toString() + j.toString();
+                        var e_div_id = 'e-date-id' + i.toString() + j.toString();
+                        if (document.getElementById(s_div_id) !== null) {
+                            s_date = s_date + "#" + document.getElementById(s_div_id).value;
+                        }
+                        if (document.getElementById(e_div_id) !== null) {
+                            e_date = e_date + "#" + document.getElementById(e_div_id).value;
+                        }
+                        j++;
+                    }
+                    s_date = s_date + "^";
+                    e_date = e_date + "^";
+                    i++;
+                }
+                //alert ('sdate is ' + s_date + ' and edate is ' + e_date);
+                document.getElementById("s-dateranges").setAttribute("value", s_date);
+                document.getElementById("e-dateranges").setAttribute("value", e_date);
+            }
+            </script>
+            
+            <style>
+                body {
+                  padding-top: 20px;
+                  background-color: #444;
+                }
+                @media (max-width: 980px) {
+                  body {
+                    padding-top: 20px;
+                  }
+                }
+            </style>
+    </head>
+    <body style="background-color: #23B14D;">
+        <div class="container-fluid">
+        <div id="f1" class="col-md-10 hero col-md-offset-1 div-hero">
+                <img src="images/logo.png" alt="Choregraphic Lineage UB" >
+                <br> <br> <br>
+                <div class="hero-text-pad-left">
+                    <h4><u>Your Lineage</u></h4>
+                    <!--button type="button" class="btn btn-info active">Your Lineage</button-->
+                </div>
+                <div class="hero-text-pad-left" id='out1'>    
+                    <br> <br>
+                        <form id="form6" method="post"  action="form7.html">
+                            <div id="artist1">
+                            <h4>Lineal Artist - 1</h4>
+                            <button style="float:right;" type="button" class="btn btn-link" onclick="addArtist()">Add Another</button>
+                            <br>
+                            <div id="gr1">
+                                <table style="width:100%;" class="table-condensed table-responsive">
+                                <tr>
+                                    <td>
+                                        <label for="gr-fn1" class="col-sm-3 control-label">First Name</label>
+                                        <input id="gr-fn1" name="gr-fn1" class="col-sm-3 width-60" type="text" placeholder="Ex- Steve">
+                                        <input type="text" name="fNameBox" id="fNameBox" style="opacity:0; position:absolute;">
+                                    </td>
+                                    <td>
+                                        <label for="gr-ln1" class="col-sm-3 control-label">Last Name</label>
+                                        <input id="gr-ln1" name="gr-ln1" class="col-sm-3 width-60" type="text" placeholder="Ex- Kole">
+                                        <input type="text" name="lNameBox" id="lNameBox" style="opacity:0; position:absolute;">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="gr-em1" class="col-sm-3 control-label">EMail</label>
+                                        <input id="gr-em1" name="gr-em1" class="col-sm-3 width-60" type="text" placeholder="Ex- steve@gmail.com">
+                                        <input type="text" name="emailBox" id="emailBox" style="opacity:0; position:absolute;">
+                                    </td>
+                                    <td>
+                                        <label for="gr-we1" class="col-sm-3 control-label">Website</label>
+                                        <input id="gr-we1" name="gr-we1" class="col-sm-3 width-60" type="text" placeholder="Ex- http://www.stevekole.me">
+                                        <input type="text" name="websiteBox" id="websiteBox" style="opacity:0; position:absolute;">
+                                    </td>
+                                </tr>
+                                </table>
+                            </div>
+                            <br> <br>
+
+                            <label for="genre1" class="col-sm-3 control-label">Genre *</label>
+                            <input id="genre1" name="genre1" class="col-sm-3" type="text" placeholder="Flamenco">
+                            <input type="text" name="genreBox" id="genreBox" style="opacity:0; position:absolute;">
+                            <br> <br>
+                            
+                           <h5>Relationship</h5>
+                           <div class="radio-inline">
+                             <label>
+                                 <input type="radio" name="relation1" id="rel-sw1" value="SW">
+                               Studied With
+                             </label>
+                           </div>
+                           <div class="radio-inline">
+                             <label>
+                               <input type="radio" name="relation1" id="rel-df1" value="DF">
+                               Danced For
+                             </label>
+                           </div>        
+                           <div class="radio-inline">
+                             <label>
+                               <input type="radio" name="relation1" id="rel-cw1" value="CW">
+                               Collaborated With
+                             </label>
+                           </div>        
+                           <div class="radio-inline">
+                             <label>
+                               <input type="radio" name="relation1" id="rel-ib1" value="IB">
+                               Influenced By
+                             </label>
+                           </div>        
+                            <input type="text" name="relBox" id="relBox" style="opacity:0; position:absolute;">
+                            
+                            <br> <br>
+                           
+                            <h5 style="display: inline-block;">Date Range</h5>
+                            <br> <br>
+                            <div id="col-date1"> 
+                            <div id="s-date11">
+                              <label for="s-date-id11">Start</label>
+                              <input type="text" class="input-sm" id="s-date-id11" name="s-date-id11" placeholder="mm/dd/yyyy">
+                              <label for="e-date-id11" style="margin-left: 2%;">End</label>
+                              <input type="text" class="input-sm" id="e-date-id11" name="e-date-id11" placeholder="mm/dd/yyyy">
+                              <button  style="float:right;" type="button" class="btn btn-link" onclick="addDate(this)">Add Another Date</button>
+
+                              <input type="text" name="s-dateranges" id="s-dateranges" style="opacity:0; position:absolute;">
+                              <input type="text" name="e-dateranges" id="e-dateranges" style="opacity:0; position:absolute;">
+                              <br> <br>
+                            </div>
+                            </div>
+                            <br> <br>
+                           <div>
+                               <p>Duration: If you don't know the exact dates, notate your best estimate of the total duration with which you studied with, Danced for or Collaborated with someone. Use the days, weeks, months or years fields as appropriate </p>
+                           </div>        
+                           <div id="col-duration"> 
+                              <label for="col-yr1">Years</label>
+                              <input type="text" class="input-sm" id="col-yr1" name="col-yr1" placeholder="2">
+                              <input type="text" name="durationyearsbox" id="durationyearsbox" style="opacity:0; position:absolute;">
+
+                              <label for="col-mo1" style="margin-left: 4%;">Months</label>
+                              <input type="text" class="input-sm" id="col-mo1" name="col-mo1" placeholder="6">
+                              <input type="text" name="durationmonthsbox" id="durationmonthsbox" style="opacity:0; position:absolute;">
+
+                              <label for="col-we1" style="margin-left: 4%;">Weeks</label>
+                              <input type="text" class="input-sm" id="col-we1" name="col-we1" placeholder="3">
+                              <input type="text" name="durationweeksbox" id="durationweeksbox" style="opacity:0; position:absolute;">
+
+                              <label for="col-da1" style="margin-left: 4%;">Days</label>
+                              <input type="text" class="input-sm" id="col-da1" name="col-da1" placeholder="4">
+                              <input type="text" name="durationdaysbox" id="durationdaysbox" style="opacity:0; position:absolute;">
+
+                              <input type="checkbox" value="submit-check-form6-value" name="submit-check-form6-name" id="submit-check-form6-id" style="opacity:0; position:absolute;">
+
+                              <br> <br>
+                            </div>
+                           </div>
+                </div>   
+                <nav>
+                    <ul class="pager">
+                        <li><a href="form5.html">Previous</a></li>
+                        <li><a style="cursor:pointer; cursor:hand;" id="saveButton6" name="submit6">&nbsp; Next &nbsp;</a></li>
+                        </form>     
+                    </ul>
+                </nav>
+        </div>
+
+        </div>
+    </body>
+
+</html>

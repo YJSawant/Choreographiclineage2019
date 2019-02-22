@@ -1,0 +1,32 @@
+/* Only styles specific to index.html */
+.fi-social-twitter {
+    color: #00aced;
+    font-size: 5rem;
+}
+
+.fi-social-facebook {
+    color: #3b5998;
+    font-size: 5rem;
+}
+
+button.accordion {
+    background-color: #ADD8E6;
+    color: #000;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+}
+
+button.accordion.active, button.accordion:hover {
+    background-color: #eee; 
+}
+
+div.panel {
+    padding: 0 18px;
+    display: none;
+}

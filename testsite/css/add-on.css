@@ -1,0 +1,36 @@
+body {
+    background-color: #23B14D;
+}
+
+.hero {
+    background-color: #fff;
+    padding: 0 10px;
+}
+
+
+.div-hero {
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    background-color:#fff;
+    text-align: left
+ }
+ .div-surv {
+  padding-right: 50px;
+ }
+ .hero-div-float {
+     float: left;
+     padding-left: 20px;
+ }
+ 
+.hero-text-pad {
+     padding: 15px;
+ }
+ 
+ .hero-text-pad-left {
+     padding-left: 15px;
+ }
+ 
+ .width-60 {
+ width: 60% !important;    
+ }

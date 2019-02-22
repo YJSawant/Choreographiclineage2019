@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>DanceWorx</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="bootstrap-3.3.2/css/bootstrap.min.css">
+            <link rel="stylesheet" href="bootstrap-3.3.2/css/bootstrap.min.css">
+            <link rel="stylesheet" href="css/add-on.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+            <script src="bootstrap-3.3.2/js/bootstrap.min.js"></script>
+            <script>
+                var i = 0;
+                function appendContactForm() {
+                    var formDat= '<div class="hero-text-pad"><p><u>Phone Assistance</u></p><p>Please call 716-645-0605 or email aceto@buffalo.edu to arrange a time to contribute your lineage with our staff over the phone. Be sure to leave your First Name, Last Name, Email Address and Phone Number and a good time to reach you. </p> <br/> <form class="form-horizontal" action="contactPhone.html" method="post" id="form1"><div class="form-group"> <input type="checkbox" name="submitContactPhoneForm"  value="submitContactPhoneFormValue" id="submitContactPhoneForm" style="opacity:0; position:absolute;"><label for="fname-phone-contact-id" class="col-sm-3 control-label">First Name <font color="red">*</font></label><div class="col-sm-4"><input type="text" class="form-control" id="fname-phone-contact-id" placeholder="First Name" name="fname-phone-contact-name"></div></div><div class="form-group"><label for="lname-phone-contact-id" class="col-sm-3 control-label">Last Name</label><div class="col-sm-4"><input type="text" class="form-control" id="lname-phone-contact-id" placeholder="Last Name" name="lname-phone-contact-name"></div></div><div class="form-group"><label for="email-phone-contact-id" class="col-sm-3 control-label">Email <font color="red">*</font></label><div class="col-sm-4"><input type="email" class="form-control" id="email-phone-contact-id" placeholder="Email" name="email-phone-contact-name"></div></div><div class="form-group"><label for="phone-phone-contact-id" class="col-sm-3 control-label">Phone <font color="red">*</font></label><div class="col-sm-4"><input type="text" class="form-control" id="phone-phone-contact-id" placeholder="Phone" name="phone-phone-contact-name"></div></div><div class="form-group"><label for="contacttime-phone-contact-id" class="col-sm-3 control-label">Best Days and Time to Contact <font color="red">*</font></label><div class="col-sm-4"><input type="text" class="form-control" id="contacttime-phone-contact-id" placeholder="Tuesday and Thursday at 2:30" name="contacttime-phone-contact-name"></div></div><div class="form-group"><div class="col-sm-offset-2 col-sm-10"><button type="button" class="btn btn-default" id="submitForm1" onclick="submitForm()">Submit</button></div></div></form></div>';
+                    if (i === 0) {
+                        $("#f1").append(formDat);         // Append the new elements
+                        i++;
+                        window.scroll(0,500);
+                    }
+                }
+            </script>
+            <script>
+            //$(document).ready(function(){
+                //$('#submitForm1').click(function(){
+                function submitForm() {
+                     $("#submit-error").empty();
+                    var fNameValid = validateFirstName();
+                    var eMailValid = validateEMail();
+                    var phoneValid = validatePhone();
+                    var timeValid = timeToContactValidate();
+                    if (fNameValid && eMailValid && phoneValid && timeValid) {
+                        $("#submitContactPhoneForm").click(); 
+                        $("#form1").submit();
+                    }
+                };
+ 
+            function validateFirstName() {
+                var fName = document.forms["form1"]["fname-phone-contact-id"].value;
+                if( /^[A-z ]+$/.test(fName)) return true;
+                else {
+                    var fNameError = '<font color="red"><h4>First Name field has to be a A-Z or a-z character. It cannot be left blank or any other character.</h4></font>';
+                    $("#submit-error").append(fNameError);
+                    return false;
+                }
+            }
+
+            function validateEMail() {
+                var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+                var email = document.forms["form1"]["email-phone-contact-id"].value;
+                if(re.test(email)) return true;
+                else {
+                    var fNameError = '<font color="red"><h4>Email has to be valid in format abc@gmail.com. It cannot be left blank or be without @ or .</h4></font>';
+                    $("#submit-error").append(fNameError);
+                    return false;
+                }
+            }
+
+            function validatePhone() {
+                var re = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/;
+                var phone = document.forms["form1"]["phone-phone-contact-id"].value;
+                if(re.test(phone)) return true;
+                else {
+                    var phoneError = '<font color="red"><h4>Phone has to be valid in format (123) 456-7890 or 123-456-7890 or 123.456.7890 or 1234567890. It cannot be left blank.</h4></font>';
+                    $("#submit-error").append(phoneError);
+                    return false;
+                }
+            }
+
+            function timeToContactValidate() {
+                var time = document.forms["form1"]["contacttime-phone-contact-id"].value;
+                if( /^(0?[1-9]|1[012]):[0-5][0-9]$/.test(time)) return true;
+                var re = /^([01]\d|2[0-3]):?([0-5]\d)$/;
+                if (re.test(time)) return true;
+                else {
+                    var timeError = '<font color="red"><h4>Please enter a valid 24-hour clock time to contact.</h4></font>';
+                    $("#submit-error").append(timeError);
+                    return false;
+                }
+            }
+            </script>
+            
+            <style>
+                body {
+                  padding-top: 20px;
+                  background-color: #444;
+                }
+                @media (max-width: 980px) {
+                  body {
+                    padding-top: 20px;
+                  }
+                }
+            </style>
+    </head>
+    <body style="background-color: #23B14D;">
+        <div class="container-fluid ">
+        <div id="f1" class="col-md-10 hero col-md-offset-1 div-hero">
+                <img src="images/logo.png" alt="Choregraphic Lineage UB" >
+                </br>
+                <h4><u>Welcome</u></h4>
+                <p>Thank you in advance for contributing your lineage. Your contribution is vital to building a global resource for dance. The amount of time it will take to fill out this form will vary depending on how many artists you include in your lineage. We encourage you to take time to include all of the people you have studied with, danced for, collaborated with and been influenced by so that this resource can most accurately represent the rich network of our field. You can work on the form over time by saving it and coming back to finish it when you are ready.</p>
+                </br> </br>
+                <p><u>A Brief Description of Choreographic Lineage Project</u></p>
+                <p>The Choreographic Lineage initiative seeks to establish an interactive web-based genealogical network illustrating connections between dance artists, their teachers, their students, their collaborators and people who they were influenced by. The main goal is to establish a knowledge base documenting 20th and 21st century dance that is searchable and minable and that will continue to grow as new generations of artists are added. Choreographic Lineage allows the user to navigate through dance history in the most direct way by isolating choreographer's historical paths. Choreographic Lineage is intended as a global resource for investigating artistic influences, career paths, choreographic connections, and complex and obscure relationships.</p>
+                </br> </br>
+                <p>View the Network : <a href="http://www.choreographiclineage.buffalo.edu/Network/index.html" target="_blank">Choreographic Lineage Network</a></p>
+                </br></br>
+                <div class= "hero-div-float">
+                    <a href="form2.html"><button type="button" class="btn btn-success"><span class="glyphicon glyphicon-calendar" aria-hidden="true" style="vertical-align:middle; margin-top: -25px;"></span>Contribute your Lineage via Online Form</button></a>
+                </div>
+                    <div class="hero-div-float">
+                        
+                    <button id="btn-phone" type="button" class="btn btn-success" onclick="appendContactForm()" ><span class="glyphicon glyphicon-phone" aria-hidden="true" style="vertical-align:middle; margin-top: -25px;"></span>Contribute your Lineage via Phone</button>
+                </div>
+                <!--input type="checkbox" name="submitContactPhoneForm"  value="submitContactPhoneFormValue" id="submitContactPhoneForm" style="opacity:0; position:absolute;"-->
+                <!--input type="checkbox" value="submit-check-form4-value" name="submit-check-form4-name" id="submit-check-form4-id" style="opacity:0; position:absolute; left:9999px;"-->
+
+                </br></br>
+                </br></br>
+                <div id="submit-error"></div>
+        </div>
+         
+         </div>
+         </body>
+</html>

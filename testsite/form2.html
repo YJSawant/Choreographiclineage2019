@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>DanceWorx</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="bootstrap-3.3.2/css/bootstrap.min.css">
+            <link rel="stylesheet" href="bootstrap-3.3.2/css/bootstrap.min.css">
+            <link rel="stylesheet" href="css/add-on.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+            <script src="bootstrap-3.3.2/js/bootstrap.min.js"></script>
+             <style>
+                body {
+                  padding-top: 20px;
+                  background-color: #444;
+                }
+                @media (max-width: 980px) {
+                  body {
+                    padding-top: 20px;
+                  }
+                }
+            </style>
+            <script>
+            $(document).ready(function(){
+              $('#submit-button-form2-id').click(function(){
+                
+                if (!document.getElementById("submit-check-form2-id").checked)
+                    $("#submit-check-form2-id").click();
+                if (document.getElementById('identify-form2-id-self').checked) {
+                    getArtistType();
+                    //alert("Hello! I am an alert box!! " + abc );
+                }
+                else if (document.getElementById('identify-form2-id-other').checked) {
+                    getOtherArtistType();
+                }
+                $("#submit-error").empty();
+                var fNameValid = validateFirstName();
+                var eMailValid = validateEMail();
+                var lNameValid = validateLastName();
+                var isWhoChecked = validateWhoseLineage();
+                var isFinePhone = validatePhoneNumber();
+                if (fNameValid && eMailValid && lNameValid && isWhoChecked && isFinePhone)
+                    if (document.forms["form2"]["identify-form2-id-other"].checked) {
+                                if (validateOtherArtistFirstName() && validateOtherLivingCheck())
+                                    $("#form2").submit();
+                    }
+                    else $("#form2").submit();
+                        
+              });
+            });
+            
+            function validateFirstName() {
+                var fName = document.forms["form2"]["fname-form2-id"].value;
+                if( /^[A-z ]+$/.test(fName)) return true;
+                else {
+                    var fNameError = '<font color="red"><h4>Your first Name has to be a A-Z or a-z character. It cannot be left blank or any other character.</h4></font>';
+                    $("#submit-error").append(fNameError);
+                    return false;
+                }
+            }
+
+            function validateWhoseLineage() {
+                if ((document.forms["form2"]["identify-form2-id-other"].checked) || (document.forms["form2"]["identify-form2-id-self"].checked))
+                    return true;
+                else {
+                    var fNameError = '<font color="red"><h4>All items marked (*) are required. Please mention whose lineage you will be contributing.</h4></font>';
+                    $("#submit-error").append(fNameError);
+                    return false;
+                }
+            }
+
+    
+            function validateLastName() {
+                var fName = document.forms["form2"]["lname-form2-id"].value;
+                if( /^[A-z ]+$/.test(fName)) return true;
+                else {
+                    var fNameError = '<font color="red"><h4>Your last Name field has to be a A-Z or a-z character. It cannot be left blank or any other character.</h4></font>';
+                    $("#submit-error").append(fNameError);
+                    return false;
+                }
+            }
+
+            function validatePhoneNumber() {
+                var phone = document.forms["form2"]["phone-form2-id"].value;
+                if( phone==null || phone =="" || /\D*([2-9]\d{2})(\D*)([2-9]\d{2})(\D*)(\d{4})\D*/.test(phone)) return true;
+                else {
+                    var phoneError = '<font color="red"><h4>The phone number you entered is invalid. Please check it again. </h4></font>';
+                    $("#submit-error").append(phoneError);
+                    return false;
+                }
+            }
+
+    
+    
+            function validateEMail() {
+                var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+                var email = document.forms["form2"]["email-form2-id"].value;
+                if(re.test(email)) return true;
+                else {
+                    var fNameError = '<font color="red"><h4>Your email has to be valid in format abc@gmail.com. It cannot be left blank or be without @ or .</h4></font>';
+                    $("#submit-error").append(fNameError);
+                    return false;
+                }
+            }
+
+            function validateOtherArtistFirstName() {
+                var fName = document.getElementById("fname-other-form2-id").value;
+                if( /^[A-z ]+$/.test(fName)) return true;
+                else {
+                    var fNameError = '<font color="red"><h4>Other Artist\'s first Name has to be a A-Z or a-z character. It cannot be left blank or any other character.</h4></font>';
+                    $("#submit-error").append(fNameError);
+                    return false;
+                }
+            }
+
+            function validateOtherLivingCheck() {
+                if (document.getElementById("living").checked || document.getElementById("deceased").checked) {
+                    return true;
+                }
+                else {
+                    var livingError = '<font color="red"><h4>Please tell us weather other artist is living or deceases. This is a required field</h4></font>';
+                    $("#submit-error").append(livingError);
+                    return false;
+                }
+            }
+            
+            function getOtherArtistType() {
+                    var fArtistName2 = $("#fname-other-form2-id").val();
+                    document.getElementById('fname-other-hidden-form2-id').setAttribute("value", fArtistName2);
+                    var lArtistName2 = $("#lname-other-form2-id").val();
+                    document.getElementById('lname-other-hidden-form2-id').setAttribute("value", lArtistName2);
+                    if (document.getElementById('living').checked)
+                        document.getElementById('artistalive-other-hidden-form2-id').setAttribute("value","living");
+                    else
+                        document.getElementById('artistalive-other-hidden-form2-id').setAttribute("value","deceased");
+            }
+            function getArtistType() {
+                if (document.getElementById('actor-form2-id').checked)
+                    var artistType = $("#actor-form2-id").val()+ "#"; 
+                if (document.getElementById('choreographer-form2-id').checked)
+                    artistType += $("#choreographer-form2-id").val() + "#"; 
+                if (document.getElementById('composer-form2-id').checked)
+                    artistType += $("#composer-form2-id").val() + "#"; 
+                if (document.getElementById('costume-designer-form2-id').checked)
+                    artistType += $("#costume-designer-form2-id").val() + "#"; 
+                if (document.getElementById('dancer-form2-id').checked)
+                    artistType += $("#dancer-form2-id").val() + "#"; 
+                if (document.getElementById('film-maker-form2-id').checked)
+                    artistType += $("#film-maker-form2-id").val() + "#"; 
+                if (document.getElementById('musician-form2-id').checked)
+                    artistType += $("#musician-form2-id").val() + "#"; 
+                if (document.getElementById('scenic-designer-form2-id').checked)
+                    artistType += $("#scenic-designer-form2-id").val() + "#"; 
+                if (document.getElementById('lighting-designer-form2-id').checked)
+                    artistType += $("#lighting-designer-form2-id").val() + "#"; 
+                if (document.getElementById('poet-form2-id').checked)
+                    artistType += $("#poet-form2-id").val() + "#"; 
+                if (document.getElementById('visual-artist-form2-id').checked)
+                    artistType += $("#visual-artist-form2-id").val() + "#"; 
+                if (document.getElementById('otherartisttype-form2-id').checked)
+                    artistType += $("#otherartisttype-val-form2-id").val() + "#";
+                document.getElementById('artisttype-hidden-form2-id').setAttribute('value', artistType);
+                return artistType;
+            }
+            </script>
+            <script>
+                var i = 0;
+                function appendArtistTypeDetail1() {
+                    var list = document.getElementById("f3");
+                    while (list.hasChildNodes())
+                        list.removeChild(list.childNodes[0]);
+                      var artistType='<p>What type of Artist are you ? (Select all that apply)</p><div class="hero-text-pad-left"> <table class="table-condensed table-responsive"> <tr> <td> <div class="checkbox-inline"> <label> <input type="checkbox" name="artisttype" value="actor" id="actor-form2-id">Actor </label> </div></td><td> <div class="checkbox-inline"> <label> <input type="checkbox" name="artisttype" value="choreographer" id="choreographer-form2-id">Choreographer </label> </div></td><td> <div class="checkbox-inline"> <label> <input type="checkbox" name="artisttype" value="composer" id="composer-form2-id">Composer </label> </div></td><td> <div class="checkbox-inline"> <label> <input type="checkbox" name="artisttype" value="costume-designer" id="costume-designer-form2-id">Costume Designer </label> </div></td><td> <div class="checkbox-inline"> <label> <input type="checkbox" name="artisttype" value="dancer" id="dancer-form2-id">Dancer </label> </div></td><td> <div class="checkbox-inline"> <label> <input type="checkbox" name="artisttype" value="film-maker" id="film-maker-form2-id">Film Maker </label> </div></td></tr><tr> <td> <div class="checkbox-inline"> <label> <input type="checkbox" name="artisttype" value="musician" id="musician-form2-id">Musician </label> </div></td><td> <div class="checkbox-inline"> <label> <input type="checkbox" name="artisttype" value="scenic-designer" id="scenic-designer-form2-id">Scenic Designer </label> </div></td><td> <div class="checkbox-inline"> <label> <input type="checkbox" name="artisttype" value="lighting-designer" id="lighting-designer-form2-id">Lighting Designer </label> </div></td><td> <div class="checkbox-inline"> <label> <input type="checkbox" name="artisttype" value="poet" id="poet-form2-id">Poet </label> </div></td><td> <div class="checkbox-inline"> <label> <input type="checkbox" name="artisttype" value="visual-artist" id="visual-artist-form2-id">Visual Artist </label> </div></td><td> <div class="checkbox-inline"> <label> <input type="checkbox" name="artisttype" value="other" id="otherartisttype-form2-id" onclick="otherArtistType()">Other </label> </div></td></tr></table> </div>';
+                        $("#f3").append(artistType);         // Append the new elements
+                }
+
+                function otherArtist() {
+                    var list = document.getElementById("f3");
+                    while (list.hasChildNodes())
+                        list.removeChild(list.childNodes[0]);
+                    var otherAtr = '<div class="form-group"> <label for="fname-other-form2-id" class="col-sm-5 control-label">First Name of the artist whose lineage you are contributing <font color="red">*</font></label> <div class="col-sm-4"> <input type="text" class="form-control" id="fname-other-form2-id" placeholder="First Name" name="fArtistName"> </div></div> <br><br> <div class="form-group"> <label for="lname-other-form2-id" class="col-sm-5 control-label">Last Name of the artist whose lineage you are contributing &nbsp;</label> <div class="col-sm-4"> <input type="text" class="form-control" id="lname-other-form2-id" name="lArtistName" placeholder="Last Name"> </div></div> <br><br> <div class="hero-text-pad-left"> <p>Is the artist living or deceased? <font color="red">*</font></p><label class="radio-inline"> <input type="radio" name="livingordec" id="living" value="living"> Living </label> <label class="radio-inline"> <input type="radio" name="livingordec" id="deceased" value="deceased"> Deceased </label> </div><br><br><p>Please note: You will be asked to share the sources (references) for the information entered on this artist at the end of this form.</p>';
+                        $("#f3").append(otherAtr);         // Append the new elements
+                        window.scroll(0,500);
+                    }
+                function otherArtistType() {
+                    var list = document.getElementById("f3");
+                    var othelem = document.getElementById('other-artist-form2-id');
+                    if (othelem == null) {
+                        var otherTypeAtr = '<div class="form-group" id="other-artist-form2-id"><div class="col-sm-4"><input type="text" class="form-control" id="otherartisttype-val-form2-id" placeholder="Other" name="otherartisttype-val-form2-name"></div></div><br>';
+                        $("#f3").append(otherTypeAtr);         // Append the new elements
+                        window.scroll(0,500);
+                    }
+                    else {
+                        var elem = document.getElementById("other-artist-form2-id");
+                        elem.parentNode.removeChild(elem);
+                    }
+                }
+            </script>
+    </head>
+
+    <body style="background-color: #23B14D;">
+        <div class="container-fluid ">
+        <div id="f1" class="col-md-10 hero col-md-offset-1 div-hero">
+                <img src="images/logo.png" alt="Choregraphic Lineage UB" >
+                </br> </br> </br>
+                <p>For assistance in filling out this form or to fill out the form via phone with a staff member, please call <b>716-645-0605</b></p>
+                </br> </br>
+                <p>Please tell who you are:</p>
+
+                <div class="hero-text-pad">
+                    <div id="submit-error"></div>
+                    <form class="form-horizontal" method="post" action="form3.html" id="form2">
+                        <div class="form-group"> 
+                            <label for="fname-form2-id" class="col-sm-3 control-label">First Name <font color="red">*</font></label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="fname-form2-id" name="fname-form2-name" placeholder="First Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lname-form2-id" class="col-sm-3 control-label">Last Name <font color="red">*</font></label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="lname-form2-id" placeholder="Last Name" name="lname-form2-name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email-form2-id" class="col-sm-3 control-label">Email <font color="red">*</font></label>
+                            <div class="col-sm-4">
+                                <input type="email" class="form-control" id="email-form2-id" placeholder="Email" name="email-form2-name">
+                            </div>
+                        </div>
+                         
+                        <div class="form-group">
+                            <label for="phone-form2-id" class="col-sm-3 control-label">Phone</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="phone-form2-id" placeholder="Phone" name="phone-form2-name">
+                            </div>
+                        </div>
+                </div>
+                
+                <p>Whose lineage will you be contributing? <font color="red">*</font></p>
+                <div class="hero-text-pad">
+                    <!--div class="hero-text-pad-left"-->    
+                    <div class="radio">
+                     <label>
+                         <input type="radio" name="identify-form2-name" id="identify-form2-id-self" value="identify-form2-value-self" onclick="appendArtistTypeDetail1()">
+                       My own
+                     </label>
+                   </div>
+                   <div class="radio">
+                     <label>
+                       <input type="radio" name="identify-form2-name" id="identify-form2-id-other" value="identify-form2-value-other" onclick="otherArtist()">
+                       An Artist other than myself
+                     </label>
+                   </div>        
+                </div>
+
+                <br>
+
+                <div id="f3">
+                </div>
+                    
+                <input type="checkbox" value="submit-check-form2-value" name="submit-check-form2-name" id="submit-check-form2-id" style="opacity:0; position:absolute; left:9999px;">
+                <input type="hidden" name="artisttype-hidden-form2-name" id="artisttype-hidden-form2-id" style="opacity:0; position:absolute; left:9999px;">
+                <input type="hidden" name="fname-other-hidden-form2-name" id="fname-other-hidden-form2-id" style="opacity:0; position:absolute; left:9999px;">
+                <input type="hidden" name="lname-other-hidden-form2-name" id="lname-other-hidden-form2-id" style="opacity:0; position:absolute; left:9999px;">
+                <input type="hidden" name="artistalive-hidden-form2-name" id="artistalive-other-hidden-form2-id" style="opacity:0; position:absolute; left:9999px;">
+
+                <nav>
+                    <ul class="pager">
+                        <li><a href="form1.html">Previous</a></li>
+                        <li><a style="cursor:pointer; cursor:hand;" id="submit-button-form2-id" name="submit-button-form2-name">&nbsp; Next &nbsp;</a></li>
+                    </ul>
+                </nav>
+                </form>
+        </div>
+         
+         </div>
+         </body>
+
+</html>
