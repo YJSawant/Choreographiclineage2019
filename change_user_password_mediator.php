@@ -15,7 +15,7 @@
 	WHERE user_email_address='$user_email_address' AND user_password='$user_old_password'";
 	
 	$result = mysqli_query($dbc,$query)
-    or die('Error querying database.: '  .mysql_error($dbc));
+    or die('Error querying database.: '  .mysqli_error($dbc));
 	
 	$count=mysqli_num_rows($result);
 	if($count==1){

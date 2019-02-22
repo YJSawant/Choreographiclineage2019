@@ -1,17 +1,16 @@
 <?php
-//$mysql_hostname = "postel.cse.buffalo.edu";
-//$mysql_user="cl";
-//$mysql_password="DclSQLwebsiteLineage";
-$mysql_database="choreographiclineage_db";
-//$connection = mysqli_connect( "localhost" , "root" , "",choreographic_lineage);
-//$dbc = mysql_select_db($mysql_database);
+//$mysqli_hostname = "postel.cse.buffalo.edu";
+//$mysqli_user="cl";
+//$mysqli_password="DclSQLwebsiteLineage";
+$mysqli_hostname = "localhost";
+$mysqli_user="root";
+$mysqli_password="root";
+$mysqli_database="choreographiclineage_db";
+#$connection = mysqli_connect( $mysqli_hostname , $mysqli_user , $mysqli_password);
+#$dbc = mysqli_select_db($mysqli_database);
 
-//echo @mysql_ping() ? 'true' : 'false';
+//echo @mysqli_ping() ? 'true' : 'false';
 
-$dbc = mysqli_connect("localhost", "root", "", "choreographic_lineage");
-
-if (!$dbc) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-echo "Connected successfully";
+ $dbc = mysqli_connect($mysqli_hostname, $mysqli_user, $mysqli_password, $mysqli_database)
+ 		or die('Error connecting to MySQL server.');
 ?>

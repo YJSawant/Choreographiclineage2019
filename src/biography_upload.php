@@ -18,8 +18,8 @@ if(isset($_POST["biography_text"])){
 	$query = "UPDATE artist_profile
 	SET artist_biography_text = '$biography_text'
 	WHERE artist_profile_id='".$_SESSION["artist_profile_id"]."'";
-	$result = mysql_query($query)
-	or die('Error querying database.: '  .mysql_error($dbc));
+	$result = mysqli_query($dbc,$query)
+	or die('Error querying database.: '  .mysqli_error($dbc));
 	include 'connection_close.php';
 	echo " &nbsp; &nbsp; &nbsp; Your biography has been saved.";
 
@@ -59,8 +59,8 @@ if(isset($_FILES["bio_file"]["type"]))
 				$query = "UPDATE artist_profile
 				SET artist_biography = '$targetPath'
 				WHERE artist_profile_id='".$_SESSION["artist_profile_id"]."'";
-				$result = mysql_query($query)
-				or die('Error querying database.: '  .mysql_error($dbc));
+				$result = mysqli_query($dbc,$query)
+				or die('Error querying database.: '  .mysqli_error($dbc));
 				include 'connection_close.php';
 				// $location = "about_lineage.php";
 				// header("Location: ".$location."");

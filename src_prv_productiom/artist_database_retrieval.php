@@ -10,13 +10,13 @@ if(isset($_SESSION["artist_profile_id"])){
 
   $artist_id = $_SESSION["artist_profile_id"];
   $query = "SELECT * FROM artist_profile WHERE artist_profile_id = '$artist_id'";
-  $artist_profile = mysql_query($query) or die('Error querying database.: '  .mysql_error($dbc));
+  $artist_profile = mysqli_query($dbc,$query) or die('Error querying database.: '  .mysqli_error($dbc));
   $query = "SELECT * FROM artist_relation WHERE artist_profile_id_1 = '$artist_id' ORDER BY artist_profile_id_2";
-  $artist_relations = mysql_query($query) or die('Error querying database.: '  .mysql_error($dbc));
+  $artist_relations = mysqli_query($dbc,$query) or die('Error querying database.: '  .mysqli_error($dbc));
   $query = "SELECT * FROM artist_education WHERE artist_profile_id = '$artist_id'";
-  $artist_education = mysql_query($query) or die('Error querying database.: '  .mysql_error($dbc));
+  $artist_education = mysqli_query($dbc,$query) or die('Error querying database.: '  .mysqli_error($dbc));
 
-  $artist_profile = mysql_fetch_assoc($artist_profile);
+  $artist_profile = mysqli_fetch_assoc($artist_profile);
   if($artist_profile["is_user_artist"] != ''){
     $_SESSION["profile_selection"] = $artist_profile["is_user_artist"];;
   }
@@ -87,7 +87,7 @@ if(isset($_SESSION["artist_profile_id"])){
   $degrees = array();
   $institutions = array();
   $other_degrees = array();
-  while($row = mysql_fetch_assoc($artist_education)){
+  while($row = mysqli_fetch_assoc($artist_education)){
     if($row["education_type"] == "main"){
       $universities[] = $row["institution_name"];
       $majors[] = $row["major"];
@@ -125,7 +125,7 @@ if(isset($_SESSION["artist_profile_id"])){
   $temp_artist_id = 0;
   $relation_artist_counter = -1;
 
-  while($row = mysql_fetch_assoc($artist_relations)){
+  while($row = mysqli_fetch_assoc($artist_relations)){
     if($temp_artist_id != $row["artist_profile_id_2"]){
       $temp_artist_id = $row["artist_profile_id_2"];
       $relation_artist_counter = $relation_artist_counter + 1;

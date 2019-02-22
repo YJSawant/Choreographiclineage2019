@@ -48,8 +48,8 @@ if(!isset($_SESSION['artist_profile_view']) && isset($_SESSION["user_email_addre
 		$query = "UPDATE artist_profile
 		SET artist_biography_text = '$biography', artist_photo_path = '$newPath'
 		WHERE artist_profile_id='".$_SESSION["artist_profile_id"]."'";
-		$result = mysql_query($query)
-		or die('Error querying database.: '  .mysql_error($dbc));
+		$result = mysqli_query($dbc,$query)
+		or die('Error querying database.: '  .mysqli_error($dbc));
 		include 'connection_close.php';
 	}
 	$location = "about_lineage.php";

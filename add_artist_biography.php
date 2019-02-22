@@ -146,7 +146,7 @@ if(isset($_SESSION["user_email_address"]) && $_SESSION["timeline_flow"] != "view
 				}
 
 				$query = "DELETE FROM artist_education WHERE artist_profile_id='".$artist_id."'";
-				$result = mysqli_query($dbc,$query) or die('Error querying database.: '  .mysql_error($dbc));
+				$result = mysqli_query($dbc,$query) or die('Error querying database.: '  .mysqli_error($dbc));
 
 				$query = "INSERT INTO artist_education (institution_name, major, degree, education_type, artist_profile_id) VALUES ";
 				$query .= implode(',', $education);

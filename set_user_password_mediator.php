@@ -5,13 +5,13 @@ include 'util.php';
 my_session_start();
 include 'connection_open.php';
 $user_email_address =  mysqli_real_escape_string($dbc,$_POST['user_email_address']);
-$user_one_time_password =  mysql_real_escape_string($dbc,$_POST['user_one_time_password']);
-$user_new_password =  mysql_real_escape_string($dbc,$_POST['user_new_password']);
+$user_one_time_password =  mysqli_real_escape_string($dbc,$_POST['user_one_time_password']);
+$user_new_password =  mysqli_real_escape_string($dbc,$_POST['user_new_password']);
 $query = "SELECT * FROM user_profile
 WHERE user_email_address='$user_email_address' AND user_one_time_password='$user_one_time_password'";
 $result = mysqli_query($dbc,$query)
 or die('Error querying database.: '  .mysqli_error($dbc));
-$count=mysqli_num_rows($dbc,$result);
+$count=mysqli_num_rows($result);
 $count = 1;
 if($count==1){
     // echo "Password Set";

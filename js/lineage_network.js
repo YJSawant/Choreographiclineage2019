@@ -1,10 +1,10 @@
 function draw() {
   // display the loading div on start of the page
-  $("#load").show();  
+  $("#load").show();
 
   // initialize colors for each type of relationship between artists
   var edge_colors_dict = {default_color: "#C0C0C0", studied_with_color: "#FF1C1C", collaborated_with_color: "#FFA807", danced_for_color: "#50B516", influenced_by_color: "#3033CE"};
-  
+
   // initialize path for the directory with images for nodes
   var image_dir = "/src/";
     //var image_dir = "/src/photo_upload_data/";
@@ -19,6 +19,7 @@ function draw() {
     data: {mode:"FULL_NETWORK"},
     success:function(response)  {
       // response from 'lineage_backend.php' is stored as a JSON array in json_object
+      //document.write('<div> Response : ' + response + '</div>');
       var json_object = $.parseJSON(response);
 
       // get the artist ids, names and images for search suggestions for textbox used to search for artists
@@ -82,7 +83,7 @@ function draw() {
         interaction: {
           hover: true, // color of node and its edges change when hovered
           tooltipDelay: 0 // time delay in displaying tooltip on hovering over a node
-        },        
+        },
 
         physics: {
           stabilization: {
@@ -116,10 +117,10 @@ function draw() {
 
         if(connected_nodes.indexOf(edge_string) > -1) {
           curr_edge.hidden = true;
-        }  
+        }
         edges_to_update.push(curr_edge);
         connected_nodes.push(edge_string);
-      }    
+      }
       edges.update(edges_to_update);
 
       // initialize the network object
@@ -137,7 +138,7 @@ function draw() {
         $("#load").css("display","none");
         $("body").css("overflow", "scroll");
       });
-      
+
       // change the type of cursor to grabbing hand while dragging the network
       network.on('dragging', function(obj){
         // console.log("network held!");
@@ -160,7 +161,7 @@ function draw() {
       network.on('blurNode', function (obj) {
         // console.log("node blurred");
         $("#my_network").css("cursor", "-webkit-grab");
-      });      
+      });
 
       // event fired on change of tab in tab bar
       $('.tablinks').click(function() {
@@ -176,7 +177,7 @@ function draw() {
 
         var edges_to_update = [];
         var connected_nodes = [];
-        // if full network tab is clicked then display all edges in grey color 
+        // if full network tab is clicked then display all edges in grey color
         // and if multiple edges occur between 2 nodes then display only one of them
         if(this.id === "full_network_tab") {
           for (var i = 0; i < edges.length; i++) {
@@ -196,10 +197,10 @@ function draw() {
           // get name of selected relationship from id of the tab
           var relationship_selected_array = this.id.split("_");
           var relationship_selected = (relationship_selected_array[0] + " " + relationship_selected_array[1]).toLowerCase();
-          
+
           // get color of the edge based on type of relationship
           var edge_color = edge_colors_dict[(relationship_selected_array[0] + "_" + relationship_selected_array[1] + "_color").toLowerCase()];
-          
+
           // determine which edges to display based on type of relationship
           for (var i = 0; i < edges.length; i++) {
             var curr_edge = edges.get(i);
@@ -219,50 +220,50 @@ function draw() {
 
       // code for the autocomplete searchbox
       $searchbox = $("#searchbox");
-      
+
       $searchbox.autocomplete({
         minLength: 2, // minimum of 2 characters to be entered before suggesting artist names
         source: names,
         select: function (event, ui) {
             $searchbox.val(ui.item.label); // display the selected text
             $("#searchbox_node_id").val(ui.item.node_id); // save selected node_id to hidden input
-        }        
+        }
       });
 
       // method to make images appear along with names in autocomplete
       $searchbox.data( "ui-autocomplete" )._renderItem = function( ul, item ) {
         var $li = $('<li>');
         var $img = $('<img style="width:32px;height:32px;">');
-        
+
         $img.attr({
           src: image_dir + item.icon, // path to image of the artist
           alt: "" // none used in case artist image is unavailable
         });
 
         $li.append('<a href="#">');
-        $li.find('a').append($img).append(item.label);  
+        $li.find('a').append($img).append(item.label);
         $li.find('a').css("display", "block");
-        
+
         return $li.appendTo(ul);
-      };      
+      };
 
       // method to focus network on the node based on artist name searched for
       $searchbox.keypress(function(e) {
         // if enter is pressed
-        if ((e.keyCode || e.which) == 13) { 
+        if ((e.keyCode || e.which) == 13) {
           // get node_id of the artist searched for
           var searched_node_id = $("#searchbox_node_id").val();
           network.focus(
           searched_node_id, // which node to focus on
           {
             scale: 0.6, // level of zoom while focussing on node
-            animation: {             
+            animation: {
               duration: 1000, // animation duration in milliseconds (Number)
               easingFunction: "easeInOutQuad" // type of animation while focussing
             }
           });
         }
       });
-    }  
+    }
   });
 }

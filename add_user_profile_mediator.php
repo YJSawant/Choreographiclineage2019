@@ -4,6 +4,7 @@ include 'menu.php';
 include 'util.php';
 my_session_start();
 include 'connection_open.php';
+
 $first_name =  mysqli_real_escape_string($dbc,$_POST['first_name']);
 $last_name =  mysqli_real_escape_string($dbc,$_POST['last_name']);
 $user_email_address =  mysqli_real_escape_string($dbc,$_POST['user_email_address']);

@@ -24,7 +24,7 @@ if(isset($_SESSION["artist_profile_id"])){
   }
 
 //  $query = "SELECT * FROM artist_relation WHERE artist_profile_id_1 = '$artist_id' ORDER BY artist_profile_id_2";
-//  $artist_relations = mysql_query($query) or die('Error querying database.: '  .mysql_error($dbc));
+//  $artist_relations = mysqli_query($dbc,$query) or die('Error querying database.: '  .mysqli_error($dbc));
 //
 //  $lineage_first_name = array();
 //  $lineage_last_name = array();
@@ -47,7 +47,7 @@ if(isset($_SESSION["artist_profile_id"])){
 //  $temp_artist_id = 0;
 //  $relation_artist_counter = -1;
 //
-//  while($row = mysql_fetch_assoc($artist_relations)){
+//  while($row = mysqli_fetch_assoc($artist_relations)){
 //    if($temp_artist_id != $row["artist_profile_id_2"]){
 //      $temp_artist_id = $row["artist_profile_id_2"];
 //      $relation_artist_counter = $relation_artist_counter + 1;

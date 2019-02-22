@@ -141,15 +141,15 @@ my_session_start();
     }
 
     $query = substr($query, 0, -3);
-    $result = mysql_query($query) or die('Error querying database.: '  .mysql_error($dbc));
+    $result = mysqli_query($dbc,$query) or die('Error querying database.: '  .mysqli_error($dbc));
 
-    while($row = mysql_fetch_assoc($result)){
+    while($row = mysqli_fetch_assoc($result)){
       if($artist_id_map[$row["artist_first_name"].$row["artist_last_name"].$row["artist_email_address"].$row["artist_website"]] == -1){
         $artist_id_map[$row["artist_first_name"].$row["artist_last_name"].$row["artist_email_address"].$row["artist_website"]] = $row["artist_profile_id"];
       }
     }
 
-    if(count($first_name) > mysql_num_rows($result)){
+    if(count($first_name) > mysqli_num_rows($result)){
       $artists = array();
       $query = "INSERT INTO artist_profile (artist_first_name, artist_last_name, artist_email_address, artist_website, is_user_artist) VALUES ";
       foreach ($first_name as $key => $value) {
@@ -158,7 +158,7 @@ my_session_start();
         }
       }
       $query .= implode(',', $artists);
-      $result = mysql_query($query) or die('Error querying database.: '  .mysql_error($dbc));
+      $result = mysqli_query($dbc,$query) or die('Error querying database.: '  .mysqli_error($dbc));
 
       $query = "SELECT artist_first_name, artist_last_name, artist_email_address, artist_website, artist_profile_id FROM artist_profile WHERE ";
       foreach($first_name as $key => $value){
@@ -166,9 +166,9 @@ my_session_start();
       }
 
       $query = substr($query, 0, -3);
-      $result = mysql_query($query) or die('Error querying database.: '  .mysql_error($dbc));
+      $result = mysqli_query($dbc,$query) or die('Error querying database.: '  .mysqli_error($dbc));
 
-      while($row = mysql_fetch_assoc($result)){
+      while($row = mysqli_fetch_assoc($result)){
         if($artist_id_map[$row["artist_first_name"].$row["artist_last_name"].$row["artist_email_address"].$row["artist_website"]] == -1){
           $artist_id_map[$row["artist_first_name"].$row["artist_last_name"].$row["artist_email_address"].$row["artist_website"]] = $row["artist_profile_id"];
         }
@@ -176,7 +176,7 @@ my_session_start();
     }
 
     $query = "DELETE FROM artist_relation WHERE artist_profile_id_1='".$_SESSION['artist_profile_id']."'";
-    $result = mysql_query($query) or die('Error querying database.: '  .mysql_error($dbc));
+    $result = mysqli_query($dbc,$query) or die('Error querying database.: '  .mysqli_error($dbc));
 
     $query = "INSERT INTO artist_relation (artist_profile_id_1, artist_profile_id_2, artist_name_1, artist_name_2, artist_email_id_2,
               artist_website_2, artist_relation, start_date, end_date, duration_years, duration_months) VALUES ";
@@ -212,7 +212,7 @@ my_session_start();
     $query .= " ON DUPLICATE KEY UPDATE artist_name_1 = VALUES(artist_name_1), artist_name_2 = VALUES(artist_name_2),
               artist_email_id_2 = VALUES(artist_email_id_2), artist_website_2 = VALUES(artist_website_2), start_date = VALUES(start_date),
               end_date = VALUES(end_date), duration_years = VALUES(duration_years), duration_months=VALUES(duration_months)";
-    $result = mysql_query($query) or die('Error querying database.: '  .mysql_error($dbc));
+    $result = mysqli_query($dbc,$query) or die('Error querying database.: '  .mysqli_error($dbc));
   }
   if(isset($_SESSION["artist_profile_add"])){
     header("Location: thank_you.php");

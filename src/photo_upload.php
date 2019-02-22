@@ -44,8 +44,8 @@ if(isset($_FILES["file"]["type"]))
                     $query = "UPDATE artist_profile
                         SET artist_photo_path = '$targetPath' 
                         WHERE artist_profile_id='" . $_SESSION["artist_profile_id"] . "'";
-                    $result = mysql_query($query)
-                    or die('Error querying database.: ' . mysql_error($dbc));
+                    $result = mysqli_query($dbc,$query)
+                    or die('Error querying database.: ' . mysqli_error($dbc));
                     include 'connection_close.php';
                 }else{
                     echo "<span id='invalid'>**Some problem occurred please try again later***<span>";

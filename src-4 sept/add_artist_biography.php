@@ -130,7 +130,7 @@ if(isset($_SESSION["user_email_address"]) && !isset($_SESSION['artist_profile_vi
 			artist_residence_country='$country_res',
 			artist_residence_province='$state_province',
 			artist_birth_country='$country_birth' WHERE artist_profile_id = '".$_SESSION['artist_profile_id']."'";
-			$result = mysql_query($query) or die('Error querying database.: '  .mysql_error($dbc));
+			$result = mysqli_query($dbc,$query) or die('Error querying database.: '  .mysqli_error($dbc));
 
 			if(!empty($university) || !empty($institute)){
 				$education = array();
@@ -143,11 +143,11 @@ if(isset($_SESSION["user_email_address"]) && !isset($_SESSION['artist_profile_vi
 				}
 
 				$query = "DELETE FROM artist_education WHERE artist_profile_id='".$artist_id."'";
-				$result = mysql_query($query) or die('Error querying database.: '  .mysql_error($dbc));
+				$result = mysqli_query($dbc,$query) or die('Error querying database.: '  .mysqli_error($dbc));
 
 				$query = "INSERT INTO artist_education (institution_name, major, degree, education_type, artist_profile_id) VALUES ";
 				$query .= implode(',', $education);
-				$result = mysql_query($query) or die('Error querying database.: '  .mysql_error($dbc));
+				$result = mysqli_query($dbc,$query) or die('Error querying database.: '  .mysqli_error($dbc));
 			}
 			$_SESSION["form_2"] = "completed";
 		}

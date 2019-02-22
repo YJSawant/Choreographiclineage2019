@@ -8,7 +8,7 @@
 	$result = mysqli_query($dbc,$query)
     or die('Error querying database.: '  .mysqli_error());
 
-    //$result = mysql_fetch_assoc($result);
+    //$result = mysqli_fetch_assoc($result);
     $arr = Array();
     while ($row = mysqli_fetch_assoc($result)){
 		$arr[] = $row;

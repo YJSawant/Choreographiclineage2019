@@ -7,17 +7,17 @@
 	
 	include 'connection_open.php';
 	
-	$user_email_address =  mysql_real_escape_string($_POST['user_email_address']);
-	$user_old_password =  mysql_real_escape_string($_POST['user_old_password']);
-	$user_new_password =  mysql_real_escape_string($_POST['user_new_password']);
+	$user_email_address =  mysqli_real_escape_string($dbc,$_POST['user_email_address']);
+	$user_old_password =  mysqli_real_escape_string($dbc,$_POST['user_old_password']);
+	$user_new_password =  mysqli_real_escape_string($dbc,$_POST['user_new_password']);
 	
 	$query = "SELECT * FROM user_profile 
 	WHERE user_email_address='$user_email_address' AND user_password='$user_old_password'";
 	
-	$result = mysql_query($query)
-    or die('Error querying database.: '  .mysql_error($dbc));
+	$result = mysqli_query($dbc,$query)
+    or die('Error querying database.: '  .mysqli_error($dbc));
 	
-	$count=mysql_num_rows($result);
+	$count=mysqli_num_rows($result);
 	if($count==1){
 		// echo "Password Changed";
 		$user_one_time_password = rand(100000, 999999);
@@ -26,8 +26,8 @@
 		SET user_password='$user_new_password', user_one_time_password='$user_one_time_password'
 		WHERE user_email_address='$user_email_address'";
 		
-		$result = mysql_query($query)
-		or die('Error querying database.: '  .mysql_error($dbc));
+		$result = mysqli_query($dbc,$query)
+		or die('Error querying database.: '  .mysqli_error($dbc));
 		
 		echo "Password Changed";
 		session_destroy(); 
@@ -37,10 +37,10 @@
 		$query = "SELECT * FROM user_profile 
 		WHERE user_email_address='$user_email_address'";
 		
-		$result = mysql_query($query)
-		or die('Error querying database.: '  .mysql_error($dbc));
+		$result = mysqli_query($dbc,$query)
+		or die('Error querying database.: '  .mysqli_error($dbc));
 		
-		$count=mysql_num_rows($result);
+		$count=mysqli_num_rows($result);
 		$_SESSION["error_flag"] = "y";
 		$_SESSION["email"] = $user_email_address;
 		if($count==1){

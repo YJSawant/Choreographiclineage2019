@@ -19,32 +19,32 @@
 	
 	include 'connection_open.php';
 	
-	$my_artist =  mysql_real_escape_string($_POST['my_artist']);
-	$other_artist =  mysql_real_escape_string($_POST['other_artist']);
+	$my_artist =  mysqli_real_escape_string($dbc,$_POST['my_artist']);
+	$other_artist =  mysqli_real_escape_string($dbc,$_POST['other_artist']);
 	
 	if($my_artist != $other_artist){
 	
 		$query = "SELECT * FROM artist_profile WHERE artist_name = '$my_artist' AND profile_name ='$user_email_address'";
 		
-		$result = mysql_query($query)
-		or die('Error querying database.: '  .mysql_error($dbc));
+		$result = mysqli_query($dbc,$query)
+		or die('Error querying database.: '  .mysqli_error($dbc));
 		
-		$count=mysql_num_rows($result);
+		$count=mysqli_num_rows($result);
 		if($count>=1){
 			
-			while($resultant = mysql_fetch_array($result)){
+			while($resultant = mysqli_fetch_array($result)){
 				$my_id = $resultant['artist_profile_id'];
 			}
 			
 			$query = "SELECT * FROM artist_profile WHERE artist_name = '$other_artist'";
 		
-			$result = mysql_query($query)
-			or die('Error querying database.: '  .mysql_error($dbc));
+			$result = mysqli_query($dbc,$query)
+			or die('Error querying database.: '  .mysqli_error($dbc));
 			
-			$count=mysql_num_rows($result);
+			$count=mysqli_num_rows($result);
 			if($count>=1){
 				
-				while($resultant = mysql_fetch_array($result)){
+				while($resultant = mysqli_fetch_array($result)){
 					$other_id = $resultant['artist_profile_id'];
 				}
 				
@@ -69,8 +69,8 @@
 						'$relation'
 						)";
 						
-						$result = mysql_query($query)
-						or die('Error querying database.: '  .mysql_error($dbc));
+						$result = mysqli_query($dbc,$query)
+						or die('Error querying database.: '  .mysqli_error($dbc));
 					}
 					$location = "";
 				echo "Added Relationships";

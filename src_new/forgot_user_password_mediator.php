@@ -4,13 +4,13 @@ include 'menu.php';
 include 'util.php';
 my_session_start();
 include 'connection_open.php';
-$user_email_address =  mysql_real_escape_string($_POST['user_email_address']);
+$user_email_address =  mysqli_real_escape_string($dbc,$_POST['user_email_address']);
 $user_one_time_password = rand(100000, 999999);
 $query = "SELECT * FROM user_profile
 	WHERE user_email_address='$user_email_address'";
-$result = mysql_query($query)
-or die('Error querying database.: '  .mysql_error($dbc));
-$count=mysql_num_rows($result);
+$result = mysqli_query($dbc,$query)
+or die('Error querying database.: '  .mysqli_error($dbc));
+$count=mysqli_num_rows($result);
 if($count == 1){
     // include 'mail_template.php';
     // $message = $message."".$user_one_time_password;
@@ -38,8 +38,8 @@ if($count == 1){
     $query = "UPDATE user_profile
 		SET user_one_time_password='$user_one_time_password'
 		WHERE user_email_address='$user_email_address'";
-    $result = mysql_query($query)
-    or die('Error querying database.: '  .mysql_error($dbc));
+    $result = mysqli_query($dbc,$query)
+    or die('Error querying database.: '  .mysqli_error($dbc));
     include 'connection_close.php';
     session_start();
     $_SESSION["set_user_password"] = "Check your email for a one-time password";

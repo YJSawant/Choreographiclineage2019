@@ -58,7 +58,7 @@
                                     </thead>
                                     <?php
                                     echo "<tbody>";
-                                    while ($resultant = mysql_fetch_array($result)) {
+                                    while ($resultant = mysqli_fetch_array($result)) {
                                         // echo "<tr style='background-color: transparent !important;'>";
 
                                         echo "<tr>";

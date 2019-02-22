@@ -320,7 +320,7 @@ my_session_start();
     }
 
     /*$query = "DELETE FROM artist_relation WHERE artist_profile_id_1='".$_SESSION['artist_profile_id']."'";
-    $result = mysql_query($query) or die('Error querying database.: '  .mysql_error($dbc));*/
+    $result = mysqli_query($dbc,$query) or die('Error querying database.: '  .mysqli_error($dbc));*/
 
     $query = "INSERT INTO artist_relation (artist_profile_id_1, artist_profile_id_2, artist_name_1, artist_name_2, artist_email_id_2,
               artist_website_2, artist_relation, start_date, end_date, duration_years, duration_months) VALUES ";
@@ -368,7 +368,7 @@ my_session_start();
               artist_email_id_2 = VALUES(artist_email_id_2), artist_website_2 = VALUES(artist_website_2), start_date = VALUES(start_date),
               end_date = VALUES(end_date), duration_years = VALUES(duration_years), duration_months=VALUES(duration_months)";*/
         echo $query;
-        $result = mysql_query($query) or die('Error querying database.: '  .mysql_error($dbc));
+        $result = mysqli_query($dbc,$query) or die('Error querying database.: '  .mysqli_error($dbc));
     }
 
   }

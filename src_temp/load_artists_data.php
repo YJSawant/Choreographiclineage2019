@@ -5,12 +5,12 @@
 	$artist = 'artist';
 	$query = "SELECT * FROM artist_profile WHERE is_user_artist='$artist'";
 	//echo ($query);
-	$result = mysql_query($query)
-    or die('Error querying database.: '  .mysql_error());
+	$result = mysqli_query($dbc,$query)
+    or die('Error querying database.: '  .mysqli_error());
 
-    //$result = mysql_fetch_assoc($result);
+    //$result = mysqli_fetch_assoc($result);
     $arr = Array();
-    while ($row = mysql_fetch_assoc($result)){
+    while ($row = mysqli_fetch_assoc($result)){
 		$arr[] = $row;
 	}
     

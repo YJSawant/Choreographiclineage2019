@@ -100,16 +100,16 @@ if(isset($_SESSION["user_email_address"]) && !isset($_SESSION['artist_profile_vi
 			'$user_email_address'
 			)";
 
-			$result = mysql_query($query)
-			or die('Error querying database.: '  .mysql_error($dbc));
+			$result = mysqli_query($dbc,$query)
+			or die('Error querying database.: '  .mysqli_error($dbc));
 			$_SESSION["form_1"] = "completed";
 			$query = "SELECT artist_profile_id FROM artist_profile
 								WHERE artist_first_name='$first_name' and artist_last_name='$last_name' and artist_email_address='$email_address'";
-			$result = mysql_query($query)
-			or die('Error querying database.: '  .mysql_error($dbc));
-			$count=mysql_num_rows($result);
+			$result = mysqli_query($dbc,$query)
+			or die('Error querying database.: '  .mysqli_error($dbc));
+			$count=mysqli_num_rows($result);
 			if($count==1){
-				$row = mysql_fetch_assoc($result);
+				$row = mysqli_fetch_assoc($result);
 				$_SESSION["artist_profile_id"] = $row["artist_profile_id"];
 			}
 		}else{
@@ -124,8 +124,8 @@ if(isset($_SESSION["user_email_address"]) && !isset($_SESSION['artist_profile_vi
 				artist_genre='$genre',
 				genre_other='$genre_other' WHERE artist_profile_id = '".$_SESSION['artist_profile_id']."'";
 
-			$result = mysql_query($query)
-			or die('Error querying database.: '  .mysql_error($dbc));
+			$result = mysqli_query($dbc,$query)
+			or die('Error querying database.: '  .mysqli_error($dbc));
 		}
 		include 'connection_close.php';
 	}

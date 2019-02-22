@@ -7,7 +7,7 @@
 	
 	include 'connection_open.php';
 	
-	$user_email_address =  mysql_real_escape_string($_POST['user_email_address']);
+	$user_email_address =  mysqli_real_escape_string($dbc,$_POST['user_email_address']);
 	$user_one_time_password = rand(100000, 999999);
 	
 	include 'mail_template.php';
@@ -18,8 +18,8 @@
 	SET user_one_time_password='$user_one_time_password'
 	WHERE user_email_address='$user_email_address'";
 	
-	$result = mysql_query($query)
-    or die('Error querying database.: '  .mysql_error($dbc));
+	$result = mysqli_query($dbc,$query)
+    or die('Error querying database.: '  .mysqli_error($dbc));
 	
 	include 'connection_close.php';
 	

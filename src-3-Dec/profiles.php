@@ -42,10 +42,10 @@
 						$query = "SELECT * FROM artist_profile
 						WHERE profile_name='$user_email_address'";
 
-						$result = mysql_query($query)
-						or die('Error querying database.: '  .mysql_error());
+						$result = mysqli_query($dbc,$query)
+						or die('Error querying database.: '  .mysqli_error());
 
-						$count=mysql_num_rows($result);
+						$count=mysqli_num_rows($result);
 
 						if($count==0){
 							echo "<legend><strong>No artist profiles. Create a new one!</legend></strong>";
@@ -64,7 +64,7 @@
 
 					<?php
 							echo "<tbody>";
-							while($resultant = mysql_fetch_array($result)){
+							while($resultant = mysqli_fetch_array($result)){
 								// echo "<tr style='background-color: transparent !important;'>";
 
 								echo "<tr>";

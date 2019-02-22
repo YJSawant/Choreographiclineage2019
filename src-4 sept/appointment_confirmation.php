@@ -10,12 +10,12 @@ error_reporting(0);
 
 if(isset($_SESSION["user_email_address"])){
 	$user_email_address = $_SESSION["user_email_address"];
-	$firstName = mysql_real_escape_string($_POST['first_name']);
-	$lastName =  mysql_real_escape_string($_POST['last_name']);
-	$email =  mysql_real_escape_string($_POST['email_address']);
-	$date =  mysql_real_escape_string($_POST['appointment_date']);
-	$contact = mysql_real_escape_string($_POST['contact_number']);
-	$note = mysql_real_escape_string($_POST['note']);
+	$firstName = mysqli_real_escape_string($dbc,$_POST['first_name']);
+	$lastName =  mysqli_real_escape_string($dbc,$_POST['last_name']);
+	$email =  mysqli_real_escape_string($dbc,$_POST['email_address']);
+	$date =  mysqli_real_escape_string($dbc,$_POST['appointment_date']);
+	$contact = mysqli_real_escape_string($dbc,$_POST['contact_number']);
+	$note = mysqli_real_escape_string($dbc,$_POST['note']);
 
 
 

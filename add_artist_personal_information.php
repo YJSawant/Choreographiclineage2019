@@ -110,7 +110,7 @@ if(isset($_SESSION["user_email_address"]) && $_SESSION["timeline_flow"] != "view
             or die('Error querying database.: '  .mysqli_error($dbc));
             $count=mysqli_num_rows($result);
             if($count==1){
-                $row = mysql_fetch_assoc($result);
+                $row = mysqli_fetch_assoc($result);
                 $_SESSION["artist_profile_id"] = $row["artist_profile_id"];
             }
         }else{

@@ -12,7 +12,7 @@ if(isset($_SESSION["artist_profile_id"])){
   $query = "SELECT * FROM artist_profile WHERE artist_profile_id = '$artist_id'";
   $artist_profile = mysqli_query($dbc,$query) or die('Error querying database.: '  .mysqli_error($dbc));
   $query = "SELECT * FROM artist_relation WHERE artist_profile_id_1 = '$artist_id' ORDER BY artist_profile_id_2";
-  $artist_relations = mysqli_query($dbc,$query) or die('Error querying database.: '  .mysql_error($dbc));
+  $artist_relations = mysqli_query($dbc,$query) or die('Error querying database.: '  .mysqli_error($dbc));
   $query = "SELECT * FROM artist_education WHERE artist_profile_id = '$artist_id'";
   $artist_education = mysqli_query($dbc,$query) or die('Error querying database.: '  .mysqli_error($dbc));
 
