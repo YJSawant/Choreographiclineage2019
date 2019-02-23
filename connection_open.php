@@ -4,7 +4,11 @@
 //$mysqli_password="DclSQLwebsiteLineage";
 $mysqli_hostname = "localhost";
 $mysqli_user="root";
-$mysqli_password="root";
+# Comment this if working using XAMPP
+# $mysqli_password="root";
+
+#Comment this if working using WAMP
+$mysqli_password="";
 $mysqli_database="choreographiclineage_db";
 #$connection = mysqli_connect( $mysqli_hostname , $mysqli_user , $mysqli_password);
 #$dbc = mysqli_select_db($mysqli_database);
