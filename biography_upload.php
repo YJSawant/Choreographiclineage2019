@@ -49,7 +49,7 @@ if(isset($_FILES["bio_file"]["type"]))
 				$targetPath = "biography_upload_data/".$_FILES['bio_file']['name']; // Target path where file is to be stored
 				$_SESSION["biography_file_path"] = $targetPath;
 				move_uploaded_file($sourcePath,$targetPath) ; // Moving Uploaded file
-				echo "<span id='success'>Biographt uploaded successfully...!!</span><br/>";
+				echo "<span id='success'>Biography uploaded successfully...!!</span><br/>";
 				// echo "<br/><b>File Name:</b> " . $_FILES["bio_file"]["name"] . "<br>";
 				// echo "<b>Type:</b> " . $_FILES["bio_file"]["type"] . "<br>";
 				// echo "<b>Size:</b> " . ($_FILES["bio_file"]["size"] / 1024) . " kB<br>";
