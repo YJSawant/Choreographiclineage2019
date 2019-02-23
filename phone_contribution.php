@@ -19,7 +19,7 @@ my_session_start();
 	<link rel="stylesheet" href="css/intlTelInput.css">
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="js/intlTelInput.js"></script>
-	<script src="js/utils.js">"></script>
+	<script src="js/utils.js"></script>
 	<style type="text/css">
 		.iti-flag {background-image: url("img/flags.png");}
 
@@ -106,7 +106,7 @@ my_session_start();
 	    window.location.href = location;
 	});
 </script>
-</script>
+
 
 
 <?php

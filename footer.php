@@ -28,7 +28,7 @@ if(isset($_SESSION["user_email_address"])){
 		</div>
 		<div class="small-6 column">
 			<ul class="menu align-right">
-				<li class="menu-text"><small>Choreographic Lineage © 2018</small></li>
+				<li class="menu-text"><small>Choreographic Lineage © 2019</small></li>
 			</ul>
 		</div>
 	<!--</div>-->

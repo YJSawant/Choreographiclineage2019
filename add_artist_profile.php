@@ -267,7 +267,7 @@ if(isset($_SESSION["contribution_type"])) {
                         </div>
                         <div class="medium-3 column">
                             <label for="Other_Artist_Text_Input" id="Other_Artist_Text" style="display:none">
-                                Please seperate multiple entries by comma:
+                                Please separate multiple entries by comma:
                                 <input  autocomplete="off" type="text" id="Other_Artist_Text_Input" name="other_artist_text_input"
                                         value="<?php echo isset($_SESSION['other_artist_text_input'])?$_SESSION['other_artist_text_input']:'' ?>"
                                 />
