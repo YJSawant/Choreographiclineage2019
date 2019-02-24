@@ -98,7 +98,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                                             }
                                                             ?>
                                                         />
-                                                        <label for="relationship_studied<?php echo '-'.$key ?>">Studied With</label>
+                                                        <label for="relationship_studied<?php echo '-'.$key ?>">Studied Under</label>
                                                     </a></li>
                                                 <li class="tabs-title"><a href="#panel2v<?php echo '-'.$key ?>" aria-controls="panel2v<?php echo '-'.$key ?>">
                                                         <input class="relationship relation_danced_cb" name="relationship_danced[]" id="relationship_danced<?php echo '-'.$key ?>" type="checkbox" tilte="danced__with_section"
@@ -120,7 +120,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                                             }
                                                             ?>
                                                         />
-                                                        <label for="relationship_collaborated<?php echo '-'.$key ?>">Collaborated With</label>
+                                                        <label for="relationship_collaborated<?php echo '-'.$key ?>">Collaborated Under</label>
                                                     </a></li>
                                                 <li class="tabs-title"><a href="#panel4v<?php echo '-'.$key ?>" aria-controls="panel4v<?php echo '-'.$key ?>">
                                                         <input class="relationship relation_influenced_cb" name="relationship_influenced[]" id="relationship_influenced<?php echo '-'.$key ?>" type="checkbox" title="influenced_by_section" value="<?php echo $key ?>"
@@ -142,7 +142,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                                     <fieldset id="study_repeat0" style="background-image: linear-gradient(#016400, white); margin-bottom: 5px;">
                                                         <div class="large-12 columns" >
                                                             <div class="small-4 column" style="margin-top: 5px;">
-                                                                <legend><strong style="color:white;">Studied With Details:</strong></legend>
+                                                                <legend><strong style="color:white;">Studied Under Details:</strong></legend>
                                                             </div>
                                                             <div class="small-8 column" style="background-color: #016400">
                                                             </div>
@@ -620,7 +620,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                     <div class="medium-3 columns">
                                         <ul class="vertical tabs" data-tabs id="relation-tabs-1">
                                             <li class="tabs-title is-active"><a href="#panel1v-1" aria-selected="true">
-                                                    <input class="relationship relation_studied_cb" name="relationship_studied[]" id="relationship_studied-1" type="checkbox" title="studied_with_section"><label for="relationship_studied">Studied With</label>
+                                                    <input class="relationship relation_studied_cb" name="relationship_studied[]" id="relationship_studied-1" type="checkbox" title="studied_with_section"><label for="relationship_studied">Studied Under</label>
                                                 </a></li>
                                             <li class="tabs-title"><a href="#panel2v-1">
                                                     <input class="relationship relation_danced_cb" name="relationship_danced[]" id="relationship_danced-1" type="checkbox" title="danced_for_section" ><label for="relationship_danced">Danced For</label>
