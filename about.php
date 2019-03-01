@@ -69,6 +69,29 @@ my_session_start();
             <li>Julie Adams Strandberg, Co-Founder, American Dance Legacy Initiative; Senior Lecturer, Theatre Arts and Performance Studies, Brown University</li>
           </ul>
         </section>
+        <hr>
+        <section>
+          <h4>The Choreographic Lineage Contributors</h4>
+         <div style="float: left; width: 33.33%;">
+          <ul>
+           <li>Sumedh Ambokar</li>
+           <li>Yash Jain</li>
+           <li>Jay Shah</li>
+           <li>Michael Rogers</li>
+           <li>Yunfei Hou</li>
+          </ul>
+        </div>
+        <div style="float: right; width: 66.66%;">
+          <ul>
+            <li>Mangesh Vilas Kaslikar</li>
+            <li>Laura Neese</li>
+            <li>Sarah Dodd</li>
+            <li>Elizabeth Kaltenbach</li>
+            <li>Naila Ansari</li>
+            </ul>
+        </div>
+        </section>
+
       </div>
     </div>
 
