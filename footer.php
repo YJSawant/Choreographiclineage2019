@@ -15,15 +15,15 @@ if(isset($_SESSION["user_email_address"])){
 <div class="row">
 	<div class="medium-12">
 -->
-<footer class="row" style="position:relative; bottom:0;">
+<footer class="row" style="position:relative; bottom:0;height: auto;">
 	<!--<div>-->
 		<div class="small-6 column">
 			<ul class="vertical medium-horizontal menu">
 				<li><a href="index.php">Home</a></li>
-				<li><a href="index.php">FAQ</a></li>
+				<li><a href="ComingSoon.php">FAQ</a></li>
 				<li><a href="about.php">About</a></li>
 				<li><a href="contact.php">Contact</a></li>
-				<li><a href="index.php">Help</a></li>
+				<li><a href="ComingSoon.php">Help</a></li>
 			</ul>
 		</div>
 		<div class="small-6 column">
