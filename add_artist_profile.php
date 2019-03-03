@@ -379,7 +379,7 @@ if(isset($_SESSION["contribution_type"])) {
         }
         $("#previous").click(function() {
             // onclick event is assigned to the #button element.
-            window.open("/src/Contribution_Introduction.php","_self");
+            window.open("Contribution_Introduction.php","_self");
             //document.location.href = "/src/add_artist_personal_information.php",true;
         });
         // onclick event is assigned to the #button element.
