@@ -17,16 +17,16 @@ my_session_start();
     <link rel="stylesheet" href="../css/global.css">
     <style>
     .loader {
-  border: 16px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 16px solid green;
-  border-bottom: 16px solid green;
-  width: 120px;
-  height: 120px;
-  -webkit-animation: spin 2s linear infinite;
-  animation: spin 2s linear infinite;
-   margin-left: auto;
-  margin-right: auto;
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid green;
+      border-bottom: 16px solid green;
+      width: 120px;
+      height: 120px;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+      margin-left: auto;
+      margin-right: auto;
   
 }
 .gap-50 {
