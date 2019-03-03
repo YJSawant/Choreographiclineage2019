@@ -15,7 +15,7 @@
 				</section>
 				<section>
 					<h4>What is Choreographic Lineage?</h4>
-					<p>Choreographic Lineage is an interactive, web-based genealogical network illustrating connections <font color=#0820aa>between dance artists,</font>  <font color=#016400>their teachers,their students,</font><font color=#969101> their collaborators</font> and people who they were influenced by. The main goal is to establish a knowledge base documenting 20th and 21st century dance that is searchable and minable and that will continue to grow as new generations of artists are added. Choreographic Lineage is intended as a global resource for investigating artistic influences, career paths, choreographic connections, and complex and obscure relationships.</p>
+					<p>Choreographic Lineage is an interactive, web-based genealogical network illustrating connections between <font color=#0820aa> dance artists,</font> their  <font color=#016400> teachers, </font> their <font color=#016400> students,</font> their <font color=#969101> collaborators</font> and people who they were influenced by. The main goal is to establish a knowledge base documenting 20th and 21st century dance that is searchable and minable and that will continue to grow as new generations of artists are added. Choreographic Lineage is intended as a global resource for investigating artistic influences, career paths, choreographic connections, and complex and obscure relationships.</p>
 				</section>
 				<section>
 					<h4>Contribute your Lineage</h4>
