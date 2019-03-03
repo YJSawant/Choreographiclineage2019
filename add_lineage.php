@@ -109,7 +109,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                                             }
                                                             ?>
                                                         />
-                                                        <label for="relationship_danced<?php echo '-'.$key ?>">Danced For</label>
+                                                        <label for="relationship_danced<?php echo '-'.$key ?>">Danced In The Work Of</label>
                                                     </a></li>
                                                 <li class="tabs-title"><a href="#panel3v<?php echo '-'.$key ?>" aria-controls="panel3v<?php echo '-'.$key ?>">
                                                         <input class="relationship relation_collaborated_cb" name="relationship_collaborated[]" id="relationship_collaborated<?php echo '-'.$key ?>" type="checkbox" title="colbrtd_with_section"
@@ -255,7 +255,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                                                 <div class="medium-4 column"></div>
                                                                 <div class="medium-4 column">
                                                                     <button type="button" class="btn btn-primary"
-                                                                            style="padding: 5px 8px; background-color:#62ad61; color:ghostwhite; font-weight: bold;" onclick="duplicate(this)">Add another timeline</button>
+                                                                            style="padding: 5px 8px; background-color:#62ad61; color:ghostwhite; font-weight: bold;" onclick="duplicate(this)">Add Another Time Frame for this Artist</button>
                                                                 </div>
                                                                 <div class="medium-4 column"></div>
                                                             </div>
@@ -272,7 +272,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                                     <fieldset id="dance_repeat0" style="background-image: linear-gradient(#0820aa, white); margin-bottom: 5px;">
                                                         <div class="large-12 columns" >
                                                             <div class="small-4 column" style="margin-top: 5px;">
-                                                                <legend><strong style="color:white;">Danced for Details:</strong></legend>
+                                                                <legend><strong style="color:white;">Danced In The Work Of Details:</strong></legend>
                                                             </div>
                                                             <div class="small-8 column" style="background-color: #0820aa">
                                                             </div>
@@ -387,7 +387,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                                                 <div class="medium-4 column"></div>
                                                                 <div class="medium-4 column">
                                                                     <button type="button" class="btn btn-primary"
-                                                                            style="padding: 5px 8px; background-color:#62ad61; color:ghostwhite; font-weight: bold;" onclick="duplicate(this)">Add another timeline</button>
+                                                                            style="padding: 5px 8px; background-color:#62ad61; color:ghostwhite; font-weight: bold;" onclick="duplicate(this)">Add Another Time Frame for this Artist</button>
                                                                 </div>
                                                                 <div class="medium-4 column"></div>
                                                             </div>
@@ -519,7 +519,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                                                 <div class="medium-4 column"></div>
                                                                 <div class="medium-4 column">
                                                                     <button type="button" class="btn btn-primary"
-                                                                            style="padding: 5px 8px; background-color:#62ad61; color:ghostwhite; font-weight: bold;" onclick="duplicate(this)">Add another timeline</button>
+                                                                            style="padding: 5px 8px; background-color:#62ad61; color:ghostwhite; font-weight: bold;" onclick="duplicate(this)">Add Another Time Frame for this Artist</button>
                                                                 </div>
                                                                 <div class="medium-4 column"></div>
                                                             </div>
@@ -623,7 +623,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                                     <input class="relationship relation_studied_cb" name="relationship_studied[]" id="relationship_studied-1" type="checkbox" title="studied_with_section"><label for="relationship_studied">Studied Under</label>
                                                 </a></li>
                                             <li class="tabs-title"><a href="#panel2v-1">
-                                                    <input class="relationship relation_danced_cb" name="relationship_danced[]" id="relationship_danced-1" type="checkbox" title="danced_for_section" ><label for="relationship_danced">Danced For</label>
+                                                    <input class="relationship relation_danced_cb" name="relationship_danced[]" id="relationship_danced-1" type="checkbox" title="danced_for_section" ><label for="relationship_danced">Danced In The Work Of</label>
                                                 </a></li>
                                             <li class="tabs-title"><a href="#panel3v-1">
                                                     <input class="relationship relation_collaborated_cb" name="relationship_collaborated[]" id="relationship_collaborated-1" type="checkbox" title="collaborated_with_section" ><label for="relationship_collaborated">Collaborated With</label>
@@ -756,7 +756,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                                             <div class="medium-4 column"></div>
                                                             <div class="medium-4 column">
                                                                 <button type="button" class="btn btn-primary"
-                                                                        style="padding: 5px 8px; background-color:#62ad61; color:ghostwhite; font-weight: bold;" onclick="duplicate(this)">Add another timeline</button>
+                                                                        style="padding: 5px 8px; background-color:#62ad61; color:ghostwhite; font-weight: bold;" onclick="duplicate(this)">Add Another Time Frame for this Artist</button>
                                                             </div>
                                                             <div class="medium-4 column"></div>
                                                         </div>
@@ -769,7 +769,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                                 <fieldset id="dance_repeat0" style="background-image: linear-gradient(#0820aa, white); margin-bottom: 5px;">
                                                     <div class="large-12 columns" >
                                                         <div class="small-4 column" style="margin-top: 5px;">
-                                                            <legend><strong style="color:white;">Danced for Details:</strong></legend>
+                                                            <legend><strong style="color:white;">Danced In The Work Of Details:</strong></legend>
                                                         </div>
                                                         <div class="small-8 column" style="background-color: #0820aa">
                                                         </div>
@@ -884,7 +884,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                                             <div class="medium-4 column"></div>
                                                             <div class="medium-4 column">
                                                                 <button type="button" class="btn btn-primary"
-                                                                        style="padding: 5px 8px; background-color:#62ad61; color:ghostwhite; font-weight: bold;" onclick="duplicate(this)">Add another timeline</button>
+                                                                        style="padding: 5px 8px; background-color:#62ad61; color:ghostwhite; font-weight: bold;" onclick="duplicate(this)">Add Another Time Frame for this Artist</button>
                                                             </div>
                                                             <div class="medium-4 column"></div>
                                                         </div>
@@ -1016,7 +1016,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                                             <div class="medium-4 column"></div>
                                                             <div class="medium-4 column">
                                                                 <button type="button" class="btn btn-primary"
-                                                                        style="padding: 5px 8px; background-color:#62ad61; color:ghostwhite; font-weight: bold;" onclick="duplicate(this)">Add another timeline</button>
+                                                                        style="padding: 5px 8px; background-color:#62ad61; color:ghostwhite; font-weight: bold;" onclick="duplicate(this)">Add Another Time Frame for this Artist</button>
                                                             </div>
                                                             <div class="medium-4 column"></div>
                                                         </div>
