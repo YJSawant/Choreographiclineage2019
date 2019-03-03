@@ -30,7 +30,7 @@
 			<div id="network_display_div" class="small-12 medium-12 large-10 columns">	
 				<div id="tab_bar_row" class="row tab">
 					<button class="tablinks medium-offset-1 small-3 medium-2 columns active" id="full_network_tab">Full Network</button>
-					<button class="tablinks small-2 columns" id="studied_with_tab">Studied with</button>
+					<button class="tablinks small-2 columns" id="studied_with_tab">Studied Under</button>
 					<button class="tablinks small-3 medium-2 columns" id="collaborated_with_tab">Collaborated with</button>
 					<button class="tablinks small-2 columns" id="danced_for_tab">Danced for</button>
 					<button class="tablinks end small-2 columns" id="influenced_by_tab">Influenced by</button>

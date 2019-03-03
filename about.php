@@ -19,6 +19,12 @@ my_session_start();
       .portrait {
         width: 200px;
       }
+      .align{
+      font-stretch:normal;
+      display: inline-block;
+      float: left;
+      line-break: auto;
+      }
     </style>
   </head>
 
@@ -46,7 +52,7 @@ my_session_start();
           <hr>
           <div class="row">
             <div class="medium-3 column text-center"><p><img src="data/images/about/stacy.png" alt="" class="portrait"></p></div>
-            <div class="medium-9 column"><strong>Metadata</strong> Librarian Stacy Person received her MLS from the University at Buffalo in 1995. She has worked with digital collections in a variety of capacities since 2007, including project management, digitization, metadata creation, and collection creation. She also works closely with faculty and other librarians in all aspects of creating digital collections.<br>Examples of recent collections she has worked on include: Album Pamiątkowe: a guide to Buffalo’s Polonia from 1906 (<a target="_blank" href="http://digital.lib.buffalo.edu/collection/LIB-008/">http://digital.lib.buffalo.edu/collection/LIB-008/</a>), the Museum of Neuroanatomy (<a target="_blank" href="http://digital.lib.buffalo.edu/collection/BMS002/">http://digital.lib.buffalo.edu/collection/BMS002/</a>), and the Medical Illustrations Collection (<a target="_blank" href="http://digital.lib.buffalo.edu/collection/BMS001/">http://digital.lib.buffalo.edu/collection/BMS001/</a>).</div>
+            <div class="medium-9 column align"><strong>Librarian</strong> Stacy Person received her MLS from the University at Buffalo in 1995. She has worked with digital collections in a variety of capacities since 2007, including project management, digitization, metadata creation, and collection creation. She also works closely with faculty and other librarians in all aspects of creating digital collections.<br>Examples of recent collections she has worked on include: <br/>Album Pamiątkowe: a guide to Buffalo’s Polonia from 1906 (<a target="_blank" href="http://digital.lib.buffalo.edu/collection/LIB-008/">http://digital.lib.buffalo.edu/collection/LIB-008/</a>), <br/>the Museum of Neuroanatomy (<a target="_blank" href="http://digital.lib.buffalo.edu/collection/BMS002/">http://digital.lib.buffalo.edu/collection/BMS002/</a>), <br/>and the Medical Illustrations Collection (<a target="_blank" href="http://digital.lib.buffalo.edu/collection/BMS001/">http://digital.lib.buffalo.edu/collection/BMS001/</a>).</div>
           </div>
           <hr>
           <div class="row">
