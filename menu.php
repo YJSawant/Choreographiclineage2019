@@ -32,7 +32,7 @@
 			<li><a href="index.php">Home</a></li>
 			<li><a href="add_user_profile.php">Contribute Your Lineage</a></li>
 			<li><a href="lineage_index.php">Explore the Network</a></li>
-			<li><a href="#">Query</a></li>
+			<!-- <li><a href="#">Query</a></li> -->
 		</ul>
 	</nav>
 </body>

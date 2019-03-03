@@ -9,9 +9,10 @@ if(isset($_SESSION["user_email_address"])){
     $location = "add_user_profile.php";
     echo("<script>location.href='$location'</script>");
 }
-$contribution_method = $_POST['contribute_online_form'];
+// $contribution_method = $_POST['contribute_online_form'];
+//$contribution_method = $_POST['contribute_type'];
 $contribution_type = $_POST['contribute_lineage'];
-if($contribution_method=="form"){
+//if($contribution_method=="form"){
     if($contribution_type == "own") {
         $_SESSION["contribution_type"] = "own";
         $_SESSION["profile_selection"] = "artist";
@@ -20,8 +21,8 @@ if($contribution_method=="form"){
         $_SESSION["profile_selection"] = "other";
     }
     echo ("<script>location.href='add_artist_profile.php'</script>");
-}
-else if($contribution_method=="phone"){
-    echo ("<script>location.href='phone_contribution.php'</script>");
-}
+//}
+// else if($contribution_method=="phone"){
+//     echo ("<script>location.href='phone_contribution.php'</script>");
+// }
 ?>

@@ -34,7 +34,7 @@ if($count==0){
        $mail->addCustomHeader('Content-Type: text/html; charset=ISO-8859-1');
        $mail->Subject = 'Welcome to Choreographic Lineage';
 
-     $message = "Hello $first_name $last_name,<br/><br/>Welcome to Choreographic Lineage. You will need to set up your password in order to log into the Lineage Contribution form. Please use the one time password mentioned below to log into your account and create your own password.<br/><br/>One Time Password: $user_one_time_password<br/><br/>Thank You,<br/>The Choreographic Lineage Team";
+     $message = "Hello $first_name $last_name,<br/><br/>Welcome to Choreographic Lineage. You will need to set up your password in order to log onto the Lineage Contribution form. Please use the one-time password mentioned below to log into your account and create your own password.<br/><br/>One-Time Password: $user_one_time_password<br/><br/>Thank You,<br/>The Choreographic Lineage Team";
        $mail->addAddress($user_email_address);
        $mail->Body    = $message;
        $mail->send();
