@@ -27,7 +27,7 @@
 
 <body>
 	<header class="row column text-center">
-			<img src="<?php echo $path.'data/images/logo_dcl_2.png'; ?>" alt="Choreographic Lineage logo">
+			<img src="data/images/logo_dcl_2.png" alt="Choreographic Lineage logo">
 	</header>
 	<nav class="row column menu-centered">
 		<ul class="vertical medium-horizontal menu">

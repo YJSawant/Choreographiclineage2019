@@ -6,7 +6,7 @@ function draw() {
   var edge_colors_dict = {default_color: "#C0C0C0", studied_with_color: "#FF1C1C", collaborated_with_color: "#FFA807", danced_for_color: "#50B516", influenced_by_color: "#3033CE"};
 
   // initialize path for the directory with images for nodes
-  var image_dir = "/src/";
+  var image_dir = "data/images/";
     //var image_dir = "/src/photo_upload_data/";
 
   //default value of node id before search for artist is performed
