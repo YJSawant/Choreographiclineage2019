@@ -1239,7 +1239,7 @@ include 'form_links_header.php'
             }
         });
 
-        window.open("/src/add_artist_profile.php","_self");
+        window.open("add_artist_profile.php","_self");
 
         //document.location.href = "/src/add_artist_personal_information.php",true;
     });

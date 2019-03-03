@@ -118,7 +118,7 @@ if(isset($_SESSION["user_email_address"])){
     }); 
 
     $("#next").click(function() {
-        window.open("/src/profiles.php","_self");
+        window.open("profiles.php","_self");
     });
 </script>
 </body>

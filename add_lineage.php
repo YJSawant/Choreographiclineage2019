@@ -1094,7 +1094,7 @@ if($_SESSION["timeline_flow"] == "view"){
     <div class="row">
         <?php if($_SESSION["timeline_flow"] == "relation_add"):?>
             <div class="large-2 small-8 column">
-                <button class="primary button float-right" type="button" name="home" id="home" onclick="window.open('/src/add_user_profile.php','_self');">
+                <button class="primary button float-right" type="button" name="home" id="home" onclick="window.open('add_user_profile.php','_self');">
                     <span>Back to Profile</span>
                 </button>
             </div>
@@ -1135,7 +1135,7 @@ if($_SESSION["timeline_flow"] == "view"){
                 </button>
             </div>
             <div class="large-2 small-8 column">
-                <button class="primary button" type="button" name="home" id="home" onclick="window.open('/src/add_user_profile.php','_self');">
+                <button class="primary button" type="button" name="home" id="home" onclick="window.open('add_user_profile.php','_self');">
                     <span>Back to Profile</span>
                 </button>
             </div>
@@ -1417,7 +1417,7 @@ if($_SESSION["timeline_flow"] == "view"){
     $("#previous").click(function() {
         // onclick event is assigned to the #button element.
         if(disabled_input){
-            window.open("/src/add_artist_biography.php","_self");
+            window.open("add_artist_biography.php","_self");
         }else{
             //add_user_profile_form
             //$("#add_artist_personal_id").serialize()
@@ -1431,7 +1431,7 @@ if($_SESSION["timeline_flow"] == "view"){
                     // alert("SUCCESS");
                 }
             });
-            window.open("/src/about_lineage.php","_self");
+            window.open("about_lineage.php","_self");
         }
     });
 
