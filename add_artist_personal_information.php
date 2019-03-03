@@ -177,7 +177,7 @@ include 'form_links_header.php'
     </div>
     <div class="row">
 
-        <h5><em>Please tell us more about <?php echo (($_SESSION['contribution_type'] == "own")?'Yourself':'Artist') ?>...</em></h5>
+        <h5><em>Please tell us more about <?php echo (($_SESSION['contribution_type'] == "own")?'yourself':'this artist') ?>...</em></h5>
     </div>
 
     <div class="row">
@@ -592,7 +592,7 @@ include 'form_links_header.php'
                     </label>
                 </div>
                 <div class="columns"></div>
-            
+
 
         </div>
     <?php endif; ?>

@@ -5,20 +5,20 @@
 	<title>Lineage</title>
 	<link rel="stylesheet" href="dist/vis-network.min.css" type="text/css" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation/6.2.1/foundation.min.css">
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> 
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="css/lineage_styles.css" type="text/css" />
 </head>
 <body  onload="draw()">
 	<div id="network_div">
 		<div id="network_row" class="row">
-			<div id="filter_div" class="small-12 medium-12 large-2 columns"> 
+			<div id="filter_div" class="small-12 medium-12 large-2 columns">
 				<div id="searchbox_row" class="row">
 					<div class="large-12 columns">
 						<label><b>Search </b></label>
        					<input id="searchbox" type="text" placeholder="Enter query" />
 					</div>
 				</div>
-				<div hidden id="searchbox_node_id"> 
+				<div hidden id="searchbox_node_id">
 				</div>
 			</div>
 			<div id="load" class="loader-frame small-12 medium-12 large-10 columns">
@@ -26,13 +26,13 @@
 					<div class="circle loader1"></div>
 					<div class="circle1 loader2"></div>
 				</div>
-			</div>		
-			<div id="network_display_div" class="small-12 medium-12 large-10 columns">	
+			</div>
+			<div id="network_display_div" class="small-12 medium-12 large-10 columns">
 				<div id="tab_bar_row" class="row tab">
 					<button class="tablinks medium-offset-1 small-3 medium-2 columns active" id="full_network_tab">Full Network</button>
 					<button class="tablinks small-2 columns" id="studied_with_tab">Studied Under</button>
 					<button class="tablinks small-3 medium-2 columns" id="collaborated_with_tab">Collaborated with</button>
-					<button class="tablinks small-2 columns" id="danced_for_tab">Danced for</button>
+					<button class="tablinks small-2 columns" id="danced_for_tab">Danced In The Work Of</button>
 					<button class="tablinks end small-2 columns" id="influenced_by_tab">Influenced by</button>
 				</div>
 				<div id="my_network">

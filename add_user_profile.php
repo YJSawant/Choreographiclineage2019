@@ -29,7 +29,7 @@ if(isset($_SESSION["user_email_address"])){
 		<div class="column text-justify">
 			<section>
 				<h2>Welcome</h2>
-				<p>Thank you in advance for contributing your lineage. Your contribution is vital to building a global resource for dance. The amount of time it will take to fill out this form will vary depending on how many artists you include in your lineage. We encourage you to take time to include all of the people you have studied with, danced for, collaborated with and been influenced by so that this resource can most accurately represent the rich network of our field. You can work on the form over time by saving it and coming back to finish it when you are ready.</p>
+				<p>Thank you in advance for contributing your lineage. Your contribution is vital to building a global resource for dance. The amount of time it will take to fill out this form will vary depending on how many artists you include in your lineage. We encourage you to take time to include all of the people you have studied with, danced in the work of, collaborated with and been influenced by so that this resource can most accurately represent the rich network of our field. You can work on the form over time by saving it and coming back to finish it when you are ready.</p>
 			</section>
 		</div>
 	</div> --->
