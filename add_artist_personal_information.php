@@ -316,6 +316,30 @@ include 'form_links_header.php'
                     Other
                 </label>
             </div>
+            <div class="medium-3 column">
+                <label for="ethnicity_unknown">
+                    <input  autocomplete="off" type="radio" id="ethnicity_unknown" name="ethnicity" value="unknown"
+                        <?php
+                        if(isset($_SESSION["ethnicity"])){
+                            echo (($_SESSION["ethnicity"]=='unknown')?'checked':'');
+                        }
+                        ?>
+                    />
+                    Unknown
+                </label>
+            </div>
+            <div class="medium-3 column">
+                <label for="ethnicity_na">
+                    <input  autocomplete="off" type="radio" id="ethnicity_na" name="ethnicity" value="na"
+                        <?php
+                        if(isset($_SESSION["ethnicity"])){
+                            echo (($_SESSION["ethnicity"]=='na')?'checked':'');
+                        }
+                        ?>
+                    />
+                    Prefer not to answer
+                </label>
+            </div>
             <div class="medium-3 column" style="float:left !important;">
                 <label for="ethnicity_other_text" id="ethnicity_other_text_label">
                     Please Specify Your ethnicity:
@@ -1087,6 +1111,15 @@ include 'form_links_header.php'
 
 
 <script type="text/javascript">
+    $(function() {
+        // this will get the full URL at the address bar
+        var url = window.location.href;
+        if(url.search("add_artist_personal_information.php"))
+        {
+            var lineage_contri = document.getElementById("contri_lineage");
+            $(lineage_contri).addClass('active');
+        }
+    }); 
 
     var items = [];
     var noOfEducation=$(".education_entries").length;

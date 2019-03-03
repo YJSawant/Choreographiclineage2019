@@ -485,4 +485,16 @@ if(isset($_SESSION["contribution_type"])) {
 include 'footer.php';
 ?>
 
+<script>
+    $(function() {
+        // this will get the full URL at the address bar
+        var url = window.location.href;
+        if(url.search("add_artist_profile.php"))
+        {
+            var lineage_contri = document.getElementById("contri_lineage");
+            $(lineage_contri).addClass('active');
+        }
+    }); 
+</script>
+
 </html>
