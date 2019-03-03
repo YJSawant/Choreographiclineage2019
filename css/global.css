@@ -11,15 +11,22 @@ header img {
   height: 150px;
 }
 
+
 nav {
   background-color: darkgreen;
   margin: 15px 0;
   font-family: 'Open Sans Condensed', sans-serif;
-  font-size: 1.5em;
+  height: 52px !important;
+  max-height: 52px;
+  font-size: 24px;
 }
 
 nav a {
   color: white;
+  display: inline;
+  text-align:center; 
+  padding: 14px 16px;
+  text-decoration: none;
 }
 
 nav a:hover,
