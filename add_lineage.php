@@ -641,7 +641,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                                 <fieldset id="study_repeat0" style="background-image: linear-gradient(#016400, white); margin-bottom: 5px;">
                                                     <div class="large-12 columns" >
                                                         <div class="small-4 column" style="margin-top: 5px;">
-                                                            <legend><strong style="color:white;">Studied With Details:</strong></legend>
+                                                            <legend><strong style="color:white;">Studied Under Details:</strong></legend>
                                                         </div>
                                                         <div class="small-8 column" style="background-color: #016400">
                                                         </div>
@@ -874,7 +874,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                                             <div class="medium-5 column">
                                                                 <button type="button" class="btn btn-primary" id="danced__with_toggle" class="danced__with_toggle"
                                                                         style="padding: 5px 8px; background-color:grey; color:ghostwhite; font-weight: bold;" onclick="toggleDuration(this)">
-                                                                    <large >Change to Duration</large>
+                                                                    <large> Change to Duration</large>
                                                                 </button>
                                                                 <span style = "cursor: pointer;" title="Toggle between range and duration for filling details. For specific details - change to range. For vague details - change to duration."><img src="img/help.png" style="height:15px;width:15px;"/></span>
                                                             </div>
@@ -1099,9 +1099,9 @@ if($_SESSION["timeline_flow"] == "view"){
                     <span>Back to Profile</span>
                 </button>
             </div>
-            <div class="large-2 small-8 column">
+            <div class="large-4 small-8 columns">
                 <button class="primary button" type="submit" name="save" id="save">
-                    <span>Save</span>
+                    <span>Save and Contribute Lineage</span>
                 </button>
             </div>
         <?php endif; ?>

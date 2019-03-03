@@ -37,7 +37,7 @@ if(isset($_SESSION["user_email_address"])){
 
 <form id="contribution_form" name="contribution_form" method="post" action="contribution_introduction_mediator.php" enctype="multipart/form-data">
     <div class="row">
-        <fieldset>
+        <!-- <fieldset> -->
             <!-- <legend class="column"><strong>Contribution Method</strong></legend>
             <div class="column small-6">
                 <label>
@@ -74,8 +74,8 @@ if(isset($_SESSION["user_email_address"])){
                     <span>Next Page</span>
                 </button>
             </div>
+            <!-- </fieldset> -->
     </div>
-    </fieldset>
     </div>
 </form>
 </body>
