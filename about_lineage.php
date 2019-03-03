@@ -75,15 +75,26 @@ else{
 	</form>
 
 	<script>
+
+		$(function() {
+			// this will get the full URL at the address bar
+			var url = window.location.href;
+			if(url.search("about_lineage.php"))
+			{
+				var lineage_contri = document.getElementById("contri_lineage");
+				$(lineage_contri).addClass('active');
+			}
+		}); 
+
 		$("#previous").click(function() {
 		// onclick event is assigned to the #button element.
-			window.open("/src/add_artist_biography.php","_self");
+			window.open("add_artist_biography.php","_self");
 
 		  //document.location.href = "/src/add_artist_personal_information.php",true;
 		});
 		// onclick event is assigned to the #button element.
 		$("#next").click(function() {
-			window.open("/src/add_lineage.php","_self");
+			window.open("add_lineage.php","_self");
 		});
 	</script>
 

@@ -31,7 +31,6 @@ if($_SESSION["timeline_flow"] == "view"){
     </div>
 </div>
 <form id="add_user_profile_form" name="add_user_profile_form" method="POST" action="add_lineage_mediator.php" enctype="multipart/form-data">
-
     <?php if(isset($_SESSION['lineage_artist_first_name']) && count($_SESSION['lineage_artist_first_name']) > 0): ?>
         <?php foreach ($_SESSION['lineage_artist_first_name'] as $key => $value): ?>
             <div class="row artist_lineage_container" id="artist_lineage_container" style="margin-bottom:2%">
@@ -271,7 +270,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                                 <div class="danced__with_section tabs-panel" id="panel2v<?php echo '-'.$key ?>" style="background-image: linear-gradient(#62ad61, white);">
                                                     <fieldset id="dance_repeat0" style="background-image: linear-gradient(#0820aa, white); margin-bottom: 5px;">
                                                         <div class="large-12 columns" >
-                                                            <div class="small-4 column" style="margin-top: 5px;">
+                                                            <div class="small-8 column" style="margin-top: 5px;">
                                                                 <legend><strong style="color:white;">Danced In The Work Of Details:</strong></legend>
                                                             </div>
                                                             <div class="small-8 column" style="background-color: #0820aa">
@@ -768,7 +767,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                             <div class="danced__with_section tabs-panel" id="panel2v-1">
                                                 <fieldset id="dance_repeat0" style="background-image: linear-gradient(#0820aa, white); margin-bottom: 5px;">
                                                     <div class="large-12 columns" >
-                                                        <div class="small-4 column" style="margin-top: 5px;">
+                                                        <div class="small-8 column" style="margin-top: 5px;">
                                                             <legend><strong style="color:white;">Danced In The Work Of Details:</strong></legend>
                                                         </div>
                                                         <div class="small-8 column" style="background-color: #0820aa">
@@ -1730,6 +1729,19 @@ if($_SESSION["timeline_flow"] == "view"){
 
 
     $(document).ready(function(){
+
+
+        $(function() {
+            // this will get the full URL at the address bar
+            var url = window.location.href;
+            if(url.search("about_lineage.php"))
+            {
+                var lineage_contri = document.getElementById("contri_lineage");
+                $(lineage_contri).addClass('active');
+            }
+        }); 
+
+
         dateScripts();
 
         $( "#dialog-1" ).dialog({

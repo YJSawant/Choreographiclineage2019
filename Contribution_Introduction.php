@@ -92,4 +92,16 @@ include 'footer.php';
     });
 </script> -->
 
+<script>
+    $(function() {
+        // this will get the full URL at the address bar
+        var url = window.location.href;
+        if(url.search("Contribution_Introduction.php"))
+        {
+            var lineage_contri = document.getElementById("contri_lineage");
+            $(lineage_contri).addClass('active');
+        }
+    }); 
+</script>
+
 </html>
