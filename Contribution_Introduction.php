@@ -38,7 +38,7 @@ if(isset($_SESSION["user_email_address"])){
 <form id="contribution_form" name="contribution_form" method="post" action="contribution_introduction_mediator.php" enctype="multipart/form-data">
     <div class="row">
         <fieldset>
-            <legend class="column"><strong>Contribution Method</strong></legend>
+            <!-- <legend class="column"><strong>Contribution Method</strong></legend>
             <div class="column small-6">
                 <label>
                     <input type="radio" id="contribute_online" name="contribute_online_form" class="contribute_online_form" value="form" checked>
@@ -50,14 +50,14 @@ if(isset($_SESSION["user_email_address"])){
                     <input type="radio" id="contribute_phone" name="contribute_online_form" class="contribute_online_form" value="phone">
                     Contribute lineage via phone
                 </label>
-            </div>
+            </div> -->
 
 
             <div class="column" style="margin-bottom:1%"  id="contribution_type" name="contribution_type">
                 <legend><strong>Contribution Type</strong></legend>
                 <div>
                     <label>
-                        <input type="radio" id="contribute_own_lineage" name="contribute_lineage" class="contribute_lineage" value="own" checked>
+                        <input type="radio" id="contribute_own_lineage" name="contribute_lineage" class="contribute_lineage" value="own">
                         I am contributing my own lineage
                     </label>
                 </div>
@@ -83,15 +83,13 @@ if(isset($_SESSION["user_email_address"])){
 include 'footer.php';
 ?>
 
-<script>
-
+<!-- <script>
     $("#contribute_online").click(function() {
         $("#contribution_type").show();
     });
     $("#contribute_phone").click(function() {
         $("#contribution_type").hide();
     });
-
-</script>
+</script> -->
 
 </html>

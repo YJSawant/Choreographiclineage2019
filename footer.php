@@ -15,7 +15,7 @@ if(isset($_SESSION["user_email_address"])){
 <div class="row">
 	<div class="medium-12">
 -->
-<footer class="row" style="position:relative; bottom:0;height: auto;">
+<footer class="row" style="position:relative;height: auto;bottom:0;">
 	<!--<div>-->
 		<div class="small-6 column">
 			<ul class="vertical medium-horizontal menu">
@@ -26,14 +26,10 @@ if(isset($_SESSION["user_email_address"])){
 				<li><a href="ComingSoon.php">Help</a></li>
 			</ul>
 		</div>
-		<div class="small-6 column">
+		<div class="small-6 column" >
 			<ul class="menu align-right">
 				<li class="menu-text"><small>Choreographic Lineage © 2019</small></li>
 			</ul>
 		</div>
 	<!--</div>-->
 </footer>
-<!--
-	</div>
-</div>
--->
