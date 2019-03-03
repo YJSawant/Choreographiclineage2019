@@ -520,6 +520,18 @@ if(isset($_SESSION['timeline_flow']) &&  $_SESSION['timeline_flow'] == "artist_a
 <script type="text/javascript">
 
 	$(document).ready(function (e) {
+
+		$(function() {
+			// this will get the full URL at the address bar
+			var url = window.location.href;
+			if(url.search("add_artist_biography.php"))
+			{
+				var lineage_contri = document.getElementById("contri_lineage");
+				$(lineage_contri).addClass('active');
+			}
+		}); 
+
+
 		$("#upload_bigraphy_text").on('submit',(function(e) {
 			e.preventDefault();
 			$("#biography_text_message").empty();

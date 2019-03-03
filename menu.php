@@ -27,10 +27,10 @@
 	<header class="row column text-center">
 			<img src="data/images/logo_dcl_2.png" alt="Choreographic Lineage logo">
 	</header>
-	<nav class="row column menu-centered">
+	<nav class="row column menu-centered" id="navbar">
 		<ul class="vertical medium-horizontal menu">
 			<li><a href="index.php">Home</a></li>
-			<li><a href="add_user_profile.php">Contribute Your Lineage</a></li>
+			<li><a href="add_user_profile.php" id="contri_lineage">Contribute Your Lineage</a></li>
 			<li><a href="lineage_index.php">Explore the Network</a></li>
 			<!-- <li><a href="#">Query</a></li> -->
 		</ul>

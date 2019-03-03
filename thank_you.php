@@ -52,7 +52,9 @@ if(isset($_SESSION["user_email_address"])){
     </div>
     <div class="row">
         <div class="small-12 small-centered columns">
-            <p>Send any comments or questions regarding this survey or the Choregraphic Lineage project to <strong><a>choreographiclineage@gmail.com</a></strong></p>
+            <br/> <br/>
+
+            <p>Send any comments or questions regarding this survey or the Choregraphic Lineage project to <strong><a href="mailto:choreographiclineage@gmail.com">choreographiclineage@gmail.com</a></strong></p>
             <!-- <p>
                 Many Thanks<br>
                 <strong>The Choreographic Lineage Team</strong><br>
@@ -104,6 +106,16 @@ if(isset($_SESSION["user_email_address"])){
     /*$("#previous").click(function() {
         window.open("/src/add_lineage.php","_self");
     });*/
+
+    $(function() {
+        // this will get the full URL at the address bar
+        var url = window.location.href;
+        if(url.search("thank_you.php"))
+        {
+            var lineage_contri = document.getElementById("contri_lineage");
+            $(lineage_contri).addClass('active');
+        }
+    }); 
 
     $("#next").click(function() {
         window.open("/src/profiles.php","_self");
