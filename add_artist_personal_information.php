@@ -1241,11 +1241,11 @@ include 'form_links_header.php'
 
         window.open("add_artist_profile.php","_self");
 
-        //document.location.href = "/src/add_artist_personal_information.php",true;
+        //document.location.href = "add_artist_personal_information.php",true;
     });
     // onclick event is assigned to the #button element.
     // $("#next").click(function() {
-    // 	window.open("/src/add_artist_biography.php","_self");
+    // 	window.open("add_artist_biography.php","_self");
     // });
 
 
