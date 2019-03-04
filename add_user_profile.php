@@ -137,18 +137,4 @@ if(isset($_SESSION["user_email_address"])){
 <?php
 include 'footer.php';?>
 
-<script>
-	$(document).ready(function(){
-		$(function() {
-            // this will get the full URL at the address bar
-            var url = window.location.href;
-            if(url.search("add_user_profile.php"))
-            {
-                var lineage_contri = document.getElementById("contri_lineage");
-                $(lineage_contri).addClass('active');
-            }
-        }); 
-});
-</script>
-
 </html>

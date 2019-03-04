@@ -401,7 +401,7 @@ if(isset($_SESSION['timeline_flow']) &&  $_SESSION['timeline_flow'] == "artist_a
 
 		window.open("add_artist_personal_information.php","_self");
 
-	  //document.location.href = "add_artist_personal_information.php",true;
+	  //document.location.href = "/src/add_artist_personal_information.php",true;
 	});
 	//onclick event is assigned to the #button element.
 	$("#next").click(function() {

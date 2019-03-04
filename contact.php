@@ -19,6 +19,14 @@ my_session_start();
         .portrait {
             width: 200px;
         }
+        html,body{
+            height: 100%;
+            margin:0;
+            padding:0;
+        }
+        .footer{
+            margin-top: 13rem;
+        }
     </style>
 </head>
 
@@ -52,7 +60,10 @@ my_session_start();
 </div>
 
 </body>
+<div class="footer">
+
 <?php
 include 'footer.php';
 ?>
+</div>
 </html>
