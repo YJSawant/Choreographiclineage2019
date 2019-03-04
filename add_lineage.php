@@ -30,6 +30,7 @@ if($_SESSION["timeline_flow"] == "view"){
         <h4><strong><?php echo ((isset($_SESSION["profile_selection"])&&$_SESSION["profile_selection"] == "artist")?"YOUR":"ARTIST'S"); ?> LINEAGE</strong></h4>
     </div>
 </div>
+<div class="medium-9 row"><p><i>Lineal artists are the people with whom you have studied, danced, collaborated and have been influenced by.</i></p></div>
 <form id="add_user_profile_form" name="add_user_profile_form" method="POST" action="add_lineage_mediator.php" enctype="multipart/form-data">
     <?php if(isset($_SESSION['lineage_artist_first_name']) && count($_SESSION['lineage_artist_first_name']) > 0): ?>
         <?php foreach ($_SESSION['lineage_artist_first_name'] as $key => $value): ?>
@@ -597,7 +598,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                 </label>
                             </div>
                             <div class="small-3 column">
-                                <label for="artist_email_address">Email Address <large style="color:red;font-weight: bold;"> *</large>
+                                <label for="artist_email_address">Email Address
                                     <input  autocomplete="off" type="text" class="artist_email_address" id="artist_email_address-1" name="lineage_artist_email_address[]" placeholder="Email Address">
                                 </label>
                             </div>
@@ -1093,12 +1094,10 @@ if($_SESSION["timeline_flow"] == "view"){
 
     <div class="row">
         <?php if($_SESSION["timeline_flow"] == "relation_add"):?>
-            <div class="large-2 small-8 column">
-                <button class="primary button float-right" type="button" name="home" id="home" onclick="window.open('/src/add_user_profile.php','_self');">
+            <div class="large-10">
+                <button class="primary button" type="button" name="home" id="home" onclick="window.open('add_user_profile.php','_self');">
                     <span>Back to Profile</span>
                 </button>
-            </div>
-            <div class="large-4 small-8 columns">
                 <button class="primary button" type="submit" name="save" id="save">
                     <span>Save and Contribute Lineage</span>
                 </button>
@@ -1134,8 +1133,8 @@ if($_SESSION["timeline_flow"] == "view"){
                     <span>Previous</span>
                 </button>
             </div>
-            <div class="large-2 small-8 column">
-                <button class="primary button" type="button" name="home" id="home" onclick="window.open('/src/add_user_profile.php','_self');">
+            <div class="large-2 small-8 column style="margin-left: 0px;">
+                <button class="primary button" type="button" name="home" id="home" onclick="window.open('add_user_profile.php','_self');">
                     <span>Back to Profile</span>
                 </button>
             </div>
@@ -1243,6 +1242,7 @@ if($_SESSION["timeline_flow"] == "view"){
             //updateRemoveVisibility(parent, divName, 4);
         }
         else{
+            alert("Please enter value for removal");
 
             element.querySelector(".range_from_months").value="";
             element.querySelector(".range_from_years").value="";
@@ -1329,6 +1329,9 @@ if($_SESSION["timeline_flow"] == "view"){
                 $(artist_object).find(".relation_influenced_cb").val(i);
             }
         }else{
+            if($(".artist_lineage_container").length == 1){
+            alert("Artist cannot be deleted");
+            }
             lineal_artist_count = 1;
             var artist_object = $(ele).closest(".artist_lineage_container");
             $(artist_object).find("input:text").val("");

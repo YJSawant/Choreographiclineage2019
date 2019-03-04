@@ -14,7 +14,7 @@ my_session_start();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation/6.2.1/foundation.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Asap">
-    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="css/global.css">
     <style>
       .portrait {
         width: 200px;
@@ -78,24 +78,31 @@ my_session_start();
         <hr>
         <section>
           <h4>The Choreographic Lineage Contributors</h4>
-         <div style="float: left; width: 33.33%;">
-          <ul>
-           <li>Sumedh Ambokar</li>
-           <li>Yash Jain</li>
-           <li>Jay Shah</li>
-           <li>Michael Rogers</li>
-           <li>Yunfei Hou</li>
-          </ul>
-        </div>
-        <div style="float: right; width: 66.66%;">
-          <ul>
-            <li>Mangesh Vilas Kaslikar</li>
-            <li>Laura Neese</li>
-            <li>Sarah Dodd</li>
-            <li>Elizabeth Kaltenbach</li>
-            <li>Naila Ansari</li>
+          <div style="column-count: 3;" >
+          <div>
+            <ul>
+            <li>Sumedh Ambokar</li>
+            <li>Yash Jain</li>
+            <li>Jay Shah</li>
+            <li>Michael Rogers</li>
+            <li>Yunfei Hou</li>
             </ul>
-        </div>
+          </div>
+          <div>
+            <ul>
+              <li>Mangesh Vilas Kaslikar</li>
+              <li>Laura Neese</li>
+              <li>Sarah Dodd</li>
+              <li>Elizabeth Kaltenbach</li>
+              <li>Naila Ansari</li>
+             </ul>
+          </div> 
+          <div>
+            <ul>
+              <li>Shivam Sahu</li>
+              <li>Shailesh Adhikari</li>
+              </ul>
+          </div>   
         </section>
 
       </div>

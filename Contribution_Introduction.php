@@ -57,7 +57,7 @@ if(isset($_SESSION["user_email_address"])){
                 <legend><strong>Contribution Type</strong></legend>
                 <div>
                     <label>
-                        <input type="radio" id="contribute_own_lineage" name="contribute_lineage" class="contribute_lineage" value="own" checked>
+                        <input type="radio" id="contribute_own_lineage" name="contribute_lineage" class="contribute_lineage" value="own">
                         I am contributing my own lineage
                     </label>
                 </div>
