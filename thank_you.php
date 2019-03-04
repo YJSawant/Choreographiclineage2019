@@ -104,7 +104,7 @@ if(isset($_SESSION["user_email_address"])){
 </div>
 <script type="text/javascript">
     /*$("#previous").click(function() {
-        window.open("add_lineage.php","_self");
+        window.open("/src/add_lineage.php","_self");
     });*/
 
     $(function() {

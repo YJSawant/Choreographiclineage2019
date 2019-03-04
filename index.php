@@ -46,6 +46,8 @@
                             <b>Dr Bina Ramamurthy</b>, Data Scientist<br>
                             <b>Renee Ruffino</b>, Graphic Designer<br>
                             <b>Domenic Licata</b>, User Experience Designer<br>
+                            <b>Shivam Sahu</b>, Graduate Student Assistant<br>
+                            <b>Shailesh Adhikari</b>, Graduate Student Assistant<br>
 						</small>
 					</div>
 				</div>

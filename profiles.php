@@ -122,10 +122,11 @@
 			</div>
 		</div>
 	</body>
-
+<div class="footer" style="margin-top:4.5%">
 <?php
 	include 'footer.php';
 ?>
+</div>
 	<script>
 	function confirmDelete(){
 		var c = confirm("Warning: You are about to delete this entire profile! Click 'OK' to cancel.");
