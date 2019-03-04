@@ -1,3 +1,7 @@
+<!--
+<div class="row">
+	<div class="medium-12">
+-->
 <div class="row">
 	<div class="medium-12">
 		<section>
@@ -11,10 +15,6 @@ if(isset($_SESSION["user_email_address"])){
 		</section>
 	</div>
 </div>
-<!--
-<div class="row">
-	<div class="medium-12">
--->
 <footer class="row" style="position:relative;height: auto;bottom:0;">
 	<!--<div>-->
 		<div class="small-6 column">
@@ -33,3 +33,4 @@ if(isset($_SESSION["user_email_address"])){
 		</div>
 	<!--</div>-->
 </footer>
+
