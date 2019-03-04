@@ -57,7 +57,7 @@ if(isset($_SESSION["user_email_address"])){
                 <legend><strong>Contribution Type</strong></legend>
                 <div>
                     <label>
-                        <input type="radio" id="contribute_own_lineage" name="contribute_lineage" class="contribute_lineage" value="own">
+                        <input type="radio" id="contribute_own_lineage" name="contribute_lineage" class="contribute_lineage" value="own" checked>
                         I am contributing my own lineage
                     </label>
                 </div>
@@ -70,7 +70,7 @@ if(isset($_SESSION["user_email_address"])){
             </div>
 
             <div class="large-12 column">
-                <button class="primary button" type="submit" name="login_submit">
+                <button class="primary button" type="submit" name="login_submit" id="enter">
                     <span>Next Page</span>
                 </button>
             </div>
@@ -93,6 +93,7 @@ include 'footer.php';
 </script> -->
 
 <script>
+
     $(function() {
         // this will get the full URL at the address bar
         var url = window.location.href;

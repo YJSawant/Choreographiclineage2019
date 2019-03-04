@@ -3,9 +3,8 @@
 // $mysqli_user="cl";
 // $mysqli_password="DclSQLwebsiteLineage";
 // $mysqli_database="choreographiclineage_db";
-
 $mysqli_hostname = "localhost";
-$mysqli_user="root";
+$mysqli_user="";
 # Comment this if working using XAMPP
 $mysqli_password="";
 $mysqli_database="choreographic_lineage";

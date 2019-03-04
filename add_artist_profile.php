@@ -321,7 +321,7 @@ if(isset($_SESSION["contribution_type"])) {
                     }
                 }
             });
-            window.open('add_user_profile.php','_self');
+            window.open('/src/add_user_profile.php','_self');
         }
         var prepopulated;
         var contribution_form_type;
@@ -380,11 +380,11 @@ if(isset($_SESSION["contribution_type"])) {
         $("#previous").click(function() {
             // onclick event is assigned to the #button element.
             window.open("Contribution_Introduction.php","_self");
-            //document.location.href = "add_artist_personal_information.php",true;
+            //document.location.href = "/src/add_artist_personal_information.php",true;
         });
         // onclick event is assigned to the #button element.
         // $("#next").click(function() {
-        // 	window.open("add_artist_personal_information.php","_self");
+        // 	window.open("/src/add_artist_personal_information.php","_self");
         // });
         $(document).ready(function(){
             prepopulated = "<?php echo $prepopulated ?>";
@@ -429,18 +429,35 @@ if(isset($_SESSION["contribution_type"])) {
                 $('input').attr('disabled','true')
             }
         });
-        $("#date_of_birth").change(function(){
-            console.log("date_of_birth");
-            var startDate = $(this).val();
-            var endDate = $(this).closest('.date_section').find("#date_of_death").val();
-            console.log(Date.parse(startDate) + " " + Date.parse(endDate));
-            if(startDate != "" && endDate != ""){
-                if ((Date.parse(startDate) >= Date.parse(endDate))) {
-                    alert("Date of Death cannot be less than Date of Birth.");
-                    $(this).val("");
-                }
+        
+        var birthdate=document.getElementById('date_of_birth');
+        console.log(birthdate);
+        birthdate.addEventListener('change',function(){
+            console.log(birthdate.value);
+            var date = new Date();
+            birth=new Date(birthdate.value);
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+            var yyyy = today.getFullYear();
+            if (dd < 10) {
+              dd = '0' + dd;
+            } 
+            if (mm < 10) {
+              mm = '0' + mm;
+            } 
+            var today = yyyy + '-' + mm + '-' + dd;
+            if(today===birthdate.value){
+                alert("same date as today!!")
             }
+            if(date < birth)
+                {
+                    alert("Given date:- "+birthdate.value+" is in the future!");
+                }
+            
+            
         });
+
         $("#date_of_death").change(function(){
             console.log("date_of_death");
             var endDate = $(this).val();
@@ -452,6 +469,9 @@ if(isset($_SESSION["contribution_type"])) {
                     $(this).val("");
                 }
             }
+
+
+
         });
     </script>
     <style>
@@ -477,7 +497,7 @@ if(isset($_SESSION["contribution_type"])) {
     <div class="row">
         <div style="text-align:center">
             <h3><strong>Please Login to access this page</strong></h3>
-            <a href="add_user_profile.php">Click here to login or create your new user</a>
+            <a href="/src/add_user_profile.php">Click here to login or create your new user</a>
         </div>
     </div>
 <?php endif; ?>
