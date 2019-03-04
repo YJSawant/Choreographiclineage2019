@@ -17,53 +17,63 @@ my_session_start();
     <link rel="stylesheet" href="../css/global.css">
     <style>
     .loader {
-      border: 16px solid #f3f3f3;
-      border-radius: 50%;
-      border-top: 16px solid green;
-      border-bottom: 16px solid green;
-      width: 120px;
-      height: 120px;
-      -webkit-animation: spin 2s linear infinite;
-      animation: spin 2s linear infinite;
-      margin-left: auto;
-      margin-right: auto;
-  
-}
-.gap-50 {
-        width:100%;
-        height:50px;
+      margin-top:50px;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid green;
+        border-bottom: 16px solid green;
+        width: 60px;
+        height: 60px;
+        -webkit-animation: spin 4s linear infinite alternate;
+        animation: spin 4s linear infinite alternate;
+        margin-left: auto;
+        margin-right: auto;
+    
+        }
+    html,body{
+      margin:0;
+     padding:0;
+     height:100%;
       }
-.gap-80 {
-        width:100%;
-        height:80px;
-      }
+    
+    .footer {
+      position:absolute;
+      bottom:0;
+      margin-bottom: 2%;
+      width:100%;
+      height:60px;
+    }
+    .content {
+      height: 1000px; /* Changed this height */
+      padding-bottom:60px;
+    }
+    
+    @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+    }
 
-@-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-      .portrait {
-        width: 200px;
-      }
-    </style>
+    @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+    }
+    .portrait {
+       width: 200px;
+        }
+  </style>
   </head>
 
   <body>
-    <h2 class="text-center">Coming Soon</h2>
-
-    <div class="gap-50"></div>
-   <div class="loader" ></div>
-    <div class="gap-80"></div>
-
+      <div id="content">
+        <h3 class="text-center" style="font-family: 'Open Sans Condensed',sans-serif ">Coming Soon!</h3>
+        <div class="loader" ></div>
+      </div>
 
   </body>
-<?php
-include 'footer.php';
-
-?>
+  <div class="footer">
+  <?php
+  include 'footer.php';
+  ?>
+  </div>
+</div>
 </html>
