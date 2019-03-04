@@ -30,7 +30,7 @@ if($_SESSION["timeline_flow"] == "view"){
         <h4><strong><?php echo ((isset($_SESSION["profile_selection"])&&$_SESSION["profile_selection"] == "artist")?"YOUR":"ARTIST'S"); ?> LINEAGE</strong></h4>
     </div>
 </div>
-<div class="medium-9 column"><p><i>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspLineal artists are the people with whom you have studied, danced, collaborated and have been influenced by.</i></p></div>
+<div class="medium-9 row"><p><i>Lineal artists are the people with whom you have studied, danced, collaborated and have been influenced by.</i></p></div>
 <form id="add_user_profile_form" name="add_user_profile_form" method="POST" action="add_lineage_mediator.php" enctype="multipart/form-data">
     <?php if(isset($_SESSION['lineage_artist_first_name']) && count($_SESSION['lineage_artist_first_name']) > 0): ?>
         <?php foreach ($_SESSION['lineage_artist_first_name'] as $key => $value): ?>
@@ -1079,7 +1079,7 @@ if($_SESSION["timeline_flow"] == "view"){
         <input type="checkbox" name="terms" id="terms" value="accepted">Accept Terms and Condition</div>
     </div>-->
 
-    <div class="row" style="margin-left: 60px;">
+    <div class="row">
         <input type="checkbox" name="terms" id="terms" value="accepted">  Accept <a href="javascript:readTermsConditions();">Terms and Conditions</a></input>
         <!--<button text="Read terms and conitions here" id="read_terms" name="read_terms" onclick="readTermsConditions()"/>-->
     </div>
@@ -1092,14 +1092,12 @@ if($_SESSION["timeline_flow"] == "view"){
         5. You are accepting the terms and conditions for your current entries and your future additions to your lineage.
     </div>
 
-    <div class="row" style="margin-left: 0px;">
+    <div class="row">
         <?php if($_SESSION["timeline_flow"] == "relation_add"):?>
-            <div class="large-2 small-8 column" >
-                <button class="primary button float-right" type="button" name="home" id="home" onclick="window.open('add_user_profile.php','_self');">
+            <div class="large-10">
+                <button class="primary button"type="button" name="home" id="home" onclick="window.open('add_user_profile.php','_self');">
                     <span>Back to Profile</span>
                 </button>
-            </div>
-            <div class="large-4 small-8 columns">
                 <button class="primary button" type="submit" name="save" id="save">
                     <span>Save and Contribute Lineage</span>
                 </button>
