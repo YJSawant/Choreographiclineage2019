@@ -79,7 +79,7 @@ else{
 
     <div class="row">
         <div class="button_container small-12 medium-8 large-4 small-centered columns">
-            <a href="login_mediator.php" class="button expanded radius text-center">Contribute Your Lineage</a>
+            <a href="login_mediator.php" class="button expanded radius text-center">Contribue Your Lineage</a>
         </div>
     </div>
 </div>
