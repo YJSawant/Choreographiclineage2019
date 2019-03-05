@@ -98,7 +98,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                                             }
                                                             ?>
                                                         />
-                                                        <label for="relationship_studied<?php echo '-'.$key ?>">Studied Under</label>
+                                                        <label for="relationship_studied<?php echo '-'.$key ?>">Studied Under</label><span style = "cursor: pointer;" title="Teachers/people under whom you have studied."><img src="img/help.png" style="height:13px;width:13px;"/></span>
                                                     </a></li>
                                                 <li class="tabs-title"><a href="#panel2v<?php echo '-'.$key ?>" aria-controls="panel2v<?php echo '-'.$key ?>">
                                                         <input class="relationship relation_danced_cb" name="relationship_danced[]" id="relationship_danced<?php echo '-'.$key ?>" type="checkbox" tilte="danced__with_section"
@@ -109,7 +109,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                                             }
                                                             ?>
                                                         />
-                                                        <label for="relationship_danced<?php echo '-'.$key ?>">Danced In The Work Of</label>
+                                                        <label for="relationship_danced<?php echo '-'.$key ?>">Danced in the Work of</label><span style = "cursor: pointer;" title="Choreographers whose works you have danced in."><img src="img/help.png" style="height:13px;width:13px;"/></span>
                                                     </a></li>
                                                 <li class="tabs-title"><a href="#panel3v<?php echo '-'.$key ?>" aria-controls="panel3v<?php echo '-'.$key ?>">
                                                         <input class="relationship relation_collaborated_cb" name="relationship_collaborated[]" id="relationship_collaborated<?php echo '-'.$key ?>" type="checkbox" title="colbrtd_with_section"
@@ -120,7 +120,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                                             }
                                                             ?>
                                                         />
-                                                        <label for="relationship_collaborated<?php echo '-'.$key ?>">Collaborated Under</label>
+                                                        <label for="relationship_collaborated<?php echo '-'.$key ?>">Collaborated Under</label><span style = "cursor: pointer;" title="Artists with whom you have collaborated."><img src="img/help.png" style="height:13px;width:13px;"/></span>
                                                     </a></li>
                                                 <li class="tabs-title"><a href="#panel4v<?php echo '-'.$key ?>" aria-controls="panel4v<?php echo '-'.$key ?>">
                                                         <input class="relationship relation_influenced_cb" name="relationship_influenced[]" id="relationship_influenced<?php echo '-'.$key ?>" type="checkbox" title="influenced_by_section" value="<?php echo $key ?>"
@@ -150,7 +150,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                                                 <input class="relation_type" title="studied" style="display:none"/>
                                                                 <div class="large-12 columns range_div" id="studied_with_range_div">
                                                                     <div class="large-12 columns" >
-                                                                        <legend><strong style="color:white;">Range: <span style = "cursor: pointer;" title="Provide a specific time range for this relationship."><img src="img/help.png" style="height:15px;width:15px;"/></span>
+                                                                        <legend><strong style="color:white;">Range: <span style = "cursor: pointer;" title="Provide a specific time range for this relationship: Month and Year, or just Year.  If you don’t recall the specific years, please enter a general decade."><img src="img/help.png" style="height:15px;width:15px;"/></span>
                                                                             </strong></legend>
                                                                     </div>
                                                                     <div class="large-12 columns">
@@ -241,11 +241,11 @@ if($_SESSION["timeline_flow"] == "view"){
                                                                     <button type="button" class="btn btn-primary" id="remove_button" onclick="remove(this,4)"
                                                                             style="padding: 5px 8px; background-color:red; color:ghostwhite; font-weight: bold;" >Remove</button>
                                                                 </div>
-                                                                <div class="medium-2 column"></div>
-                                                                <div class="medium-5 column">
+                                                                <div class="medium-1 column"></div>
+                                                                <div class="medium-6 column">
                                                                     <button type="button" class="btn btn-primary" id="studied_with_toggle" class="studied_with_toggle"
                                                                             style="padding: 5px 8px; background-color:grey; color:ghostwhite; font-weight: bold;" onclick="toggleDuration(this)">
-                                                                        <large >Change to Duration</large>
+                                                                        <large >I don’t recall the date range.</large>
                                                                     </button>
                                                                     <span style = "cursor: pointer;" title="Toggle between range and duration for filling details. For specific details - change to range. For vague details - change to duration."><img src="img/help.png" style="height:15px;width:15px;"/></span>
                                                                 </div>
@@ -282,7 +282,7 @@ if($_SESSION["timeline_flow"] == "view"){
 
                                                                 <div class="large-12 columns range_div" id="danced__with_range_div">
                                                                     <div class="large-12 columns" >
-                                                                        <legend><strong style="color:white;">Range: <span style = "cursor: pointer;" title="Provide a specific time range for this relationship."><img src="img/help.png" style="height:15px;width:15px;"/></span>
+                                                                        <legend><strong style="color:white;">Range: <span style = "cursor: pointer;" title="Provide a specific time range for this relationship: Month and Year, or just Year.  If you don’t recall the specific years, please enter a general decade."><img src="img/help.png" style="height:15px;width:15px;"/></span>
                                                                             </strong></legend>
                                                                     </div>
                                                                     <div class="large-12 columns">
@@ -373,11 +373,11 @@ if($_SESSION["timeline_flow"] == "view"){
                                                                     <button type="button" class="btn btn-primary" id="remove_button" onclick="remove(this,4)"
                                                                             style="padding: 5px 8px; background-color:red; color:ghostwhite; font-weight: bold;" >Remove</button>
                                                                 </div>
-                                                                <div class="medium-2 column"></div>
-                                                                <div class="medium-5 column">
+                                                                <div class="medium-1 column"></div>
+                                                                <div class="medium-6 column">
                                                                     <button type="button" class="btn btn-primary" id="danced__with_toggle" class="danced__with_toggle"
                                                                             style="padding: 5px 8px; background-color:grey; color:ghostwhite; font-weight: bold;" onclick="toggleDuration(this)">
-                                                                        <large >Change to Duration</large>
+                                                                        <large >I don’t recall the date range.</large>
                                                                     </button>
                                                                     <span style = "cursor: pointer;" title="Toggle between range and duration for filling details. For specific details - change to range. For vague details - change to duration."><img src="img/help.png" style="height:15px;width:15px;"/></span>
                                                                 </div>
@@ -412,7 +412,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                                                 <div class="large-12 columns range_div" id="colbrtd_with_range_div">
 
                                                                     <div class="large-12 columns" >
-                                                                        <legend><strong style="color:white;">Range: <span style = "cursor: pointer;" title="Provide a specific time range for this relationship."><img src="img/help.png" style="height:15px;width:15px;"/></span>
+                                                                        <legend><strong style="color:white;">Range: <span style = "cursor: pointer;" title="Provide a specific time range for this relationship: Month and Year, or just Year.  If you don’t recall the specific years, please enter a general decade."><img src="img/help.png" style="height:15px;width:15px;"/></span>
                                                                             </strong></legend>
                                                                     </div>
 
@@ -505,11 +505,11 @@ if($_SESSION["timeline_flow"] == "view"){
                                                                     <button type="button" class="btn btn-primary" id="remove_button" onclick="remove(this,4)"
                                                                             style="padding: 5px 8px; background-color:red; color:ghostwhite; font-weight: bold;" >Remove</button>
                                                                 </div>
-                                                                <div class="medium-2 column"></div>
-                                                                <div class="medium-5 column">
+                                                                <div class="medium-1 column"></div>
+                                                                <div class="medium-6 column">
                                                                     <button type="button" class="btn btn-primary" id="colbrtd_with_toggle" class="colbrtd_with_toggle"
                                                                             style="padding: 5px 8px; background-color:grey; color:ghostwhite; font-weight: bold;" onclick="toggleDuration(this)">
-                                                                        <large >Change to Duration</large>
+                                                                        <large >I don’t recall the date range.</large>
                                                                     </button>
                                                                     <span style = "cursor: pointer;" title="Toggle between range and duration for filling details. For specific details - change to range. For vague details - change to duration."><img src="img/help.png" style="height:15px;width:15px;"/></span>
                                                                 </div>
@@ -531,7 +531,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                                 <!-- Influenced tab section -->
                                                 <div class="tabs-panel influenced_by_section" id="panel4v<?php echo '-'.$key ?>">
                                                     <fieldset>
-                                                        <legend><strong>Influenced By Details:</strong></legend>
+                                                        <legend><strong>Influenced by Details:</strong></legend>
                                                         <div class="row not_influenced" <?php echo isset($_SESSION["influenced_by"][$key])?"style='display:none'":""; ?>>
                                                             <input class="relation_type" title="influenced" style="display:none"/>
                                                             <div class="column">
@@ -546,7 +546,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                                                 <div class="row">
                                                                     <center>
                                                                         <button class="primary button influenced_by" type="button" style="margin-top:5%">
-                                                                            <span>Influenced By</span>
+                                                                            <span>Influenced by</span>
                                                                         </button>
                                                                     </center>
                                                                 </div>
@@ -620,13 +620,13 @@ if($_SESSION["timeline_flow"] == "view"){
                                     <div class="medium-3 columns">
                                         <ul class="vertical tabs" data-tabs id="relation-tabs-1">
                                             <li class="tabs-title is-active"><a href="#panel1v-1" aria-selected="true">
-                                                    <input class="relationship relation_studied_cb" name="relationship_studied[]" id="relationship_studied-1" type="checkbox" title="studied_with_section"><label for="relationship_studied">Studied Under</label>
+                                                    <input class="relationship relation_studied_cb" name="relationship_studied[]" id="relationship_studied-1" type="checkbox" title="studied_with_section"><label for="relationship_studied">Studied Under</label><span style = "cursor: pointer;" title="Teachers/people under whom you have studied."><img src="img/help.png" style="height:13px;width:13px;"/></span>
                                                 </a></li>
                                             <li class="tabs-title"><a href="#panel2v-1">
-                                                    <input class="relationship relation_danced_cb" name="relationship_danced[]" id="relationship_danced-1" type="checkbox" title="danced_for_section" ><label for="relationship_danced">Danced In The Work Of</label>
+                                                    <input class="relationship relation_danced_cb" name="relationship_danced[]" id="relationship_danced-1" type="checkbox" title="danced_for_section" ><label for="relationship_danced">Danced in the Work of</label><span style = "cursor: pointer;" title="Choreographers whose works you have danced in."><img src="img/help.png" style="height:13px;width:13px;"/></span>
                                                 </a></li>
                                             <li class="tabs-title"><a href="#panel3v-1">
-                                                    <input class="relationship relation_collaborated_cb" name="relationship_collaborated[]" id="relationship_collaborated-1" type="checkbox" title="collaborated_with_section" ><label for="relationship_collaborated">Collaborated With</label>
+                                                    <input class="relationship relation_collaborated_cb" name="relationship_collaborated[]" id="relationship_collaborated-1" type="checkbox" title="collaborated_with_section" ><label for="relationship_collaborated">Collaborated With</label><span style = "cursor: pointer;" title="Artists with whom you have collaborated."><img src="img/help.png" style="height:13px;width:13px;"/></span>
                                                 </a></li>
                                             <li class="tabs-title"><a href="#panel4v-1">
                                                     <input class="relationship relation_influenced_cb" name="relationship_influenced[]" id="relationship_influenced-1" type="checkbox" title="influenced_by_section" value="0"><label for="relationship_influenced">Influenced By</label>
@@ -649,7 +649,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                                             <input class="relation_type" title="studied" style="display:none"/>
                                                             <div class="large-12 columns range_div" id="studied_with_range_div">
                                                                 <div class="large-12 columns" >
-                                                                    <legend><strong style="color:white;">Range: <span style = "cursor: pointer;" title="Provide a specific time range for this relationship."><img src="img/help.png" style="height:15px;width:15px;"/></span>
+                                                                    <legend><strong style="color:white;">Range: <span style = "cursor: pointer;" title="Provide a specific time range for this relationship: Month and Year, or just Year.  If you don’t recall the specific years, please enter a general decade."><img src="img/help.png" style="height:15px;width:15px;"/></span>
                                                                         </strong></legend>
 
 
@@ -742,11 +742,11 @@ if($_SESSION["timeline_flow"] == "view"){
                                                                 <button type="button" class="btn btn-primary" id="remove_button" onclick="remove(this,4)"
                                                                         style="padding: 5px 8px; background-color:red; color:ghostwhite; font-weight: bold;" >Remove</button>
                                                             </div>
-                                                            <div class="medium-2 column"></div>
-                                                            <div class="medium-5 column">
+                                                            <div class="medium-1 column"></div>
+                                                            <div class="medium-6 column">
                                                                 <button type="button" class="btn btn-primary" id="studied_with_toggle" class="studied_with_toggle"
                                                                         style="padding: 5px 8px; background-color:grey; color:ghostwhite; font-weight: bold;" onclick="toggleDuration(this)">
-                                                                    <large >Change to Duration</large>
+                                                                    <large >I don’t recall the date range.</large>
                                                                 </button>
                                                                 <span style = "cursor: pointer;" title="Toggle between range and duration for filling details. For specific details - change to range. For vague details - change to duration."><img src="img/help.png" style="height:15px;width:15px;"/></span>
                                                             </div>
@@ -779,7 +779,7 @@ if($_SESSION["timeline_flow"] == "view"){
 
                                                             <div class="large-12 columns range_div" id="danced__with_range_div">
                                                                 <div class="large-12 columns" >
-                                                                    <legend><strong style="color:white;">Range: <span style = "cursor: pointer;" title="Provide a specific time range for this relationship."><img src="img/help.png" style="height:15px;width:15px;"/></span>
+                                                                    <legend><strong style="color:white;">Range: <span style = "cursor: pointer;" title="Provide a specific time range for this relationship: Month and Year, or just Year.  If you don’t recall the specific years, please enter a general decade."><img src="img/help.png" style="height:15px;width:15px;"/></span>
                                                                         </strong></legend>
                                                                 </div>
                                                                 <div class="large-12 columns">
@@ -870,11 +870,11 @@ if($_SESSION["timeline_flow"] == "view"){
                                                                 <button type="button" class="btn btn-primary" id="remove_button" onclick="remove(this,4)"
                                                                         style="padding: 5px 8px; background-color:red; color:ghostwhite; font-weight: bold;" >Remove</button>
                                                             </div>
-                                                            <div class="medium-2 column"></div>
-                                                            <div class="medium-5 column">
+                                                            <div class="medium-1 column"></div>
+                                                            <div class="medium-6 column">
                                                                 <button type="button" class="btn btn-primary" id="danced__with_toggle" class="danced__with_toggle"
                                                                         style="padding: 5px 8px; background-color:grey; color:ghostwhite; font-weight: bold;" onclick="toggleDuration(this)">
-                                                                    <large> Change to Duration</large>
+                                                                    <large> I don’t recall the date range.</large>
                                                                 </button>
                                                                 <span style = "cursor: pointer;" title="Toggle between range and duration for filling details. For specific details - change to range. For vague details - change to duration."><img src="img/help.png" style="height:15px;width:15px;"/></span>
                                                             </div>
@@ -910,7 +910,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                                             <div class="large-12 columns range_div" id="colbrtd_with_range_div">
 
                                                                 <div class="large-12 columns" >
-                                                                    <legend><strong style="color:white;">Range: <span style = "cursor: pointer;" title="Provide a specific time range for this relationship."><img src="img/help.png" style="height:15px;width:15px;"/></span>
+                                                                    <legend><strong style="color:white;">Range: <span style = "cursor: pointer;" title="Provide a specific time range for this relationship: Month and Year, or just Year.  If you don’t recall the specific years, please enter a general decade."><img src="img/help.png" style="height:15px;width:15px;"/></span>
                                                                         </strong></legend>
                                                                 </div>
 
@@ -1002,11 +1002,11 @@ if($_SESSION["timeline_flow"] == "view"){
                                                                 <button type="button" class="btn btn-primary" id="remove_button" onclick="remove(this,4)"
                                                                         style="padding: 5px 8px; background-color:red; color:ghostwhite; font-weight: bold;" >Remove</button>
                                                             </div>
-                                                            <div class="medium-2 column"></div>
-                                                            <div class="medium-5 column">
+                                                            <div class="medium-1 column"></div>
+                                                            <div class="medium-6 column">
                                                                 <button type="button" class="btn btn-primary" id="colbrtd_with_toggle" class="colbrtd_with_toggle"
                                                                         style="padding: 5px 8px; background-color:grey; color:ghostwhite; font-weight: bold;" onclick="toggleDuration(this)">
-                                                                    <large >Change to Duration</large>
+                                                                    <large >I don’t recall the date range.</large>
                                                                 </button>
                                                                 <span style = "cursor: pointer;" title="Toggle between range and duration for filling details. For specific details - change to range. For vague details - change to duration."><img src="img/help.png" style="height:15px;width:15px;"/></span>
                                                             </div>
@@ -1356,6 +1356,7 @@ if($_SESSION["timeline_flow"] == "view"){
         }
     }
     $("#addArtist").click(function(){
+      if(lineal_artist_count<50){
         lineal_artist_count = lineal_artist_count + 1;
         var clone = $('.artist_lineage_container:last').clone();
         clone.find("input:text").val("");
@@ -1416,6 +1417,10 @@ if($_SESSION["timeline_flow"] == "view"){
         dateScripts();
         $(document).foundation();
         //deleteArtist();
+      }
+      else{
+        alert("Cannot add more than 50 Artists!");
+      }
     });
     $("#previous").click(function() {
         // onclick event is assigned to the #button element.
@@ -1742,7 +1747,7 @@ if($_SESSION["timeline_flow"] == "view"){
                 var lineage_contri = document.getElementById("contri_lineage");
                 $(lineage_contri).addClass('active');
             }
-        }); 
+        });
 
 
         dateScripts();
@@ -1821,7 +1826,7 @@ if($_SESSION["timeline_flow"] == "view"){
         var dur_range_id = prefix+"range_div"+suffix;
 
 
-        var dur_text = "Change to Duration";
+        var dur_text = "I don’t recall the date range.";
         var range_text = "Change to Range";
 
         console.log("dur div id : ", dur_div_id);

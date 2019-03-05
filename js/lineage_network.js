@@ -22,6 +22,7 @@ function draw() {
       //document.write('<div> Response : ' + response + '</div>');
       var json_object = $.parseJSON(response);
 
+      console.log(json_object);
       // get the artist ids, names and images for search suggestions for textbox used to search for artists
       var names = new Array();
       for(var i = 0; i < json_object.nodes.length; i++) {
