@@ -77,7 +77,7 @@ if(isset($_SESSION["contribution_type"])) {
             <div class="row">
                 <fieldset class="large-6 columns">
                     <legend><strong>Is the Artist living or deceased?</strong></legend>
-                    <input type="radio" name="artist_status" value="living" id="artist_living"
+                    <input type="radio" name="artist_status" value="living" id="artist_living" checked
                         <?php
                         if(isset($_SESSION["artist_status"])){
                             echo (($_SESSION["artist_status"]=='living')?'checked':'');
@@ -457,22 +457,35 @@ if(isset($_SESSION["contribution_type"])) {
             
             
         });
-
-        $("#date_of_death").change(function(){
-            console.log("date_of_death");
-            var endDate = $(this).val();
-            var startDate = $(this).closest('.date_section').find("#date_of_birth").val();
-            console.log(Date.parse(startDate) + " " + Date.parse(endDate));
-            if(startDate != "" && endDate != ""){
-                if ((Date.parse(startDate) >= Date.parse(endDate))) {
-                    alert("Date of Death cannot be less than Date of Birth.");
-                    $(this).val("");
-                }
+        //Previous team's date validations
+        // $("#date_of_death").change(function(){
+        //     console.log("date_of_death");
+        //     var endDate = $(this).val();
+        //     var startDate = $(this).closest('.date_section').find("#date_of_birth").val();
+        //     console.log(Date.parse(startDate) + " " + Date.parse(endDate));
+        //     if(startDate != "" && endDate != ""){
+        //         if ((Date.parse(startDate) >= Date.parse(endDate))) {
+        //             alert("Date of Death cannot be less than Date of Birth.");
+        //             $(this).val("");
+        //         }
+        //     }
+        var submit=document.getElementById("next");
+        submit.addEventListener('click',function(event){
+            console.log("clicked");
+            var birthdate=document.getElementById('date_of_birth');
+            console.log(birthdate.value);
+            dateformat_birth= new Date(birthdate.value);
+            var deathdate=document.getElementById('date_of_death');
+            dateformat_death= new Date(deathdate.value);
+            if(dateformat_death<dateformat_birth){
+                alert("Date of Death cannot be less than Date of Birth !");
+                event.preventDefault();
             }
 
-
-
         });
+
+
+        // });
     </script>
     <style>
         .button-group input{

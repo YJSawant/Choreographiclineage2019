@@ -531,7 +531,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                                 <!-- Influenced tab section -->
                                                 <div class="tabs-panel influenced_by_section" id="panel4v<?php echo '-'.$key ?>">
                                                     <fieldset>
-                                                        <legend><strong>Influenced by Details:</strong></legend>
+                                                        <legend><strong>Influenced By Details:</strong></legend>
                                                         <div class="row not_influenced" <?php echo isset($_SESSION["influenced_by"][$key])?"style='display:none'":""; ?>>
                                                             <input class="relation_type" title="influenced" style="display:none"/>
                                                             <div class="column">
@@ -546,7 +546,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                                                 <div class="row">
                                                                     <center>
                                                                         <button class="primary button influenced_by" type="button" style="margin-top:5%">
-                                                                            <span>Influenced by</span>
+                                                                            <span>Influenced By</span>
                                                                         </button>
                                                                     </center>
                                                                 </div>
