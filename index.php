@@ -46,10 +46,10 @@
                             <b>Dr Bina Ramamurthy</b>, Data Scientist<br>
                             <b>Renee Ruffino</b>, Graphic Designer<br>
                             <b>Domenic Licata</b>, User Experience Designer<br>
-							<b>Miki Padhiary</b>, Master's Student <br>
-							<b>Shreyas Rajguru</b>, Master's Student<br>
-							<b>Amit Banerjee</b>, Master's Student <br>
-							<b>Yogesh Sawant</b>, Master's Student <br>
+							<b>Miki Padhiary</b>, Graduate Student <br>
+							<b>Shreyas Rajguru</b>, Graduate Student<br>
+							<b>Amit Banerjee</b>, Graduate Student <br>
+							<b>Yogesh Sawant</b>, Graduate Student <br>
 						</small>
 					</div>
 				</div>
