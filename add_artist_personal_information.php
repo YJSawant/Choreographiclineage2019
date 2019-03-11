@@ -317,18 +317,6 @@ include 'form_links_header.php'
                 </label>
             </div>
             <div class="medium-3 column">
-                <label for="ethnicity_unknown">
-                    <input  autocomplete="off" type="radio" id="ethnicity_unknown" name="ethnicity" value="unknown"
-                        <?php
-                        if(isset($_SESSION["ethnicity"])){
-                            echo (($_SESSION["ethnicity"]=='unknown')?'checked':'');
-                        }
-                        ?>
-                    />
-                    Unknown
-                </label>
-            </div>
-            <div class="medium-3 column">
                 <label for="ethnicity_na">
                     <input  autocomplete="off" type="radio" id="ethnicity_na" name="ethnicity" value="na"
                         <?php
@@ -360,10 +348,10 @@ include 'form_links_header.php'
                 </label>
             </fieldset>
                 <div class="large-3 columns country_birth">
-                    <label><legend><strong>Your country of birth</strong></legend>
+                    <label><legend><strong>Your Country of Birth</strong></legend>
                         <select id = "country_birth" name="country_birth"
                                 value="<?php echo isset($_SESSION['country_birth'])?$_SESSION['country_birth']:'' ?>" />
-                        <option value="">Select your country</option>
+                        <!--<option value="">Please select a Value</option>-->
                         <option value="Afganistan">Afghanistan</option>
                         <option value="Albania">Albania</option>
                         <option value="Algeria">Algeria</option>
@@ -596,7 +584,7 @@ include 'form_links_header.php'
                         <option value="Ukraine">Ukraine</option>
                         <option value="United Arab Erimates">United Arab Emirates</option>
                         <option value="United Kingdom">United Kingdom</option>
-                        <option value="United States of America">United States of America</option>
+                        <option value="United States of America" selected="selected">United States of America</option>
                         <option value="Uraguay">Uruguay</option>
                         <option value="Uzbekistan">Uzbekistan</option>
                         <option value="Vanuatu">Vanuatu</option>
@@ -631,10 +619,10 @@ include 'form_links_header.php'
                     </label>
                 </div>
                 <div class="medium-4 columns country_residence">
-                    <label for="country_residence" class="text-left middle"><legend><strong>Country of residence</strong></legend>
+                    <label for="country_residence" class="text-left middle"><legend><strong>Country of Residence</strong></legend>
                         <select id=country_residence name="country_residence"
                                 value="<?php echo (isset($_SESSION['country_residence'])?$_SESSION['country_residence']:'') ?>" />
-                        <option value="">Select your country</option>
+                       <!-- <option value="">United States of America</option> -->
                         <option value="Afganistan">Afghanistan</option>
                         <option value="Albania">Albania</option>
                         <option value="Algeria">Algeria</option>
@@ -867,7 +855,7 @@ include 'form_links_header.php'
                         <option value="Ukraine">Ukraine</option>
                         <option value="United Arab Erimates">United Arab Emirates</option>
                         <option value="United Kingdom">United Kingdom</option>
-                        <option value="United States of America">United States of America</option>
+                        <option value="United States of America" selected="selected">United States of America</option>
                         <option value="Uraguay">Uruguay</option>
                         <option value="Uzbekistan">Uzbekistan</option>
                         <option value="Vanuatu">Vanuatu</option>
@@ -1094,7 +1082,7 @@ include 'form_links_header.php'
 
     <div class="row">
         <div class="large-2 small-8 columns">
-            <button class="primary button float-right" id="previous" type="button">
+            <button class="primary button" id="previous" type="button">
                 <span>Previous</span>
             </button>
         </div>
