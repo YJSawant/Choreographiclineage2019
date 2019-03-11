@@ -282,13 +282,13 @@ if(isset($_SESSION["contribution_type"])) {
         <div class="row">
             <?php if(isset($_SESSION['artist_relation_add'])):?>
                 <div class="large-2 small-8 columns">
-                    <button class="primary button float-right" id="previous" type="button">
+                    <button class="primary button" id="previous" type="button">
                         <span>Previous</span>
                     </button>
                 </div>
             <?php else: ?>
                 <div class="large-2 small-8 columns">
-                    <button class="primary button float-right" type="button" name="home" id="home" onclick="saveAndBack()">
+                    <button class="primary button" type="button" name="home" id="home" onclick="saveAndBack()">
                         <span>Back to Profile</span>
                     </button>
                 </div>
@@ -298,8 +298,7 @@ if(isset($_SESSION["contribution_type"])) {
                     <span><?php echo (($_SESSION['timeline_flow'] == "view")?"":"Save & ") ?>Next</span>
                 </button>
             </div>
-            <div class="column">
-            </div>
+            <div></div>
         </div>
     </form>
     <script>
@@ -379,7 +378,7 @@ if(isset($_SESSION["contribution_type"])) {
         }
         $("#previous").click(function() {
             // onclick event is assigned to the #button element.
-            window.open("Contribution_Introduction.php","_self");
+            window.open("contribution_introduction.php","_self");
             //document.location.href = "add_artist_personal_information.php",true;
         });
         // onclick event is assigned to the #button element.
