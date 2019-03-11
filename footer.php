@@ -20,15 +20,15 @@ if(isset($_SESSION["user_email_address"])){
 		<div class="small-6 column">
 			<ul class="vertical medium-horizontal menu">
 				<li><a href="index.php">Home</a></li>
-				<li><a href="ComingSoon.php">FAQ</a></li>
+				<li><a href="coming_soon.php">FAQ</a></li>
 				<li><a href="about.php">About</a></li>
 				<li><a href="contact.php">Contact</a></li>
-				<li><a href="ComingSoon.php">Help</a></li>
+				<li><a href="coming_soon.php">Help</a></li>
 			</ul>
 		</div>
 		<div class="small-6 column" >
 			<ul class="menu align-right">
-				<li class="menu-text"><small>Choreographic Lineage © 2019</small></li>
+				<li class="menu-text"><small>Choreographic Lineage &copy; <?php echo date("Y");?></small></li>
 			</ul>
 		</div>
 	<!--</div>-->
