@@ -14,16 +14,15 @@ $content=$_POST['content'];
 
 if(empty($name)||empty($visitor_email)){
   echo "Name and email are mandatory!";
-
 }else{
-include 'php/lib/PHPMailer/PHPMailerAutoload.php';
+    include 'php/lib/PHPMailer/PHPMailerAutoload.php';
     $mail = new PHPMailer;
     $mail->isSMTP();                                      // Set mailer to use SMTP
     $mail->Host = 'hobbes.cse.buffalo.edu';  // Specify main and backup SMTP servers
     $mail->SMTPAuth = false;                               // Enable SMTP authentication
     $mail->Port = 587;                                    // TCP port to connect to
 
-    $mail->setFrom('dcl@buffalo.edu', 'Choreographic Lineage');
+    $mail->setFrom('no-reply@buffalo.edu', 'Choreographic Lineage');
 
     $mail->isHTML(true);
     //$mail->addReplyTo('choreographiclineage@gmail.com', 'Choreographic Lineage');
@@ -34,32 +33,26 @@ include 'php/lib/PHPMailer/PHPMailerAutoload.php';
     $message = "Thank you for your email. A member will contact you soon. <br><br><br/>Thank You,<br/>The Choreographic Lineage Team";
     $mail->addAddress($visitor_email);
     $mail->Body = $message;
-    if(!$mail->send()){
-      echo"failed";
-    }
-    else{
-      echo"passed";
-    }
-
-    //Sending email to
+    $mail->send();
+    
+    //Sending email to admin
     $admin_mail = new PHPMailer;
     $admin_mail->isSMTP();                                      // Set mailer to use SMTP
     $admin_mail->Host = 'hobbes.cse.buffalo.edu';  // Specify main and backup SMTP servers
     $admin_mail->SMTPAuth = false;                               // Enable SMTP authentication
     $admin_mail->Port = 587;                                    // TCP port to connect to
-    $admin_mail->setFrom('dcl@buffalo.edu', 'Choreographic Lineage');
+    $admin_mail->setFrom('no-reply@buffalo.edu', 'Choreographic Lineage');
     $admin_mail->isHTML(true);
     //$admin_mail->addReplyTo('miki.nitdgp@gmail.com', 'Melanie Aceto');
     $admin_mail->addCustomHeader('MIME-Version: 1.0');
     $admin_mail->addCustomHeader('Content-Type: text/html; charset=ISO-8859-1');
     $admin_mail->Subject = "Choreographic Lineage Help";
-    $admin_mail->addAddress("miki.nitdgp@gmail.com");
+    $admin_mail->addAddress("aceto@buffalo.edu");
     $admin_mail->Body = $content;
-    if(!$admin_mail->send()){
-      echo"failed";
+    if($admin_mail->send())
+    {
+      header("Location: index.php");
     }
-    else{
-      echo"passed";
     }
 
 // include 'php/lib/PHPMailer/PHPMailerAutoload.php';
@@ -83,7 +76,6 @@ include 'php/lib/PHPMailer/PHPMailerAutoload.php';
 //     else{
 //       echo"mail sent";
 //     }
-  }
 include 'footer.php';
 
 ?>

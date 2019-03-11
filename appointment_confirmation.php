@@ -32,7 +32,7 @@ include 'util.php';
     $mail->addCustomHeader('Content-Type: text/html; charset=ISO-8859-1');
     $mail->Subject = "Choreographic Lineage Appointment";
 
-    $message = "Thank you for your interest in Choreographic Lineage. A team member will contact you soon to arrange a lineage appointment.<br/><br/>Thank you,<br/>Choreographic Lineage Team";
+    $message = "Thank you for your interest in Choreographic Lineage. A team member will contact you soon to arrange a lineage appointment.<br/><br/>Thank you,<br/>The Choreographic Lineage Team";
     $mail->addAddress($email);
     $mail->Body = $message;
     $mail->send();
