@@ -16,21 +16,20 @@ my_session_start();
 </head>
 <div class="container">
   <div style="text-align:center">
-    <h4>Kindly Tell Us Your Query</h4>
+    <h4>Kindly tell us your query</h4>
   </div>
   <div class="row">
-      <form method ="post" action="helpEmail.php" name="emailform">
+      <form method ="post" action="help_mediator.php" name="emailform">
         <label for="fname">Name</label>
-        <input type="text" id="name" name="name" placeholder="Your name..">
+        <input type="text" id="name" name="name" placeholder="Your name">
         <label for="lname">Email</label>
-        <input type="Email" id="mail" name="mail" placeholder="Your Email-ID..">
+        <input type="Email" id="mail" name="mail" placeholder="Your Email-ID">
         <label for="subject">Subject</label>
         <textarea id="subject" name="content"
-         name="subject" 
-         placeholder="Please start writing here.." 
+         placeholder="Please start writing here" 
          style="height:110px">
         </textarea>
-        <input type="submit" name="submit" value="submit" style="color:"cyan">
+        <input type="submit" name="submit" value="Submit" style="color:black">
       </form>
     </div>
 </div>
