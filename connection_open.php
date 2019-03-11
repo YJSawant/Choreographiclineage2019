@@ -1,15 +1,14 @@
 <?php
-$mysqli_hostname = "stark.cse.buffalo.edu";
-$mysqli_user="cl";
-$mysqli_password="DclSQLwebsiteLineage";
-$mysqli_database="choreographiclineage_db";
+// $mysqli_hostname = "stark.cse.buffalo.edu";
+// $mysqli_user="cl";
+// $mysqli_password="DclSQLwebsiteLineage";
+// $mysqli_database="choreographiclineage_db";
 
-// $mysqli_hostname = "localhost";
-// $mysqli_user="root";
-
-// # Comment this if working using XAMPP
-// $mysqli_password="";
-// $mysqli_database="choreographic_lineage";
+$mysqli_hostname = "localhost";
+$mysqli_user="root";
+# Comment this if working using XAMPP
+$mysqli_password="";
+$mysqli_database="choreographic_lineage";
 
 #Comment this if working using WAMP
 #$mysqli_password="";
