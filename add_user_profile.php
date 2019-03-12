@@ -15,7 +15,7 @@ if(isset($_SESSION["user_email_address"])){
 
 <html>
 <head>
-	<title>Contribute Your Lineage</title>
+	<title>Contibute Your Lineage</title>
 </head>
 
 <body>
