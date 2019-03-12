@@ -40,13 +40,13 @@ if(isset($_FILES["bio_file"]["type"]))
 		}
 		else
 		{
-			if (file_exists("img/biography_upload_data/" . $_FILES["bio_file"]["name"])) {
+			if (file_exists("biography_upload_data/" . $_FILES["bio_file"]["name"])) {
 				echo $_FILES["bio_file"]["name"] . " <span id='invalid'><b>already exists.</b></span> ";
 			}
 			else
 			{
 				$sourcePath = $_FILES['bio_file']['tmp_name']; // Storing source path of the file in a variable
-				$targetPath = "img/biography_upload_data/".$_FILES['bio_file']['name']; // Target path where file is to be stored
+				$targetPath = "biography_upload_data/".$_FILES['bio_file']['name']; // Target path where file is to be stored
 				$_SESSION["biography_file_path"] = $targetPath;
 				move_uploaded_file($sourcePath,$targetPath) ; // Moving Uploaded file
 				echo "<span id='success'>Biography uploaded successfully...!!</span><br/>";
