@@ -19,6 +19,7 @@ if(empty($name)||empty($visitor_email)){
     $mail = new PHPMailer;
     $mail->isSMTP();                                      // Set mailer to use SMTP
     $mail->Host = 'hobbes.cse.buffalo.edu';  // Specify main and backup SMTP servers
+    //$mail->SMTPDebug = 4;
     $mail->SMTPAuth = false;                               // Enable SMTP authentication
     $mail->Port = 587;                                    // TCP port to connect to
 
