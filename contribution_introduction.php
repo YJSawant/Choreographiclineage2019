@@ -63,7 +63,7 @@ if(isset($_SESSION["user_email_address"])){
                 </div>
                 <div>
                     <label>
-                        <input type="radio" id="contribute_another_artist_lineage" name="contribute_lineage" class="contribute_lineage" value="another" checked>
+                        <input type="radio" id="contribute_another_artist_lineage" name="contribute_lineage" class="contribute_lineage" value="another">
                         I am contributing lineage for another artist
                     </label>
                 </div>

@@ -136,430 +136,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                         </div>
                                         <div class="medium-9 columns">
                                             <div class="tabs-content" data-tabs-content="relation-tabs<?php echo '-'.$key ?>">
-
-                                                <!-- Studied with tab section -->
-                                                <div class="studied_with_section tabs-panel is-active" id="panel1v<?php echo '-'.$key ?> " >
-                                                    <fieldset id="study_repeat0" style="background-image: linear-gradient(#016400, white); margin-bottom: 5px;">
-                                                        <div class="large-12 columns" >
-                                                            <div class="small-4 column" style="margin-top: 5px;">
-                                                                <legend><strong style="color:white;">Studied Under Details:</strong></legend>
-                                                            </div>
-                                                            <div class="small-8 column" style="background-color: #016400">
-                                                            </div>
-                                                            <div class="row duration_selection" value="studied">
-                                                                <input class="relation_type" title="studied" style="display:none"/>
-                                                                <div class="large-12 columns range_div" id="studied_with_range_div">
-                                                                    <div class="large-12 columns" >
-                                                                        <legend><strong style="color:white;">Range: <span style = "cursor: pointer;" title="Provide a specific time range for this relationship: Month and Year, or just Year.  If you don’t recall the specific years, please enter a general decade."><img src="img/help.png" style="height:15px;width:15px;"/></span>
-                                                                            </strong></legend>
-                                                                    </div>
-                                                                    <div class="large-12 columns">
-                                                                        <div class="medium-6 column">
-                                                                            <legend style="color:white;">From:</legend>
-                                                                            <div class="small-6 column">
-
-                                                                                <select name="studied_from_months[]" class="range_from_months">
-                                                                                    <option value>Month</option>
-                                                                                    <?php for ($i = 1; $i <= 12; $i++) : ?>
-                                                                                        <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                                    <?php endfor; ?>
-                                                                                </select>
-                                                                            </div>
-                                                                            <div class="small-6 column">
-
-                                                                                <select name="studied_from_years[]" class="range_from_years">
-                                                                                    <option value>Year</option>
-                                                                                    <?php for ($i = 2018; $i >=1000; $i--) : ?>
-                                                                                        <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                                    <?php endfor; ?>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="medium-6 column">
-                                                                            <legend style="color:white;">To:</legend>
-                                                                            <div class="small-6 column">
-
-                                                                                <select name="studied_to_months[]" class="range_to_months">
-                                                                                    <option value>Month</option>
-                                                                                    <?php for ($i = 1; $i <= 12; $i++) : ?>
-                                                                                        <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                                    <?php endfor; ?>
-                                                                                </select>
-                                                                            </div>
-                                                                            <div class="small-6 column">
-                                                                                <select name="studied_to_years[]" class="range_to_years">
-                                                                                    <option value>Year</option>
-                                                                                    <?php for ($i = 2018; $i >=1000; $i--) : ?>
-                                                                                        <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                                    <?php endfor; ?>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="large-12 columns duration_div" id="studied_with_duration_div" style="display:none">
-                                                                    <div class="large-12 columns">
-                                                                        <legend><strong style="color:white;">Duration: <span style = "cursor: pointer;" title="Provide total number of years and/or months for this relationship. Please also tell us over what time span this total duration was (From/To)."><img src="img/help.png" style="height:15px;width:15px;"/></span>
-                                                                            </strong></legend>
-                                                                    </div>
-                                                                    <div class="large-12 columns">
-                                                                        <div class="small-3 column">
-                                                                            <legend style="color:white;">Total Years</legend>
-                                                                            <input type="text" name="studied_duration_years[]" disabled="disabled" class="duration_years" placeholder="Total Years"/>
-                                                                        </div>
-                                                                        <div class="small-3 column">
-                                                                            <legend style="color:white;">And/Or Months</legend>
-                                                                            <input type="text" name="studied_duration_months[]" disabled="disabled" class="duration_months" placeholder="Total Months"/>
-                                                                        </div>
-                                                                        <div class="small-3 column">
-                                                                            <legend style="color:white;">From:</legend>
-                                                                            <select name="studied_duration_from_years[]" disabled="disabled" class="duration_from_years">
-                                                                                <option value>Year</option>
-                                                                                <?php for ($i = 2018; $i >=1000; $i--) : ?>
-                                                                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                                <?php endfor; ?>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="small-3 column">
-                                                                            <legend style="color:white;">To:</legend>
-
-                                                                            <select name="studied_duration_to_years[]" disabled="disabled" class="duration_to_years">
-                                                                                <option value>Year</option>
-                                                                                <?php for ($i = 2018; $i >=1000; $i--) : ?>
-                                                                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                                <?php endfor; ?>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="large-12 columns">
-                                                                <div class="medium-5 column">
-                                                                    <button type="button" class="btn btn-primary" id="remove_button" onclick="remove(this,4)"
-                                                                            style="padding: 5px 8px; background-color:red; color:ghostwhite; font-weight: bold;" >Remove</button>
-                                                                </div>
-                                                                <div class="medium-1 column"></div>
-                                                                <div class="medium-6 column">
-                                                                    <button type="button" class="btn btn-primary" id="studied_with_toggle" class="studied_with_toggle"
-                                                                            style="padding: 5px 8px; background-color:grey; color:ghostwhite; font-weight: bold;" onclick="toggleDuration(this)">
-                                                                        <large >I don’t recall the date range.</large>
-                                                                    </button>
-                                                                    <span style = "cursor: pointer;" title="Toggle between range and duration for filling details. For specific details - change to range. For vague details - change to duration."><img src="img/help.png" style="height:15px;width:15px;"/></span>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="large-12 columns" style="margin-top: 5px">
-                                                                <div class="medium-4 column"></div>
-                                                                <div class="medium-4 column">
-                                                                    <button type="button" class="btn btn-primary"
-                                                                            style="padding: 5px 8px; background-color:#62ad61; color:ghostwhite; font-weight: bold;" onclick="duplicate(this)">Add Another Time Frame for this Artist</button>
-                                                                </div>
-                                                                <div class="medium-4 column"></div>
-                                                            </div>
-                                                        </div>
-                                                    </fieldset>
-                                                </div>
-
-
-
-
-                                                <!-- Danced for tab section -->
-
-                                                <div class="danced__with_section tabs-panel" id="panel2v<?php echo '-'.$key ?>" style="background-image: linear-gradient(#62ad61, white);">
-                                                    <fieldset id="dance_repeat0" style="background-image: linear-gradient(#0820aa, white); margin-bottom: 5px;">
-                                                        <div class="large-12 columns" >
-                                                            <div class="small-8 column" style="margin-top: 5px;">
-                                                                <legend><strong style="color:white;">Danced In The Work Of Details:</strong></legend>
-                                                            </div>
-                                                            <div class="small-8 column" style="background-color: #0820aa">
-                                                            </div>
-
-                                                            <div class="row duration_selection" value="danced">
-                                                                <input class="relation_type" title="danced" style="display:none"/>
-
-                                                                <div class="large-12 columns range_div" id="danced__with_range_div">
-                                                                    <div class="large-12 columns" >
-                                                                        <legend><strong style="color:white;">Range: <span style = "cursor: pointer;" title="Provide a specific time range for this relationship: Month and Year, or just Year.  If you don’t recall the specific years, please enter a general decade."><img src="img/help.png" style="height:15px;width:15px;"/></span>
-                                                                            </strong></legend>
-                                                                    </div>
-                                                                    <div class="large-12 columns">
-                                                                        <div class="medium-6 column">
-                                                                            <legend style="color:white;">From:</legend>
-                                                                            <div class="small-6 column">
-
-                                                                                <select name="danced_from_months[]" class="range_from_months">
-                                                                                    <option value>Month</option>
-                                                                                    <?php for ($i = 1; $i <= 12; $i++) : ?>
-                                                                                        <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                                    <?php endfor; ?>
-                                                                                </select>
-                                                                            </div>
-                                                                            <div class="small-6 column">
-
-                                                                                <select name="danced_from_years[]" class="range_from_years">
-                                                                                    <option value>Year</option>
-                                                                                    <?php for ($i = 2018; $i >=1000; $i--) : ?>
-                                                                                        <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                                    <?php endfor; ?>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="medium-6 column">
-                                                                            <legend style="color:white;">To:</legend>
-                                                                            <div class="small-6 column">
-
-                                                                                <select name="danced_to_months[]" class="range_to_months">
-                                                                                    <option value>Month</option>
-                                                                                    <?php for ($i = 1; $i <= 12; $i++) : ?>
-                                                                                        <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                                    <?php endfor; ?>
-                                                                                </select>
-                                                                            </div>
-                                                                            <div class="small-6 column">
-                                                                                <select name="danced_to_years[]" class="range_to_years">
-                                                                                    <option value>Year</option>
-                                                                                    <?php for ($i = 2018; $i >=1000; $i--) : ?>
-                                                                                        <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                                    <?php endfor; ?>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="large-12 columns duration_div" id="danced__with_duration_div" style="display:none">
-                                                                    <div class="large-12 columns">
-                                                                        <legend><strong style="color:white;">Duration: <span style = "cursor: pointer;" title="Provide total number of years and/or months for this relationship. Please also tell us over what time span this total duration was (From/To)."><img src="img/help.png" style="height:15px;width:15px;"/></span>
-                                                                            </strong></legend>
-                                                                    </div>
-                                                                    <div class="large-12 columns">
-                                                                        <div class="small-3 column">
-                                                                            <legend style="color:white;">Total Years</legend>
-                                                                            <input type="text" name="danced_duration_years[]" disabled="disabled"  class="duration_years" placeholder="Total Years"/>
-                                                                        </div>
-                                                                        <div class="small-3 column">
-                                                                            <legend style="color:white;">And/Or Months</legend>
-                                                                            <input type="text" name="danced_duration_months[]" disabled="disabled"  class="duration_months" placeholder="Total Months"/>
-                                                                        </div>
-                                                                        <div class="small-3 column">
-                                                                            <legend style="color:white;">From:</legend>
-                                                                            <select name="danced_duration_from_years[]" disabled="disabled"  class="duration_from_years">
-                                                                                <option value>Year</option>
-                                                                                <?php for ($i = 2018; $i >=1000; $i--) : ?>
-                                                                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                                <?php endfor; ?>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="small-3 column">
-                                                                            <legend style="color:white;">To:</legend>
-
-                                                                            <select name="danced_duration_to_years[]" disabled="disabled"  class="duration_to_years">
-                                                                                <option value>Year</option>
-                                                                                <?php for ($i = 2018; $i >=1000; $i--) : ?>
-                                                                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                                <?php endfor; ?>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="large-12 columns">
-                                                                <div class="medium-5 column">
-                                                                    <button type="button" class="btn btn-primary" id="remove_button" onclick="remove(this,4)"
-                                                                            style="padding: 5px 8px; background-color:red; color:ghostwhite; font-weight: bold;" >Remove</button>
-                                                                </div>
-                                                                <div class="medium-1 column"></div>
-                                                                <div class="medium-6 column">
-                                                                    <button type="button" class="btn btn-primary" id="danced__with_toggle" class="danced__with_toggle"
-                                                                            style="padding: 5px 8px; background-color:grey; color:ghostwhite; font-weight: bold;" onclick="toggleDuration(this)">
-                                                                        <large >I don’t recall the date range.</large>
-                                                                    </button>
-                                                                    <span style = "cursor: pointer;" title="Toggle between range and duration for filling details. For specific details - change to range. For vague details - change to duration."><img src="img/help.png" style="height:15px;width:15px;"/></span>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="large-12 columns" style="margin-top: 5px">
-                                                                <div class="medium-4 column"></div>
-                                                                <div class="medium-4 column">
-                                                                    <button type="button" class="btn btn-primary"
-                                                                            style="padding: 5px 8px; background-color:#62ad61; color:ghostwhite; font-weight: bold;" onclick="duplicate(this)">Add Another Time Frame for this Artist</button>
-                                                                </div>
-                                                                <div class="medium-4 column"></div>
-                                                            </div>
-
-                                                        </div>
-                                                    </fieldset>
-                                                </div>
-
-
-                                                <div class="colbrtd_with_section tabs-panel" id="panel3v<?php echo '-'.$key ?>" style="background-image: linear-gradient(#62ad61, white);">
-                                                    <fieldset id="colab_repeat0" style="background-image: linear-gradient(#969101, white); margin-bottom: 5px;">
-                                                        <div class="large-12 columns" >
-                                                            <div class="small-6 column" style="margin-top: 5px;">
-                                                                <legend><strong style="color:white;">Collaborated With Details:</strong></legend>
-                                                            </div>
-                                                            <div class="small-6 column" style="background-color: #969101">
-                                                            </div>
-
-
-                                                            <div class="row duration_selection" value="collaborated">
-                                                                <input class="relation_type" title="collaborated" style="display:none"/>
-                                                                <div class="large-12 columns range_div" id="colbrtd_with_range_div">
-
-                                                                    <div class="large-12 columns" >
-                                                                        <legend><strong style="color:white;">Range: <span style = "cursor: pointer;" title="Provide a specific time range for this relationship: Month and Year, or just Year.  If you don’t recall the specific years, please enter a general decade."><img src="img/help.png" style="height:15px;width:15px;"/></span>
-                                                                            </strong></legend>
-                                                                    </div>
-
-                                                                    <div class="large-12 columns">
-                                                                        <div class="medium-6 column">
-                                                                            <legend style="color:white;">From:</legend>
-                                                                            <div class="small-6 column">
-
-                                                                                <select name="collaborated_from_months[]" class="range_from_months">
-                                                                                    <option value>Month</option>
-                                                                                    <?php for ($i = 1; $i <= 12; $i++) : ?>
-                                                                                        <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                                    <?php endfor; ?>
-                                                                                </select>
-                                                                            </div>
-                                                                            <div class="small-6 column">
-
-                                                                                <select name="collaborated_from_years[]" class="range_from_years">
-                                                                                    <option value>Year</option>
-                                                                                    <?php for ($i = 2018; $i >=1000; $i--) : ?>
-                                                                                        <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                                    <?php endfor; ?>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="medium-6 column">
-                                                                            <legend style="color:white;">To:</legend>
-                                                                            <div class="small-6 column">
-
-                                                                                <select name="collaborated_to_months[]" class="range_to_months">
-                                                                                    <option value>Month</option>
-                                                                                    <?php for ($i = 1; $i <= 12; $i++) : ?>
-                                                                                        <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                                    <?php endfor; ?>
-                                                                                </select>
-                                                                            </div>
-                                                                            <div class="small-6 column">
-                                                                                <select name="collaborated_to_years[]" class="range_to_years">
-                                                                                    <option value>Year</option>
-                                                                                    <?php for ($i = 2018; $i >=1000; $i--) : ?>
-                                                                                        <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                                    <?php endfor; ?>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="large-12 columns duration_div" id="colbrtd_with_duration_div" style="display:none">
-                                                                    <div class="large-12 columns">
-                                                                        <legend><strong style="color:white;">Duration: <span style = "cursor: pointer;" title="Provide total number of years and/or months for this relationship. Please also tell us over what time span this total duration was (From/To)."><img src="img/help.png" style="height:15px;width:15px;"/></span>
-                                                                            </strong></legend>
-                                                                    </div>
-                                                                    <div class="large-12 columns">
-                                                                        <div class="small-3 column">
-                                                                            <legend style="color:white;">Total Years</legend>
-                                                                            <input type="text" name="collaborated_duration_years[]" disabled="disabled" class="duration_years" placeholder="Total Years"/>
-                                                                        </div>
-
-                                                                        <div class="small-3 column">
-                                                                            <legend style="color:white;">And/Or Months</legend>
-                                                                            <input type="text" name="collaborated_duration_months[]" disabled="disabled" class="duration_months" placeholder="Total Months"/>
-                                                                        </div>
-                                                                        <div class="small-3 column">
-                                                                            <legend style="color:white;">From:</legend>
-                                                                            <select name="collaborated_duration_from_years[]" disabled="disabled" class="duration_from_years">
-                                                                                <option value>Year</option>
-                                                                                <?php for ($i = 2018; $i >=1000; $i--) : ?>
-                                                                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                                <?php endfor; ?>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="small-3 column">
-                                                                            <legend style="color:white;">To:</legend>
-
-                                                                            <select name="collaborated_duration_to_years[]" disabled="disabled" class="duration_to_years">
-                                                                                <option value>Year</option>
-                                                                                <?php for ($i = 2018; $i >=1000; $i--) : ?>
-                                                                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                                <?php endfor; ?>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="large-12 columns">
-                                                                <div class="medium-5 column">
-                                                                    <button type="button" class="btn btn-primary" id="remove_button" onclick="remove(this,4)"
-                                                                            style="padding: 5px 8px; background-color:red; color:ghostwhite; font-weight: bold;" >Remove</button>
-                                                                </div>
-                                                                <div class="medium-1 column"></div>
-                                                                <div class="medium-6 column">
-                                                                    <button type="button" class="btn btn-primary" id="colbrtd_with_toggle" class="colbrtd_with_toggle"
-                                                                            style="padding: 5px 8px; background-color:grey; color:ghostwhite; font-weight: bold;" onclick="toggleDuration(this)">
-                                                                        <large >I don’t recall the date range.</large>
-                                                                    </button>
-                                                                    <span style = "cursor: pointer;" title="Toggle between range and duration for filling details. For specific details - change to range. For vague details - change to duration."><img src="img/help.png" style="height:15px;width:15px;"/></span>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="large-12 columns" style="margin-top: 5px">
-                                                                <div class="medium-4 column"></div>
-                                                                <div class="medium-4 column">
-                                                                    <button type="button" class="btn btn-primary"
-                                                                            style="padding: 5px 8px; background-color:#62ad61; color:ghostwhite; font-weight: bold;" onclick="duplicate(this)">Add Another Time Frame for this Artist</button>
-                                                                </div>
-                                                                <div class="medium-4 column"></div>
-                                                            </div>
-
-                                                        </div>
-                                                    </fieldset>
-                                                </div>
-
-                                                <!-- Influenced tab section -->
-                                                <div class="tabs-panel influenced_by_section" id="panel4v<?php echo '-'.$key ?>">
-                                                    <fieldset>
-                                                        <legend><strong>Influenced by Details:</strong></legend>
-                                                        <div class="row not_influenced" <?php echo isset($_SESSION["influenced_by"][$key])?"style='display:none'":""; ?>>
-                                                            <input class="relation_type" title="influenced" style="display:none"/>
-                                                            <div class="column">
-                                                                <div class="row">
-                                                                    <div class="column">
-                                                                        People who have significantly influenced your work, such as artists, authors, philosophers, etc. You do not need
-                                                                        to have a relationship with this person in order to list them as having an impact on your work.
-                                                                        By choosing Influenced by you are acknowledging that you have been influenced by this person. No time based data
-                                                                        is necessary.
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <center>
-                                                                        <button class="primary button influenced_by" type="button" style="margin-top:5%">
-                                                                            <span>Influenced by</span>
-                                                                        </button>
-                                                                    </center>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row influenced" <?php echo !isset($_SESSION["influenced_by"][$key])?"style='display:none'":""; ?>>
-                                                            <div class="column" style="color:darkgreen;">
-                                                                <center><h3><strong>You are influenced by this Artist</h3></strong></center>
-                                                            </div>
-
-                                                        </div>
-                                                    </fieldset>
-                                                </div>
+                                             
                                             </div>
                                         </div>
                                     </div>
@@ -658,16 +235,23 @@ if($_SESSION["timeline_flow"] == "view"){
                                                                     <div class="medium-6 column">
                                                                         <legend style="color:white;">From:</legend>
                                                                         <div class="small-6 column">
-
                                                                             <select name="studied_from_months[]" class="range_from_months">
-                                                                                <option value>Month</option>
-                                                                                <?php for ($i = 1; $i <= 12; $i++) : ?>
-                                                                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                                <?php endfor; ?>
+                                                                            <option value='00'>Month</option>
+                                                                            <option value='01'>January</option>
+                                                                            <option value='02'>February</option>
+                                                                            <option value='03'>March</option>
+                                                                            <option value='04'>April</option>
+                                                                            <option value='05'>May</option>
+                                                                            <option value='06'>June</option>
+                                                                            <option value='07'>July</option>
+                                                                            <option value='08'>August</option>
+                                                                            <option value='09'>September</option>
+                                                                            <option value='10'>October</option>
+                                                                            <option value='11'>November</option>
+                                                                            <option value='12'>December</option>                                                                                                                            
                                                                             </select>
                                                                         </div>
                                                                         <div class="small-6 column">
-
                                                                             <select name="studied_from_years[]" class="range_from_years">
                                                                                 <option value>Year</option>
                                                                                 <?php for ($i = 2018; $i >=1000; $i--) : ?>
@@ -678,16 +262,25 @@ if($_SESSION["timeline_flow"] == "view"){
                                                                     </div>
 
                                                                     <div class="medium-6 column">
-                                                                        <legend style="color:white;">To:</legend>
+                                                                        <legend style="color:white;">To:</legend>    
                                                                         <div class="small-6 column">
-
-                                                                            <select name="studied_to_months[]" class="range_to_months">
-                                                                                <option value>Month</option>
-                                                                                <?php for ($i = 1; $i <= 12; $i++) : ?>
-                                                                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                                <?php endfor; ?>
+                                                                        <select name="studied_to_months[]" class="range_to_months">
+                                                                            <option value='00'>Month</option>
+                                                                            <option value='01'>January</option>
+                                                                            <option value='02'>February</option>
+                                                                            <option value='03'>March</option>
+                                                                            <option value='04'>April</option>
+                                                                            <option value='05'>May</option>
+                                                                            <option value='06'>June</option>
+                                                                            <option value='07'>July</option>
+                                                                            <option value='08'>August</option>
+                                                                            <option value='09'>September</option>
+                                                                            <option value='10'>October</option>
+                                                                            <option value='11'>November</option>
+                                                                            <option value='12'>December</option>                                                                                                                            
                                                                             </select>
-                                                                        </div>
+                                                                        </div>   
+
                                                                         <div class="small-6 column">
                                                                             <select name="studied_to_years[]" class="range_to_years">
                                                                                 <option value>Year</option>
@@ -788,10 +381,19 @@ if($_SESSION["timeline_flow"] == "view"){
                                                                         <div class="small-6 column">
 
                                                                             <select name="danced_from_months[]" class="range_from_months">
-                                                                                <option value>Month</option>
-                                                                                <?php for ($i = 1; $i <= 12; $i++) : ?>
-                                                                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                                <?php endfor; ?>
+                                                                                <option value='00'>Month</option>
+                                                                                <option value='01'>January</option>
+                                                                                <option value='02'>February</option>
+                                                                                <option value='03'>March</option>
+                                                                                <option value='04'>April</option>
+                                                                                <option value='05'>May</option>
+                                                                                <option value='06'>June</option>
+                                                                                <option value='07'>July</option>
+                                                                                <option value='08'>August</option>
+                                                                                <option value='09'>September</option>
+                                                                                <option value='10'>October</option>
+                                                                                <option value='11'>November</option>
+                                                                                <option value='12'>December</option>
                                                                             </select>
                                                                         </div>
                                                                         <div class="small-6 column">
@@ -810,10 +412,19 @@ if($_SESSION["timeline_flow"] == "view"){
                                                                         <div class="small-6 column">
 
                                                                             <select name="danced_to_months[]" class="range_to_months">
-                                                                                <option value>Month</option>
-                                                                                <?php for ($i = 1; $i <= 12; $i++) : ?>
-                                                                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                                <?php endfor; ?>
+                                                                                <option value='00'>Month</option>
+                                                                                <option value='01'>January</option>
+                                                                                <option value='02'>February</option>
+                                                                                <option value='03'>March</option>
+                                                                                <option value='04'>April</option>
+                                                                                <option value='05'>May</option>
+                                                                                <option value='06'>June</option>
+                                                                                <option value='07'>July</option>
+                                                                                <option value='08'>August</option>
+                                                                                <option value='09'>September</option>
+                                                                                <option value='10'>October</option>
+                                                                                <option value='11'>November</option>
+                                                                                <option value='12'>December</option>
                                                                             </select>
                                                                         </div>
                                                                         <div class="small-6 column">
@@ -853,7 +464,6 @@ if($_SESSION["timeline_flow"] == "view"){
                                                                     </div>
                                                                     <div class="small-3 column">
                                                                         <legend style="color:white;">To:</legend>
-
                                                                         <select name="danced_duration_to_years[]" disabled="disabled"  class="duration_to_years">
                                                                             <option value>Year</option>
                                                                             <?php for ($i = 2018; $i >=1000; $i--) : ?>
@@ -920,10 +530,19 @@ if($_SESSION["timeline_flow"] == "view"){
                                                                         <div class="small-6 column">
 
                                                                             <select name="collaborated_from_months[]" class="range_from_months">
-                                                                                <option value>Month</option>
-                                                                                <?php for ($i = 1; $i <= 12; $i++) : ?>
-                                                                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                                <?php endfor; ?>
+                                                                                <option value='00'>Month</option>
+                                                                                <option value='01'>January</option>
+                                                                                <option value='02'>February</option>
+                                                                                <option value='03'>March</option>
+                                                                                <option value='04'>April</option>
+                                                                                <option value='05'>May</option>
+                                                                                <option value='06'>June</option>
+                                                                                <option value='07'>July</option>
+                                                                                <option value='08'>August</option>
+                                                                                <option value='09'>September</option>
+                                                                                <option value='10'>October</option>
+                                                                                <option value='11'>November</option>
+                                                                                <option value='12'>December</option>
                                                                             </select>
                                                                         </div>
                                                                         <div class="small-6 column">
@@ -942,10 +561,19 @@ if($_SESSION["timeline_flow"] == "view"){
                                                                         <div class="small-6 column">
 
                                                                             <select name="collaborated_to_months[]" class="range_to_months">
-                                                                                <option value>Month</option>
-                                                                                <?php for ($i = 1; $i <= 12; $i++) : ?>
-                                                                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                                <?php endfor; ?>
+                                                                                <option value='00'>Month</option>
+                                                                                <option value='01'>January</option>
+                                                                                <option value='02'>February</option>
+                                                                                <option value='03'>March</option>
+                                                                                <option value='04'>April</option>
+                                                                                <option value='05'>May</option>
+                                                                                <option value='06'>June</option>
+                                                                                <option value='07'>July</option>
+                                                                                <option value='08'>August</option>
+                                                                                <option value='09'>September</option>
+                                                                                <option value='10'>October</option>
+                                                                                <option value='11'>November</option>
+                                                                                <option value='12'>December</option>
                                                                             </select>
                                                                         </div>
                                                                         <div class="small-6 column">
