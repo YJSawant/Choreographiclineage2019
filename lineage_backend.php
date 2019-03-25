@@ -16,7 +16,8 @@ if(isset($_REQUEST['mode']))	{
 function fetch_full_network($dbc)	{
 
 	//fetch nodes
-	$artist_id_name_query = "SELECT `artist_profile_id`, `artist_first_name`, `artist_last_name`, `is_user_artist`, `artist_photo_path` FROM `artist_profile` WHERE `artist_profile_id` IN (SELECT DISTINCT `artist_profile_id_1` FROM `artist_relation` UNION SELECT DISTINCT `artist_profile_id_2` FROM `artist_relation`)";
+	//$artist_id_name_query = "SELECT `artist_profile_id`, `artist_first_name`, `artist_last_name`, `is_user_artist`, `artist_photo_path` FROM `artist_profile` WHERE `artist_profile_id` IN (SELECT DISTINCT `artist_profile_id_1` FROM `artist_relation` UNION SELECT DISTINCT `artist_profile_id_2` FROM `artist_relation`)";
+$artist_id_name_query = "SELECT `artist_profile_id`, `artist_first_name`, `artist_last_name`, `is_user_artist`, `artist_photo_path`, `artist_living_status`, `artist_dob`, `artist_dod`,`artist_genre`,`artist_ethnicity`,`artist_gender`,`artist_residence_country` FROM `artist_profile` WHERE `artist_profile_id` IN (SELECT DISTINCT `artist_profile_id_1` FROM `artist_relation` UNION SELECT DISTINCT `artist_profile_id_2` FROM `artist_relation`)";
 	$artist_id_name_result = mysqli_query($dbc,$artist_id_name_query)
 	or die('Error querying database.: '  .mysqli_error($dbc));
 
@@ -30,7 +31,7 @@ function fetch_full_network($dbc)	{
 			if($row['artist_photo_path'] == "") {
 				$image = "missing_image.jpg";
 			}
-			$nodes[] = array('id' => $row['artist_profile_id'], 'title' => $row['artist_first_name']." ".$row['artist_last_name'], 'label' => $row['artist_first_name']." ".$row['artist_last_name'], 'shape'=>"circularImage", 'image' => $image, 'size' => 20);
+			$nodes[] = array('id' => $row['artist_profile_id'], 'title' => $row['artist_first_name']." ".$row['artist_last_name'], 'label' => $row['artist_first_name']." ".$row['artist_last_name'], 'shape'=>"circularImage", 'image' => $image, 'size' => 20,'isLiving' => $row['artist_living_status'],'dob' => $row['artist_dob'],'dod' => $row['artist_dod'],'genre' => $row['artist_genre'],'ethnicity' => $row['artist_ethnicity'],'gender' => $row['artist_gender'],'country' => $row['artist_residence_country']);
 			if($row['is_user_artist'] == "artist") {
 				$node_border_array[] = array('id' => $row['artist_profile_id'], 'border_color' => '#2F7D82');
 			}
@@ -89,6 +90,24 @@ function fetch_full_network($dbc)	{
 		}
 	}
 
+//fetch education nodes
+	$artist_education_query = "SELECT `artist_profile_id`, `education_type`, `institution_name`, `major`, `degree` FROM `artist_education` WHERE `artist_profile_id` IN (SELECT DISTINCT `artist_profile_id_1` FROM `artist_relation` UNION SELECT DISTINCT `artist_profile_id_2` FROM `artist_relation`)";
+
+	$artist_education_result = mysqli_query($dbc,$artist_education_query)
+	or die('Error querying database.: '  .mysqli_error($dbc));
+
+	$count = mysqli_num_rows($artist_education_result);
+
+	if($count>0){
+		$education_nodes = Array();
+
+		while($row = mysqli_fetch_array($artist_education_result)){
+
+			$education_nodes[] = array('id' => $row['artist_profile_id'], 'education_type' => $row['education_type'], 'institution_name' => $row['institution_name'], 'major' => $row['major'],'degree' => $row['degree']);
+
+		}
+	}
+
 	//fetch number of connections for each node
 	$updated_nodes = Array();
 	foreach($nodes as $node) {
@@ -102,7 +121,7 @@ function fetch_full_network($dbc)	{
 		$updated_nodes[] = $node;
 	}
 	$nodes = $updated_nodes;
-	return array("nodes" => $nodes, "edges" => $edges, "node_borders" => $node_border_array);	
+	return array("nodes" => $nodes, "edges" => $edges, "node_borders" => $node_border_array, "education_nodes" => $education_nodes);
 }
 
 //fetches artist name for given artist profile id
@@ -110,7 +129,7 @@ function fetch_artist_name($artist_id, $dbc)	{
 	$artist_name_query = "SELECT `artist_first_name`, `artist_last_name` FROM `artist_profile` WHERE `artist_profile_id` = $artist_id";
 	$artist_name_result = mysqli_query($dbc,$artist_name_query)
 	or die('Error querying database.: '  .mysqli_error($dbc));
-	
+
 	$artist_first_name = "";
 	$artist_last_name = "";
 
@@ -124,4 +143,3 @@ function fetch_artist_name($artist_id, $dbc)	{
 
 include 'connection_close.php';
 ?>
-
