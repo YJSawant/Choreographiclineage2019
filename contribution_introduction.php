@@ -63,7 +63,7 @@ if(isset($_SESSION["user_email_address"])){
                 </div>
                 <div>
                     <label>
-                        <input type="radio" id="contribute_another_artist_lineage" name="contribute_lineage" class="contribute_lineage" value="another" checked>
+                        <input type="radio" id="contribute_another_artist_lineage" name="contribute_lineage" class="contribute_lineage" value="another">
                         I am contributing lineage for another artist
                     </label>
                 </div>
@@ -97,7 +97,7 @@ include 'footer.php';
     $(function() {
         // this will get the full URL at the address bar
         var url = window.location.href;
-        if(url.search("Contribution_Introduction.php"))
+        if(url.search("contribution_introduction.php"))
         {
             var lineage_contri = document.getElementById("contri_lineage");
             $(lineage_contri).addClass('active');

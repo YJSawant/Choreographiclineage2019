@@ -40,6 +40,7 @@ if(isset($_FILES["bio_file"]["type"]))
 		}
 		else
 		{
+
 			if (file_exists("biography_upload_data/" . $_FILES["bio_file"]["name"])) {
 				echo $_FILES["bio_file"]["name"] . " <span id='invalid'><b>already exists.</b></span> ";
 			}
@@ -48,20 +49,23 @@ if(isset($_FILES["bio_file"]["type"]))
 				$sourcePath = $_FILES['bio_file']['tmp_name']; // Storing source path of the file in a variable
 				$targetPath = "biography_upload_data/".$_FILES['bio_file']['name']; // Target path where file is to be stored
 				$_SESSION["biography_file_path"] = $targetPath;
-				move_uploaded_file($sourcePath,$targetPath) ; // Moving Uploaded file
-				echo "<span id='success'>Biography uploaded successfully...!!</span><br/>";
+				if(move_uploaded_file($sourcePath,$targetPath))
+				{
+					echo "<span id='success'>Biography Uploaded Successfully...!!</span><br/>";
+					include 'connection_open.php';
+					$query = "UPDATE artist_profile
+					SET artist_biography = '$targetPath'
+					WHERE artist_profile_id='".$_SESSION["artist_profile_id"]."'";
+					$result = mysqli_query($dbc,$query)
+					or die('Error querying database.: '  .mysqli_error($dbc));
+					include 'connection_close.php';
+				}else{
+                    echo "<span id='invalid'>**Please try again later***<span>";
+                }  // Moving Uploaded file
 				// echo "<br/><b>File Name:</b> " . $_FILES["bio_file"]["name"] . "<br>";
 				// echo "<b>Type:</b> " . $_FILES["bio_file"]["type"] . "<br>";
 				// echo "<b>Size:</b> " . ($_FILES["bio_file"]["size"] / 1024) . " kB<br>";
 				//echo "<b>Temp file:</b> " . $_FILES["bio_file"]["tmp_name"] . "<br>";
-				include 'connection_open.php';
-
-				$query = "UPDATE artist_profile
-				SET artist_biography = '$targetPath'
-				WHERE artist_profile_id='".$_SESSION["artist_profile_id"]."'";
-				$result = mysqli_query($dbc,$query)
-				or die('Error querying database.: '  .mysqli_error($dbc));
-				include 'connection_close.php';
 				// $location = "about_lineage.php";
 				// header("Location: ".$location."");
 			}
