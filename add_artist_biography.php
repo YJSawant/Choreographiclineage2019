@@ -246,6 +246,7 @@ if(isset($_SESSION['timeline_flow']) &&  $_SESSION['timeline_flow'] == "artist_a
 								}
 								?>
 							</div>
+
 						</div>
 					</div>
 					<p><br></p>
@@ -275,6 +276,7 @@ if(isset($_SESSION['timeline_flow']) &&  $_SESSION['timeline_flow'] == "artist_a
 						</textarea>
 					</div>
 					<div class="row">
+
 						<input type="submit" value="Save" class="button small submit_text action_button"/>
 						<span id="biography_text_message"></span>
 					</div>
@@ -296,6 +298,8 @@ if(isset($_SESSION['timeline_flow']) &&  $_SESSION['timeline_flow'] == "artist_a
 	<div class="row" >
 		<form id="uploadimage" action="" method="post" enctype="multipart/form-data">
 			<div class="large-4 medium-4 small-4 columns"><!-- INSERT THE INPUT FIELDS HERE -->
+
+
 				<div class="row"><!-- INSERT THE "choose file" here FIELDS HERE -->
 					<div class="small-8">
 						<label for="file" class="button small expanded action_button">Choose File</label>

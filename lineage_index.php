@@ -1,6 +1,10 @@
-<?php include 'menu.php';?>
-<!DOCTYPE html>
-<html lang="en">
+<?php 
+include 'util.php';
+
+		include 'menu.php';	
+
+?>
+<html>
 <head>
 	<title>Lineage</title>
 	<link rel="stylesheet" href="dist/vis-network.min.css" type="text/css" />
