@@ -15,7 +15,7 @@
 				<div id="searchbox_row" class="row">
 					<div class="large-12 columns">
 						<label><b>Search</b></label>
-       					<input id="searchbox" type="text" placeholder="Enter query" />
+       					<input id="searchbox" type="text" placeholder="Enter Name" />
 						<input id="submit" type="button" value="Submit"/>  
 					</div>
 				</div>

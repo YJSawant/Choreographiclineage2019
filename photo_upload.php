@@ -25,12 +25,12 @@ if(isset($_FILES["file"]["type"]))
 		}
 		else
 		{
-			if (file_exists("data/images/photo_upload_data/" . $_FILES["file"]["name"])) {
+			if (file_exists("upload/photo_upload_data/" . $_FILES["file"]["name"])) {
 				echo $_FILES["file"]["name"] . " <span id='invalid'><b>already exists.</b></span> ";
 			}
 			else {
                 $sourcePath = $_FILES['file']['tmp_name']; // Storing source path of the file in a variable
-                $targetPath = "data/images/photo_upload_data/" . $_FILES['file']['name']; // Target path where file is to be stored
+                $targetPath = "upload/photo_upload_data/" . $_FILES['file']['name']; // Target path where file is to be stored
 				// echo("<script>console.log('Target: ".$targetPath."');</script>");
 				// echo("<script>console.log('Source: ".$sourcePath."');</script>");
 				$_SESSION["photo_file_path"] = $targetPath;
