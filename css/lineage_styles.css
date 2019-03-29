@@ -154,6 +154,13 @@ div.tab button.active {
 	margin-right: 0;
 }
 
+#search_text {
+	background-color: #ddd;
+	font-family: Arial,sans-serif;
+	font-size: 16px;
+	margin-bottom: 4px;
+}
+
 nav {
 	margin-bottom: 0px;
 }
