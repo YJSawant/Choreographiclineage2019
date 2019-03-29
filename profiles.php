@@ -21,7 +21,7 @@
         if ($count == 0) {
 
             //echo "<legend><strong>Create a new one!</legend></strong>";
-            $location = "Contribution_Introduction.php";
+            $location = "contribution_introduction.php";
             echo("<script>location.href='$location'</script>");
         }
     }else {

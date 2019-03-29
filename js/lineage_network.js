@@ -42,6 +42,9 @@ function draw() {
       // initialize the div in which the network should be displayed
       var container = document.getElementById('my_network');
 
+      // initialize the search text div
+      var search_text = document.getElementById('search_text');
+
       // add nodes and edges to network data
       var data = {
         nodes: nodes,
@@ -164,6 +167,10 @@ function draw() {
         $("#my_network").css("cursor", "-webkit-grab");
       });
 
+      network.on('selectNode', function (obj) {
+        console.log("node selected");
+      });
+
       // event fired on change of tab in tab bar
       $('.tablinks').click(function() {
         // Get all elements with class="tablinks" and remove the class "active"
@@ -221,12 +228,13 @@ function draw() {
 
       // code for the autocomplete searchbox
       $searchbox = $("#searchbox");
-
+      
       $searchbox.autocomplete({
-        minLength: 2, // minimum of 2 characters to be entered before suggesting artist names
+        minLength: 1, // minimum of 1 characters to be entered before suggesting artist names
         source: names,
         select: function (event, ui) {
             $searchbox.val(ui.item.label); // display the selected text
+            $("#searchTextValue").val(ui.item.label);
             $("#searchbox_node_id").val(ui.item.node_id); // save selected node_id to hidden input
         }
       });
@@ -244,7 +252,6 @@ function draw() {
         $li.append('<a href="#">');
         $li.find('a').append($img).append(item.label);
         $li.find('a').css("display", "block");
-
         return $li.appendTo(ul);
       };
 
@@ -254,17 +261,41 @@ function draw() {
         if ((e.keyCode || e.which) == 13) {
           // get node_id of the artist searched for
           var searched_node_id = $("#searchbox_node_id").val();
+          var final_text = $("#searchTextValue").val();
+          if(final_text!=null)
+          {
+            $('#search_text').html('&nbsp&nbsp'+"Results for"+" "+'<span style="font-weight:bold">'+final_text+'</span>');
+          }    
           network.focus(
           searched_node_id, // which node to focus on
           {
             scale: 0.6, // level of zoom while focussing on node
             animation: {
               duration: 1000, // animation duration in milliseconds (Number)
-              easingFunction: "easeInOutQuad" // type of animation while focussing
+              easingFunction: "easeInOutQuart" // type of animation while focussing
             }
           });
         }
       });
+
+      submit = document.getElementById('submit');
+      submit.addEventListener('click',(function(e) {
+          var searched_node_id = $("#searchbox_node_id").val();
+          var final_text = $("#searchTextValue").val();
+          if(final_text!=null)
+          {
+            $('#search_text').html('&nbsp&nbsp'+"Results for"+" "+'<span style="font-weight:bold">'+final_text+'</span>');
+          }    
+          network.focus(
+          searched_node_id, // which node to focus on
+          {
+            scale: 0.6, // level of zoom while focussing on node
+            animation: {
+              duration: 1000, // animation duration in milliseconds (Number)
+              easingFunction: "easeInOutQuart" // type of animation while focussing
+            }
+          });
+      }));
     }
   });
 }
