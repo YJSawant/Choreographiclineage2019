@@ -193,7 +193,6 @@ if(isset($_SESSION['timeline_flow']) &&  $_SESSION['timeline_flow'] == "artist_a
 <body>
 	<?php
 	include 'form_links_header.php'
-
 	?>
 
 	<div class="row">
@@ -205,7 +204,6 @@ if(isset($_SESSION['timeline_flow']) &&  $_SESSION['timeline_flow'] == "artist_a
 	</div>
 	<div class="row">
 		<p align="middle"><h2><strong>YOUR BIOGRAPHY</strong></h2></p>
-
 	</div>
 
 
@@ -257,17 +255,13 @@ if(isset($_SESSION['timeline_flow']) &&  $_SESSION['timeline_flow'] == "artist_a
 							<input type="submit" value="Upload" class="button small expanded submit action_button"/>
 						</div>
 					</div>
-					<div class="row">
-						<div class="small-8 columns">
+					<div class="row small-8 columns">
 							<div id="bio_message">
-							</div>
-
-						</div>
+					</div>
 					</div>
 				</div>
 			</form>
 		</div>
-
 
 		<div class=" large-7 medium-7 small-7 columns biography_container" id="type_section" style="display: none">
 			<label>
@@ -311,7 +305,7 @@ if(isset($_SESSION['timeline_flow']) &&  $_SESSION['timeline_flow'] == "artist_a
 						<label for="file" class="button small expanded action_button">Choose File</label>
 						<input type="file" id="file" name="file" class="show-for-sr" required/>
 					</div>
-					<div class="large-8 medium-6 columns">
+					<div class="row small-8 columns">
 						<div id="image_name"><?php
 								if(isset($_SESSION["photo_file_path"])){
 									echo $_SESSION["photo_file_path"];
@@ -321,14 +315,10 @@ if(isset($_SESSION['timeline_flow']) &&  $_SESSION['timeline_flow'] == "artist_a
 				</div>
 
 				<div class="row"><!-- INSERT THE submit here here FIELDS HERE -->
-
 					<div class="small-8">
 						<input type="submit" value="Upload" class="button  small expanded submit action_button" />
-					</div>
-					<div class="large-8 medium-6 columns">
 						<div id="message"></div>
 					</div>
-
 				</div>
 			</div>
 
@@ -351,7 +341,7 @@ if(isset($_SESSION['timeline_flow']) &&  $_SESSION['timeline_flow'] == "artist_a
 
 	<div class="row">
 		<div class="large-2 small-8 columns ">
-			<button class="primary button float-right" id="previous" type="button">
+			<button class="primary button" id="previous" type="button">
 				<span>Previous</span>
 			</button>
 		</div>
@@ -374,12 +364,12 @@ if(isset($_SESSION['timeline_flow']) &&  $_SESSION['timeline_flow'] == "artist_a
 <script>
 
     $("#upload_document").click(function() {
-        console.log("hello");
+        //console.log("hello");
         $("#Upload_pdf_section").show();
         $("#type_section").hide();
     });
     $("#type_biography").click(function() {
-        console.log("hello1");
+        //console.log("hello1");
         $("#type_section").show();
         $("#Upload_pdf_section").hide();
     });
@@ -457,8 +447,6 @@ if(isset($_SESSION['timeline_flow']) &&  $_SESSION['timeline_flow'] == "artist_a
 				}
 			});
 		});
-
-
 
 		function imageIsLoaded(e) {
 			$("#file").css("color","green");
