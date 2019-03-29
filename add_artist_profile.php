@@ -282,13 +282,13 @@ if(isset($_SESSION["contribution_type"])) {
         <div class="row">
             <?php if(isset($_SESSION['artist_relation_add'])):?>
                 <div class="large-2 small-8 columns">
-                    <button class="primary button" id="previous" type="button">
+                    <button class="primary button float-right" id="previous" type="button">
                         <span>Previous</span>
                     </button>
                 </div>
             <?php else: ?>
                 <div class="large-2 small-8 columns">
-                    <button class="primary button" type="button" name="home" id="home" onclick="saveAndBack()">
+                    <button class="primary button float-right" type="button" name="home" id="home" onclick="saveAndBack()">
                         <span>Back to Profile</span>
                     </button>
                 </div>
@@ -298,7 +298,8 @@ if(isset($_SESSION["contribution_type"])) {
                     <span><?php echo (($_SESSION['timeline_flow'] == "view")?"":"Save & ") ?>Next</span>
                 </button>
             </div>
-            <div></div>
+            <div class="column">
+            </div>
         </div>
     </form>
     <script>
@@ -378,7 +379,7 @@ if(isset($_SESSION["contribution_type"])) {
         }
         $("#previous").click(function() {
             // onclick event is assigned to the #button element.
-            window.open("contribution_introduction.php","_self");
+            window.open("Contribution_Introduction.php","_self");
             //document.location.href = "add_artist_personal_information.php",true;
         });
         // onclick event is assigned to the #button element.
@@ -412,14 +413,23 @@ if(isset($_SESSION["contribution_type"])) {
             	artistStatusSelection();
             	artistTypeSelection();
              }
-
+             // else {
+            // 	//$("input[name='profile_selection']").filter("[value='artist']").prop('checked',true);
+            // 	 //$("#other_artist_section").hide();
+            // 	 $("#artist_living").attr("checked",true);
+            // 	 $("#date_of_death_div").hide();
+            // 	 $("#Other_Artist_Text").hide();
+            // 	 $(".other_artist").hide();
+            // 	 fetchFields();
+            // }
+            //$("input[name='profile_selection']").click(profileSelection);
             $("#Other_Artist_Type").click(artistTypeSelection);
             $("input[name='artist_status']").click(artistStatusSelection);
             if(disabled_input){
                 $('input').attr('disabled','true')
             }
         });
-
+        
         var birthdate=document.getElementById('date_of_birth');
         console.log(birthdate);
         birthdate.addEventListener('change',function(){
@@ -432,10 +442,10 @@ if(isset($_SESSION["contribution_type"])) {
             var yyyy = today.getFullYear();
             if (dd < 10) {
               dd = '0' + dd;
-            }
+            } 
             if (mm < 10) {
               mm = '0' + mm;
-            }
+            } 
             var today = yyyy + '-' + mm + '-' + dd;
             if(today===birthdate.value){
                 alert("same date as today!!")
@@ -444,42 +454,35 @@ if(isset($_SESSION["contribution_type"])) {
                 {
                     alert("Given date:- "+birthdate.value+" is in the future!");
                 }
-
-
+            
+            
         });
-        var dod=document.getElementById('date_of_death');
-        let delay = (()=>{
-          let timer = 0;
-          return function(callback, ms){
-            clearTimeout (timer);
-            timer = setTimeout(callback, ms);
-          };
-        })
-        ();
-        dod.addEventListener("keyup",function() {
-        delay(function(){
-          var bdate=new Date(birthdate.value);
-          var ddate=new Date(dod.value);
-          if(bdate>ddate){
-            alert("Date of Death cannot be smalled than DOB!");
-            $('#date_of_death').val("");
-            }
-        }, 2000 );
-        });
-        // var submit=document.getElementById("next");
-        // submit.addEventListener('click',function(event){
-        //     console.log("clicked");
-        //     var birthdate=document.getElementById('date_of_birth');
-        //     console.log(birthdate.value);
-        //     dateformat_birth= new Date(birthdate.value);
-        //     var deathdate=document.getElementById('date_of_death');
-        //     dateformat_death= new Date(deathdate.value);
-        //     if(dateformat_death<dateformat_birth){
-        //         alert("Date of Death cannot be less than Date of Birth !");
-        //         event.preventDefault();
+        //Previous team's date validations
+        // $("#date_of_death").change(function(){
+        //     console.log("date_of_death");
+        //     var endDate = $(this).val();
+        //     var startDate = $(this).closest('.date_section').find("#date_of_birth").val();
+        //     console.log(Date.parse(startDate) + " " + Date.parse(endDate));
+        //     if(startDate != "" && endDate != ""){
+        //         if ((Date.parse(startDate) >= Date.parse(endDate))) {
+        //             alert("Date of Death cannot be less than Date of Birth.");
+        //             $(this).val("");
+        //         }
         //     }
+        var submit=document.getElementById("next");
+        submit.addEventListener('click',function(event){
+            console.log("clicked");
+            var birthdate=document.getElementById('date_of_birth');
+            console.log(birthdate.value);
+            dateformat_birth= new Date(birthdate.value);
+            var deathdate=document.getElementById('date_of_death');
+            dateformat_death= new Date(deathdate.value);
+            if(dateformat_death<dateformat_birth){
+                alert("Date of Death cannot be less than Date of Birth !");
+                event.preventDefault();
+            }
 
-        // });
+        });
 
 
         // });
@@ -524,7 +527,7 @@ include 'footer.php';
             var lineage_contri = document.getElementById("contri_lineage");
             $(lineage_contri).addClass('active');
         }
-    });
+    }); 
 </script>
 
 </html>
