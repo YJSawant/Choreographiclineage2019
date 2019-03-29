@@ -14,8 +14,9 @@
 			<div id="filter_div" class="small-12 medium-12 large-2 columns">
 				<div id="searchbox_row" class="row">
 					<div class="large-12 columns">
-						<label><b>Search </b></label>
+						<label><b>Search</b></label>
        					<input id="searchbox" type="text" placeholder="Enter query" />
+						<input id="submit" type="button" value="Submit"/>  
 					</div>
 				</div>
 				<div hidden id="searchbox_node_id">
@@ -30,10 +31,14 @@
 			<div id="network_display_div" class="small-12 medium-12 large-10 columns">
 				<div id="tab_bar_row" class="row tab">
 					<button class="tablinks medium-offset-1 small-3 medium-2 columns active" id="full_network_tab">Full Network</button>
-					<button class="tablinks small-2 columns" id="studied_with_tab">Studied Under</button>
+					<button class="tablinks small-2 columns" id="studied_with_tab">Studied under</button>
 					<button class="tablinks small-3 medium-2 columns" id="collaborated_with_tab">Collaborated with</button>
-					<button class="tablinks small-2 columns" id="danced_for_tab">Danced In The Work Of</button>
+					<button class="tablinks small-2 columns" id="danced_for_tab">Danced in the work of</button>
 					<button class="tablinks end small-2 columns" id="influenced_by_tab">Influenced by</button>
+				</div>
+				<div hidden id="searchTextValue">
+				</div>
+				<div id="search_text">
 				</div>
 				<div id="my_network">
 				</div>

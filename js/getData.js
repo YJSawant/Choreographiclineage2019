@@ -12,7 +12,7 @@ function getData() {
 		     	// console.log(data_array);
 		     	var names = new Array();
 
-		     	var image_dir = "/src/img/";
+		     	var image_dir = "data/images/";
 		     	var jsonData = JSON.parse(response);
 				for (var i = 0; i < jsonData.length; i++) {
 					
