@@ -16,14 +16,14 @@
 
         include 'connection_open.php';
 
-        $query = "SELECT * FROM phone_appointments where status='Done'";
+        $query = "SELECT * FROM phone_appointments where status='UnDone'";
 
 
         $result = mysqli_query($dbc,$query)
         or die('Error querying database.: ' . mysqli_error());
 
         $count = mysqli_num_rows($result);
-        echo "<div align='center'><a href='phone_appointment_list_done.php'><button style='background-color: green;  border: none;
+        echo "<div align='center'><a href='phone_appointment_list.php'><button style='background-color: green;  border: none;
   color: white;
   padding: 15px 32px;
   text-align: center;
@@ -31,7 +31,7 @@
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
-  cursor: pointer;' >View done Phone Appointments</button></div>"; 
+  cursor: pointer;' >View Undone Phone Appointments</button></div>"; 
 
         echo "<div class='table-responsive'><table style='width: 60%; height: auto;' align='center'>";
 		echo "<tr><th>id</th><th>first_name</th><th>last_name</th><th>contact</th><th>note</th></tr>";
