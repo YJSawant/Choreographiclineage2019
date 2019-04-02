@@ -8,7 +8,7 @@
 	include 'path.php';
 	include 'AdminMenu.php';
 	include 'util.php';
-    
+
 	my_session_start();
 	if(isset($_SESSION["user_email_address"])) {
 
@@ -16,7 +16,7 @@
 
         include 'connection_open.php';
 
-        $query = "SELECT * FROM phone_appointments where status='Done'";
+        $query = "SELECT * FROM phone_appointments where status='UnDone' order by Submitted_Date ASC";
 
 
         $result = mysqli_query($dbc,$query)
@@ -31,22 +31,32 @@
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
-  cursor: pointer;' >View done Phone Appointments</button></div>"; 
+  cursor: pointer;' >View done Phone Appointments</button></div>";
 
         echo "<div class='table-responsive'><table style='width: 60%; height: auto;' align='center'>";
-		echo "<tr><th>id</th><th>first_name</th><th>last_name</th><th>contact</th><th>note</th></tr>";
+		echo "<tr><th>id</th><th>First Name</th><th>Last Name</th><th>Contact</th><th>Notes</th><th>Submission Date</tr>";
 
 		while($row = mysqli_fetch_array($result)) {
-    		$id = $row['id'];
-    		$first_name = $row['first_name'];
-    		$last_name = $row['last_name'];
-    		$contact = $row['contact'];
-    		$note = $row['note'];
-    		echo "<tr><td style='width: 100px;'>".$id."</td><td style='width: 200px;'>".$first_name."</td><td>".$last_name."</td><td style='width: 200px;'>".$contact."</td><td style='width: 200px;'>".$note."</td></tr>";
-              } 
+    		$ID = $row['id'];
+    		$Firstname = $row['first_name'];
+    		$Lastname = $row['last_name'];
+    		$Contact = $row['contact'];
+    		$Note = $row['note'];
+        $SubmissionDate=$row['Submitted_Date'];
+    		echo "<tr>
+        <td style='width: 100px;'>".$ID."</td>
+        <td style='width: 200px;'>".$Firstname."</td>
+        <td>".$Lastname."</td>
+        <td style='width: 200px;'>".$Contact."</td>
+        <td style='width: 200px;'>".$Note."</td>
+        <td style='width: 200px;'>".$SubmissionDate."</td>
+        <td style='width: 200px;'>
+        <button style='color:green;background-color:#99ff99;border-radius:.5px' type='button'><a href='done.php?id='".$ID.">Mark as Done</button></td>
+        </tr>";
+        }
 
 echo "</table></div>";
-   
+
     }
 
     else {
@@ -57,12 +67,13 @@ echo "</table></div>";
 ?>
     <script>
     function confirmDone(){
-  
+
         //var c = confirm("Warning: You are about to confirm this appointment schedule profile!");
         //return c;
         location.reload();
     }
     </script>
+
 </html>
 <?php
   include 'footer.php';
