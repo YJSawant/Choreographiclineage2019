@@ -23,15 +23,25 @@
         or die('Error querying database.: ' . mysqli_error());
 
         $count = mysqli_num_rows($result);
-        echo "<div align='center'><a href='phone_appointment_list.php'><button style='background-color: green;  border: none;
+        echo "<table style='width:auto;'align='center'><tr><td>";
+        echo "<div align='center'><a href='phone_appointment_list_done.php'><button style='background-color: green;  border: none;
   color: white;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;' >View pending Phone Appointments</button></div>";
+  cursor: pointer;' >View Completed Phone Appointments</button></div>";
+  echo"</td><td>";
+  echo "<div align='center'><a href='phone_appointment_list.php'><button style='background-color: green;  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;' >View Pending Phone Appointments</button></div>";
+  echo "</td></tr></table>";
 
         echo "<div class='table-responsive'><table style='width: 60%; height: auto;' align='center'>";
 		echo "<tr><th>id</th><th>First Name</th><th>Last Name</th><th>Contact</th><th>Notes</th></tr>";
