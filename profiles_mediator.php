@@ -22,7 +22,7 @@
 		$_SESSION["user_email_address"] = $_POST['artist_profile_add'];
 		$_SESSION["artist_profile_add"] = "add";
         $_SESSION["timeline_flow"] = "artist_add";
-		$location = "Contribution_Introduction.php";
+		$location = "contribution_introduction.php";
         $_SESSION["artist_profile_id"] = "";
 
         unset($_SESSION["artist_first_name"]);

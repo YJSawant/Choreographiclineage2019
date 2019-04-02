@@ -8,7 +8,7 @@ $mysqli_hostname = "localhost";
 $mysqli_user="root";
 # Comment this if working using XAMPP
 $mysqli_password="";
-$mysqli_database="choreographic_lineage";
+$mysqli_database="Choreographiclineage2019";
 
 #Comment this if working using WAMP
 #$mysqli_password="";

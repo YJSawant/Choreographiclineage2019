@@ -4,7 +4,7 @@ include 'menu.php';
 include 'util.php';
 my_session_start();
     if( isset($_SESSION["user_email_address"]) ){
-        $location = "Contribution_Introduction.php";
+        $location = "contribution_introduction.php";
 
     }else {
         $location = "add_user_profile.php";
@@ -52,7 +52,7 @@ my_session_start();
 				</label>
 			</div>
 			<div class="medium-4 column">
-				
+
 			</div>
 			<!-- FIRST NAME AND LAST NAME -->
 		</div>
@@ -63,12 +63,12 @@ my_session_start();
 				</label>
 			</div>
 		</div>
-		
+
 		<div class="row">
 			<div class="medium-10 columns">
 				<label for="contact_number">Contact Number <large style="color:red;font-weight: bold;"> *<br></large>
 					<input type="tel" name="contact_number" class="contact_number" id="contact_number" placeholder="Enter 10 digits only" pattern="[1-9]{1}[0-9]{9}" required>
-					
+
 				</label>
 			</div>
 		</div>
@@ -112,4 +112,3 @@ my_session_start();
 <?php
 include 'footer.php';
 ?>
-
