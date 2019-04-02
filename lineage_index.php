@@ -20,6 +20,9 @@ include 'util.php';
 					<div class="large-12 columns">
 						<label><b>Search</b></label>
        					<input id="searchbox" type="text" placeholder="Enter Name" />
+						<br/>  
+						<input id="university-search-box" type="text" placeholder="Enter University" />
+
 						<input id="submit" type="button" value="Submit"/>  
 					</div>
 				</div>
