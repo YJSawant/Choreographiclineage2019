@@ -30,6 +30,14 @@ function draw() {
         json_object.nodes[i].image = image_dir + json_object.nodes[i].image;
       }
 
+      //// get the university names
+      var university_names = new Array();
+      for(var i = 0; i < json_object.education_nodes.length; i++) {
+        university_names.push({node_id: json_object.education_nodes[i].id, label: json_object.education_nodes[i].institution_name, icon: json_object.education_nodes[i].image});
+        json_object.education_nodes[i].image = image_dir + json_object.education_nodes[i].image;
+      }
+      console.log(university_names);
+
       // store the nodes and edges in corresponding vis js objects
       var nodes = new vis.DataSet(json_object.nodes);
       var edges = new vis.DataSet(json_object.edges);
@@ -238,6 +246,18 @@ function draw() {
             $("#searchbox_node_id").val(ui.item.node_id); // save selected node_id to hidden input
         }
       });
+
+       // code for the autocomplete university searchbox
+       $university_search_box = $("#university-search-box"); 
+       $university_search_box.autocomplete({
+         minLength: 3, // minimum of 3 characters to be entered before suggesting university names
+         source: university_names,
+         select: function (event, ui) {
+             $university_search_box.val(ui.item.label); // display the selected text
+             $("#searchTextValue").val(ui.item.label);
+             $("#searchbox_node_id").val(ui.item.node_id); // save selected node_id to hidden input
+         }
+       });
 
       // method to make images appear along with names in autocomplete
       $searchbox.data( "ui-autocomplete" )._renderItem = function( ul, item ) {
