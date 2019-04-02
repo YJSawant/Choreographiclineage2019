@@ -16,13 +16,14 @@
 
         include 'connection_open.php';
 
-        $query = "SELECT * FROM phone_appointments where status='UnDone' order by Submitted_Date ASC";
+        $query = "SELECT * FROM phone_appointments where status='Undone' order by Submitted_Date ASC";
 
 
         $result = mysqli_query($dbc,$query)
         or die('Error querying database.: ' . mysqli_error());
 
         $count = mysqli_num_rows($result);
+        echo "<table style='width:auto;'align='center'><tr><td>";
         echo "<div align='center'><a href='phone_appointment_list_done.php'><button style='background-color: green;  border: none;
   color: white;
   padding: 15px 32px;
@@ -30,11 +31,20 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;' >View done Phone Appointments</button></div>";
+  cursor: pointer;' >View Completed Phone Appointments</button></div>";
+  echo"</td><td>";
+  echo "<div align='center'><a href='phone_appointment_list.php'><button style='background-color: green;  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;' >View Pending Phone Appointments</button></div>";
+  echo "</td></tr></table>";
 
         echo "<div class='table-responsive'><table style='width: 60%; height: auto;' align='center'>";
-		echo "<tr><th>id</th><th>First Name</th><th>Last Name</th><th>Contact</th><th>Notes</th><th>Submission Date</tr>";
+		echo "<tr><th>id</th><th>First Name</th><th>Last Name</th><th>Contact</th><th>Notes</th><th>Submission Date</th></tr>";
 
 		while($row = mysqli_fetch_array($result)) {
     		$ID = $row['id'];
@@ -51,7 +61,7 @@
         <td style='width: 200px;'>".$Note."</td>
         <td style='width: 200px;'>".$SubmissionDate."</td>
         <td style='width: 200px;'>
-        <button style='color:green;background-color:#99ff99;border-radius:.5px' type='button'><a href='done.php?id='".$ID.">Mark as Done</button></td>
+        <button style='color:green;background-color:#99ff99;border-radius:.5px' type='button'><a href='done.php?id=".$ID."'>Mark as Done</button></td>
         </tr>";
         }
 
