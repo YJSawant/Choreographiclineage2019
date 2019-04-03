@@ -30,13 +30,13 @@ function draw() {
         json_object.nodes[i].image = image_dir + json_object.nodes[i].image;
       }
 
-      //// get the university names
+      // get the university names
       var university_names = new Array();
       for(var i = 0; i < json_object.education_nodes.length; i++) {
         university_names.push({node_id: json_object.education_nodes[i].id, label: json_object.education_nodes[i].institution_name, icon: json_object.education_nodes[i].image});
         json_object.education_nodes[i].image = image_dir + json_object.education_nodes[i].image;
       }
-      console.log(university_names);
+     // console.log(university_names);
 
       // store the nodes and edges in corresponding vis js objects
       var nodes = new vis.DataSet(json_object.nodes);
@@ -96,7 +96,6 @@ function draw() {
           hover: true, // color of node and its edges change when hovered
           tooltipDelay: 0 // time delay in displaying tooltip on hovering over a node
         },
-
         physics: {
           stabilization: {
             iterations: 200, // maximum number of iteration to stabilize
@@ -167,6 +166,7 @@ function draw() {
       network.on('hoverNode', function (obj) {
         // console.log("node hovered");
         $("#my_network").css("cursor", "pointer");
+        $("#my_network").attr('title','No. of connections= '+network.getConnectedEdges(obj.node).length);
       });
 
       // change the type of cursor to hand on coming out of node hover
@@ -236,7 +236,6 @@ function draw() {
 
       // code for the autocomplete searchbox
       $searchbox = $("#searchbox");
-      
       $searchbox.autocomplete({
         minLength: 1, // minimum of 1 characters to be entered before suggesting artist names
         source: names,
@@ -254,8 +253,8 @@ function draw() {
          source: university_names,
          select: function (event, ui) {
              $university_search_box.val(ui.item.label); // display the selected text
-             $("#searchTextValue").val(ui.item.label);
-             $("#searchbox_node_id").val(ui.item.node_id); // save selected node_id to hidden input
+             $("#uniTextValue").val(ui.item.label);
+             $("#uni_searchbox_node_id").val(ui.item.node_id); // save selected node_id to hidden input
          }
        });
 
@@ -281,41 +280,78 @@ function draw() {
         if ((e.keyCode || e.which) == 13) {
           // get node_id of the artist searched for
           var searched_node_id = $("#searchbox_node_id").val();
-          var final_text = $("#searchTextValue").val();
-          if(final_text!=null)
+          var search_text = $("#searchTextValue").val();
+          //var university_search_value = $("#university_search_val").val();
+          if(!searched_node_id)
           {
-            $('#search_text').html('&nbsp&nbsp'+"Results for"+" "+'<span style="font-weight:bold">'+final_text+'</span>');
-          }    
-          network.focus(
-          searched_node_id, // which node to focus on
-          {
-            scale: 0.6, // level of zoom while focussing on node
-            animation: {
-              duration: 1000, // animation duration in milliseconds (Number)
-              easingFunction: "easeInOutQuart" // type of animation while focussing
-            }
-          });
+            $('#search_text').html('&nbsp&nbsp'+"Please correct your search criteria.");
+          } else{
+            $('#search_text').html('&nbsp&nbsp'+"Results for"+" "+'<span style="font-weight:bold">'+search_text+'</span>');
+            network.focus(
+              searched_node_id, // which node to focus on
+              {
+                scale: 0.6, // level of zoom while focussing on node
+                animation: {
+                  duration: 1000, // animation duration in milliseconds (Number)
+                  easingFunction: "easeInOutQuart" // type of animation while focussing
+                }
+              });
+            }         
         }
       });
 
       submit = document.getElementById('submit');
       submit.addEventListener('click',(function(e) {
           var searched_node_id = $("#searchbox_node_id").val();
-          var final_text = $("#searchTextValue").val();
-          if(final_text!=null)
+          var uni_searched_node_id = $("#uni_searchbox_node_id").val();
+          var search_text = $("#searchTextValue").val();
+          var uni_search_text = $("#uniTextValue").val();
+          console.log("Clicked Submit"); 
+          if(!searched_node_id && !uni_searched_node_id)
           {
-            $('#search_text').html('&nbsp&nbsp'+"Results for"+" "+'<span style="font-weight:bold">'+final_text+'</span>');
-          }    
-          network.focus(
-          searched_node_id, // which node to focus on
+            console.log("Inside both");
+            $('#search_text').html('&nbsp&nbsp'+"Please correct your search criteria.");
+          }else if(searched_node_id && uni_searched_node_id)  
           {
-            scale: 0.6, // level of zoom while focussing on node
-            animation: {
-              duration: 1000, // animation duration in milliseconds (Number)
-              easingFunction: "easeInOutQuart" // type of animation while focussing
-            }
-          });
+            $('#search_text').html('&nbsp&nbsp'+"Results for"+" "+'<span style="font-weight:bold">'+search_text+" "+uni_search_text+'</span>');
+            network.focus(
+              searched_node_id, // which node to focus on
+              {
+                scale: 0.6, // level of zoom while focussing on node
+                animation: {
+                  duration: 1000, // animation duration in milliseconds (Number)
+                  easingFunction: "easeInOutQuart" // type of animation while focussing
+                }
+              });
+          } else if(uni_searched_node_id)
+          {
+            console.log("Inside university");
+            $('#search_text').html('&nbsp&nbsp'+"Results for"+" "+'<span style="font-weight:bold">'+uni_search_text+'</span>');
+            network.focus(
+              uni_searched_node_id, // which node to focus on
+              {
+                scale: 0.6, // level of zoom while focussing on node
+                animation: {
+                  duration: 1000, // animation duration in milliseconds (Number)
+                  easingFunction: "easeInOutQuart" // type of animation while focussing
+                }
+              });
+          } else if(searched_node_id)
+          {
+            console.log("Inside search");
+            $('#search_text').html('&nbsp&nbsp'+"Results for"+" "+'<span style="font-weight:bold">'+search_text+'</span>');
+            network.focus(
+              searched_node_id, // which node to focus on
+              {
+                scale: 0.6, // level of zoom while focussing on node
+                animation: {
+                  duration: 1000, // animation duration in milliseconds (Number)
+                  easingFunction: "easeInOutQuart" // type of animation while focussing
+                }
+              });
+          }
       }));
     }
+    
   });
 }
