@@ -11,7 +11,8 @@ function draw() {
 
   //default value of node id before search for artist is performed
   var searched_node_id = -1;
-
+  var connected_nodes = [];
+  var edges_to_update = [];
   // ajax request to fetch the nodes, edges and border color of nodes from backend
   $.ajax({
     type: 'post',
@@ -21,7 +22,6 @@ function draw() {
       // response from 'lineage_backend.php' is stored as a JSON array in json_object
       //document.write('<div> Response : ' + response + '</div>');
       var json_object = $.parseJSON(response);
-
       console.log(json_object);
       // get the artist ids, names and images for search suggestions for textbox used to search for artists
       var names = new Array();
@@ -37,6 +37,9 @@ function draw() {
         json_object.education_nodes[i].image = image_dir + json_object.education_nodes[i].image;
       }
      // console.log(university_names);
+      // final_nodes = json_object.nodes;
+      // final_edges = json_object.edges;
+      // final_border = json_object.node_borders;
 
       // store the nodes and edges in corresponding vis js objects
       var nodes = new vis.DataSet(json_object.nodes);
@@ -105,7 +108,8 @@ function draw() {
           },
           barnesHut: {
             gravitationalConstant: -30000, // setting repulsion (negative value) between the nodes
-            centralGravity: 0 // pulls entire network to the center
+            centralGravity: 0.2,
+            avoidOverlap: 5 // pulls entire network to the center
           }
         }
       };
@@ -120,8 +124,6 @@ function draw() {
       nodes.update(nodes_to_update);
 
       // if multiple edges occur between 2 nodes then display only one of them in the full network view
-      var connected_nodes = [];
-      var edges_to_update = [];
       for (var i = 0; i < edges.length; i++) {
         var curr_edge = edges.get(i);
         var edge_string = curr_edge.from + "->" + curr_edge.to;
@@ -193,9 +195,12 @@ function draw() {
 
         var edges_to_update = [];
         var connected_nodes = [];
-        // if full network tab is clicked then display all edges in grey color
-        // and if multiple edges occur between 2 nodes then display only one of them
         if(this.id === "full_network_tab") {
+          //var search = document.getElementById("myDIV");
+          
+          search_text.style.visibility="hidden";
+          document.getElementById('searchbox').value = "";
+          document.getElementById('university-search-box').value = "";
           for (var i = 0; i < edges.length; i++) {
             var curr_edge = edges.get(i);
             var edge_string = curr_edge.from + "->" + curr_edge.to;
@@ -207,6 +212,27 @@ function draw() {
             edges_to_update.push(curr_edge);
             connected_nodes.push(edge_string);
           }
+          edges.update(edges_to_update);
+
+          for (var i = 0; i < nodes.length; i++){
+                var cur_node = Object.entries(nodes._data)[i][1]["id"]; 
+                cur_node = nodes.get(node_borders[i].id);
+                cur_node.color = {border: node_borders[i].border_color};
+                cur_node.hidden = false;          
+                connected_nodes.push(cur_node);
+            }
+            nodes.update(connected_nodes);
+
+            // network.zoomOut(
+            //   0.6, // which node to focus on
+            //   {
+            //     scale: 0.6, // level of zoom while focussing on node
+            //     animation: {
+            //       duration: 1000, // animation duration in milliseconds (Number)
+            //       easingFunction: "easeInOutQuart" // type of animation while focussing
+            //     }
+            //   });  
+            
         }
         // if a relationship tab is selected then display only the edges of that relationship
         else {
@@ -218,19 +244,85 @@ function draw() {
           var edge_color = edge_colors_dict[(relationship_selected_array[0] + "_" + relationship_selected_array[1] + "_color").toLowerCase()];
 
           // determine which edges to display based on type of relationship
+          var req_edges= [];
           for (var i = 0; i < edges.length; i++) {
             var curr_edge = edges.get(i);
-            if(curr_edge.label.toLowerCase() === relationship_selected) {
-              curr_edge.hidden = false;
-              curr_edge.color = edge_color;
+            if(this.id === "studied_with_tab") {
+              search_text.style.visibility="hidden";
+              document.getElementById('searchbox').value = "";
+              document.getElementById('university-search-box').value = "";
+              if(curr_edge.label.toLowerCase() === "studied with") {
+                curr_edge.hidden = false;
+                curr_edge.color = edge_color;
+                req_edges.push(curr_edge.from);
+                req_edges.push(curr_edge.to);
+              }
+              else {
+                curr_edge.hidden = true;
+              }
+              edges_to_update.push(curr_edge);
+            }else if(this.id === "collaborated_with_tab")
+            {
+              search_text.style.visibility="hidden";
+              document.getElementById('searchbox').value = "";
+              document.getElementById('university-search-box').value = "";
+              if(curr_edge.label.toLowerCase() === "collaborated with") {
+                curr_edge.hidden = false;
+                curr_edge.color = edge_color;
+                req_edges.push(curr_edge.from);
+                req_edges.push(curr_edge.to);
+              }
+              else {
+                curr_edge.hidden = true;
+              }
+              edges_to_update.push(curr_edge);
+            }else if(this.id === "danced_for_tab")
+            {
+              search_text.style.visibility="hidden";
+              document.getElementById('searchbox').value = "";
+              document.getElementById('university-search-box').value = "";
+              if(curr_edge.label.toLowerCase() === "danced for") {
+                curr_edge.hidden = false;
+                curr_edge.color = edge_color;
+                req_edges.push(curr_edge.from);
+                req_edges.push(curr_edge.to);
+              }
+              else {
+                curr_edge.hidden = true;
+              }
+              edges_to_update.push(curr_edge);
+            }else if(this.id === "influenced_by_tab")
+            {
+              search_text.style.visibility="hidden";
+              document.getElementById('searchbox').value = "";
+              document.getElementById('university-search-box').value = "";
+              if(curr_edge.label.toLowerCase() === "influenced by") {
+                curr_edge.hidden = false;
+                curr_edge.color = edge_color;
+                req_edges.push(curr_edge.from);
+                req_edges.push(curr_edge.to);
+              }
+              else {
+                curr_edge.hidden = true;
+              }
+              edges_to_update.push(curr_edge);
             }
-            else {
-              curr_edge.hidden = true;
-            }
-            edges_to_update.push(curr_edge);
+            
           }
         }
-        edges.update(edges_to_update);
+        edges.update(edges_to_update);   
+        for (var i = 0; i < nodes.length; i++){
+          var cur_node = Object.entries(nodes._data)[i][1]["id"]; 
+          cur_node = nodes.get(node_borders[i].id);
+          cur_node.color = {border: node_borders[i].border_color};
+          if(req_edges.includes(cur_node["id"])){
+            cur_node.hidden = false;    
+                 }else{
+                   cur_node.hidden = true;
+                 }                         
+          connected_nodes.push(cur_node);
+      }
+      nodes.update(connected_nodes);
       });
 
 
@@ -306,10 +398,10 @@ function draw() {
           var uni_searched_node_id = $("#uni_searchbox_node_id").val();
           var search_text = $("#searchTextValue").val();
           var uni_search_text = $("#uniTextValue").val();
-          console.log("Clicked Submit"); 
+          //console.log("Clicked Submit"); 
           if(!searched_node_id && !uni_searched_node_id)
           {
-            console.log("Inside both");
+           // console.log("Inside both");
             $('#search_text').html('&nbsp&nbsp'+"Please correct your search criteria.");
           }else if(searched_node_id && uni_searched_node_id)  
           {
@@ -325,7 +417,7 @@ function draw() {
               });
           } else if(uni_searched_node_id)
           {
-            console.log("Inside university");
+           // console.log("Inside university");
             $('#search_text').html('&nbsp&nbsp'+"Results for"+" "+'<span style="font-weight:bold">'+uni_search_text+'</span>');
             network.focus(
               uni_searched_node_id, // which node to focus on
@@ -338,20 +430,59 @@ function draw() {
               });
           } else if(searched_node_id)
           {
-            console.log("Inside search");
+           document.getElementById("search_text").style.visibility="visible";
             $('#search_text').html('&nbsp&nbsp'+"Results for"+" "+'<span style="font-weight:bold">'+search_text+'</span>');
-            network.focus(
-              searched_node_id, // which node to focus on
-              {
-                scale: 0.6, // level of zoom while focussing on node
-                animation: {
-                  duration: 1000, // animation duration in milliseconds (Number)
-                  easingFunction: "easeInOutQuart" // type of animation while focussing
-                }
-              });
+            var edge_to_keep = [];
+            var new_edge_string;
+            var nodeId = searched_node_id;
+            var edge_color = edge_colors_dict["default_color"];
+            final_edges = []; final_nodes = [];
+            for (var i = 0; i < edges.length; i++){
+              var new_edge = edges.get(i);
+              new_edge_string = new_edge.from + "->" + new_edge.to;
+              new_edge_from = new_edge.from;
+              new_edge_to = new_edge.to;
+              if(new_edge_from === nodeId) {
+                new_edge.hidden = false;
+                new_edge.color = edge_color;
+                edge_to_keep.push(new_edge_to);
+             } else{
+              new_edge.hidden = true;
+             }
+             final_edges.push(new_edge);
+             final_nodes.push(new_edge_string);
+           }           
+           edges.update(final_edges);
+
+           edge_to_keep.push(nodeId);
+           for (var i = 0; i < nodes.length; i++){
+              var new_node = Object.entries(nodes._data)[i][1]["id"]; 
+              new_node = nodes.get(node_borders[i].id);
+              new_node.color = {border: node_borders[i].border_color};
+              if(edge_to_keep.includes(new_node["id"])){
+                new_node.hidden = false;
+              }else{
+                new_node.hidden = true;
+              }             
+              final_nodes.push(new_node);
+              final_nodes.push(new_edge_string);
+          }       
+          nodes.update(final_nodes);
+          network.focus(
+            searched_node_id, // which node to focus on
+            {
+              scale: 0.6, // level of zoom while focussing on node
+              animation: {
+                duration: 1000, // animation duration in milliseconds (Number)
+                easingFunction: "easeInOutQuart" // type of animation while focussing
+              }
+            });
           }
+          
       }));
     }
     
   });
+
+
 }
