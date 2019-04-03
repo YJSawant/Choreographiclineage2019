@@ -28,6 +28,8 @@ include 'util.php';
 				</div>
 				<div hidden id="searchbox_node_id">
 				</div>
+				<div hidden id="uni_searchbox_node_id">
+				</div>
 			</div>
 			<div id="load" class="loader-frame small-12 medium-12 large-10 columns">
 				<div id="loader_circles_div">
@@ -44,6 +46,8 @@ include 'util.php';
 					<button class="tablinks end small-2 columns" id="influenced_by_tab">Influenced by</button>
 				</div>
 				<div hidden id="searchTextValue">
+				</div>
+				<div hidden id="uniTextValue">
 				</div>
 				<div id="search_text">
 				</div>
