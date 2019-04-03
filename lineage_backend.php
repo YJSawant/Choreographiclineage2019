@@ -27,10 +27,10 @@ $artist_id_name_query = "SELECT `artist_profile_id`, `artist_first_name`, `artis
 			}
 			$nodes[] = array('id' => $row['artist_profile_id'], 'title' => $row['artist_first_name']." ".$row['artist_last_name'], 'label' => $row['artist_first_name']." ".$row['artist_last_name'], 'shape'=>"circularImage", 'image' => $image, 'size' => 20,'isLiving' => $row['artist_living_status'],'dob' => $row['artist_dob'],'dod' => $row['artist_dod'],'genre' => $row['artist_genre'],'ethnicity' => $row['artist_ethnicity'],'gender' => $row['artist_gender'],'country' => $row['artist_residence_country']);
 			if($row['is_user_artist'] == "artist") {
-				$node_border_array[] = array('id' => $row['artist_profile_id'], 'border_color' => '#2F7D82');
+				$node_border_array[] = array('id' => $row['artist_profile_id'], 'border_color' => '#FF0000');
 			}
 			else {
-				$node_border_array[] = array('id' => $row['artist_profile_id'], 'border_color' => '#B2497D');
+				$node_border_array[] = array('id' => $row['artist_profile_id'], 'border_color' => '#0000FF');
 			}
 		}
 	}
