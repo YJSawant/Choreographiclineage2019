@@ -13,6 +13,9 @@ function draw() {
   var searched_node_id = -1;
   var connected_nodes = [];
   var edges_to_update = [];
+  var network;
+  var options;
+
   // ajax request to fetch the nodes, edges and border color of nodes from backend
   $.ajax({
     type: 'post',
@@ -63,7 +66,7 @@ function draw() {
       };
 
       // define options for nodes, edges, interaction, physics
-      var options = {
+      options = {
         nodes: {
           borderWidth: 2, // thickness of border around nodes
           color: {
@@ -137,7 +140,7 @@ function draw() {
       edges.update(edges_to_update);
 
       // initialize the network object
-      var network = new vis.Network(container, data, options);
+      network = new vis.Network(container, data, options);
 
       // set physics to false after stabilization iterations
       network.on("stabilizationIterationsDone", function () {
@@ -160,7 +163,7 @@ function draw() {
 
       // change the type of cursor to hand on releasing the drag
       network.on('release', function(obj){
-        // console.log("network released!");
+        console.log("network released!");
         $("#my_network").css("cursor", "-webkit-grab");
       });
 
@@ -196,8 +199,6 @@ function draw() {
         var edges_to_update = [];
         var connected_nodes = [];
         if(this.id === "full_network_tab") {
-          //var search = document.getElementById("myDIV");
-          
           search_text.style.visibility="hidden";
           document.getElementById('searchbox').value = "";
           document.getElementById('university-search-box').value = "";
@@ -231,7 +232,11 @@ function draw() {
             //       duration: 1000, // animation duration in milliseconds (Number)
             //       easingFunction: "easeInOutQuart" // type of animation while focussing
             //     }
-            //   });  
+            //   }); 
+            network = new vis.Network(container, data, options);
+            network.on("stabilizationIterationsDone", function () {
+              network.setOptions( { physics: false } );
+            });
             
         }
         // if a relationship tab is selected then display only the edges of that relationship
@@ -315,7 +320,7 @@ function draw() {
           var cur_node = Object.entries(nodes._data)[i][1]["id"]; 
           cur_node = nodes.get(node_borders[i].id);
           cur_node.color = {border: node_borders[i].border_color};
-          if(req_edges.includes(cur_node["id"])){
+          if((cur_node["id"])&& req_edges.includes(cur_node["id"])){
             cur_node.hidden = false;    
                  }else{
                    cur_node.hidden = true;
