@@ -132,7 +132,7 @@ function draw() {
           curr_edge.hidden = true;
         }
         edges_to_update.push(curr_edge);
-        connected_nodes.push(edge_string);
+        //connected_nodes.push(edge_string);
       }
       edges.update(edges_to_update);
 
@@ -203,14 +203,14 @@ function draw() {
           document.getElementById('university-search-box').value = "";
           for (var i = 0; i < edges.length; i++) {
             var curr_edge = edges.get(i);
-            var edge_string = curr_edge.from + "->" + curr_edge.to;
+            //var edge_string = curr_edge.from + "->" + curr_edge.to;
             curr_edge.hidden = false;
             if(connected_nodes.indexOf(edge_string) > -1) {
               curr_edge.hidden = true;
             }
             curr_edge.color = edge_colors_dict["default_color"];
             edges_to_update.push(curr_edge);
-            connected_nodes.push(edge_string);
+           // connected_nodes.push(edge_string);
           }
           edges.update(edges_to_update);
 
@@ -439,7 +439,7 @@ function draw() {
             final_edges = []; final_nodes = [];
             for (var i = 0; i < edges.length; i++){
               var new_edge = edges.get(i);
-              new_edge_string = new_edge.from + "->" + new_edge.to;
+              ///new_edge_string = new_edge.from + "->" + new_edge.to;
               new_edge_from = new_edge.from;
               new_edge_to = new_edge.to;
               if(new_edge_from === nodeId) {
@@ -450,7 +450,7 @@ function draw() {
               new_edge.hidden = true;
              }
              final_edges.push(new_edge);
-             final_nodes.push(new_edge_string);
+             //final_nodes.push(new_edge_string);
            }           
            edges.update(final_edges);
 
