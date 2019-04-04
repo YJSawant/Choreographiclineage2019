@@ -330,18 +330,39 @@ function draw() {
       nodes.update(connected_nodes);
       });
 
-
       // code for the autocomplete searchbox
       $searchbox = $("#searchbox");
+
+      $('#searchbox').on('change',function(){
+        if(!isNaN(this.value))
+        {
+          $("#searchTextValue").val("");
+          $("#searchbox_node_id").val("");
+        }    
+     }); 
+
       $searchbox.autocomplete({
         minLength: 1, // minimum of 1 characters to be entered before suggesting artist names
         source: names,
         select: function (event, ui) {
+          if(isNaN(this.value)){
             $searchbox.val(ui.item.label); // display the selected text
             $("#searchTextValue").val(ui.item.label);
             $("#searchbox_node_id").val(ui.item.node_id); // save selected node_id to hidden input
+          } else{
+            $("#searchTextValue").val("");
+            $("#searchbox_node_id").val("");
+          }           
         }
       });
+
+      $('#university-search-box').on('change',function(){
+        if(!isNaN(this.value))
+        {
+          $("#uniTextValue").val("");
+          $("#uni_searchbox_node_id").val("");
+        }    
+     }); 
 
        // code for the autocomplete university searchbox
        $university_search_box = $("#university-search-box"); 
