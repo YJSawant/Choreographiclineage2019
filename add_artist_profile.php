@@ -102,14 +102,16 @@ if(isset($_SESSION["contribution_type"])) {
                         <div class="column medium-6">
                             <fieldset>
                                 <legend><strong>Date of Birth</strong>  <span style="color:red;font-weight: bold;"> *</span><legend>
-                                        <input type="date" value="<?php echo isset($_SESSION['date_of_birth'])?$_SESSION['date_of_birth']:'' ?>" class="span2" id="date_of_birth" name="date_of_birth" placeholder="yyyy-mm-dd">
+                                        <input type="date" value="<?php echo isset($_SESSION['date_of_birth'])?$_SESSION['date_of_birth']:'' ?>" class="span2" id="date_of_birth" name="date_of_birth" placeholder="yyyy-mm-dd" onblur="emailvalidation()">
                             </fieldset>
                         </div>
                         <div class="column medium-6" id="date_of_death_div" style="display:none">
                             <fieldset  >
                                 <legend><strong>Date of Death</strong><span style="color:red;font-weight: bold;"> *</span><legend>
-                                        <input type="date" value="<?php echo isset($_SESSION['date_of_death'])?$_SESSION['date_of_death']:'' ?>" class="span2" id="date_of_death" name="date_of_death" placeholder="yyyy-mm-dd" >
+                                        <input type="date" value="<?php echo isset($_SESSION['date_of_death'])?$_SESSION['date_of_death']:'' ?>" class="span2" id="date_of_death" name="date_of_death" placeholder="yyyy-mm-dd" onblur="deathvalidation()" >
                             </fieldset>
+                        </div>
+                        <div class="column medium-12" id="date_message" style="color:red">
                         </div>
                     </div>
                 </div>
@@ -429,34 +431,47 @@ if(isset($_SESSION["contribution_type"])) {
                 $('input').attr('disabled','true')
             }
         });
-        
-        var birthdate=document.getElementById('date_of_birth');
-        console.log(birthdate);
-        birthdate.addEventListener('change',function(){
-            console.log(birthdate.value);
-            var date = new Date();
-            birth=new Date(birthdate.value);
-            var today = new Date();
-            var dd = today.getDate();
-            var mm = today.getMonth() + 1; //January is 0!
-            var yyyy = today.getFullYear();
-            if (dd < 10) {
-              dd = '0' + dd;
-            } 
-            if (mm < 10) {
-              mm = '0' + mm;
-            } 
-            var today = yyyy + '-' + mm + '-' + dd;
-            if(today===birthdate.value){
-                alert("same date as today!!")
+        function emailvalidation(){
+          var birthdate=document.getElementById('date_of_birth');
+              var date = new Date();
+              birth=new Date(birthdate.value);
+              var today = new Date();
+              var dd = today.getDate();
+              var mm = today.getMonth() + 1; //January is 0!
+              var yyyy = today.getFullYear();
+              if (dd < 10) {
+                dd = '0' + dd;
+              }
+              if (mm < 10) {
+                mm = '0' + mm;
+              }
+              var today = yyyy + '-' + mm + '-' + dd;
+              if(today===birthdate.value){
+                document.getElementById('date_message').style.display="block";
+                document.getElementById("date_message").innerHTML="Same Date as Today";
+              }
+              else if (date < birth){
+                    document.getElementById('message').style.display="block";
+                    document.getElementById("date_message").innerHTML="Given date:- "+birthdate.value+" is in the future!";
+              }
+              else{
+                document.getElementById('date_message').style.display="none";
+              }
+
+          }
+          function deathvalidation(){
+            var birth=document.getElementById("date_of_birth");
+            var death=document.getElementById("date_of_death");
+            var bd=new Date(birth.value);
+            var dd=new Date(death.value);
+            if (bd>dd){
+              document.getElementById('date_message').style.display="block";
+              document.getElementById('date_message').innerHTML="Date of death cannot be less than date of birth";
             }
-            if(date < birth)
-                {
-                    alert("Given date:- "+birthdate.value+" is in the future!");
-                }
-            
-            
-        });
+            else{
+              document.getElementById('date_message').style.display="none";
+            }
+          }
         //Previous team's date validations
         // $("#date_of_death").change(function(){
         //     console.log("date_of_death");
@@ -527,7 +542,7 @@ include 'footer.php';
             var lineage_contri = document.getElementById("contri_lineage");
             $(lineage_contri).addClass('active');
         }
-    }); 
+    });
 </script>
 
 </html>
