@@ -65,7 +65,7 @@ if(isset($_SESSION["contribution_type"])) {
                             <div class="medium-4 column">
                                 <!--<label for="artist_email_address">Email Address <span class="other_artist">of Artist</span>-->
                                     <label for="artist_email_address"><?php echo (($_SESSION['contribution_type'] == "own")?'Your Email Address':'Email Address of Artist') ?></span>
-                                    <input  value="<?php echo (($_SESSION['contribution_type'] == "own")?$_SESSION['user_email_address']:'') ?>" autocomplete="off" type="text" id="artist_email_address" name="artist_email_address" placeholder="Email Address">
+                                    <input  value="<?php echo (($_SESSION['contribution_type'] == "own")?$_SESSION['user_email_address']:'') ?>" autocomplete="off" type="email" id="artist_email_address" name="artist_email_address" placeholder="Email Address">
                                 </label>
                             </div>
                     </fieldset>
