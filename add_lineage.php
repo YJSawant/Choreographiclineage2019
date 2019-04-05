@@ -717,7 +717,11 @@ if($_SESSION["timeline_flow"] == "view"){
         2. You are aware that the information you provide will be used as a global resource, accessible to the general public, unless otherwise noted in the survey. </br>
         3. Choreographic Lineage will not sell, share or rent your personal information to any third party or use your e-mail address for unsolicited mail. Any emails sent by Choreograhic Lineage will only be in connection with the Choreographic Lineage resource. </br>
         4. The information you provide to Choreographic Lineage is accurate to the best of your knowledge. </br>
-        5. You are accepting the terms and conditions for your current entries and your future additions to your lineage.
+        5. You are accepting the terms and conditions for your current entries and your future additions to your lineage.</br>
+        </br>
+        <button class="primary button" style="margin:auto; display:block;" id="accept" type="submit" name="Accept">
+        <span>Accept</span>
+         </button>
     </div>
 
     <div class="row">
@@ -761,7 +765,7 @@ if($_SESSION["timeline_flow"] == "view"){
                     <span>Previous</span>
                 </button>
             </div>
-            <div class="large-2 small-8 column style="margin-left: 0px;">
+            <div class="large-2 small-8 column" style="margin-left: 0px;">
                 <button class="primary button" type="button" name="home" id="home" onclick="window.open('add_user_profile.php','_self');">
                     <span>Back to Profile</span>
                 </button>
@@ -1383,6 +1387,18 @@ if($_SESSION["timeline_flow"] == "view"){
         $( "#dialog-1" ).dialog({
             autoOpen: false,
         });
+
+        $('#accept').click(function(){
+        //console.log("I am clicked");
+        $( "#dialog-1" ).dialog( "close" );
+        document.getElementById("terms").checked = true;
+     });
+
+     $('#ui-id-1').click(function(){
+        //console.log("I am clicked");
+        $( "#dialog-1" ).dialog( "close" );
+        document.getElementById("terms").checked = false;
+     });
 
         var relation = $(".relationship");
         for (var i = 0; i < relation.length; i++) {

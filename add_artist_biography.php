@@ -306,18 +306,15 @@ if(isset($_SESSION['timeline_flow']) &&  $_SESSION['timeline_flow'] == "artist_a
 						<input type="file" id="file" name="file" class="show-for-sr" required/>
 					</div>
 					<div class="row small-8 columns">
-						<div id="image_name"><?php
-								if(isset($_SESSION["photo_file_path"])){
-									echo $_SESSION["photo_file_path"];
-								}
-								?></div>
+						<div id="image_name">
 					</div>
 				</div>
 
 				<div class="row"><!-- INSERT THE submit here here FIELDS HERE -->
 					<div class="small-8">
-						<input type="submit" value="Upload" class="button  small expanded submit action_button" />
 						<div id="message"></div>
+						<br/><br/>
+						<input type="submit" value="Upload" class="button  small expanded submit action_button" />
 					</div>
 				</div>
 			</div>
@@ -434,7 +431,7 @@ if(isset($_SESSION['timeline_flow']) &&  $_SESSION['timeline_flow'] == "artist_a
 				var match= ["image/jpeg","image/png","image/jpg"];
 				if(!((imagefile==match[0]) || (imagefile==match[1]) || (imagefile==match[2])))
 				{
-					$('#previewing').attr('src','noimage.png');
+					$("#image_name").text("");
 					$("#message").text("Please upload a file with a valid format");
 					$("#file").val("");
 					return false;
