@@ -47,7 +47,7 @@ function draw() {
       // store the nodes and edges in corresponding vis js objects
       var nodes = new vis.DataSet(json_object.nodes);
       var edges = new vis.DataSet(json_object.edges);
-
+      var education_nodes = json_object.education_nodes;
       // store the node borders which indicates whether artist's profile was filled by the same artist or by another user
       var node_borders = json_object.node_borders;
 
@@ -181,7 +181,7 @@ function draw() {
       });
 
       network.on('selectNode', function (obj) {
-        console.log("node selected");
+        //console.log("node selected");
       });
 
       // event fired on change of tab in tab bar
@@ -204,14 +204,12 @@ function draw() {
           document.getElementById('university-search-box').value = "";
           for (var i = 0; i < edges.length; i++) {
             var curr_edge = edges.get(i);
-            //var edge_string = curr_edge.from + "->" + curr_edge.to;
             curr_edge.hidden = false;
             if(connected_nodes.indexOf(edge_string) > -1) {
               curr_edge.hidden = true;
             }
             curr_edge.color = edge_colors_dict["default_color"];
             edges_to_update.push(curr_edge);
-           // connected_nodes.push(edge_string);
           }
           edges.update(edges_to_update);
 
@@ -219,20 +217,11 @@ function draw() {
                 var cur_node = Object.entries(nodes._data)[i][1]["id"]; 
                 cur_node = nodes.get(node_borders[i].id);
                 cur_node.color = {border: node_borders[i].border_color};
-                cur_node.hidden = false;          
+                cur_node.hidden = false; 
+                cur_node.borderWidth = 2;         
                 connected_nodes.push(cur_node);
             }
             nodes.update(connected_nodes);
-
-            // network.zoomOut(
-            //   0.6, // which node to focus on
-            //   {
-            //     scale: 0.6, // level of zoom while focussing on node
-            //     animation: {
-            //       duration: 1000, // animation duration in milliseconds (Number)
-            //       easingFunction: "easeInOutQuart" // type of animation while focussing
-            //     }
-            //   }); 
             network = new vis.Network(container, data, options);
             network.on("stabilizationIterationsDone", function () {
               network.setOptions( { physics: false } );
@@ -427,35 +416,111 @@ function draw() {
           //console.log("Clicked Submit"); 
           if(!searched_node_id && !uni_searched_node_id)
           {
-           // console.log("Inside both");
+          // console.log("Inside both");
             $('#search_text').html('&nbsp&nbsp'+"Please correct your search criteria.");
-          }else if(searched_node_id && uni_searched_node_id)  
+          }          
+          else if(searched_node_id && uni_searched_node_id)
           {
-            $('#search_text').html('&nbsp&nbsp'+"Results for"+" "+'<span style="font-weight:bold">'+search_text+" "+uni_search_text+'</span>');
-            network.focus(
-              searched_node_id, // which node to focus on
-              {
-                scale: 0.6, // level of zoom while focussing on node
-                animation: {
-                  duration: 1000, // animation duration in milliseconds (Number)
-                  easingFunction: "easeInOutQuart" // type of animation while focussing
-                }
+           //console.log("Inside common");
+            document.getElementById("search_text").style.visibility="visible";
+            for (var i = 0; i < edges.length; i++) {
+              var curr_edge = edges.get(i);
+              curr_edge.hidden = false;
+              if(connected_nodes.indexOf(edge_string) > -1) {
+                curr_edge.hidden = true;
+              }
+              curr_edge.color = edge_colors_dict["default_color"];
+              edges_to_update.push(curr_edge);
+            }
+            edges.update(edges_to_update);
+  
+            for (var i = 0; i < nodes.length; i++){
+                  var cur_node = Object.entries(nodes._data)[i][1]["id"]; 
+                  cur_node = nodes.get(node_borders[i].id);
+                  cur_node.color = {border: node_borders[i].border_color};
+                  cur_node.hidden = false;  
+                  cur_node.borderWidth=2;        
+                  connected_nodes.push(cur_node);
+              }
+              nodes.update(connected_nodes);
+              network = new vis.Network(container, data, options);
+              network.on("stabilizationIterationsDone", function () {
+              network.setOptions( { physics: false } );
               });
-          } else if(uni_searched_node_id)
+
+            final_nodes = [];
+            
+            for (var i = 0; i <education_nodes.length; i++){
+              var new_node;
+              var education_val = education_nodes[i]["institution_name"];
+              var node_val = education_nodes[i]["id"];
+              new_node = education_nodes[i]["id"]; 
+              new_node = nodes.get(node_borders[i].id);
+              new_node.color = {border: node_borders[i].border_color};
+              if(searched_node_id ===node_val  && education_val === uni_search_text  )
+              {
+                $('#search_text').html('&nbsp&nbsp'+"Results for"+" "+'<span style="font-weight:bold">'+search_text+" "+uni_search_text+'</span>');
+                new_node.borderWidth = 60;
+                final_nodes.push(new_node);
+                break;
+              } else{
+                new_node.borderWidth = 2;
+                final_nodes.push(new_node);
+                $('#search_text').html('&nbsp&nbsp'+"No results found. Displaying the full network");
+              }           
+            }       
+            nodes.update(final_nodes);
+          } 
+          else if(uni_searched_node_id)
           {
-           // console.log("Inside university");
+            //console.log("Inside university");
+            document.getElementById("search_text").style.visibility="visible";
             $('#search_text').html('&nbsp&nbsp'+"Results for"+" "+'<span style="font-weight:bold">'+uni_search_text+'</span>');
-            network.focus(
-              uni_searched_node_id, // which node to focus on
-              {
-                scale: 0.6, // level of zoom while focussing on node
-                animation: {
-                  duration: 1000, // animation duration in milliseconds (Number)
-                  easingFunction: "easeInOutQuart" // type of animation while focussing
-                }
+            for (var i = 0; i < edges.length; i++) {
+              var curr_edge = edges.get(i);
+              curr_edge.hidden = false;
+              if(connected_nodes.indexOf(edge_string) > -1) {
+                curr_edge.hidden = true;
+              }
+              curr_edge.color = edge_colors_dict["default_color"];
+              edges_to_update.push(curr_edge);
+            }
+            edges.update(edges_to_update);
+  
+            for (var i = 0; i < nodes.length; i++){
+                  var cur_node = Object.entries(nodes._data)[i][1]["id"]; 
+                  cur_node = nodes.get(node_borders[i].id);
+                  cur_node.color = {border: node_borders[i].border_color};
+                  cur_node.hidden = false;
+                  cur_node.borderWidth=2;          
+                  connected_nodes.push(cur_node);
+              }
+              nodes.update(connected_nodes);
+              network = new vis.Network(container, data, options);
+              network.on("stabilizationIterationsDone", function () {
+                network.setOptions( { physics: false } );
               });
+
+            final_nodes = [];
+            
+            for (var i = 0; i < education_nodes.length; i++){
+              var new_node;
+              var education_val = education_nodes[i]["institution_name"];
+              new_node = education_nodes[i]["id"]; 
+              new_node = nodes.get(node_borders[i].id);
+              new_node.color = {border: node_borders[i].border_color};
+              if(education_val === uni_search_text)
+              {
+                new_node.borderWidth = 60;
+              } else{
+                new_node.borderWidth = 2;
+              }           
+              final_nodes.push(new_node);
+            }       
+            nodes.update(final_nodes);
           } else if(searched_node_id)
           {
+          // console.log("Inside search");
            document.getElementById("search_text").style.visibility="visible";
             $('#search_text').html('&nbsp&nbsp'+"Results for"+" "+'<span style="font-weight:bold">'+search_text+'</span>');
             var edge_to_keep = [];
@@ -476,7 +541,6 @@ function draw() {
               new_edge.hidden = true;
              }
              final_edges.push(new_edge);
-             //final_nodes.push(new_edge_string);
            }           
            edges.update(final_edges);
 
@@ -487,11 +551,13 @@ function draw() {
               new_node.color = {border: node_borders[i].border_color};
               if(edge_to_keep.includes(new_node["id"])){
                 new_node.hidden = false;
+                new_node.borderWidth = 2;
               }else{
                 new_node.hidden = true;
+                new_node.borderWidth = 2;
               }             
               final_nodes.push(new_node);
-              final_nodes.push(new_edge_string);
+              //final_nodes.push(new_edge_string);
           }       
           nodes.update(final_nodes);
           network.focus(
@@ -504,7 +570,7 @@ function draw() {
               }
             });
           }
-          
+       
       }));
     }
     
