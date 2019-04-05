@@ -36,18 +36,27 @@ function draw() {
       // get the university names
       var university_names = new Array();
       for(var i = 0; i < json_object.education_nodes.length; i++) {
-        university_names.push({node_id: json_object.education_nodes[i].id, label: json_object.education_nodes[i].institution_name, icon: json_object.education_nodes[i].image});
-        json_object.education_nodes[i].image = image_dir + json_object.education_nodes[i].image;
+        university_names.push({label: json_object.education_nodes[i].institution_name});
+      }
+
+      // getting state names
+      var state_names = new Array();
+      for(var i = 0; i < json_object.artist_details.length; i++) {
+        state_names.push({label: json_object.artist_details[i].artist_residence_state});
+      }
+
+      // getting the country names
+      var country_names = new Array();
+      for(var i = 0; i < json_object.artist_details.length; i++) {
+        country_names.push({label: json_object.artist_details[i].artist_residence_country});
       }
      // console.log(university_names);
-      // final_nodes = json_object.nodes;
-      // final_edges = json_object.edges;
-      // final_border = json_object.node_borders;
 
       // store the nodes and edges in corresponding vis js objects
       var nodes = new vis.DataSet(json_object.nodes);
       var edges = new vis.DataSet(json_object.edges);
       var education_nodes = json_object.education_nodes;
+      var artist_details = json_object.artist_details;
       // store the node borders which indicates whether artist's profile was filled by the same artist or by another user
       var node_borders = json_object.node_borders;
 
@@ -163,7 +172,7 @@ function draw() {
 
       // change the type of cursor to hand on releasing the drag
       network.on('release', function(obj){
-        console.log("network released!");
+        //console.log("network released!");
         $("#my_network").css("cursor", "-webkit-grab");
       });
 
@@ -202,6 +211,27 @@ function draw() {
           search_text.style.visibility="hidden";
           document.getElementById('searchbox').value = "";
           document.getElementById('university-search-box').value = "";
+          document.getElementById('state-search-box').value = "";
+          document.getElementById('country-search-box').value = "";
+
+          var uncheck=document.getElementsByName('checkbox');
+              for(var i=0;i<uncheck.length;i++)
+              {
+                if(uncheck[i].type=='checkbox')
+                {
+                uncheck[i].checked=false;
+                }
+              }
+
+          var unselect=document.getElementsByName('radio');
+              for(var i=0;i<unselect.length;i++)
+              {
+                if(unselect[i].type=='radio')
+                {
+                  unselect[i].checked=false;
+                }
+              }
+
           for (var i = 0; i < edges.length; i++) {
             var curr_edge = edges.get(i);
             curr_edge.hidden = false;
@@ -245,6 +275,27 @@ function draw() {
               search_text.style.visibility="hidden";
               document.getElementById('searchbox').value = "";
               document.getElementById('university-search-box').value = "";
+              document.getElementById('state-search-box').value = "";
+              document.getElementById('country-search-box').value = "";
+
+          var uncheck=document.getElementsByName('checkbox');
+              for(var i=0;i<uncheck.length;i++)
+              {
+                if(uncheck[i].type=='checkbox')
+                {
+                uncheck[i].checked=false;
+                }
+              }
+
+          var unselect=document.getElementsByName('radio');
+              for(var i=0;i<unselect.length;i++)
+              {
+                if(unselect[i].type=='radio')
+                {
+                  unselect[i].checked=false;
+                }
+              }
+
               if(curr_edge.label.toLowerCase() === "studied with") {
                 curr_edge.hidden = false;
                 curr_edge.color = edge_color;
@@ -260,6 +311,27 @@ function draw() {
               search_text.style.visibility="hidden";
               document.getElementById('searchbox').value = "";
               document.getElementById('university-search-box').value = "";
+              document.getElementById('state-search-box').value = "";
+          document.getElementById('country-search-box').value = "";
+
+          var uncheck=document.getElementsByName('checkbox');
+              for(var i=0;i<uncheck.length;i++)
+              {
+                if(uncheck[i].type=='checkbox')
+                {
+                uncheck[i].checked=false;
+                }
+              }
+
+          var unselect=document.getElementsByName('radio');
+              for(var i=0;i<unselect.length;i++)
+              {
+                if(unselect[i].type=='radio')
+                {
+                  unselect[i].checked=false;
+                }
+              }
+
               if(curr_edge.label.toLowerCase() === "collaborated with") {
                 curr_edge.hidden = false;
                 curr_edge.color = edge_color;
@@ -275,6 +347,26 @@ function draw() {
               search_text.style.visibility="hidden";
               document.getElementById('searchbox').value = "";
               document.getElementById('university-search-box').value = "";
+              document.getElementById('state-search-box').value = "";
+              document.getElementById('country-search-box').value = "";
+
+              var uncheck=document.getElementsByName('checkbox');
+                  for(var i=0;i<uncheck.length;i++)
+                  {
+                    if(uncheck[i].type=='checkbox')
+                    {
+                    uncheck[i].checked=false;
+                    }
+                  }
+
+              var unselect=document.getElementsByName('radio');
+                  for(var i=0;i<unselect.length;i++)
+                  {
+                    if(unselect[i].type=='radio')
+                    {
+                      unselect[i].checked=false;
+                    }
+                  }
               if(curr_edge.label.toLowerCase() === "danced for") {
                 curr_edge.hidden = false;
                 curr_edge.color = edge_color;
@@ -290,6 +382,26 @@ function draw() {
               search_text.style.visibility="hidden";
               document.getElementById('searchbox').value = "";
               document.getElementById('university-search-box').value = "";
+              document.getElementById('state-search-box').value = "";
+              document.getElementById('country-search-box').value = "";
+
+              var uncheck=document.getElementsByName('checkbox');
+                  for(var i=0;i<uncheck.length;i++)
+                  {
+                    if(uncheck[i].type=='checkbox')
+                    {
+                    uncheck[i].checked=false;
+                    }
+                  }
+
+              var unselect=document.getElementsByName('radio');
+                  for(var i=0;i<unselect.length;i++)
+                  {
+                    if(unselect[i].type=='radio')
+                    {
+                      unselect[i].checked=false;
+                    }
+                  }
               if(curr_edge.label.toLowerCase() === "influenced by") {
                 curr_edge.hidden = false;
                 curr_edge.color = edge_color;
@@ -321,7 +433,6 @@ function draw() {
 
       // code for the autocomplete searchbox
       $searchbox = $("#searchbox");
-
       $('#searchbox').on('change',function(){
         if(!isNaN(this.value))
         {
@@ -352,7 +463,6 @@ function draw() {
           $("#uni_searchbox_node_id").val("");
         }    
      }); 
-
        // code for the autocomplete university searchbox
        $university_search_box = $("#university-search-box"); 
        $university_search_box.autocomplete({
@@ -362,6 +472,40 @@ function draw() {
              $university_search_box.val(ui.item.label); // display the selected text
              $("#uniTextValue").val(ui.item.label);
              $("#uni_searchbox_node_id").val(ui.item.node_id); // save selected node_id to hidden input
+         }
+       });
+
+       $('#state-search-box').on('change',function(){
+        if(!isNaN(this.value))
+        {
+          $("#stateTextValue").val("");
+        }    
+     }); 
+       // code for the autocomplete state searchbox
+       $state_search_box = $("#state-search-box"); 
+       $state_search_box.autocomplete({
+         minLength: 1, // minimum of 3 characters to be entered before suggesting university names
+         source: state_names,
+         select: function (event, ui) {
+             $state_search_box.val(ui.item.label); // display the selected text
+             $("#stateTextValue").val(ui.item.label);
+         }
+       });
+
+       $('#country-search-box').on('change',function(){
+        if(!isNaN(this.value))
+        {
+          $("#countryTextValue").val("");
+        }    
+     }); 
+       // code for the autocomplete country searchbox
+       $country_search_box = $("#country-search-box"); 
+       $country_search_box.autocomplete({
+         minLength: 1, // minimum of 3 characters to be entered before suggesting university names
+         source: country_names,
+         select: function (event, ui) {
+             $country_search_box.val(ui.item.label); // display the selected text
+             $("#countryTextValue").val(ui.item.label);
          }
        });
 
@@ -410,16 +554,21 @@ function draw() {
       submit = document.getElementById('submit');
       submit.addEventListener('click',(function(e) {
           var searched_node_id = $("#searchbox_node_id").val();
-          var uni_searched_node_id = $("#uni_searchbox_node_id").val();
+          //var uni_searched_node_id = $("#uni_searchbox_node_id").val();
           var search_text = $("#searchTextValue").val();
           var uni_search_text = $("#uniTextValue").val();
-          //console.log("Clicked Submit"); 
-          if(!searched_node_id && !uni_searched_node_id)
+          var state_text = $("#stateTextValue").val();
+          var country_text = $("#countryTextValue").val();
+          var check_val=document.getElementsByName('checkbox');
+          var radio_val=document.getElementsByName('radio');
+
+          if(!searched_node_id && !uni_search_text && !state_text && !country_text &&
+           !check_val && !radio_val)
           {
           // console.log("Inside both");
-            $('#search_text').html('&nbsp&nbsp'+"Please correct your search criteria.");
+            $('#search_text').html('&nbsp&nbsp'+"No Results Found. Displaying full network");
           }          
-          else if(searched_node_id && uni_searched_node_id)
+          else if(searched_node_id && uni_search_text)
           {
            //console.log("Inside common");
             document.getElementById("search_text").style.visibility="visible";
@@ -448,8 +597,52 @@ function draw() {
               network.setOptions( { physics: false } );
               });
 
-            final_nodes = [];
+            // combined_nodes = [];
+            // for (var i = 0; i <education_nodes.length; i++){
+            //   for(var j=0; j<artist_details.length; j++)
+            //   {
+            //     if(education_nodes[i]["id"] = artist_details[j]["id"])
+            //     {
+            //       combined_nodes.push
+            //     }
+            //   }
             
+
+              var new_node;
+              var state_val;
+              var country_val;
+              var gender_val;
+              var living_val;
+            // for (var i = 0; i <education_nodes.length; i++){
+            //   var education_val = education_nodes[i]["institution_name"];
+            //   var node_val = education_nodes[i]["id"];
+            //   new_node = education_nodes[i]["id"]; 
+            //   new_node = nodes.get(node_borders[i].id);
+            //   new_node.color = {border: node_borders[i].border_color};
+            //   for(var j=0; j<artist_details.length; j++){
+            //     if(education_nodes[i]["id"] === artist_details[j]["id"])
+            //     {
+            //       state_val = artist_details[j]["artist_residence_state"];
+            //       country_val = artist_details[j]["artist_residence_country"];
+            //       gender_val = artist_details[j]["artist_gender"];
+            //       living_val = artist_details[j]["artist_living_status"];
+            //     }               
+            //   }                       
+            //   if(searched_node_id ===node_val  && education_val === uni_search_text  
+            //     && state_val === state_text && country_val === country_text
+            //     && gender_val === state_text && living_val === state_text)
+            //   {
+            //     $('#search_text').html('&nbsp&nbsp'+"Results for"+" "+'<span style="font-weight:bold">'+search_text+" "+uni_search_text+'</span>');
+            //     new_node.borderWidth = 60;
+            //     final_nodes.push(new_node);
+            //     break;
+            //   } else{
+            //     new_node.borderWidth = 2;
+            //     final_nodes.push(new_node);
+            //     $('#search_text').html('&nbsp&nbsp'+"No results found. Displaying the full network");
+            //   }           
+            // }  
+            final_nodes = [] 
             for (var i = 0; i <education_nodes.length; i++){
               var new_node;
               var education_val = education_nodes[i]["institution_name"];
@@ -471,9 +664,9 @@ function draw() {
             }       
             nodes.update(final_nodes);
           } 
-          else if(uni_searched_node_id)
+          else if(uni_search_text)
           {
-            //console.log("Inside university");
+            console.log("Inside university");
             document.getElementById("search_text").style.visibility="visible";
             $('#search_text').html('&nbsp&nbsp'+"Results for"+" "+'<span style="font-weight:bold">'+uni_search_text+'</span>');
             for (var i = 0; i < edges.length; i++) {

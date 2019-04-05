@@ -22,14 +22,26 @@ include 'util.php';
        					<input id="searchbox" type="text" placeholder="Enter Name" />
 						<br/>  
 						<input id="university-search-box" type="text" placeholder="Enter University" />
+						<br/>
+						<label><b>Living Status</b></label>
+						<label><input id="living" type="checkbox" name="checkbox">Living</label>
+						<label><input id="dead" type="checkbox" name="checkbox"></span>Deceased</label>
+						<br/>
+						<label><b>Gender</b></label>
+						<label><input id="male" type="radio" name="radio"></span>Male</label>
+						<label><input id="female" type="radio" name="radio"></span>Female</label>
+						<br/>
+						<input id="state-search-box" type="text" placeholder="Enter State Code" />
+						<br/>  
+						<input id="country-search-box" type="text" placeholder="Enter Country" />
 
 						<input id="submit" type="button" value="Submit"/>  
 					</div>
 				</div>
 				<div hidden id="searchbox_node_id">
 				</div>
-				<div hidden id="uni_searchbox_node_id">
-				</div>
+				<!-- <div hidden id="uni_searchbox_node_id">
+				</div> -->
 			</div>
 			<div id="load" class="loader-frame small-12 medium-12 large-10 columns">
 				<div id="loader_circles_div">
