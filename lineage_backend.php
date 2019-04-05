@@ -82,12 +82,39 @@ $artist_id_name_query = "SELECT `artist_profile_id`, `artist_first_name`, `artis
 	$artist_education_result = mysqli_query($dbc,$artist_education_query)
 	or die('Error querying database.: '  .mysqli_error($dbc));
 	$count = mysqli_num_rows($artist_education_result);
+	$education_nodes = Array();
 	if($count>0){
-		$education_nodes = Array();
 		while($row = mysqli_fetch_array($artist_education_result)){
 			$education_nodes[] = array('id' => $row['artist_profile_id'], 'education_type' => $row['education_type'], 'institution_name' => $row['institution_name'], 'major' => $row['major'],'degree' => $row['degree']);
 		}
 	}
+
+	//fetches artist details
+	$artist_details_query = "SELECT `artist_profile_id`, `artist_first_name`, `artist_last_name` ,`artist_living_status`, `artist_gender`, `artist_residence_state`, `artist_residence_country` FROM `artist_profile` WHERE `artist_profile_id` IN (SELECT DISTINCT `artist_profile_id_1` FROM `artist_relation` UNION SELECT DISTINCT `artist_profile_id_2` FROM `artist_relation`)";
+	$artist_details_result = mysqli_query($dbc,$artist_details_query)
+	or die('Error querying database.: '  .mysqli_error($dbc));
+	$count = mysqli_num_rows($artist_details_result);
+	$artist_details = Array();
+	if($count>0){
+		while($row = mysqli_fetch_array($artist_details_result)){
+			$artist_details[] = array('id' => $row['artist_profile_id'], 'artist_first_name' => $row['artist_first_name'], 'artist_last_name' => $row['artist_last_name'], 'artist_living_status' => $row['artist_living_status'],'artist_gender' => $row['artist_gender'],'artist_residence_state' => $row['artist_residence_state'],'artist_residence_country' => $row['artist_residence_country']);
+		}
+	}
+
+	$profile_details = Array();
+	$profile_details = $artist_details+$education_nodes;
+	// $education_nodes.forEach(function(element){
+	// 	$profile_details.push({
+	// 	id:element.id,
+	// 	date:element.date,
+	// 	name:(arrayB.find(e=>e.id===element.id)).name
+	// 	});  
+	//   });
+	  
+	//   console.log(arrayC);
+	  
+	//$education_nodes.push(artist_details);
+
 	//fetch number of connections for each node
 	$updated_nodes = Array();
 	foreach($nodes as $node) {
@@ -102,19 +129,9 @@ $artist_id_name_query = "SELECT `artist_profile_id`, `artist_first_name`, `artis
 	}
 	$nodes = $updated_nodes;
 
-	//fetches artist details
-	$artist_details_query = "SELECT `artist_profile_id`, `artist_first_name`, `artist_last_name` ,`artist_living_status`, `artist_gender`, `artist_residence_state`, `artist_residence_country` FROM `artist_profile` WHERE `artist_profile_id` IN (SELECT DISTINCT `artist_profile_id_1` FROM `artist_relation` UNION SELECT DISTINCT `artist_profile_id_2` FROM `artist_relation`)";
-	$artist_details_result = mysqli_query($dbc,$artist_details_query)
-	or die('Error querying database.: '  .mysqli_error($dbc));
-	$count = mysqli_num_rows($artist_details_result);
-	$artist_details = Array();
-	if($count>0){
-		while($row = mysqli_fetch_array($artist_details_result)){
-			$artist_details[] = array('id' => $row['artist_profile_id'], 'artist_first_name' => $row['artist_first_name'], 'artist_last_name' => $row['artist_last_name'], 'artist_living_status' => $row['artist_living_status'],'artist_gender' => $row['artist_gender'],'artist_residence_state' => $row['artist_residence_state'],'artist_residence_country' => $row['artist_residence_country']);
-		}
-	}
-
-	return array("nodes" => $nodes, "edges" => $edges, "node_borders" => $node_border_array, "education_nodes" => $education_nodes, "artist_details" =>$artist_details);
+	return array("nodes" => $nodes, "edges" => $edges, "node_borders" => $node_border_array,
+	 "education_nodes" => $education_nodes, "artist_details" =>$artist_details,
+	 "profile_details" =>$profile_details);
 }
 //fetches artist name for given artist profile id
 function fetch_artist_name($artist_id, $dbc)	{
