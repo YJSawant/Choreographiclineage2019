@@ -1,7 +1,7 @@
-<?php 
+<?php
 include 'util.php';
 
-		include 'menu.php';	
+		include 'menu.php';
 
 ?>
 <html>
@@ -20,7 +20,7 @@ include 'util.php';
 					<div class="large-12 columns">
 						<label><b>Search</b></label>
        					<input id="searchbox" type="text" placeholder="Enter Name" />
-						<br/>  
+						<br/>
 						<input id="university-search-box" type="text" placeholder="Enter University" />
 						<br/>
 						<label><b>Living Status</b></label>
@@ -32,12 +32,96 @@ include 'util.php';
 						<label><input id="female" type="radio" name="radio"></span>Female</label>
 						<br/>
 						<input id="state-search-box" type="text" placeholder="Enter State Code" />
-						<br/>  
+						<br/>
 						<input id="country-search-box" type="text" placeholder="Enter Country" />
 
-						<input id="submit" type="button" value="Submit"/>  
+						<input id="submit" type="button" value="Submit"/>
 					</div>
 				</div>
+				<div class='my-legend'>
+						<div class='legend-title'>Network Guide</div>
+						<div class='legend-scale'>
+  					<ul class='legend-labels'>
+    					<li><span class="bluenode"></span>Own Contribution</li>
+    					<li><span class="rednode"></span>Other's Contribution</li>
+    					<li><span class="redarrow"></span>Studied Under</li>
+    					<li><span class="yellowarrow"></span>Collaborated With</li>
+    					<li><span class="greenarrow"></span>Danced For</li>
+							<li><span class="bluearrow"></span>Influenced By</li>
+   				</ul>
+				</div>
+			</div>
+
+<style type='text/css'>
+	.bluenode:before {
+		content: '\26AC';
+		font-size: 20px;
+		color:blue;
+		}
+	.rednode:before{
+		content:'\26AC';
+		font-size:20px;
+		color:red;
+	}
+	.redarrow:before{
+		content:'\279B';
+		font-size:20px;
+		color:red;
+	}
+	.yellowarrow:before{
+		content:'\279B';
+		font-size:20px;
+		color:yellow;
+	}
+	.greenarrow:before{
+		content:'\279B';
+		font-size:20px;
+		color:green;
+	}
+	.bluearrow:before{
+		content:'\279B';
+		font-size:20px;
+		color:blue;
+	}
+
+  .my-legend .legend-title {
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 90%;
+    }
+  .my-legend .legend-scale ul {
+    margin: 0;
+    margin-bottom: 5px;
+    padding: 0;
+    float: left;
+    list-style: none;
+    }
+  .my-legend .legend-scale ul li {
+    font-size: 80%;
+    list-style: none;
+    margin-left: 0;
+    line-height: 18px;
+    margin-bottom: 2px;
+    }
+  .my-legend ul.legend-labels li span {
+    display: block;
+    float: left;
+    height: 16px;
+    width: 30px;
+    margin-right: 5px;
+    margin-left: 0;
+    border: 1px solid #999;
+    }
+  .my-legend .legend-source {
+    font-size: 70%;
+    color: #999;
+    clear: both;
+    }
+  .my-legend a {
+    color: #777;
+    }
+</style>
 				<div hidden id="searchbox_node_id">
 				</div>
 				<!-- <div hidden id="uni_searchbox_node_id">
