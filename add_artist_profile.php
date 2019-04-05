@@ -120,13 +120,13 @@ if(isset($_SESSION["contribution_type"])) {
                                         <input type="date" value="<?php echo isset($_SESSION['date_of_birth'])?$_SESSION['date_of_birth']:'' ?>" class="span2" id="date_of_birth" name="date_of_birth" placeholder="yyyy-mm-dd" onblur="emailvalidation()">
                             </fieldset>
                         </div>
-                        <div class="column medium-3" id="date_of_death_div" style="display:none">
+                        <div class="column medium-2" id="date_of_death_div" style="display:none">
                             <fieldset  >
                                 <legend><strong>Date of Death</strong><span style="color:red;font-weight: bold;"> *</span><legend>
                                         <input type="date" value="<?php echo isset($_SESSION['date_of_death'])?$_SESSION['date_of_death']:'' ?>" class="span2" id="date_of_death" name="date_of_death" placeholder="yyyy-mm-dd" onblur="deathvalidation()" >
                             </fieldset>
                         </div>
-                        <div class="column medium-5" style="color:red">
+                        <div class="column medium-3" style="color:red">
                           <br>
                           <div id="date_message">
                           </div>
@@ -465,17 +465,13 @@ if(isset($_SESSION["contribution_type"])) {
                 mm = '0' + mm;
               }
               var today = yyyy + '-' + mm + '-' + dd;
-              if(today===birthdate.value){
+              if(today===birthdate.value || date < birth){
                 document.getElementById('date_message').style.display="block";
-                document.getElementById("date_message").innerHTML="Same Date as Today";
-              }
-              else if (date < birth){
-                    document.getElementById('message').style.display="block";
-                    document.getElementById("date_message").innerHTML="Given date:- "+birthdate.value+" is in the future!";
+                document.getElementById("date_message").innerHTML="! Invalid Birth Date";
               }
               else{
-                document.getElementById('date_message').style.display="none";
-              }
+              document.getElementById('date_message').style.display="none";
+            }
 
           }
           function deathvalidation(){
@@ -485,7 +481,7 @@ if(isset($_SESSION["contribution_type"])) {
             var dd=new Date(death.value);
             if (bd>dd){
               document.getElementById('date_message').style.display="block";
-              document.getElementById('date_message').innerHTML="Date of death cannot be less than date of birth";
+              document.getElementById('date_message').innerHTML="! Invalid Date of Death";
             }
             else{
               document.getElementById('date_message').style.display="none";
@@ -501,7 +497,7 @@ if(isset($_SESSION["contribution_type"])) {
             var deathdate=document.getElementById('date_of_death');
             dateformat_death= new Date(deathdate.value);
             if(dateformat_death<dateformat_birth){
-                alert("Date of Death cannot be less than Date of Birth !");
+                alert("Please enter a valid Date of Death !");
                 event.preventDefault();
             }
 
