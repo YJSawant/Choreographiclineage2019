@@ -1,8 +1,6 @@
 <?php
 include 'util.php';
-
-		include 'menu.php';
-
+include 'menu.php';
 ?>
 <html>
 <head>
@@ -19,14 +17,14 @@ include 'util.php';
 				<div id="searchbox_row" class="row">
 					<div class="large-12 columns">
 						<label><b>Search</b></label>
-       					<input id="searchbox" type="text" placeholder="Enter Name" />
-						<input style="margin: auto;" id="university-search-box" type="text" placeholder="Enter University" />
-						<label style="margin: auto;"><b>Living Status</b></label>
+       			<input id="searchbox" type="text" placeholder="Enter Name" />
+						<input style="margin-bottom: 16px;" id="university-search-box" type="text" placeholder="Enter University" />
+						<label><b>Living Status</b></label>
 						<label><input id="living" type="checkbox" name="checkbox">Living</label>
-						<label><input id="dead" type="checkbox" name="checkbox"></span>Deceased</label>
-						<label style="margin: auto;"><b>Gender</b></label>
+						<label style="margin-bottom: 16px;"><input id="dead" type="checkbox" name="checkbox"></span>Deceased</label>
+						<label><b>Gender</b></label>
 						<label><input id="male" type="radio" name="radio"></span>Male</label>
-						<label><input id="female" type="radio" name="radio"></span>Female</label>
+						<label style="margin-bottom: 16px;"><input id="female" type="radio" name="radio"></span>Female</label>
 						<input style="margin-bottom: 16px;" id="state-search-box" type="text" placeholder="Enter State Code" />
 						<input style="margin-bottom: 16px;" id="country-search-box" type="text" placeholder="Enter Country" />
 						<input style="margin-bottom: 16px;" id="submit" type="button" value="Submit"/>
@@ -44,9 +42,60 @@ include 'util.php';
 						<li><span class="bluearrow"></span>Influenced By</li>
    				</ul>
 				</div>
+			 </div>
+			<div hidden id="searchbox_node_id">
 			</div>
+				<!-- <div hidden id="uni_searchbox_node_id">
+				</div> -->
+			</div>
+			<div id="load" class="loader-frame small-12 medium-12 large-10 columns">
+				<div id="loader_circles_div">
+					<div class="circle loader1"></div>
+					<div class="circle1 loader2"></div>
+				</div>
+			</div>
+			<div id="network_display_div" class="small-12 medium-12 large-10 columns">
+				<div id="tab_bar_row" class="row tab">
+					<button class="tablinks medium-offset-1 small-3 medium-2 columns active" id="full_network_tab">Full Network</button>
+					<button class="tablinks small-2 columns" id="studied_with_tab">Studied under</button>
+					<button class="tablinks small-3 medium-2 columns" id="collaborated_with_tab">Collaborated with</button>
+					<button class="tablinks small-2 columns" id="danced_for_tab">Danced in the work of</button>
+					<button class="tablinks end small-2 columns" id="influenced_by_tab">Influenced by</button>
+				</div>
+				<div hidden id="searchTextValue">
+				</div>
+				<div hidden id="uniTextValue">
+				</div>
+				<div id="search_text">
+				</div>
+				<div id="my_network" class="small-12 medium-12 large-14 columns">
+				</div>
+				<div hidden id="mySidenav" class="sidenav">
+				<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+					<div id="artist_pic" class="pic"> </div>
+					<div id="artist_name" class="name"> </div>
+					<div id="artist_gender" class="gender"> </div>
+					<div id="artist_university" class="university"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<style type='text/css'>
+	.pic{
+	}
 
-<style type='text/css'>
+	.name{
+		text-align : center;
+		font-weight: bold
+	}
+
+	.gender{
+		text-align : center;
+	}
+
+	.university{
+		text-align : center;
+	}
 	.bluenode:before {
 		content: '\26AC';
 		font-size: 20px;
@@ -115,37 +164,57 @@ include 'util.php';
   .my-legend a {
     color: #777;
     }
+
+body {
+  font-family: "Lato", sans-serif;
+  transition: background-color .5s;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #DCDCDC;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
 </style>
-				<div hidden id="searchbox_node_id">
-				</div>
-				<!-- <div hidden id="uni_searchbox_node_id">
-				</div> -->
-			</div>
-			<div id="load" class="loader-frame small-12 medium-12 large-10 columns">
-				<div id="loader_circles_div">
-					<div class="circle loader1"></div>
-					<div class="circle1 loader2"></div>
-				</div>
-			</div>
-			<div id="network_display_div" class="small-12 medium-12 large-10 columns">
-				<div id="tab_bar_row" class="row tab">
-					<button class="tablinks medium-offset-1 small-3 medium-2 columns active" id="full_network_tab">Full Network</button>
-					<button class="tablinks small-2 columns" id="studied_with_tab">Studied under</button>
-					<button class="tablinks small-3 medium-2 columns" id="collaborated_with_tab">Collaborated with</button>
-					<button class="tablinks small-2 columns" id="danced_for_tab">Danced in the work of</button>
-					<button class="tablinks end small-2 columns" id="influenced_by_tab">Influenced by</button>
-				</div>
-				<div hidden id="searchTextValue">
-				</div>
-				<div hidden id="uniTextValue">
-				</div>
-				<div id="search_text">
-				</div>
-				<div id="my_network">
-				</div>
-			</div>
-		</div>
-	</div>
+	<script>
+		function closeNav() {
+		document.getElementById("mySidenav").style.display = "none"; 
+		document.getElementById("mySidenav").style.width = "0";	
+		}
+	</script>
 	<script type="text/javascript" src="dist/vis.js"></script>
 	<script src="https://cdn.jsdelivr.net/foundation/6.2.1/foundation.min.js"></script>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
