@@ -232,7 +232,10 @@ function draw() {
             if(artist_details[i]["artist_gender"] === "male" || artist_details[i]["artist_gender"] === "Male")
             {
               artist_gender.innerHTML= "Male";
-            }else{
+            }else if(artist_details[i]["artist_gender"] ==="") {
+              artist_gender.innerHTML= "";
+            }else
+            {
               artist_gender.innerHTML= "Female";
             }
             break;
@@ -359,7 +362,10 @@ function draw() {
                   if(artist_details[i]["artist_gender"] === "male" || artist_details[i]["artist_gender"] === "Male")
                   {
                     artist_gender.innerHTML= "Male";
-                  }else{
+                  }else if(artist_details[i]["artist_gender"] ==="") {
+                    artist_gender.innerHTML= "";
+                  }else
+                  {
                     artist_gender.innerHTML= "Female";
                   }
                   break;
@@ -762,7 +768,10 @@ function draw() {
                     if(artist_details[i]["artist_gender"] === "male" || artist_details[i]["artist_gender"] === "Male")
                     {
                       artist_gender.innerHTML= "Male";
-                    }else{
+                    }else if(artist_details[i]["artist_gender"] ==="") {
+                      artist_gender.innerHTML= "";
+                    }else
+                    {
                       artist_gender.innerHTML= "Female";
                     }
                     break;
@@ -911,7 +920,10 @@ function draw() {
             if(artist_details[i]["artist_gender"] === "male" || artist_details[i]["artist_gender"] === "Male")
             {
               artist_gender.innerHTML= "Male";
-            }else{
+            }else if(artist_details[i]["artist_gender"] ==="") {
+              artist_gender.innerHTML= "";
+            }else
+            {
               artist_gender.innerHTML= "Female";
             }
             break;
