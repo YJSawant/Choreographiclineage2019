@@ -82,19 +82,23 @@ include 'menu.php';
 	</div>
 	<style type='text/css'>
 	.pic{
+		margin-bottom: 12px;
 	}
 
 	.name{
 		text-align : center;
-		font-weight: bold
+		font-weight: bold;
+		margin-bottom: 12px;
 	}
 
 	.gender{
 		text-align : center;
+		margin-bottom: 12px;
 	}
 
 	.university{
 		text-align : center;
+		margin-bottom: 12px;
 	}
 	.bluenode:before {
 		content: '\26AC';
