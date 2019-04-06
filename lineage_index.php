@@ -20,25 +20,19 @@ include 'util.php';
 					<div class="large-12 columns">
 						<label><b>Search</b></label>
        					<input id="searchbox" type="text" placeholder="Enter Name" />
-						<br/>
-						<input id="university-search-box" type="text" placeholder="Enter University" />
-						<br/>
-						<label><b>Living Status</b></label>
+						<input style="margin: auto;" id="university-search-box" type="text" placeholder="Enter University" />
+						<label style="margin: auto;"><b>Living Status</b></label>
 						<label><input id="living" type="checkbox" name="checkbox">Living</label>
 						<label><input id="dead" type="checkbox" name="checkbox"></span>Deceased</label>
-						<br/>
-						<label><b>Gender</b></label>
+						<label style="margin: auto;"><b>Gender</b></label>
 						<label><input id="male" type="radio" name="radio"></span>Male</label>
 						<label><input id="female" type="radio" name="radio"></span>Female</label>
-						<br/>
-						<input id="state-search-box" type="text" placeholder="Enter State Code" />
-						<br/>
-						<input id="country-search-box" type="text" placeholder="Enter Country" />
-
-						<input id="submit" type="button" value="Submit"/>
+						<input style="margin-bottom: 16px;" id="state-search-box" type="text" placeholder="Enter State Code" />
+						<input style="margin-bottom: 16px;" id="country-search-box" type="text" placeholder="Enter Country" />
+						<input style="margin-bottom: 16px;" id="submit" type="button" value="Submit"/>
 					</div>
 				</div>
-				<div class='my-legend'>
+				<div class='my-legend'style="margin: auto;">
 						<div class='legend-title'>Network Guide</div>
 						<div class='legend-scale'>
   					<ul class='legend-labels'>
@@ -47,7 +41,7 @@ include 'util.php';
     					<li><span class="redarrow"></span>Studied Under</li>
     					<li><span class="yellowarrow"></span>Collaborated With</li>
     					<li><span class="greenarrow"></span>Danced For</li>
-							<li><span class="bluearrow"></span>Influenced By</li>
+						<li><span class="bluearrow"></span>Influenced By</li>
    				</ul>
 				</div>
 			</div>
