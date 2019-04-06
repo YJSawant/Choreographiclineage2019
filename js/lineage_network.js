@@ -191,6 +191,7 @@ function draw() {
 
       network.on('selectNode', function (obj) {
         //console.log("node selected");
+        //console.log(obj);
       });
 
       // event fired on change of tab in tab bar
