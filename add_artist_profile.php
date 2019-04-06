@@ -3,19 +3,17 @@ include 'path.php';
 include 'menu.php';
 include 'util.php';
 my_session_start();
-$prepopulated = "true";
+$prepopulated = "false";
 
 if(isset($_SESSION["user_email_address"])){
     $user_email_address = $_SESSION["user_email_address"];
     $user_lastname = $_SESSION["user_lastname"];
     $user_firstname = $_SESSION["user_firstname"];
-
-
     if(isset($_SESSION["timeline_flow"]) &&  ($_SESSION['timeline_flow'] == "edit" || $_SESSION['timeline_flow'] == "view")) {
-     	$prepopulated = "true";
-        $artist_email_address = $_SESSION["artist_email_address"];
-        $artist_lastname = $_SESSION["artist_last_name"];
-        $artist_firstname = $_SESSION["artist_first_name"];
+        $prepopulated = "true";
+        $user_email_address = $_SESSION["artist_email_address"];
+        $user_lastname = $_SESSION["artist_last_name"];
+        $user_firstname = $_SESSION["artist_first_name"];
     }
 
     if(isset($_SESSION['timeline_flow']) &&  $_SESSION['timeline_flow'] == "view") {
@@ -28,6 +26,7 @@ if(isset($_SESSION["contribution_type"])) {
     $contribution_form_type = $_SESSION["contribution_type"];
 }
 ?>
+
 <html>
 <?php if(isset($_SESSION["user_email_address"])): ?>
     <head>
@@ -38,9 +37,9 @@ if(isset($_SESSION["contribution_type"])) {
     <form id="add_user_profile_form" name="add_user_profile_form" method="post" action="add_artist_personal_information.php" enctype="multipart/form-data">
         <div class="row">
             <div class="progress" role="progressbar" tabindex="0" aria-valuenow="10" aria-valuemin="0" aria-valuetext="10 percent" aria-valuemax="100">
-				  <span class="progress-meter" style="width: 10%">
-				    <p class="progress-meter-text">10%</p>
-				  </span>
+                  <span class="progress-meter" style="width: 10%">
+                    <p class="progress-meter-text">10%</p>
+                  </span>
             </div>
         </div>
 
@@ -54,40 +53,26 @@ if(isset($_SESSION["contribution_type"])) {
                             <div class="medium-4 column">
                                 <!--<label for="artist_first_name">First Name of Artist</span> <span style="color:red;font-weight: bold;"> *</span>-->
                                     <label for="artist_first_name"><?php echo (($_SESSION['contribution_type'] == "own")?'Your First Name':'First Name of Artist') ?></span> <span style="color:red;font-weight: bold;"> *</span>
-                                    <input value="<?php if(isset($_SESSION["artist_first_name"])){
-                                      echo $_SESSION['artist_first_name'];
-                                    }
-                                    else {
-                                      echo '';
-                                    } ?>" autocomplete="off" type="text" id="artist_first_name" name="artist_first_name" placeholder="First Name" required>
+                                    <input  value="<?php echo (($_SESSION['contribution_type'] == "own")?$_SESSION['user_firstname']:'') ?>" autocomplete="off" type="text" id="artist_first_name" name="artist_first_name" placeholder="First Name" required>
                                 </label>
                             </div>
                             <div class="medium-4 column">
                                 <!--<label for="artist_last_name">Last Name <span class="other_artist">of Artist</span> <span style="color:red;font-weight: bold;"> *</span>-->
                                     <label for="artist_last_name"><?php echo (($_SESSION['contribution_type'] == "own")?'Your Last Name':'Last Name of Artist') ?></span> <span style="color:red;font-weight: bold;"> *</span>
-                                      <input value="<?php if(isset($_SESSION["artist_last_name"])){
-                                        echo $_SESSION['artist_last_name'];
-                                      }
-                                      else {
-                                        echo '';
-                                      } ?>" autocomplete="off" type="text" id="artist_last_name" name="artist_last_name" placeholder="Last Name" required>
+                                    <input  value="<?php echo (($_SESSION['contribution_type'] == "own")?$_SESSION['user_lastname']:'') ?>" autocomplete="off" type="text" id="artist_last_name" name="artist_last_name" placeholder="Last Name" required>
                                 </label>
                             </div>
                             <div class="medium-4 column">
                                 <!--<label for="artist_email_address">Email Address <span class="other_artist">of Artist</span>-->
                                     <label for="artist_email_address"><?php echo (($_SESSION['contribution_type'] == "own")?'Your Email Address':'Email Address of Artist') ?></span>
-                                      <input value="<?php if(isset($_SESSION["artist_email_address"])){
-                                        echo $_SESSION['$artist_email_address'];
-                                      }
-                                      else {
-                                        echo '';
-                                      } ?>" autocomplete="off" type="email" id="artist_email_address" name="artist_email_address" placeholder="Email Address">
+                                    <input  value="<?php echo (($_SESSION['contribution_type'] == "own")?$_SESSION['user_email_address']:'') ?>" autocomplete="off" type="text" id="artist_email_address" name="artist_email_address" placeholder="Email Address">
                                 </label>
                             </div>
                     </fieldset>
                 </section>
             </div>
         </div>
+
         <div id="other_artist_section">
             <div class="row">
                 <fieldset class="large-6 columns">
@@ -114,22 +99,17 @@ if(isset($_SESSION["contribution_type"])) {
             <div class="row">
                 <div class="column large-6">
                     <div class="row date_section">
-                        <div class="column medium-4">
+                        <div class="column medium-6">
                             <fieldset>
                                 <legend><strong>Date of Birth</strong>  <span style="color:red;font-weight: bold;"> *</span><legend>
-                                        <input type="date" value="<?php echo isset($_SESSION['date_of_birth'])?$_SESSION['date_of_birth']:'' ?>" class="span2" id="date_of_birth" name="date_of_birth" placeholder="yyyy-mm-dd" onblur="emailvalidation()">
+                                        <input type="date" value="<?php echo isset($_SESSION['date_of_birth'])?$_SESSION['date_of_birth']:'' ?>" class="span2" id="date_of_birth" name="date_of_birth" placeholder="yyyy-mm-dd">
                             </fieldset>
                         </div>
-                        <div class="column medium-2" id="date_of_death_div" style="display:none">
+                        <div class="column medium-6" id="date_of_death_div" style="display:none">
                             <fieldset  >
                                 <legend><strong>Date of Death</strong><span style="color:red;font-weight: bold;"> *</span><legend>
-                                        <input type="date" value="<?php echo isset($_SESSION['date_of_death'])?$_SESSION['date_of_death']:'' ?>" class="span2" id="date_of_death" name="date_of_death" placeholder="yyyy-mm-dd" onblur="deathvalidation()" >
+                                        <input type="date" value="<?php echo isset($_SESSION['date_of_death'])?$_SESSION['date_of_death']:'' ?>" class="span2" id="date_of_death" name="date_of_death" placeholder="yyyy-mm-dd" >
                             </fieldset>
-                        </div>
-                        <div class="column medium-3" style="color:red">
-                          <br>
-                          <div id="date_message">
-                          </div>
                         </div>
                     </div>
                 </div>
@@ -374,15 +354,15 @@ if(isset($_SESSION["contribution_type"])) {
                 $("#date_of_death").val("");
                 $("#date_of_death_div").hide();
                 $("#date_of_death").prop("required",false);
-            }	else if ($('input[name="artist_status"]:checked').val() == "deceased") {
+            }   else if ($('input[name="artist_status"]:checked').val() == "deceased") {
                 $("#date_of_death_div").show();
                 $("#date_of_death").prop("required",true);
             }
         }
         function fetchFields(){
-            var first_name = "<?php echo $artist_firstname ?>";
-            var last_name = "<?php echo $artist_lastname ?>";
-            var email_address = "<?php echo $artist_email_address ?>";
+            var first_name = "<?php echo $user_firstname ?>";
+            var last_name = "<?php echo $user_lastname ?>";
+            var email_address = "<?php echo $user_email_address ?>";
             $("#artist_first_name").val(first_name);
             $("#artist_last_name").val(last_name);
             $("#artist_email_address").val(email_address);
@@ -399,12 +379,12 @@ if(isset($_SESSION["contribution_type"])) {
         }
         $("#previous").click(function() {
             // onclick event is assigned to the #button element.
-            window.open("contribution_introduction.php","_self");
+            window.open("Contribution_Introduction.php","_self");
             //document.location.href = "add_artist_personal_information.php",true;
         });
         // onclick event is assigned to the #button element.
         // $("#next").click(function() {
-        // 	window.open("add_artist_personal_information.php","_self");
+        //  window.open("add_artist_personal_information.php","_self");
         // });
         $(document).ready(function(){
             prepopulated = "<?php echo $prepopulated ?>";
@@ -427,21 +407,20 @@ if(isset($_SESSION["contribution_type"])) {
                 $("#other_artist_section").hide();
             }
             if(prepopulated == "true"){
-            	console.log("SSS "  + prepopulated);
-            	//profileSelection();
+                console.log("SSS "  + prepopulated);
+                //profileSelection();
                 fetchFields();
-            	artistStatusSelection();
-            	artistTypeSelection();
+                artistStatusSelection();
+                artistTypeSelection();
              }
-
              // else {
-            // 	//$("input[name='profile_selection']").filter("[value='artist']").prop('checked',true);
-            // 	 //$("#other_artist_section").hide();
-            // 	 $("#artist_living").attr("checked",true);
-            // 	 $("#date_of_death_div").hide();
-            // 	 $("#Other_Artist_Text").hide();
-            // 	 $(".other_artist").hide();
-            // 	 fetchFields();
+            //  //$("input[name='profile_selection']").filter("[value='artist']").prop('checked',true);
+            //   //$("#other_artist_section").hide();
+            //   $("#artist_living").attr("checked",true);
+            //   $("#date_of_death_div").hide();
+            //   $("#Other_Artist_Text").hide();
+            //   $(".other_artist").hide();
+            //   fetchFields();
             // }
             //$("input[name='profile_selection']").click(profileSelection);
             $("#Other_Artist_Type").click(artistTypeSelection);
@@ -450,44 +429,46 @@ if(isset($_SESSION["contribution_type"])) {
                 $('input').attr('disabled','true')
             }
         });
-        function emailvalidation(){
-          var birthdate=document.getElementById('date_of_birth');
-              var date = new Date();
-              birth=new Date(birthdate.value);
-              var today = new Date();
-              var dd = today.getDate();
-              var mm = today.getMonth() + 1; //January is 0!
-              var yyyy = today.getFullYear();
-              if (dd < 10) {
-                dd = '0' + dd;
-              }
-              if (mm < 10) {
-                mm = '0' + mm;
-              }
-              var today = yyyy + '-' + mm + '-' + dd;
-              if(today===birthdate.value || date < birth){
-                document.getElementById('date_message').style.display="block";
-                document.getElementById("date_message").innerHTML="! Invalid Birth Date";
-              }
-              else{
-              document.getElementById('date_message').style.display="none";
+        
+        var birthdate=document.getElementById('date_of_birth');
+        console.log(birthdate);
+        birthdate.addEventListener('change',function(){
+            console.log(birthdate.value);
+            var date = new Date();
+            birth=new Date(birthdate.value);
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+            var yyyy = today.getFullYear();
+            if (dd < 10) {
+              dd = '0' + dd;
+            } 
+            if (mm < 10) {
+              mm = '0' + mm;
+            } 
+            var today = yyyy + '-' + mm + '-' + dd;
+            if(today===birthdate.value){
+                alert("same date as today!!")
             }
-
-          }
-          function deathvalidation(){
-            var birth=document.getElementById("date_of_birth");
-            var death=document.getElementById("date_of_death");
-            var bd=new Date(birth.value);
-            var dd=new Date(death.value);
-            if (bd>dd){
-              document.getElementById('date_message').style.display="block";
-              document.getElementById('date_message').innerHTML="! Invalid Date of Death";
-            }
-            else{
-              document.getElementById('date_message').style.display="none";
-            }
-          }
-
+            if(date < birth)
+                {
+                    alert("Given date:- "+birthdate.value+" is in the future!");
+                }
+            
+            
+        });
+        //Previous team's date validations
+        // $("#date_of_death").change(function(){
+        //     console.log("date_of_death");
+        //     var endDate = $(this).val();
+        //     var startDate = $(this).closest('.date_section').find("#date_of_birth").val();
+        //     console.log(Date.parse(startDate) + " " + Date.parse(endDate));
+        //     if(startDate != "" && endDate != ""){
+        //         if ((Date.parse(startDate) >= Date.parse(endDate))) {
+        //             alert("Date of Death cannot be less than Date of Birth.");
+        //             $(this).val("");
+        //         }
+        //     }
         var submit=document.getElementById("next");
         submit.addEventListener('click',function(event){
             console.log("clicked");
@@ -497,13 +478,13 @@ if(isset($_SESSION["contribution_type"])) {
             var deathdate=document.getElementById('date_of_death');
             dateformat_death= new Date(deathdate.value);
             if(dateformat_death<dateformat_birth){
-                alert("Please enter a valid Date of Death !");
+                alert("Date of Death cannot be less than Date of Birth !");
                 event.preventDefault();
             }
 
         });
 
-        console.log($_SESSION[contribution_type])
+
         // });
     </script>
     <style>
@@ -546,7 +527,7 @@ include 'footer.php';
             var lineage_contri = document.getElementById("contri_lineage");
             $(lineage_contri).addClass('active');
         }
-    });
+    }); 
 </script>
 
 </html>
