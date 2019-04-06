@@ -65,7 +65,7 @@ if(isset($_SESSION["contribution_type"])) {
                             <div class="medium-4 column">
                                 <!--<label for="artist_email_address">Email Address <span class="other_artist">of Artist</span>-->
                                     <label for="artist_email_address"><?php echo (($_SESSION['contribution_type'] == "own")?'Your Email Address':'Email Address of Artist') ?></span>
-                                    <input  value="<?php echo (($_SESSION['contribution_type'] == "own")?$_SESSION['user_email_address']:'') ?>" autocomplete="off" type="text" id="artist_email_address" name="artist_email_address" placeholder="Email Address">
+                                    <input  value="<?php echo (($_SESSION['contribution_type'] == "own")?$_SESSION['user_email_address']:'') ?>" autocomplete="off" type="email" id="artist_email_address" name="artist_email_address" placeholder="Email Address">
                                 </label>
                             </div>
                     </fieldset>
@@ -99,19 +99,25 @@ if(isset($_SESSION["contribution_type"])) {
             <div class="row">
                 <div class="column large-6">
                     <div class="row date_section">
-                        <div class="column medium-6">
+                        <div class="column medium-4">
                             <fieldset>
-                                <legend><strong>Date of Birth</strong>  <span style="color:red;font-weight: bold;"> *</span><legend>
-                                        <input type="date" value="<?php echo isset($_SESSION['date_of_birth'])?$_SESSION['date_of_birth']:'' ?>" class="span2" id="date_of_birth" name="date_of_birth" placeholder="yyyy-mm-dd">
+                                <legend><strong>Date of Birth</strong>  <span style="color:red;font-weight: bold;"> *</span></legend>
+                                        <input type="date" value="<?php echo isset($_SESSION['date_of_birth'])?$_SESSION['date_of_birth']:'' ?>" class="span2" id="date_of_birth" name="date_of_birth" placeholder="yyyy-mm-dd" 
+                                        onblur="emailvalidation()">
                             </fieldset>
                         </div>
-                        <div class="column medium-6" id="date_of_death_div" style="display:none">
+                        <div class="column medium-2" id="date_of_death_div" style="display:none">
                             <fieldset  >
-                                <legend><strong>Date of Death</strong><span style="color:red;font-weight: bold;"> *</span><legend>
-                                        <input type="date" value="<?php echo isset($_SESSION['date_of_death'])?$_SESSION['date_of_death']:'' ?>" class="span2" id="date_of_death" name="date_of_death" placeholder="yyyy-mm-dd" >
+                                <legend><strong>Date of Death</strong><span style="color:red;font-weight: bold;"> *</span></legend>
+                                        <input type="date" value="<?php echo isset($_SESSION['date_of_death'])?$_SESSION['date_of_death']:'' ?>" class="span2" id="date_of_death" name="date_of_death" placeholder="yyyy-mm-dd" 
+                                        onblur="deathvalidation()">
                             </fieldset>
                         </div>
-                    </div>
+                        <div class="column medium-4" style="color:red">
+                            <br>
+                            <div style="padding-top: 4px;" id ="date_message">
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>
@@ -429,11 +435,55 @@ if(isset($_SESSION["contribution_type"])) {
                 $('input').attr('disabled','true')
             }
         });
-        
-        var birthdate=document.getElementById('date_of_birth');
-        console.log(birthdate);
-        birthdate.addEventListener('change',function(){
-            console.log(birthdate.value);
+        function emailvalidation(){
+              var birthdate=document.getElementById('date_of_birth');
+              var date = new Date();
+              birth=new Date(birthdate.value);
+              var today = new Date();
+              var dd = today.getDate();
+              var mm = today.getMonth() + 1; //January is 0!
+              var yyyy = today.getFullYear();
+              if (dd < 10) {
+                dd = '0' + dd;
+              }
+              if (mm < 10) {
+                mm = '0' + mm;
+              }
+              var today = yyyy + '-' + mm + '-' + dd;
+              if(today===birthdate.value || date<birth){
+                document.getElementById('date_message').style.display="block";
+                document.getElementById("date_message").innerHTML="Invalid Date of Birth";
+              }
+              else{
+                document.getElementById('date_message').style.display="none";
+              }
+          } 
+
+        function deathvalidation(){
+            var birth=document.getElementById("date_of_birth");
+            var death=document.getElementById("date_of_death");
+            var bd=new Date(birth.value);
+            var dd=new Date(death.value);
+            if (bd>dd){
+              document.getElementById('date_message').style.display="block";
+              document.getElementById('date_message').innerHTML="! Invalid Date of Death";
+            }
+            else{
+              document.getElementById('date_message').style.display="none";
+            }
+          }
+       
+        var submit=document.getElementById("next");
+        submit.addEventListener('click',function(event){
+            console.log("clicked");
+            var birthdate=document.getElementById('date_of_birth');
+            dateformat_birth= new Date(birthdate.value);
+            var deathdate=document.getElementById('date_of_death');
+            dateformat_death= new Date(deathdate.value);
+            if(dateformat_death<dateformat_birth){
+                alert("Please change Date of Death !");
+                event.preventDefault();
+            }
             var date = new Date();
             birth=new Date(birthdate.value);
             var today = new Date();
@@ -441,46 +491,17 @@ if(isset($_SESSION["contribution_type"])) {
             var mm = today.getMonth() + 1; //January is 0!
             var yyyy = today.getFullYear();
             if (dd < 10) {
-              dd = '0' + dd;
-            } 
+                dd = '0' + dd;
+            }
             if (mm < 10) {
-              mm = '0' + mm;
-            } 
+                mm = '0' + mm;
+            }
             var today = yyyy + '-' + mm + '-' + dd;
-            if(today===birthdate.value){
-                alert("same date as today!!")
+            if(today===birthdate.value || date<birth){
+              alert("Please change Date of Birth !");
+              event.preventDefault();
             }
-            if(date < birth)
-                {
-                    alert("Given date:- "+birthdate.value+" is in the future!");
-                }
-            
-            
-        });
-        //Previous team's date validations
-        // $("#date_of_death").change(function(){
-        //     console.log("date_of_death");
-        //     var endDate = $(this).val();
-        //     var startDate = $(this).closest('.date_section').find("#date_of_birth").val();
-        //     console.log(Date.parse(startDate) + " " + Date.parse(endDate));
-        //     if(startDate != "" && endDate != ""){
-        //         if ((Date.parse(startDate) >= Date.parse(endDate))) {
-        //             alert("Date of Death cannot be less than Date of Birth.");
-        //             $(this).val("");
-        //         }
-        //     }
-        var submit=document.getElementById("next");
-        submit.addEventListener('click',function(event){
-            console.log("clicked");
-            var birthdate=document.getElementById('date_of_birth');
-            console.log(birthdate.value);
-            dateformat_birth= new Date(birthdate.value);
-            var deathdate=document.getElementById('date_of_death');
-            dateformat_death= new Date(deathdate.value);
-            if(dateformat_death<dateformat_birth){
-                alert("Date of Death cannot be less than Date of Birth !");
-                event.preventDefault();
-            }
+
 
         });
 
