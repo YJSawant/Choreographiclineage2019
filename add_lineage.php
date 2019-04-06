@@ -8,6 +8,9 @@ if($_SESSION["timeline_flow"] == "view"){
 }else{
     echo "<script>var disabled_input=false;</script>";
 }
+$artist_fname=$_SESSION["artist_first_name"];
+$artist_lname=$_SESSION["artist_last_name"];
+$artist_fullname=$artist_fname.' '.$artist_lname;
 ?>
 
 <html>
@@ -20,14 +23,14 @@ if($_SESSION["timeline_flow"] == "view"){
 <body onload="getData()">
 <div class="row">
     <div class="progress" role="progressbar" tabindex="0" aria-valuenow="80" aria-valuemin="0" aria-valuetext="80 percent" aria-valuemax="100">
-			<span class="progress-meter" style="width: 80%">
-				<p class="progress-meter-text">80%</p>
-			</span>
+            <span class="progress-meter" style="width: 80%">
+                <p class="progress-meter-text">80%</p>
+            </span>
     </div>
 </div>
 <div class="row">
     <div class="large-4 columns large-offset-4">
-        <h4><strong><?php echo ((isset($_SESSION["profile_selection"])&&$_SESSION["profile_selection"] == "artist")?"YOUR":"ARTIST'S"); ?> LINEAGE</strong></h4>
+        <h4><strong><?php echo ((isset($_SESSION["profile_selection"])&&$_SESSION["profile_selection"] == "artist")?"YOUR LINEAGE":'You are contributing lineage for '.$artist_fullname); ?></strong></h4>
     </div>
 </div>
 <div class="medium-9 row"><p><i>Lineal artists are the people with whom you have studied, danced, collaborated and have been influenced by.</i></p></div>
@@ -44,7 +47,7 @@ if($_SESSION["timeline_flow"] == "view"){
                                 </div>
                                 <div class="small-4 small-offset-4 column">
                                     <button class="primary alert button delete_artist artist_button
-											" style="float:right" id="delete_artist" type="button" onclick="deleteArtist(this)">
+                                            " style="float:right" id="delete_artist" type="button" onclick="deleteArtist(this)">
                                         <span>Remove this Artist</span>
                                     </button>
                                 </div>
@@ -1004,32 +1007,32 @@ if($_SESSION["timeline_flow"] == "view"){
         clone.find(".relation_influenced_cb").val(lineal_artist_count - 1);
         clone.find(".influenced_by_section").html(
             "<fieldset>"
-            +	"<legend><strong>Influenced by Details:</strong></legend>"
-            +	"<div class='row not_influenced'>"
-            +		"<input class='relation_type' title='influenced' style='display:none'/>"
-            +		"<div class='column'>"
-            +			"<div class='row'>"
-            +				"<div class='column'>"
-            +					"People who have significantly influenced your work, such as artists, authors, philosophers, etc. You do not need"
-            +					"to have a relationship with this person in order to list them as having an impact on your work."
-            +					"By choosing Influenced by you are acknowledging that you have been influenced by this person. No time based data"
-            +					"is necessary."
-            +				"</div>"
-            +			"</div>"
-            +			"<div class='row'>"
-            +				"<center>"
-            +					"<button class='primary button influenced_by' type='button' style='margin-top:5%'>"
-            +						"<span>Influenced by</span>"
-            +					"</button>"
-            +				"</center>"
-            +			"</div>"
-            +		"</div>"
-            +	"</div>"
-            +	"<div class='row influenced' style='display:none;'>"
-            +		"<div class='column' style='color:darkgreen;'>"
-            +			"<center><h3><strong>You are influenced by this Artist</h3></strong></center>"
-            +		"</div>"
-            +	"</div>"
+            +   "<legend><strong>Influenced by Details:</strong></legend>"
+            +   "<div class='row not_influenced'>"
+            +       "<input class='relation_type' title='influenced' style='display:none'/>"
+            +       "<div class='column'>"
+            +           "<div class='row'>"
+            +               "<div class='column'>"
+            +                   "People who have significantly influenced your work, such as artists, authors, philosophers, etc. You do not need"
+            +                   "to have a relationship with this person in order to list them as having an impact on your work."
+            +                   "By choosing Influenced by you are acknowledging that you have been influenced by this person. No time based data"
+            +                   "is necessary."
+            +               "</div>"
+            +           "</div>"
+            +           "<div class='row'>"
+            +               "<center>"
+            +                   "<button class='primary button influenced_by' type='button' style='margin-top:5%'>"
+            +                       "<span>Influenced by</span>"
+            +                   "</button>"
+            +               "</center>"
+            +           "</div>"
+            +       "</div>"
+            +   "</div>"
+            +   "<div class='row influenced' style='display:none;'>"
+            +       "<div class='column' style='color:darkgreen;'>"
+            +           "<center><h3><strong>You are influenced by this Artist</h3></strong></center>"
+            +       "</div>"
+            +   "</div>"
             + "</fieldset>"
         );
         clone.find(".tabs").attr("id", clone.find(".tabs").attr("id").split("-")[0] + "-" + lineal_artist_count);
