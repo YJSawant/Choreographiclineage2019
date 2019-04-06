@@ -24,7 +24,20 @@ if(isset($_SESSION["user_email_address"])){
 }
 if(isset($_SESSION["contribution_type"])) {
     $contribution_form_type = $_SESSION["contribution_type"];
+    if (isset($_SESSION["artist_first_name"])){
+        $artist_fname=$_SESSION["artist_first_name"];
+    }
+    else{
+        $artist_fname="";
+    }
+    if (isset($_SESSION["artist_last_name"])){
+        $artist_lname=$_SESSION["artist_last_name"];
+    }
+    else{
+        $artist_lname="";
+    }
 }
+
 ?>
 
 <html>
@@ -42,7 +55,6 @@ if(isset($_SESSION["contribution_type"])) {
                   </span>
             </div>
         </div>
-
         <div class="row">
             <div class="medium-10 column">
                 <section>
@@ -53,13 +65,13 @@ if(isset($_SESSION["contribution_type"])) {
                             <div class="medium-4 column">
                                 <!--<label for="artist_first_name">First Name of Artist</span> <span style="color:red;font-weight: bold;"> *</span>-->
                                     <label for="artist_first_name"><?php echo (($_SESSION['contribution_type'] == "own")?'Your First Name':'First Name of Artist') ?></span> <span style="color:red;font-weight: bold;"> *</span>
-                                    <input  value="<?php echo (($_SESSION['contribution_type'] == "own")?$_SESSION['user_firstname']:'') ?>" autocomplete="off" type="text" id="artist_first_name" name="artist_first_name" placeholder="First Name" required>
+                                    <input  value="<?php echo (($_SESSION['contribution_type'] == "own")?$_SESSION['user_firstname']:$artist_fname) ?>" autocomplete="off" type="text" id="artist_first_name" name="artist_first_name" placeholder="First Name" required>
                                 </label>
                             </div>
                             <div class="medium-4 column">
                                 <!--<label for="artist_last_name">Last Name <span class="other_artist">of Artist</span> <span style="color:red;font-weight: bold;"> *</span>-->
                                     <label for="artist_last_name"><?php echo (($_SESSION['contribution_type'] == "own")?'Your Last Name':'Last Name of Artist') ?></span> <span style="color:red;font-weight: bold;"> *</span>
-                                    <input  value="<?php echo (($_SESSION['contribution_type'] == "own")?$_SESSION['user_lastname']:'') ?>" autocomplete="off" type="text" id="artist_last_name" name="artist_last_name" placeholder="Last Name" required>
+                                    <input  value="<?php echo (($_SESSION['contribution_type'] == "own")?$_SESSION['user_lastname']:$artist_lname) ?>" autocomplete="off" type="text" id="artist_last_name" name="artist_last_name" placeholder="Last Name" required>
                                 </label>
                             </div>
                             <div class="medium-4 column">
@@ -99,28 +111,34 @@ if(isset($_SESSION["contribution_type"])) {
             <div class="row">
                 <div class="column large-6">
                     <div class="row date_section">
-                        <div class="column medium-4">
+                        <div class="column medium-6">
                             <fieldset>
                                 <legend><strong>Date of Birth</strong>  <span style="color:red;font-weight: bold;"> *</span></legend>
                                         <input type="date" value="<?php echo isset($_SESSION['date_of_birth'])?$_SESSION['date_of_birth']:'' ?>" class="span2" id="date_of_birth" name="date_of_birth" placeholder="yyyy-mm-dd" 
                                         onblur="emailvalidation()">
                             </fieldset>
                         </div>
-                        <div class="column medium-2" id="date_of_death_div" style="display:none">
+                        <div class="column medium-6" id="date_of_death_div" style="display:block">
                             <fieldset  >
                                 <legend><strong>Date of Death</strong><span style="color:red;font-weight: bold;"> *</span></legend>
                                         <input type="date" value="<?php echo isset($_SESSION['date_of_death'])?$_SESSION['date_of_death']:'' ?>" class="span2" id="date_of_death" name="date_of_death" placeholder="yyyy-mm-dd" 
-                                        onblur="deathvalidation()">
+                                        onblur="deathvalidation()"
+                                        maxlength="4">
                             </fieldset>
                         </div>
-                        <div class="column medium-4" style="color:red">
-                            <br>
-                            <div style="padding-top: 4px;" id ="date_message">
-                            </div>
-                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        
+       
+        <div class="row">
+                <fieldset class="large-6 columns">
+                    <legend>
+                    <div style="color:red;" id="date_message"></div>
+                    </legend>
+                </fieldset>
+            </div>
 
         <div class="row">
             <div class="medium-10 column">
@@ -413,7 +431,6 @@ if(isset($_SESSION["contribution_type"])) {
                 $("#other_artist_section").hide();
             }
             if(prepopulated == "true"){
-                console.log("SSS "  + prepopulated);
                 //profileSelection();
                 fetchFields();
                 artistStatusSelection();

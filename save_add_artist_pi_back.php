@@ -88,7 +88,12 @@
 		
 
 
-
+	if(isset($_POST["artist_first_name"]) && !empty($_POST["artist_first_name"])){
+      $_SESSION["artist_first_name"] = $_POST["artist_first_name"];
+	}
+	if(isset($_POST["artist_last_name"]) && !empty($_POST["artist_last_name"])){
+      $_SESSION["artist_last_name"] = $_POST["artist_last_name"];
+	}
 
 	if(isset($_POST["lineage_artist_first_name"]) && !empty($_POST["lineage_artist_first_name"])){
       $_SESSION["lineage_artist_first_name"] = $_POST["lineage_artist_first_name"];
