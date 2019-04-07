@@ -83,11 +83,11 @@ div.tab button.active {
 }
 
 #network_div {
-	height: 80%;
+	height: 110%;
 }
 
 #filter_div {
-	height: 110%;
+	height: 100%;
 	border-right: 1px solid #cccccc;
 	padding-right: 0;
 }
@@ -181,7 +181,7 @@ nav {
 	}
 
 	#filter_div {
-		height: 80%;
+		height: 110%;
 		border-right: 0;
 		border-bottom: 1px solid #cccccc;;
 	}
@@ -196,6 +196,6 @@ nav {
 	}
 
 	#my_network {
-		height: 80%;
+		height: 100%;
 	}
 }	
