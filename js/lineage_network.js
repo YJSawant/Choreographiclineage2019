@@ -265,6 +265,7 @@ function draw() {
         // if a relationship tab is selected then display only the edges of that relationship
         else {
           // get name of selected relationship from id of the tab
+          createVisNetwork(container, data, options, node_borders); 
           var relationship_selected_array = this.id.split("_");
           var relationship_selected = (relationship_selected_array[0] + " " + relationship_selected_array[1]).toLowerCase();
 
@@ -272,17 +273,12 @@ function draw() {
           var edge_color = edge_colors_dict[(relationship_selected_array[0] + "_" + relationship_selected_array[1] + "_color").toLowerCase()];
 
           // determine which edges to display based on type of relationship
-          var req_edges= [];
-          for (var i = 0; i < edges.length; i++) {
-            var curr_edge = edges.get(i);
-            if(this.id === "studied_with_tab") {
               search_text.style.visibility="hidden";
               document.getElementById('searchbox').value = "";
               document.getElementById('university-search-box').value = "";
               document.getElementById('state-search-box').value = "";
               document.getElementById('country-search-box').value = "";
-
-          var uncheck=document.getElementsByName('checkbox');
+              var uncheck=document.getElementsByName('checkbox');
               for(var i=0;i<uncheck.length;i++)
               {
                 if(uncheck[i].type=='checkbox')
@@ -291,15 +287,18 @@ function draw() {
                 }
               }
 
-          var unselect=document.getElementsByName('radio');
-              for(var i=0;i<unselect.length;i++)
-              {
-                if(unselect[i].type=='radio')
-                {
-                  unselect[i].checked=false;
-                }
-              }
-
+              var unselect=document.getElementsByName('radio');
+                  for(var i=0;i<unselect.length;i++)
+                  {
+                    if(unselect[i].type=='radio')
+                    {
+                      unselect[i].checked=false;
+                    }
+                  }
+          var req_edges= [];
+          for (var i = 0; i < edges.length; i++) {
+            var curr_edge = edges.get(i);
+            if(this.id === "studied_with_tab") {
               if(curr_edge.label.toLowerCase() === "studied with") {
                 curr_edge.hidden = false;
                 curr_edge.color = edge_color;
@@ -312,30 +311,6 @@ function draw() {
               edges_to_update.push(curr_edge);
             }else if(this.id === "collaborated_with_tab")
             {
-              search_text.style.visibility="hidden";
-              document.getElementById('searchbox').value = "";
-              document.getElementById('university-search-box').value = "";
-              document.getElementById('state-search-box').value = "";
-          document.getElementById('country-search-box').value = "";
-
-          var uncheck=document.getElementsByName('checkbox');
-              for(var i=0;i<uncheck.length;i++)
-              {
-                if(uncheck[i].type=='checkbox')
-                {
-                uncheck[i].checked=false;
-                }
-              }
-
-          var unselect=document.getElementsByName('radio');
-              for(var i=0;i<unselect.length;i++)
-              {
-                if(unselect[i].type=='radio')
-                {
-                  unselect[i].checked=false;
-                }
-              }
-
               if(curr_edge.label.toLowerCase() === "collaborated with") {
                 curr_edge.hidden = false;
                 curr_edge.color = edge_color;
@@ -348,29 +323,6 @@ function draw() {
               edges_to_update.push(curr_edge);
             }else if(this.id === "danced_for_tab")
             {
-              search_text.style.visibility="hidden";
-              document.getElementById('searchbox').value = "";
-              document.getElementById('university-search-box').value = "";
-              document.getElementById('state-search-box').value = "";
-              document.getElementById('country-search-box').value = "";
-
-              var uncheck=document.getElementsByName('checkbox');
-                  for(var i=0;i<uncheck.length;i++)
-                  {
-                    if(uncheck[i].type=='checkbox')
-                    {
-                    uncheck[i].checked=false;
-                    }
-                  }
-
-              var unselect=document.getElementsByName('radio');
-                  for(var i=0;i<unselect.length;i++)
-                  {
-                    if(unselect[i].type=='radio')
-                    {
-                      unselect[i].checked=false;
-                    }
-                  }
               if(curr_edge.label.toLowerCase() === "danced for") {
                 curr_edge.hidden = false;
                 curr_edge.color = edge_color;
@@ -383,29 +335,6 @@ function draw() {
               edges_to_update.push(curr_edge);
             }else if(this.id === "influenced_by_tab")
             {
-              search_text.style.visibility="hidden";
-              document.getElementById('searchbox').value = "";
-              document.getElementById('university-search-box').value = "";
-              document.getElementById('state-search-box').value = "";
-              document.getElementById('country-search-box').value = "";
-
-              var uncheck=document.getElementsByName('checkbox');
-                  for(var i=0;i<uncheck.length;i++)
-                  {
-                    if(uncheck[i].type=='checkbox')
-                    {
-                    uncheck[i].checked=false;
-                    }
-                  }
-
-              var unselect=document.getElementsByName('radio');
-                  for(var i=0;i<unselect.length;i++)
-                  {
-                    if(unselect[i].type=='radio')
-                    {
-                      unselect[i].checked=false;
-                    }
-                  }
               if(curr_edge.label.toLowerCase() === "influenced by") {
                 curr_edge.hidden = false;
                 curr_edge.color = edge_color;
@@ -421,17 +350,17 @@ function draw() {
           }
         }
         edges.update(edges_to_update);   
-        for (var i = 0; i < nodes.length; i++){
-          var cur_node = Object.entries(nodes._data)[i][1]["id"]; 
-          cur_node = nodes.get(node_borders[i].id);
-          cur_node.color = {border: node_borders[i].border_color};
-          if((cur_node["id"])&& req_edges.includes(cur_node["id"])){
-            cur_node.hidden = false;    
-                 }else{
-                   cur_node.hidden = true;
-                 }                         
-          connected_nodes.push(cur_node);
-      }
+          for (var i = 0; i < nodes.length; i++){
+            var cur_node = Object.entries(nodes._data)[i][1]["id"]; 
+            cur_node = nodes.get(node_borders[i].id);
+            cur_node.color = {border: node_borders[i].border_color};
+            if((cur_node["id"])&& req_edges.includes(cur_node["id"])){
+              cur_node.hidden = false;    
+                  }else{
+                    cur_node.hidden = true;
+                  }                         
+              connected_nodes.push(cur_node);
+        }
       nodes.update(connected_nodes);
       });
 

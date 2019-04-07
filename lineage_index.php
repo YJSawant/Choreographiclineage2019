@@ -106,12 +106,12 @@ include 'menu.php';
 	.bluenode:before {
 		content: '\26AC';
 		font-size: 20px;
-		color:blue;
+		color:#da0067;
 		}
 	.rednode:before{
 		content:'\26AC';
 		font-size:20px;
-		color:red;
+		color:#025457;
 	}
 	.redarrow:before{
 		content:'\279B';
@@ -121,7 +121,7 @@ include 'menu.php';
 	.yellowarrow:before{
 		content:'\279B';
 		font-size:20px;
-		color:yellow;
+		color:#FFC300;
 	}
 	.greenarrow:before{
 		content:'\279B';
