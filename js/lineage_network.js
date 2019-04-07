@@ -200,18 +200,16 @@ function draw() {
         var artist_university = document.getElementById("artist_university");
         for (var i = 0; i < nodes.length; i++) {
           var cur_node = Object.entries(nodes._data)[i][1]["id"];
-          artist_pic.innerHTML = ''; 
           if(selected_node[0] === cur_node)
-          {
-            var img = document.createElement('img');            
+          {           
             if(Object.entries(nodes._data)[i][1]["image"] === "upload/photo_upload_data/missing_image.jpg")
             {
-              img.src="upload/photo_upload_data/NoImageAvailable.jpg";
+              artist_pic.src="upload/photo_upload_data/NoImageAvailable.jpg";
+              break;
             }else{
-              img.src=Object.entries(nodes._data)[i][1]["image"] ;
+              artist_pic.src=Object.entries(nodes._data)[i][1]["image"] ;
+              break;
             }
-            artist_pic.appendChild(img);    
-            break;
           }
         } 
 
@@ -232,16 +230,17 @@ function draw() {
             if(artist_details[i]["artist_gender"] === "male" || artist_details[i]["artist_gender"] === "Male")
             {
               artist_gender.innerHTML= "Male";
+              break;
             }else if(artist_details[i]["artist_gender"] ==="") {
               artist_gender.innerHTML= "";
+              break;
             }else
             {
               artist_gender.innerHTML= "Female";
+              break;
             }
-            break;
           }
-        }
-        
+        }      
       });
 
       // event fired on change of tab in tab bar
@@ -764,58 +763,58 @@ function draw() {
         });
                   
         network.on('selectNode', function (obj) {
-        var side_nav = document.getElementById("mySidenav");
-        side_nav.style.width = "300px";	
-        side_nav.style.display = "block"; 
-        var selected_node = obj.nodes;
-        var artist_pic = document.getElementById("artist_pic");
-        var artist_name = document.getElementById("artist_name");
-        var artist_gender = document.getElementById("artist_gender");
-        var artist_university = document.getElementById("artist_university");
-        for (var i = 0; i < nodes.length; i++) {
-          var cur_node = Object.entries(nodes._data)[i][1]["id"];
-          artist_pic.innerHTML = ''; 
-          if(selected_node[0] === cur_node)
-          {
-            var img = document.createElement('img');            
-            if(Object.entries(nodes._data)[i][1]["image"] === "upload/photo_upload_data/missing_image.jpg")
-            {
-              img.src="upload/photo_upload_data/NoImageAvailable.jpg";
-            }else{
-              img.src=Object.entries(nodes._data)[i][1]["image"] ;
+          var side_nav = document.getElementById("mySidenav");
+          side_nav.style.width = "300px";	
+          side_nav.style.display = "block"; 
+          var selected_node = obj.nodes;
+          var artist_pic = document.getElementById("artist_pic");
+          var artist_name = document.getElementById("artist_name");
+          var artist_gender = document.getElementById("artist_gender");
+          var artist_university = document.getElementById("artist_university");
+          for (var i = 0; i < nodes.length; i++) {
+            var cur_node = Object.entries(nodes._data)[i][1]["id"];
+            if(selected_node[0] === cur_node)
+            {           
+              if(Object.entries(nodes._data)[i][1]["image"] === "upload/photo_upload_data/missing_image.jpg")
+              {
+                artist_pic.src="upload/photo_upload_data/NoImageAvailable.jpg";
+                break;
+              }else{
+                artist_pic.src=Object.entries(nodes._data)[i][1]["image"] ;
+                break;
+              }
             }
-            artist_pic.appendChild(img);    
-            break;
-          }
-        } 
-
-        for (var i = 0; i < education_nodes.length; i++) {
-          var cur_node = education_nodes[i]["id"];
-          if(selected_node[0] === cur_node)
-          {
-            artist_university.innerHTML= education_nodes[i]["institution_name"];
-            break;
-          }
-        }
-
-        for (var i = 0; i < artist_details.length; i++) {
-          var cur_node = artist_details[i]["id"];
-          if(selected_node[0] === cur_node)
-          {
-            artist_name.innerHTML= artist_details[i]["artist_first_name"] +" "+ artist_details[i]["artist_last_name"];
-            if(artist_details[i]["artist_gender"] === "male" || artist_details[i]["artist_gender"] === "Male")
+          } 
+  
+          for (var i = 0; i < education_nodes.length; i++) {
+            var cur_node = education_nodes[i]["id"];
+            if(selected_node[0] === cur_node)
             {
-              artist_gender.innerHTML= "Male";
-            }else if(artist_details[i]["artist_gender"] ==="") {
-              artist_gender.innerHTML= "";
-            }else
-            {
-              artist_gender.innerHTML= "Female";
+              artist_university.innerHTML= education_nodes[i]["institution_name"];
+              break;
             }
-            break;
           }
-        }       
-      }); 
+  
+          for (var i = 0; i < artist_details.length; i++) {
+            var cur_node = artist_details[i]["id"];
+            if(selected_node[0] === cur_node)
+            {
+              artist_name.innerHTML= artist_details[i]["artist_first_name"] +" "+ artist_details[i]["artist_last_name"];
+              if(artist_details[i]["artist_gender"] === "male" || artist_details[i]["artist_gender"] === "Male")
+              {
+                artist_gender.innerHTML= "Male";
+                break;
+              }else if(artist_details[i]["artist_gender"] ==="") {
+                artist_gender.innerHTML= "";
+                break;
+              }else
+              {
+                artist_gender.innerHTML= "Female";
+                break;
+              }
+            }
+          }      
+        });
 }
 }
 

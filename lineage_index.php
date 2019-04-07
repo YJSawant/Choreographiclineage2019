@@ -72,7 +72,7 @@ include 'menu.php';
 				</div>
 				<div hidden id="mySidenav" class="sidenav">
 				<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-					<div id="artist_pic" class="pic"> </div>
+					<img class="pic" id="artist_pic" src = "">
 					<div id="artist_name" class="name"> </div>
 					<div id="artist_gender" class="gender"> </div>
 					<div id="artist_university" class="university"></div>
@@ -82,9 +82,10 @@ include 'menu.php';
 	</div>
 	<style type='text/css'>
 	.pic{
-		height: 40%;
 		max-height : 40%;
-		margin-bottom: 12px;				
+		height: max-content;
+		margin-bottom: 12px;	
+		width: 100%;			
 	}
 
 	.name{
