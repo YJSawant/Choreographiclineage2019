@@ -13,7 +13,8 @@ if(isset($_REQUEST['mode']))	{
 function fetch_full_network($dbc)	{
 	//fetch nodes
 	//$artist_id_name_query = "SELECT `artist_profile_id`, `artist_first_name`, `artist_last_name`, `is_user_artist`, `artist_photo_path` FROM `artist_profile` WHERE `artist_profile_id` IN (SELECT DISTINCT `artist_profile_id_1` FROM `artist_relation` UNION SELECT DISTINCT `artist_profile_id_2` FROM `artist_relation`)";
-$artist_id_name_query = "SELECT `artist_profile_id`, `artist_first_name`, `artist_last_name`, `is_user_artist`, `artist_photo_path`, `artist_living_status`, `artist_dob`, `artist_dod`,`artist_genre`,`artist_ethnicity`,`artist_gender`,`artist_residence_country` FROM `artist_profile` WHERE `artist_profile_id` IN (SELECT DISTINCT `artist_profile_id_1` FROM `artist_relation` UNION SELECT DISTINCT `artist_profile_id_2` FROM `artist_relation`)";
+//$artist_id_name_query = "SELECT `artist_profile_id`, `artist_first_name`, `artist_last_name`, `is_user_artist`, `artist_photo_path`, `artist_living_status`, `artist_dob`, `artist_dod`,`artist_genre`,`artist_ethnicity`,`artist_gender`,`artist_residence_country` FROM `artist_profile` WHERE `artist_profile_id` IN (SELECT DISTINCT `artist_profile_id_1` FROM `artist_relation` UNION SELECT DISTINCT `artist_profile_id_2` FROM `artist_relation`)";
+$artist_id_name_query = "SELECT `artist_profile_id`, `artist_first_name`, `artist_last_name`, `is_user_artist`, `artist_photo_path`, `artist_living_status`, `artist_dob`, `artist_dod`,`artist_genre`,`artist_ethnicity`,`artist_gender`,`artist_residence_country` FROM `artist_profile` WHERE `artist_profile_id`";
 	$artist_id_name_result = mysqli_query($dbc,$artist_id_name_query)
 	or die('Error querying database.: '  .mysqli_error($dbc));
 	$count = mysqli_num_rows($artist_id_name_result);
@@ -23,7 +24,7 @@ $artist_id_name_query = "SELECT `artist_profile_id`, `artist_first_name`, `artis
 		while($row = mysqli_fetch_array($artist_id_name_result)){
 			$image = $row['artist_photo_path'];
 			if($row['artist_photo_path'] == "") {
-				$image = "missing_image.jpg";
+				$image = "upload/photo_upload_data/missing_image.jpg";
 			}
 			$nodes[] = array('id' => $row['artist_profile_id'], 'title' => $row['artist_first_name']." ".$row['artist_last_name'], 'label' => $row['artist_first_name']." ".$row['artist_last_name'], 'shape'=>"circularImage", 'image' => $image, 'size' => 20,'isLiving' => $row['artist_living_status'],'dob' => $row['artist_dob'],'dod' => $row['artist_dod'],'genre' => $row['artist_genre'],'ethnicity' => $row['artist_ethnicity'],'gender' => $row['artist_gender'],'country' => $row['artist_residence_country']);
 			if($row['is_user_artist'] == "artist") {
@@ -78,7 +79,8 @@ $artist_id_name_query = "SELECT `artist_profile_id`, `artist_first_name`, `artis
 		}
 	}
 //fetch education nodes
-	$artist_education_query = "SELECT `artist_profile_id`, `education_type`, `institution_name`, `major`, `degree` FROM `artist_education` WHERE `artist_profile_id` IN (SELECT DISTINCT `artist_profile_id_1` FROM `artist_relation` UNION SELECT DISTINCT `artist_profile_id_2` FROM `artist_relation`)";
+	//$artist_education_query = "SELECT `artist_profile_id`, `education_type`, `institution_name`, `major`, `degree` FROM `artist_education` WHERE `artist_profile_id` IN (SELECT DISTINCT `artist_profile_id_1` FROM `artist_relation` UNION SELECT DISTINCT `artist_profile_id_2` FROM `artist_relation`)";
+	$artist_education_query = "SELECT `artist_profile_id`, `education_type`, `institution_name`, `major`, `degree` FROM `artist_education` WHERE `education_type` = 'main'";
 	$artist_education_result = mysqli_query($dbc,$artist_education_query)
 	or die('Error querying database.: '  .mysqli_error($dbc));
 	$count = mysqli_num_rows($artist_education_result);
@@ -90,7 +92,7 @@ $artist_id_name_query = "SELECT `artist_profile_id`, `artist_first_name`, `artis
 	}
 
 	//fetches artist details
-	$artist_details_query = "SELECT `artist_profile_id`, `artist_first_name`, `artist_last_name` ,`artist_living_status`, `artist_gender`, `artist_residence_state`, `artist_residence_country` FROM `artist_profile` WHERE `artist_profile_id` IN (SELECT DISTINCT `artist_profile_id_1` FROM `artist_relation` UNION SELECT DISTINCT `artist_profile_id_2` FROM `artist_relation`)";
+	$artist_details_query = "SELECT `artist_profile_id`, `artist_first_name`, `artist_last_name` ,`artist_living_status`, `artist_gender`, `artist_residence_state`, `artist_residence_country` FROM `artist_profile`";
 	$artist_details_result = mysqli_query($dbc,$artist_details_query)
 	or die('Error querying database.: '  .mysqli_error($dbc));
 	$count = mysqli_num_rows($artist_details_result);

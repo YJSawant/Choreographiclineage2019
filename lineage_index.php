@@ -82,7 +82,9 @@ include 'menu.php';
 	</div>
 	<style type='text/css'>
 	.pic{
-		margin-bottom: 12px;
+		height: 40%;
+		max-height : 40%;
+		margin-bottom: 12px;				
 	}
 
 	.name{
