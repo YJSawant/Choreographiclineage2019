@@ -6,7 +6,7 @@ function draw() {
   var edge_colors_dict = {default_color: "#C0C0C0", studied_with_color: "#FF1C1C", collaborated_with_color: "#FFA807", danced_for_color: "#50B516", influenced_by_color: "#3033CE"};
 
   // initialize path for the directory with images for nodes
-  var image_dir = "data/images/";
+  var image_dir = "";
     //var image_dir = "/src/photo_upload_data/";
 
   //default value of node id before search for artist is performed
@@ -204,9 +204,9 @@ function draw() {
           if(selected_node[0] === cur_node)
           {
             var img = document.createElement('img');            
-            if(Object.entries(nodes._data)[i][1]["image"] === "data/images/missing_image.jpg")
+            if(Object.entries(nodes._data)[i][1]["image"] === "upload/photo_upload_data/missing_image.jpg")
             {
-              img.src="data/images/NoImageAvailable.jpg";
+              img.src="upload/photo_upload_data/NoImageAvailable.jpg";
             }else{
               img.src=Object.entries(nodes._data)[i][1]["image"] ;
             }
@@ -255,125 +255,13 @@ function draw() {
         // Show the current tab, and add an "active" class to the button that opened the tab
         document.getElementById(this.id).style.display = "block";
         this.className += " active";
-
-        var edges_to_update = [];
-        var connected_nodes = [];
         if(this.id === "full_network_tab") {
           search_text.style.visibility="hidden";
           document.getElementById('searchbox').value = "";
           document.getElementById('university-search-box').value = "";
           document.getElementById('state-search-box').value = "";
           document.getElementById('country-search-box').value = "";
-
-          var uncheck=document.getElementsByName('checkbox');
-              for(var i=0;i<uncheck.length;i++)
-              {
-                if(uncheck[i].type=='checkbox')
-                {
-                uncheck[i].checked=false;
-                }
-              }
-
-          var unselect=document.getElementsByName('radio');
-              for(var i=0;i<unselect.length;i++)
-              {
-                if(unselect[i].type=='radio')
-                {
-                  unselect[i].checked=false;
-                }
-              }
-
-          for (var i = 0; i < edges.length; i++) {
-            var curr_edge = edges.get(i);
-            curr_edge.hidden = false;
-            if(connected_nodes.indexOf(edge_string) > -1) {
-              curr_edge.hidden = true;
-            }
-            curr_edge.color = edge_colors_dict["default_color"];
-            edges_to_update.push(curr_edge);
-          }
-          edges.update(edges_to_update);
-
-          for (var i = 0; i < nodes.length; i++){
-                var cur_node = Object.entries(nodes._data)[i][1]["id"]; 
-                cur_node = nodes.get(node_borders[i].id);
-                cur_node.color = {border: node_borders[i].border_color};
-                cur_node.hidden = false; 
-                cur_node.borderWidth = 2;         
-                connected_nodes.push(cur_node);
-            }
-            nodes.update(connected_nodes);
-            network = new vis.Network(container, data, options);
-            network.on("stabilizationIterationsDone", function () {
-              network.setOptions( { physics: false } );
-            });
-            // change the type of cursor to pointing hand when hovered over a node
-            network.on('hoverNode', function (obj) {
-              // console.log("node hovered");
-              $("#my_network").css("cursor", "pointer");
-              $("#my_network").attr('title','No. of connections= '+network.getConnectedEdges(obj.node).length);
-            });
-      
-            // change the type of cursor to hand on coming out of node hover
-            network.on('blurNode', function (obj) {
-              $("#my_network").css("cursor", "-webkit-grab");
-            });
-      
-            network.on('selectNode', function (obj) {
-              var side_nav = document.getElementById("mySidenav");
-              side_nav.style.width = "300px";	
-              side_nav.style.display = "block"; 
-              var selected_node = obj.nodes;
-              var artist_pic = document.getElementById("artist_pic");
-              var artist_name = document.getElementById("artist_name");
-              var artist_gender = document.getElementById("artist_gender");
-              var artist_university = document.getElementById("artist_university");
-              for (var i = 0; i < nodes.length; i++) {
-                var cur_node = Object.entries(nodes._data)[i][1]["id"];
-                artist_pic.innerHTML = ''; 
-                if(selected_node[0] === cur_node)
-                {
-                  var img = document.createElement('img');            
-                  if(Object.entries(nodes._data)[i][1]["image"] === "data/images/missing_image.jpg")
-                  {
-                    img.src="data/images/NoImageAvailable.jpg";
-                  }else{
-                    img.src=Object.entries(nodes._data)[i][1]["image"] ;
-                  }
-                  artist_pic.appendChild(img);    
-                  break;
-                }
-              } 
-      
-              for (var i = 0; i < education_nodes.length; i++) {
-                var cur_node = education_nodes[i]["id"];
-                if(selected_node[0] === cur_node)
-                {
-                  artist_university.innerHTML= education_nodes[i]["institution_name"];
-                  break;
-                }
-              }
-      
-              for (var i = 0; i < artist_details.length; i++) {
-                var cur_node = artist_details[i]["id"];
-                if(selected_node[0] === cur_node)
-                {
-                  artist_name.innerHTML= artist_details[i]["artist_first_name"] +" "+ artist_details[i]["artist_last_name"];
-                  if(artist_details[i]["artist_gender"] === "male" || artist_details[i]["artist_gender"] === "Male")
-                  {
-                    artist_gender.innerHTML= "Male";
-                  }else if(artist_details[i]["artist_gender"] ==="") {
-                    artist_gender.innerHTML= "";
-                  }else
-                  {
-                    artist_gender.innerHTML= "Female";
-                  }
-                  break;
-                }
-              }
-              
-            });
-            
+          createVisNetwork(container, data, options, node_borders);           
         }
         // if a relationship tab is selected then display only the edges of that relationship
         else {
@@ -630,7 +518,6 @@ function draw() {
       $searchbox.data( "ui-autocomplete" )._renderItem = function( ul, item ) {
         var $li = $('<li>');
         var $img = $('<img style="width:32px;height:32px;">');
-
         $img.attr({
           src: image_dir + item.icon, // path to image of the artist
           alt: "" // none used in case artist image is unavailable
@@ -676,110 +563,19 @@ function draw() {
           var uni_search_text = $("#uniTextValue").val();
           var state_text = $("#stateTextValue").val();
           var country_text = $("#countryTextValue").val();
-          var check_val=document.getElementsByName('checkbox');
-          var radio_val=document.getElementsByName('radio');
+          // var check_val=document.getElementsByName('checkbox');
+          // var radio_val=document.getElementsByName('radio');
 
-          if(!searched_node_id && !uni_search_text && !state_text && !country_text &&
-           !check_val && !radio_val)
+          if(!searched_node_id && !uni_search_text && !state_text && !country_text)
           {
           // console.log("Inside both");
             $('#search_text').html('&nbsp&nbsp'+"No Results Found. Displaying full network");
+            createVisNetwork(container, data, options, node_borders);
           }          
           else if(searched_node_id && uni_search_text)
           {
-           //console.log("Inside common");
             document.getElementById("search_text").style.visibility="visible";
-            for (var i = 0; i < edges.length; i++) {
-              var curr_edge = edges.get(i);
-              curr_edge.hidden = false;
-              if(connected_nodes.indexOf(edge_string) > -1) {
-                curr_edge.hidden = true;
-              }
-              curr_edge.color = edge_colors_dict["default_color"];
-              edges_to_update.push(curr_edge);
-            }
-            edges.update(edges_to_update);
-  
-            for (var i = 0; i < nodes.length; i++){
-                  var cur_node = Object.entries(nodes._data)[i][1]["id"]; 
-                  cur_node = nodes.get(node_borders[i].id);
-                  cur_node.color = {border: node_borders[i].border_color};
-                  cur_node.hidden = false;  
-                  cur_node.borderWidth=2;        
-                  connected_nodes.push(cur_node);
-              }
-              nodes.update(connected_nodes);
-              network = new vis.Network(container, data, options);
-              network.on("stabilizationIterationsDone", function () {
-              network.setOptions( { physics: false } );
-              });
-
-              network.on('hoverNode', function (obj) {
-                // console.log("node hovered");
-                $("#my_network").css("cursor", "pointer");
-                $("#my_network").attr('title','No. of connections= '+network.getConnectedEdges(obj.node).length);
-              });
-        
-              // change the type of cursor to hand on coming out of node hover
-              network.on('blurNode', function (obj) {
-                $("#my_network").css("cursor", "-webkit-grab");
-              });
-        
-              network.on('selectNode', function (obj) {
-                var side_nav = document.getElementById("mySidenav");
-                side_nav.style.width = "300px";	
-                side_nav.style.display = "block"; 
-                var selected_node = obj.nodes;
-                var artist_pic = document.getElementById("artist_pic");
-                var artist_name = document.getElementById("artist_name");
-                var artist_gender = document.getElementById("artist_gender");
-                var artist_university = document.getElementById("artist_university");
-                for (var i = 0; i < nodes.length; i++) {
-                  var cur_node = Object.entries(nodes._data)[i][1]["id"];
-                  artist_pic.innerHTML = ''; 
-                  if(selected_node[0] === cur_node)
-                  {
-                    var img = document.createElement('img');            
-                    if(Object.entries(nodes._data)[i][1]["image"] === "data/images/missing_image.jpg")
-                    {
-                      img.src="data/images/NoImageAvailable.jpg";
-                    }else{
-                      img.src=Object.entries(nodes._data)[i][1]["image"] ;
-                    }
-                    artist_pic.appendChild(img);    
-                    break;
-                  }
-                } 
-        
-                for (var i = 0; i < education_nodes.length; i++) {
-                  var cur_node = education_nodes[i]["id"];
-                  if(selected_node[0] === cur_node)
-                  {
-                    artist_university.innerHTML= education_nodes[i]["institution_name"];
-                    break;
-                  }
-                }
-        
-                for (var i = 0; i < artist_details.length; i++) {
-                  var cur_node = artist_details[i]["id"];
-                  if(selected_node[0] === cur_node)
-                  {
-                    artist_name.innerHTML= artist_details[i]["artist_first_name"] +" "+ artist_details[i]["artist_last_name"];
-                    if(artist_details[i]["artist_gender"] === "male" || artist_details[i]["artist_gender"] === "Male")
-                    {
-                      artist_gender.innerHTML= "Male";
-                    }else if(artist_details[i]["artist_gender"] ==="") {
-                      artist_gender.innerHTML= "";
-                    }else
-                    {
-                      artist_gender.innerHTML= "Female";
-                    }
-                    break;
-                  }
-                }
-                
-              });  
-
+            createVisNetwork(container, data, options, node_borders);
             // combined_nodes = [];
             // for (var i = 0; i <education_nodes.length; i++){
             //   for(var j=0; j<artist_details.length; j++)
@@ -808,7 +604,15 @@ function draw() {
             //       state_val = artist_details[j]["artist_residence_state"];
             //       country_val = artist_details[j]["artist_residence_country"];
             //       gender_val = artist_details[j]["artist_gender"];
-            //       living_val = artist_details[j]["artist_living_status"];
+            //       living_val = artist_deta
+            //     final_nodes.push(new_node);
+            //     $('#search_text').html('&nbsp&nbsp'+"No results found. Displaying the full network");
+            //   }           
+            // }  
+            final_nodes = [] 
+            for (var i = 0; i <education_nodes.length; i++){
+              var new_node;
+              var education_val = education_nodes[i]["institution_name"];
             //     }               
             //   }                       
             //   if(searched_node_id ===node_val  && education_val === uni_search_text  
@@ -820,20 +624,12 @@ function draw() {
             //     final_nodes.push(new_node);
             //     break;
             //   } else{
-            //     new_node.borderWidth = 2;
-            //     final_nodes.push(new_node);
-            //     $('#search_text').html('&nbsp&nbsp'+"No results found. Displaying the full network");
-            //   }           
-            // }  
-            final_nodes = [] 
-            for (var i = 0; i <education_nodes.length; i++){
-              var new_node;
-              var education_val = education_nodes[i]["institution_name"];
+            //     new_node.borderWidth = 2;odes[i]["institution_name"];
               var node_val = education_nodes[i]["id"];
-              new_node = education_nodes[i]["id"]; 
+              //new_node = education_nodes[i]["id"]; 
               new_node = nodes.get(node_borders[i].id);
               new_node.color = {border: node_borders[i].border_color};
-              if(searched_node_id ===node_val  && education_val === uni_search_text  )
+              if(searched_node_id ===node_val  && education_val === uni_search_text)
               {
                 $('#search_text').html('&nbsp&nbsp'+"Results for"+" "+'<span style="font-weight:bold">'+search_text+" "+uni_search_text+'</span>');
                 new_node.borderWidth = 60;
@@ -849,89 +645,10 @@ function draw() {
           } 
           else if(uni_search_text)
           {
-            console.log("Inside university");
             document.getElementById("search_text").style.visibility="visible";
-            $('#search_text').html('&nbsp&nbsp'+"Results for"+" "+'<span style="font-weight:bold">'+uni_search_text+'</span>');
-            for (var i = 0; i < edges.length; i++) {
-              var curr_edge = edges.get(i);
-              curr_edge.hidden = false;
-              if(connected_nodes.indexOf(edge_string) > -1) {
-                curr_edge.hidden = true;
-              }
-              curr_edge.color = edge_colors_dict["default_color"];
-              edges_to_update.push(curr_edge);
-            }
-            edges.update(edges_to_update);
-  
-            for (var i = 0; i < nodes.length; i++){
-                  var cur_node = Object.entries(nodes._data)[i][1]["id"]; 
-                  cur_node = nodes.get(node_borders[i].id);
-                  cur_node.color = {border: node_borders[i].border_color};
-                  cur_node.hidden = false;
-                  cur_node.borderWidth=2;          
-                  connected_nodes.push(cur_node);
-              }
-              nodes.update(connected_nodes);
-        network = new vis.Network(container, data, options);
-        network.on("stabilizationIterationsDone", function () {
-          network.setOptions( { physics: false } );
-        });
-                  
-        network.on('selectNode', function (obj) {
-        var side_nav = document.getElementById("mySidenav");
-        side_nav.style.width = "300px";	
-        side_nav.style.display = "block"; 
-        var selected_node = obj.nodes;
-        var artist_pic = document.getElementById("artist_pic");
-        var artist_name = document.getElementById("artist_name");
-        var artist_gender = document.getElementById("artist_gender");
-        var artist_university = document.getElementById("artist_university");
-        for (var i = 0; i < nodes.length; i++) {
-          var cur_node = Object.entries(nodes._data)[i][1]["id"];
-          artist_pic.innerHTML = ''; 
-          if(selected_node[0] === cur_node)
-          {
-            var img = document.createElement('img');            
-            if(Object.entries(nodes._data)[i][1]["image"] === "data/images/missing_image.jpg")
-            {
-              img.src="data/images/NoImageAvailable.jpg";
-            }else{
-              img.src=Object.entries(nodes._data)[i][1]["image"] ;
-            }
-            artist_pic.appendChild(img);    
-            break;
-          }
-        } 
-
-        for (var i = 0; i < education_nodes.length; i++) {
-          var cur_node = education_nodes[i]["id"];
-          if(selected_node[0] === cur_node)
-          {
-            artist_university.innerHTML= education_nodes[i]["institution_name"];
-            break;
-          }
-        }
-
-        for (var i = 0; i < artist_details.length; i++) {
-          var cur_node = artist_details[i]["id"];
-          if(selected_node[0] === cur_node)
-          {
-            artist_name.innerHTML= artist_details[i]["artist_first_name"] +" "+ artist_details[i]["artist_last_name"];
-            if(artist_details[i]["artist_gender"] === "male" || artist_details[i]["artist_gender"] === "Male")
-            {
-              artist_gender.innerHTML= "Male";
-            }else if(artist_details[i]["artist_gender"] ==="") {
-              artist_gender.innerHTML= "";
-            }else
-            {
-              artist_gender.innerHTML= "Female";
-            }
-            break;
-          }
-        }       
-      });    
+            $('#search_text').html('&nbsp&nbsp'+"Results for"+" "+'<span style="font-weight:bold">'+uni_search_text+'</span>'); 
+            createVisNetwork(container, data,options, node_borders);
             final_nodes = [];
-            
             for (var i = 0; i < education_nodes.length; i++){
               var new_node;
               var education_val = education_nodes[i]["institution_name"];
@@ -959,7 +676,6 @@ function draw() {
             final_edges = []; final_nodes = [];
             for (var i = 0; i < edges.length; i++){
               var new_edge = edges.get(i);
-              ///new_edge_string = new_edge.from + "->" + new_edge.to;
               new_edge_from = new_edge.from;
               new_edge_to = new_edge.to;
               if(new_edge_from === nodeId) {
@@ -1005,5 +721,101 @@ function draw() {
     
   });
 
+  function createVisNetwork(container, data, options, node_borders)
+{
+          var uncheck=document.getElementsByName('checkbox');
+              for(var i=0;i<uncheck.length;i++)
+              {
+                if(uncheck[i].type=='checkbox')
+                {
+                uncheck[i].checked=false;
+                }
+              }
 
+          var unselect=document.getElementsByName('radio');
+              for(var i=0;i<unselect.length;i++)
+              {
+                if(unselect[i].type=='radio')
+                {
+                  unselect[i].checked=false;
+                }
+              }
+
+          for (var i = 0; i < edges.length; i++) {
+            var curr_edge = edges.get(i);
+            curr_edge.hidden = false;
+            curr_edge.color = edge_colors_dict["default_color"];
+            edges_to_update.push(curr_edge);
+          }
+          edges.update(edges_to_update);
+
+          for (var i = 0; i < artist_details.length; i++){
+                var cur_node = artist_details[i]["id"]; 
+                cur_node = nodes.get(node_borders[i].id);
+                cur_node.color = {border: node_borders[i].border_color};
+                cur_node.hidden = false; 
+                cur_node.borderWidth = 2;         
+                connected_nodes.push(cur_node);
+            }
+            nodes.update(connected_nodes);      
+            network = new vis.Network(container, data, options);
+        network.on("stabilizationIterationsDone", function () {
+        network.setOptions( { physics: false } );
+        });
+                  
+        network.on('selectNode', function (obj) {
+        var side_nav = document.getElementById("mySidenav");
+        side_nav.style.width = "300px";	
+        side_nav.style.display = "block"; 
+        var selected_node = obj.nodes;
+        var artist_pic = document.getElementById("artist_pic");
+        var artist_name = document.getElementById("artist_name");
+        var artist_gender = document.getElementById("artist_gender");
+        var artist_university = document.getElementById("artist_university");
+        for (var i = 0; i < nodes.length; i++) {
+          var cur_node = Object.entries(nodes._data)[i][1]["id"];
+          artist_pic.innerHTML = ''; 
+          if(selected_node[0] === cur_node)
+          {
+            var img = document.createElement('img');            
+            if(Object.entries(nodes._data)[i][1]["image"] === "upload/photo_upload_data/missing_image.jpg")
+            {
+              img.src="upload/photo_upload_data/NoImageAvailable.jpg";
+            }else{
+              img.src=Object.entries(nodes._data)[i][1]["image"] ;
+            }
+            artist_pic.appendChild(img);    
+            break;
+          }
+        } 
+
+        for (var i = 0; i < education_nodes.length; i++) {
+          var cur_node = education_nodes[i]["id"];
+          if(selected_node[0] === cur_node)
+          {
+            artist_university.innerHTML= education_nodes[i]["institution_name"];
+            break;
+          }
+        }
+
+        for (var i = 0; i < artist_details.length; i++) {
+          var cur_node = artist_details[i]["id"];
+          if(selected_node[0] === cur_node)
+          {
+            artist_name.innerHTML= artist_details[i]["artist_first_name"] +" "+ artist_details[i]["artist_last_name"];
+            if(artist_details[i]["artist_gender"] === "male" || artist_details[i]["artist_gender"] === "Male")
+            {
+              artist_gender.innerHTML= "Male";
+            }else if(artist_details[i]["artist_gender"] ==="") {
+              artist_gender.innerHTML= "";
+            }else
+            {
+              artist_gender.innerHTML= "Female";
+            }
+            break;
+          }
+        }       
+      }); 
 }
+}
+
