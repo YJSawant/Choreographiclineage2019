@@ -82,7 +82,7 @@ include 'menu.php';
 	</div>
 	<style type='text/css'>
 	.pic{
-		height: 300px;
+		height: 240px;
 		margin-bottom: 12px;
 		overflow:hidden;	
 		width: 100%;			
