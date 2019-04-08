@@ -23,8 +23,8 @@ include 'menu.php';
 						<label><input id="living" type="checkbox" name="checkbox">Living</label>
 						<label style="margin-bottom: 16px;"><input id="dead" type="checkbox" name="checkbox"></span>Deceased</label>
 						<label><b>Gender</b></label>
-						<label><input id="male" type="radio" name="radio"></span>Male</label>
-						<label style="margin-bottom: 16px;"><input id="female" type="radio" name="radio"></span>Female</label>
+						<label><input id="male" type="radio" name="radio" value="male"></span>Male</label>
+						<label style="margin-bottom: 16px;"><input id="female" type="radio" name="radio" value="female"></span>Female</label>
 						<input style="margin-bottom: 16px;" id="state-search-box" type="text" placeholder="Enter State Code" />
 						<input style="margin-bottom: 16px;" id="country-search-box" type="text" placeholder="Enter Country" />
 						<input style="margin-bottom: 16px;" id="submit" type="button" value="Submit"/>
@@ -65,6 +65,10 @@ include 'menu.php';
 				<div hidden id="searchTextValue">
 				</div>
 				<div hidden id="uniTextValue">
+				</div>
+				<div hidden id="stateTextValue">
+				</div>
+				<div hidden id="countryTextValue">
 				</div>
 				<div id="search_text">
 				</div>
