@@ -404,7 +404,6 @@ function draw() {
          select: function (event, ui) {
              $university_search_box.val(ui.item.label); // display the selected text
              $("#uniTextValue").val(ui.item.label);
-             $("#uni_searchbox_node_id").val(ui.item.node_id); // save selected node_id to hidden input
          }
        });
 
@@ -420,7 +419,7 @@ function draw() {
          minLength: 1, // minimum of 3 characters to be entered before suggesting university names
          source: state_names,
          select: function (event, ui) {
-             $state_search_box.val(ui.item.label); // display the selected text
+             $state_search_box.val(ui.item.label); // display the selected text           
              $("#stateTextValue").val(ui.item.label);
          }
        });
@@ -491,8 +490,15 @@ function draw() {
           var uni_search_text = $("#uniTextValue").val();
           var state_text = $("#stateTextValue").val();
           var country_text = $("#countryTextValue").val();
-          // var check_val=document.getElementsByName('checkbox');
-          // var radio_val=document.getElementsByName('radio');
+          var check_val1;
+          var check_val2;
+          if (document.getElementById('dead').checked) {
+            check_val2 = "deceased";
+          }
+          if (document.getElementById('living').checked) {
+            check_val1 = "living";
+          }
+          var radio_val=$("input:radio[name=radio]:checked").val();
 
           if(!searched_node_id && !uni_search_text && !state_text && !country_text)
           {
