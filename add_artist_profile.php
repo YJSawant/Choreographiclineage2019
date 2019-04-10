@@ -43,7 +43,15 @@ if(isset($_SESSION["contribution_type"])) {
 <html>
 <?php if(isset($_SESSION["user_email_address"])): ?>
     <head>
-        <title>Add Artist</title>
+        <title>Add Artist</title> 
+           <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
+           <style>  
+           ul{  
+                cursor:pointer;  
+                list-style-type:none;
+           }  
+           </style>     
     </head>
 
     <body>
@@ -65,13 +73,17 @@ if(isset($_SESSION["contribution_type"])) {
                             <div class="medium-4 column">
                                 <!--<label for="artist_first_name">First Name of Artist</span> <span style="color:red;font-weight: bold;"> *</span>-->
                                     <label for="artist_first_name"><?php echo (($_SESSION['contribution_type'] == "own")?'Your First Name':'First Name of Artist') ?></span> <span style="color:red;font-weight: bold;"> *</span>
-                                    <input  value="<?php echo (($_SESSION['contribution_type'] == "own")?$_SESSION['user_firstname']:$artist_fname) ?>" autocomplete="off" type="text" id="artist_first_name" name="artist_first_name" placeholder="First Name" required>
+                                    <input value="<?php echo (($_SESSION['contribution_type'] == "own")?$_SESSION['user_firstname']:$artist_fname) ?>" autocomplete="off" type="text" id="artist_first_name" name="artist_first_name" placeholder="First Name" required>
+                                    <div id ="firstnamelist" style="background-color:#eee;"></div>  
+
                                 </label>
                             </div>
                             <div class="medium-4 column">
                                 <!--<label for="artist_last_name">Last Name <span class="other_artist">of Artist</span> <span style="color:red;font-weight: bold;"> *</span>-->
                                     <label for="artist_last_name"><?php echo (($_SESSION['contribution_type'] == "own")?'Your Last Name':'Last Name of Artist') ?></span> <span style="color:red;font-weight: bold;"> *</span>
                                     <input  value="<?php echo (($_SESSION['contribution_type'] == "own")?$_SESSION['user_lastname']:$artist_lname) ?>" autocomplete="off" type="text" id="artist_last_name" name="artist_last_name" placeholder="Last Name" required>
+                                    <div id="lastnamelist" style="background-color:#eee;"></div>
+                                    <div id ="duplication_check" style="color:red" ></div>
                                 </label>
                             </div>
                             <div class="medium-4 column">
@@ -318,7 +330,7 @@ if(isset($_SESSION["contribution_type"])) {
                 </div>
             <?php endif; ?>
             <div class="large-2 small-8 columns">
-                <button class="primary button" id="next" type="submit">
+                <button class="primary button" id="next" type="submit" name="submit">
                     <span><?php echo (($_SESSION['timeline_flow'] == "view")?"":"Save & ") ?>Next</span>
                 </button>
             </div>
@@ -349,30 +361,7 @@ if(isset($_SESSION["contribution_type"])) {
         }
         var prepopulated;
         var contribution_form_type;
-        /*
-        $(function(){
-            $('#date_of_birth').fdatepicker({
-                initialDate: '',
-                format: 'yyyy-mm-dd',
-                disableDblClickSelection: true,
-                leftArrow:'<<',
-                rightArrow:'>>',
-                closeIcon:'X',
-                closeButton: true
-            });
-        });
-        $(function(){
-            $('#date_of_death').fdatepicker({
-                initialDate: '',
-                format: 'yyyy-mm-dd',
-                disableDblClickSelection: true,
-                leftArrow:'<<',
-                rightArrow:'>>',
-                closeIcon:'X',
-                closeButton: true
-            });
-        });
-        */
+ 
         function artistStatusSelection(){
             if($('input[name="artist_status"]:checked').val() == "living"){
                 $("#date_of_death").val("");
@@ -494,10 +483,10 @@ if(isset($_SESSION["contribution_type"])) {
               document.getElementById('date_message').style.display="none";
             }
           }
+        
        
         var submit=document.getElementById("next");
         submit.addEventListener('click',function(event){
-            console.log("clicked");
             var birthdate=document.getElementById('date_of_birth');
             dateformat_birth= new Date(birthdate.value);
             var deathdate=document.getElementById('date_of_death');
@@ -527,9 +516,14 @@ if(isset($_SESSION["contribution_type"])) {
                 alert("Please change Date of Birth, cannot be in future!");
                 event.preventDefault();
             }
-
-
+            var text=document.getElementById("duplication_check").innerHTML;
+            console.log(text);
+            if(text.trim()===("!! User already exists. Please change artist name").trim()){
+                alert("Cannot submit form with duplicate artist name");
+                event.preventDefault();
+            }
         });
+
 
 
         // });
@@ -576,5 +570,77 @@ include 'footer.php';
         }
     }); 
 </script>
+<script>  
+ $(document).ready(function(){  
+      $('#artist_first_name').keyup(function(){  
+           var query = $(this).val();  
+           if(query != '')  
+           {  
+                $.ajax({  
+                     url:"auto_complete_firstname.php",  
+                     method:"POST",  
+                     data:{query:query},  
+                     success:function(data)  
+                     {  
+                          $('#firstnamelist').fadeIn();  
+                          $('#firstnamelist').html(data);  
+                     }  
+                });  
+           }  
+      });  
+      $(document).on('click', 'li', function(){  
+           $('#artist_first_name').val($(this).text());  
+           $('#firstnamelist').fadeOut();  
+      });  
+ });  
+ $(document).ready(function(){
+    $("#artist_last_name").blur(function(){
+        var lname=$(this).val();
+        var fname=$("#artist_first_name").val();
+        if (lname && fname){
+            $.ajax({
+                url:"duplication_check.php",
+                method:"POST",
+                data:{
+                    first:fname,
+                    last:lname
+                },
+                success:function(response)
+                {   
+                    $('#duplication_check').html(response);
+                    // if(response=="success")
+                        // alert("Artist already exists");
+                        // $("#next").prop("disabled",true);
+                }
+            });
+        }
+    })
+ });
+</script>
+  <!-- <script>  
+ $(document).ready(function(){  
+      $('#artist_last_name').keyup(function(){  
+           var query = $(this).val();  
+           console.log(query);
+           if(query != '')  
+           {  
+                $.ajax({  
+                     url:"auto_complete_firstname.php",  
+                     method:"POST",  
+                     data:{query1:query},  
+                     success:function(data)  
+                     {  
+                          $('#lastnamelist').fadeIn();  
+                          $('#lastnamelist').html(data);  
+                     }  
+                });  
+           }  
+      });  
+      $(document).on('click', 'li', function(){  
+           $('#artist_last_name').val($(this).text());  
+           $('#lastnamelist').fadeOut();  
+      });  
+ });  
+ </script>   -->
 
 </html>
