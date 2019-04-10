@@ -115,7 +115,7 @@ if(isset($_SESSION["contribution_type"])) {
                             <fieldset>
                                 <legend><strong>Date of Birth</strong>  <span style="color:red;font-weight: bold;"> *</span></legend>
                                         <input type="date" value="<?php echo isset($_SESSION['date_of_birth'])?$_SESSION['date_of_birth']:'' ?>" class="span2" id="date_of_birth" name="date_of_birth" placeholder="yyyy-mm-dd" 
-                                        onblur="emailvalidation()">
+                                        onblur="datevalidation()">
                             </fieldset>
                         </div>
                         <div class="column medium-6" id="date_of_death_div" style="display:block">
@@ -452,7 +452,8 @@ if(isset($_SESSION["contribution_type"])) {
                 $('input').attr('disabled','true')
             }
         });
-        function emailvalidation(){
+        
+        function datevalidation(){
               var birthdate=document.getElementById('date_of_birth');
               var date = new Date();
               birth=new Date(birthdate.value);
@@ -467,14 +468,18 @@ if(isset($_SESSION["contribution_type"])) {
                 mm = '0' + mm;
               }
               var today = yyyy + '-' + mm + '-' + dd;
-              if(today===birthdate.value || date<birth){
+              if(date<birth){
                 document.getElementById('date_message').style.display="block";
-                document.getElementById("date_message").innerHTML="Invalid Date of Birth";
+                document.getElementById("date_message").innerHTML="Date of Birth cannot be in future!";
+              }
+              else if(today===birthdate.value){
+                document.getElementById('date_message').style.display="block";
+                document.getElementById("date_message").innerHTML="Date of Birth cannot be today!";
               }
               else{
                 document.getElementById('date_message').style.display="none";
               }
-          } 
+          }  
 
         function deathvalidation(){
             var birth=document.getElementById("date_of_birth");
@@ -514,9 +519,13 @@ if(isset($_SESSION["contribution_type"])) {
                 mm = '0' + mm;
             }
             var today = yyyy + '-' + mm + '-' + dd;
-            if(today===birthdate.value || date<birth){
-              alert("Please change Date of Birth !");
-              event.preventDefault();
+            if(today===birthdate.value){
+                alert("Please change Date of Birth !");
+                event.preventDefault();
+            }
+            if (date<birth){
+                alert("Please change Date of Birth, cannot be in future!");
+                event.preventDefault();
             }
 
 
