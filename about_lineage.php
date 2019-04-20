@@ -94,6 +94,7 @@ else{
 		});
 		// onclick event is assigned to the #button element.
 		$("#next").click(function() {
+			<?php unset($_SESSION['lineage_artist_first_name']);?>
 			window.open("add_lineage.php","_self");
 		});
 	</script>
