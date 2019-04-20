@@ -1,4 +1,5 @@
 <?php
+
 $mysqli_hostname = "stark.cse.buffalo.edu";
 $mysqli_user="cl";
 $mysqli_password="DclSQLwebsiteLineage";

@@ -1074,6 +1074,7 @@ $artist_fullname=$artist_fname.' '.$artist_lname;
                     // alert("SUCCESS");
                 }
             });
+            <?php unset($_SESSION['lineage_artist_first_name']);?>
             window.open("about_lineage.php","_self");
         }
     });
