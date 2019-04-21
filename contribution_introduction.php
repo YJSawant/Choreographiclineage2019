@@ -53,7 +53,7 @@ if(isset($_SESSION["user_email_address"])){
             </div> -->
 
 
-            <div class="column" style="display:none;margin-bottom:1%"  id="contribution_type" name="contribution_type" >
+            <div class="column" style="display:none;margin-bottom:1%"  id="contribution_type" name="contribution_type">
                 <legend><strong>Contribution Type</strong></legend>
                 <div>
                     <label>
