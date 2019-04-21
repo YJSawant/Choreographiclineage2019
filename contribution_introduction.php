@@ -53,17 +53,17 @@ if(isset($_SESSION["user_email_address"])){
             </div> -->
 
 
-            <div class="column" style="margin-bottom:1%"  id="contribution_type" name="contribution_type">
+            <div class="column" style="display:none;margin-bottom:1%"  id="contribution_type" name="contribution_type" >
                 <legend><strong>Contribution Type</strong></legend>
                 <div>
                     <label>
-                        <input type="radio" id="contribute_own_lineage" name="contribute_lineage" class="contribute_lineage" value="own">
+                        <input type="radio" id="contribute_own_lineage" name="contribute_lineage" class="contribute_lineage" value="own" checked>
                         I am contributing my own lineage
                     </label>
                 </div>
                 <div>
                     <label>
-                        <input type="radio" id="contribute_another_artist_lineage" name="contribute_lineage" class="contribute_lineage" value="another" checked>
+                        <input type="radio" id="contribute_another_artist_lineage" name="contribute_lineage" class="contribute_lineage" value="another">
                         I am contributing lineage for another artist
                     </label>
                 </div>
@@ -71,7 +71,7 @@ if(isset($_SESSION["user_email_address"])){
 
             <div class="large-12 column">
                 <button class="primary button" type="submit" name="login_submit" id="enter">
-                    <span>Next Page</span>
+                    <span>Begin</span>
                 </button>
             </div>
             <!-- </fieldset> -->
@@ -102,7 +102,7 @@ include 'footer.php';
             var lineage_contri = document.getElementById("contri_lineage");
             $(lineage_contri).addClass('active');
         }
-    }); 
+    });
 </script>
 
 </html>

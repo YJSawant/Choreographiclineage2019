@@ -143,7 +143,7 @@
             var lineage_contri = document.getElementById("contri_lineage");
             $(lineage_contri).addClass('active');
         }
-    }); 
+    });
 </script>
 
 </html>

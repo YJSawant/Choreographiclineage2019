@@ -25,13 +25,14 @@ $count=mysqli_num_rows($result);
 if($count==1){
     $_SESSION["user_email_address"] = $user_email_address;
     $firstrow = mysqli_fetch_assoc($result);
-    
+
     $_SESSION["user_firstname"] = $firstrow["user_first_name"];
     $_SESSION["user_lastname"] = $firstrow["user_last_name"];
     $_SESSION["user_id"] = $firstrow["user_id"];
     //echo "Logged in as: ".$user_email_address;
-    if($firstrow['user_type']=='User')
-     $location = "profiles.php";
+    if($firstrow['user_type']=='User'){
+      $location = "profiles.php";
+    }
     else
      $location = "AdminIndex.php";
 }
