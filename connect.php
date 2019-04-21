@@ -1,9 +1,6 @@
 <?php
 
-//$servername = "tethys.cse.buffalo.edu";
-//$username = "conloonc";
-//$password = "ChangeMe";
-//$dbname = "cse410_bluegrey_db"
+
 $connections = array();
 
 function getDbConnection(){
