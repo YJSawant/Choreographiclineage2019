@@ -139,7 +139,7 @@ $artist_fullname=$artist_fname.' '.$artist_lname;
                                         </div>
                                         <div class="medium-9 columns">
                                             <div class="tabs-content" data-tabs-content="relation-tabs<?php echo '-'.$key ?>">
-                                             
+
                                             </div>
                                         </div>
                                     </div>
@@ -217,7 +217,7 @@ $artist_fullname=$artist_fname.' '.$artist_lname;
                                         <div class="tabs-content" data-tabs-content="relation-tabs-1">
 
                                             <!--Studied with tab : New-->
-                                            <div class="studied_with_section tabs-panel is-active" id="panel1v-1">
+                                            <div class="studied_with_section tabs-panel is-active" id="panel1v-1" style="display:none;">
                                                 <fieldset id="study_repeat0" style="background-image: linear-gradient(#016400, white); margin-bottom: 5px;">
                                                     <div class="large-12 columns" >
                                                         <div class="small-4 column" style="margin-top: 5px;">
@@ -251,7 +251,7 @@ $artist_fullname=$artist_fname.' '.$artist_lname;
                                                                             <option value='09'>September</option>
                                                                             <option value='10'>October</option>
                                                                             <option value='11'>November</option>
-                                                                            <option value='12'>December</option>                                                                                                                            
+                                                                            <option value='12'>December</option>
                                                                             </select>
                                                                         </div>
                                                                         <div class="small-6 column">
@@ -265,7 +265,7 @@ $artist_fullname=$artist_fname.' '.$artist_lname;
                                                                     </div>
 
                                                                     <div class="medium-6 column">
-                                                                        <legend style="color:white;">To:</legend>    
+                                                                        <legend style="color:white;">To:</legend>
                                                                         <div class="small-6 column">
                                                                         <select name="studied_to_months[]" class="range_to_months">
                                                                             <option value='00'>Month</option>
@@ -280,9 +280,9 @@ $artist_fullname=$artist_fname.' '.$artist_lname;
                                                                             <option value='09'>September</option>
                                                                             <option value='10'>October</option>
                                                                             <option value='11'>November</option>
-                                                                            <option value='12'>December</option>                                                                                                                            
+                                                                            <option value='12'>December</option>
                                                                             </select>
-                                                                        </div>   
+                                                                        </div>
 
                                                                         <div class="small-6 column">
                                                                             <select name="studied_to_years[]" class="range_to_years">
@@ -361,7 +361,7 @@ $artist_fullname=$artist_fname.' '.$artist_lname;
                                             </div>
 
                                             <!--Danced with tab : Other artist-->
-                                            <div class="danced__with_section tabs-panel" id="panel2v-1">
+                                            <div class="danced__with_section tabs-panel" id="panel2v-1" style="display:none;">
                                                 <fieldset id="dance_repeat0" style="background-image: linear-gradient(#0820aa, white); margin-bottom: 5px;">
                                                     <div class="large-12 columns" >
                                                         <div class="small-8 column" style="margin-top: 5px;">
@@ -508,7 +508,7 @@ $artist_fullname=$artist_fname.' '.$artist_lname;
 
 
                                             <!--Collaborated with tab : Other artist-->
-                                            <div class="colbrtd_with_section tabs-panel" id="panel3v-1">
+                                            <div class="colbrtd_with_section tabs-panel" id="panel3v-1" style="display:none;">
                                                 <fieldset id="colab_repeat0" style="background-image: linear-gradient(#969101, white); margin-bottom: 5px;">
                                                     <div class="large-12 columns" >
                                                         <div class="small-6 column" style="margin-top: 5px;">
