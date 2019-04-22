@@ -9,24 +9,23 @@ function getDbConnection(){
   // $password = "DclSQLwebsiteLineage";
   // $dbname = "choreographiclineage_db";
 
-  $servername = "localhost";
-  $username="cl";
-  $password="";
-  $dbname="choreographiclineage_db";
+  $servername = 'localhost';
+  $username='root';
+  $password='';
+  $dbname='choreographiclineage_db';
   error_log("Connecting to  ".$dbname." as user ".$username, 0);
-
   $conn = null;
-
 
   // Create connection
   try{
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    echo("trying connection");
+    $conn = new PDO("mysql:host=".$servername.";dbname=".$dbname, $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     array_push($connections, $conn);
     return $conn;
   }
   catch(Exception $e){
-    echo "connection error ".$servername;
+    echo "connection error ".$servername .$dbname .$username .$password;
     error_log("Error Connecting to  ".$dbname." as user ".$username, 0);
   }
 

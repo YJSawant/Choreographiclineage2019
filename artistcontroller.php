@@ -13,7 +13,8 @@ $json_params = file_get_contents('php://input');
 // check to make sure that the JSON is in a valid format
 if (isValidJSON($json_params)){
  //load in all the potential parameters.  These should match the database columns for the objects. 
-  $conn = getDbConnection();  $decoded_params = json_decode($json_params, TRUE);
+  $conn = getDbConnection();  
+  $decoded_params = json_decode($json_params, TRUE);
   $action = $decoded_params['action'];
   $json['action'] = $action;
   // uncomment the following line if you want to turn PHP error reporting on for debug - note, this will break the JSON response

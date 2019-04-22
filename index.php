@@ -56,11 +56,10 @@
 			</aside>
 		</div>
 
-		<div class="row">
-			<div class="medium-6 medium-offset-6 column">
-				<p><img src="data/images/logo_ub.jpg" alt="UB logo"></p>
-				<p><img src="data/images/logo_techne.png" alt="Techne logo"></p>
-			</div>
+		<div class="row">	
+		    <img src="" alt="" style="width: 33%;">
+			<img src="data/images/logo_ub.jpg" alt="UB logo" style="width: 33%;">		
+			<img src="data/images/logo_techne.png" alt="Techne logo" style="width: 33%;">
 		</div>
 
 <script>
