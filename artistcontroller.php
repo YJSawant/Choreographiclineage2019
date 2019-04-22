@@ -737,11 +737,11 @@ if (!IsNullOrEmpty($artistWebsite)){
         $json['artist_profile'][] = $row1;
     }
 } else { 
-    $json['Exeption'] = "Unrecognized Action ";
+    $json['Exception'] = "Unrecognized Action ";
 } 
 } 
 else{
-  $json['Exeption'] = "Invalid JSON on Inbound Request";
+  $json['Exception'] = "Invalid JSON on Inbound Request";
 } 
 echo json_encode($json);
 closeConnections(); 
