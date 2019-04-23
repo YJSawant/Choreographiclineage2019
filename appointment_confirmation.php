@@ -19,7 +19,6 @@
 
 var date = new Date();
 var a=date.yyyymmdd();
-
 </script>
 <?php
 include 'path.php';
@@ -35,8 +34,8 @@ include 'util.php';
 	$email =  mysqli_real_escape_string($dbc,$_POST['email_address']);
 	$contact = mysqli_real_escape_string($dbc,$_POST['contact_number']);
 	$note = mysqli_real_escape_string($dbc,$_POST['note']);
-  $status="Undone";
-  $dated="<script>document.write(a)</script>";
+  	$status="Undone";
+  	$dated=date("m/d/Y");
 
     //include 'appointment_mail_template.php';
     //mail($user_email_address, $subject, $message, $headers);
@@ -64,9 +63,9 @@ include 'util.php';
 
 
 	$query = "INSERT INTO phone_appointments
-	(first_name, last_name, email, contact,note,status,dated)
+	(first_name, last_name, email, contact,note,status,Submitted_Date)
 	VALUES
-	('$firstName','$lastName','$email','$contact','$note','$status','$date')";
+	('$firstName','$lastName','$email','$contact','$note','$status','$dated')";
 
 	$result = mysqli_query($dbc,$query)
 	or die('Error querying database.: '  .mysqli_error($dbc));
