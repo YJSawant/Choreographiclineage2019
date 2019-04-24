@@ -37,7 +37,7 @@ my_session_start();
 			<p><h3><strong>CONTRIBUTE YOUR LINEAGE BY PHONE</strong></h3></p>
 		</div>
 		<div class="row">
-			<h5>Please fill out the form below so that we may contact you in order to arrange a time to gather your lineage.</h5>
+			<h5>Please share days and times that are good for someone from Choreographic Lineage to contact you regarding your lineage.</h5>
 		</div>
 
 		<div class = "row">
