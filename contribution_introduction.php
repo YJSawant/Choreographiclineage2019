@@ -31,7 +31,7 @@ if(isset($_SESSION["user_email_address"])){
 </div>
 <div class="row">
     <div class="column small-12">
-        <p>See the network: <a href="#">http://www.choreagraphiclineage.buffalo.edu/Network/index.html</a></p>
+        <p>See the network: <a href="lineage_index.php">Click Here</a></p>
     </div>
 </div>
 
