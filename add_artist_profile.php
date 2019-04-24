@@ -301,6 +301,7 @@ if(isset($_SESSION["contribution_type"])) {
                                 Other
                             </label>
                         </div>
+                        <div id="checkboxvalidation" style="color:red;"></div><br>
                         <div class="medium-3 column">
                             <label for="Other_Artist_Text_Input" id="Other_Artist_Text" style="display:none">
                                 Please separate multiple entries by comma:
@@ -392,7 +393,7 @@ if(isset($_SESSION["contribution_type"])) {
         }
         $("#previous").click(function() {
             // onclick event is assigned to the #button element.
-            window.open("Contribution_Introduction.php","_self");
+            window.open("contribution_introduction.php","_self");
             //document.location.href = "add_artist_personal_information.php",true;
         });
         // onclick event is assigned to the #button element.
@@ -522,9 +523,16 @@ if(isset($_SESSION["contribution_type"])) {
                 alert("Cannot submit form with duplicate artist name");
                 event.preventDefault();
             }
+            if ($('#add_user_profile_form :checkbox:checked').length > 0){
+
+            }
+            else{
+                $('#checkboxvalidation').html("Please select Type of Artist !!");
+                event.preventDefault();
+            }
         });
 
-
+        
 
         // });
     </script>
@@ -617,30 +625,4 @@ include 'footer.php';
     })
  });
 </script>
-  <!-- <script>  
- $(document).ready(function(){  
-      $('#artist_last_name').keyup(function(){  
-           var query = $(this).val();  
-           console.log(query);
-           if(query != '')  
-           {  
-                $.ajax({  
-                     url:"auto_complete_firstname.php",  
-                     method:"POST",  
-                     data:{query1:query},  
-                     success:function(data)  
-                     {  
-                          $('#lastnamelist').fadeIn();  
-                          $('#lastnamelist').html(data);  
-                     }  
-                });  
-           }  
-      });  
-      $(document).on('click', 'li', function(){  
-           $('#artist_last_name').val($(this).text());  
-           $('#lastnamelist').fadeOut();  
-      });  
- });  
- </script>   -->
-
 </html>
