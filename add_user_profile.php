@@ -101,7 +101,7 @@ if(isset($_SESSION["user_email_address"])){
 									<button class="secondary button add_user_button" type="submit" name="user_profile_submit">
 										<span>Sign Me Up</span>
 									</button>
-                                    <a href="phone_contribution.php" style="float: right;margin-top: 5px;padding-top: 5px;"><u>Don't want to register- Contribute Lineage via Phone</u></a>
+                                    <a href="phone_contribution.php" style="float: right;margin-top: 5px;padding-top: 5px;"><u>Don't want to register? Contribute Lineage via Phone</u></a>
 								</div>
 							</div>
 						</fieldset>
