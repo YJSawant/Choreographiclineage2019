@@ -12,7 +12,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 $json_params = file_get_contents('php://input');
 // check to make sure that the JSON is in a valid format
 if (isValidJSON($json_params)){
- //load in all the potential parameters.  These should match the database columns for the objects. 
+ //load in all the potential parameters.  These should match the database columns for the objects.
   $conn = getDbConnection();  $decoded_params = json_decode($json_params, TRUE);
   $action = $decoded_params['action'];
   $json['action'] = $action;
@@ -43,7 +43,7 @@ $statement->execute($args);
 $last_id = $conn->lastInsertId();
 $json['Record Id'] = $last_id;
 $json['Status'] = "SUCCESS - Inserted Id $last_id";
-}catch (Exception $e) { 
+}catch (Exception $e) {
     $json['Exception'] =  $e->getMessage();
 }
 }else{
@@ -60,7 +60,7 @@ $json['Status'] = "SUCCESS - Updated $count Rows";
 } else {
 $json['Status'] = "ERROR - Updated 0 Rows - Check for Valid Ids ";
 }
-}catch (Exception $e) { 
+}catch (Exception $e) {
     $json['Exception'] =  $e->getMessage();
 }
 $json['Action'] = $action;
@@ -79,7 +79,7 @@ $json['Status'] = "SUCCESS - Deleted $count Rows";
 } else {
 $json['Status'] = "ERROR - Deleted 0 Rows - Check for Valid Ids ";
 }
-}catch (Exception $e) { 
+}catch (Exception $e) {
     $json['Exception'] =  $e->getMessage();
 }
 } else {
@@ -117,25 +117,25 @@ if (!IsNullOrEmpty($genreName)){
       }
       array_push ($args, $genreName);
     }
-    $json['SQL'] = $sql; 
+    $json['SQL'] = $sql;
     try{
       $statement = $conn->prepare($sql);
       $statement->setFetchMode(PDO::FETCH_ASSOC);
       $statement->execute($args);
       $result = $statement->fetchAll();
-    }catch (Exception $e) { 
+    }catch (Exception $e) {
       $json['Exception'] =  $e->getMessage();
     }
     foreach($result as $row1 ) {
         $json['genres'][] = $row1;
     }
-} else { 
+} else {
     $json['Exeption'] = "Unrecognized Action ";
-} 
-} 
+}
+}
 else{
   $json['Exeption'] = "Invalid JSON on Inbound Request";
-} 
+}
 echo json_encode($json);
-closeConnections(); 
+closeConnections();
 ?>

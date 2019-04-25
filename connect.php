@@ -18,10 +18,10 @@ function getDbConnection(){
 
   // Create connection
   try{
-    echo("trying connection");
+    //echo("trying connection");
     $conn = new PDO("mysql:host=".$servername.";dbname=".$dbname, $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    array_push($connections, $conn);
+    //array_push($connections, $conn);
     return $conn;
   }
   catch(Exception $e){
@@ -32,9 +32,7 @@ function getDbConnection(){
 }
 
 function closeConnections(){
-  foreach ($connections as $conn) {
-    $conn = null;
-  }
+
 }
 
 ?>
