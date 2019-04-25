@@ -346,7 +346,8 @@ include 'form_links_header.php'
             <fieldset class="large-2 columns">
                 <label><legend><strong>Your Date of Birth</strong><span style="color:red;font-weight: bold;"> *</span></legend>
                     <input type="date" class="date_of_birth" id="date_of_birth" placeholder="mm-dd-yyyy" name="date_of_birth" required
-                           value="<?php echo isset($_SESSION['date_of_birth'])?$_SESSION['date_of_birth']:'' ?>" />
+                           value="<?php echo isset($_SESSION['date_of_birth'])?$_SESSION['date_of_birth']:'' ?>"
+                           onblur="datevalidation()" />
                 </label>
             </fieldset>
                 <div class="large-3 columns country_birth">
@@ -607,9 +608,13 @@ include 'form_links_header.php'
                 </div>
                 <div class="columns"></div>
 
-
         </div>
     <?php endif; ?>
+    <div class="row">
+        <fieldset class="large-2 columns">
+            <div id ="date_message" style="color:red;"></div>
+        </fieldset>
+    </div>
     <!-- Getting Address info -->
     <div class="row">
         <fieldset class="large-10 columns">
@@ -1088,7 +1093,7 @@ include 'form_links_header.php'
             </button>
         </div>
         <div class="large-2 small-8 columns">
-            <button class="primary button" id="next" type="submit" onclick="submit_gender_validation()">
+            <button class="primary button" id="next" type="submit" onclick="submit_validation()">
                 <span><?php echo (($_SESSION['timeline_flow'] == "view")?"":"Save & ") ?>Next</span>
             </button>
         </div>
@@ -1106,13 +1111,65 @@ include 'form_links_header.php'
             $('#othergendervalidation').html("Cannot be Empty !!");
         }
     }
-    function submit_gender_validation(){
-        var txt=$("#gender_other_text").val();
-        if (txt ==""){
-            alert("Please enter Gender correctly ")
-            event.preventDefault();
+    function submit_validation(){
+        if(document.querySelector('input[id="gender_other"]:checked')) {
+            var txt=$("#gender_other_text").val();
+            if (txt ==""){
+                alert("Please specify your gender under other's category")
+                event.preventDefault();
         }
+        }
+            var birthdate=document.getElementById('date_of_birth');
+            dateformat_birth= new Date(birthdate.value);
+            var date = new Date();
+            birth=new Date(birthdate.value);
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+            var yyyy = today.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd;
+            }
+            if (mm < 10) {
+                mm = '0' + mm;
+            }
+            var today = yyyy + '-' + mm + '-' + dd;
+            if(today===birthdate.value){
+                alert("Date of Birth cannot be today !!");
+                event.preventDefault();
+            }
+            if (date<birth){
+                alert("Date of Birth cannot be in future !!");
+                event.preventDefault();
+            }
     }
+    function datevalidation(){
+              var birthdate=document.getElementById('date_of_birth');
+              var date = new Date();
+              birth=new Date(birthdate.value);
+              var today = new Date();
+              var dd = today.getDate();
+              var mm = today.getMonth() + 1; 
+              var yyyy = today.getFullYear();
+              if (dd < 10) {
+                dd = '0' + dd;
+              }
+              if (mm < 10) {
+                mm = '0' + mm;
+              }
+              var today = yyyy + '-' + mm + '-' + dd;
+              if(date<birth){
+                document.getElementById('date_message').style.display="block";
+                document.getElementById("date_message").innerHTML="Date of Birth cannot be in future!";
+              }
+              else if(today===birthdate.value){
+                document.getElementById('date_message').style.display="block";
+                document.getElementById("date_message").innerHTML="Date of Birth cannot be today!";
+              }
+              else{
+                document.getElementById('date_message').style.display="none";
+              }
+    } 
     $(function() {
         // this will get the full URL at the address bar
         var url = window.location.href;
