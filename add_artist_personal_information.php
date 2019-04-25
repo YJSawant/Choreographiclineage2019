@@ -76,36 +76,36 @@ if(isset($_SESSION["user_email_address"]) && $_SESSION["timeline_flow"] != "view
 
         if($_SESSION["artist_profile_id"] == ""){
             $query = "INSERT INTO artist_profile
-			(
-			is_user_artist,
-			artist_first_name,
-			artist_last_name,
-			artist_email_address,
-			artist_living_status,
-			artist_dob,
-			artist_dod,
-			artist_genre,
-			genre_other,
-			profile_name)
-			VALUES
-			(
-			'$is_artist',
-			'$first_name',
-			'$last_name',
-			'$email_address',
-			'$status',
-			'$dob',
-			'$dod',
-			'$genre',
-			'$genre_other',
-			'$user_email_address'
-			)";
+            (
+            is_user_artist,
+            artist_first_name,
+            artist_last_name,
+            artist_email_address,
+            artist_living_status,
+            artist_dob,
+            artist_dod,
+            artist_genre,
+            genre_other,
+            profile_name)
+            VALUES
+            (
+            '$is_artist',
+            '$first_name',
+            '$last_name',
+            '$email_address',
+            '$status',
+            '$dob',
+            '$dod',
+            '$genre',
+            '$genre_other',
+            '$user_email_address'
+            )";
 
             $result = mysqli_query($dbc,$query)
             or die('Error querying database.: '  .mysqli_error($dbc));
             //$_SESSION["form_1"] = "completed";
             $query = "SELECT artist_profile_id FROM artist_profile
-								WHERE artist_first_name='$first_name' and artist_last_name='$last_name' and artist_email_address='$email_address'";
+                                WHERE artist_first_name='$first_name' and artist_last_name='$last_name' and artist_email_address='$email_address'";
             $result = mysqli_query($dbc,$query)
             or die('Error querying database.: '  .mysqli_error($dbc));
             $count=mysqli_num_rows($result);
@@ -115,15 +115,15 @@ if(isset($_SESSION["user_email_address"]) && $_SESSION["timeline_flow"] != "view
             }
         }else{
             $query = "UPDATE artist_profile SET
-				is_user_artist='$is_artist',
-				artist_first_name='$first_name',
-				artist_last_name='$last_name',
-				artist_email_address='$email_address',
-				artist_living_status='$status',
-				artist_dob='$dob',
-				artist_dod='$dod',
-				artist_genre='$genre',
-				genre_other='$genre_other' WHERE artist_profile_id = '".$_SESSION['artist_profile_id']."'";
+                is_user_artist='$is_artist',
+                artist_first_name='$first_name',
+                artist_last_name='$last_name',
+                artist_email_address='$email_address',
+                artist_living_status='$status',
+                artist_dob='$dob',
+                artist_dod='$dod',
+                artist_genre='$genre',
+                genre_other='$genre_other' WHERE artist_profile_id = '".$_SESSION['artist_profile_id']."'";
 
             $result = mysqli_query($dbc,$query)
             or die('Error querying database.: '  .mysqli_error($dbc));
@@ -167,9 +167,9 @@ include 'form_links_header.php'
     <!-- Getting gender info-->
     <div class="row">
         <div class="progress" role="progressbar" tabindex="0" aria-valuenow="20" aria-valuemin="0" aria-valuetext="20 percent" aria-valuemax="100">
-				<span class="progress-meter" style="width: 20%">
-					<p class="progress-meter-text">20%</p>
-				</span>
+                <span class="progress-meter" style="width: 20%">
+                    <p class="progress-meter-text">20%</p>
+                </span>
         </div>
     </div>
     <div class="row">
@@ -221,12 +221,14 @@ include 'form_links_header.php'
             </div>
             <div class="medium-4 column" style="float:left !important;">
                 <label for="gender_other_text" id="gender_other_text_label">
-						Please Specify Your Gender:
-						<input  autocomplete="off" type="text" id="gender_other_text" name="gender_other"
-						value="<?php echo isset($_SESSION['gender_other'])?$_SESSION['gender_other']:'' ?>" />
-					</label>
+                        Please Specify Your Gender:
+                        <input  autocomplete="off" type="text" onblur="gendervalidation()"" id="gender_other_text" name="gender_other"
+                        value="<?php echo isset($_SESSION['gender_other'])?$_SESSION['gender_other']:'' ?>" />
+                    </label>
+                    <div id="othergendervalidation" style="color:red;"></div>
             </div>
         </fieldset>
+
     </div>
     <!-- Getting Ethnicity info -->
     <div class="row">
@@ -1086,7 +1088,7 @@ include 'form_links_header.php'
             </button>
         </div>
         <div class="large-2 small-8 columns">
-            <button class="primary button" id="next" type="submit">
+            <button class="primary button" id="next" type="submit" onclick="submit_gender_validation()">
                 <span><?php echo (($_SESSION['timeline_flow'] == "view")?"":"Save & ") ?>Next</span>
             </button>
         </div>
@@ -1098,6 +1100,19 @@ include 'form_links_header.php'
 
 
 <script type="text/javascript">
+    function gendervalidation(){
+        var gender=document.getElementById("gender_other_text").value;
+        if (gender==""){
+            $('#othergendervalidation').html("Cannot be Empty !!");
+        }
+    }
+    function submit_gender_validation(){
+        var txt=$("#gender_other_text").val();
+        if (txt ==""){
+            alert("Please enter Gender correctly ")
+            event.preventDefault();
+        }
+    }
     $(function() {
         // this will get the full URL at the address bar
         var url = window.location.href;
@@ -1232,7 +1247,7 @@ include 'form_links_header.php'
     });
     // onclick event is assigned to the #button element.
     // $("#next").click(function() {
-    // 	window.open("add_artist_biography.php","_self");
+    //  window.open("add_artist_biography.php","_self");
     // });
 
 
