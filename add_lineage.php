@@ -187,6 +187,12 @@ $artist_fullname=$artist_fname.' '.$artist_lname;
                                     <input  autocomplete="off" type="text" class="artist_website" id="artist_website-1" name="lineage_artist_website[]" placeholder="Website">
                                 </label>
                             </div>
+                            <div class="small-3 column">
+                                <label for="artist_website">Genre <small></small>
+                                    <input type="text" id="example" placeholder="Select">
+                                </label>
+                            </div>
+
                         </div>
 
 
@@ -780,6 +786,9 @@ $artist_fullname=$artist_fname.' '.$artist_lname;
 </form>
 
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="js/combo/Drop-Down-Combo-Tree/style.css">
+<script src="js/combo/Drop-Down-Combo-Tree/comboTreePlugin.js"></script>
+<script src="js/combo/Drop-Down-Combo-Tree/icontains.js"></script>
 <script type="text/javascript" src="js/getData.js"></script>
 </body>
 

@@ -127,6 +127,40 @@ function getData() {
 					console.log(genres);
 
 
+					var myData = [
+					    {
+					      id: 0,
+					      title: 'Item 1 '
+					    }, {
+					      id: 1,
+					      title: 'Item 2',
+					      subs: [
+					        {
+					          id: 10,
+					          title: 'Item 2-1'
+					        }, {
+					          id: 11,
+					          title: 'Item 2-2'
+					        }, {
+					          id: 12,
+					          title: 'Item 2-3'
+					        }
+					      ]
+					    }, {
+					      id: 2,
+					      title: 'Item 3'
+					    },
+					    // more data here
+					];
+
+					$('#example').comboTree({
+					  source : myData,
+					  isMultiple: true
+					});
+
+
+
+
 
 
 
