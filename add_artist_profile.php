@@ -11,9 +11,9 @@ if(isset($_SESSION["user_email_address"])){
     $user_firstname = $_SESSION["user_firstname"];
     if(isset($_SESSION["timeline_flow"]) &&  ($_SESSION['timeline_flow'] == "edit" || $_SESSION['timeline_flow'] == "view")) {
         $prepopulated = "true";
-        $user_email_address = $_SESSION["artist_email_address"];
-        $user_lastname = $_SESSION["artist_last_name"];
-        $user_firstname = $_SESSION["artist_first_name"];
+        $user_email_address = $_SESSION["user_email_address"];
+        $user_lastname = $_SESSION["user_lastname"];
+        $user_firstname = $_SESSION["user_firstname"];
     }
 
     if(isset($_SESSION['timeline_flow']) &&  $_SESSION['timeline_flow'] == "view") {
@@ -89,7 +89,7 @@ if(isset($_SESSION["contribution_type"])) {
                             <div class="medium-4 column">
                                 <!--<label for="artist_email_address">Email Address <span class="other_artist">of Artist</span>-->
                                     <label for="artist_email_address"><?php echo (($_SESSION['contribution_type'] == "own")?'Your Email Address':'Email Address of Artist') ?></span>
-                                    <input  value="<?php echo (($_SESSION['contribution_type'] == "own")?$_SESSION['user_email_address']:'') ?>" autocomplete="off" type="email" id="artist_email_address" name="artist_email_address" placeholder="Email Address">
+                                    <input value="<?php echo (($_SESSION['contribution_type'] == "own")?$_SESSION['user_email_address']:'') ?>" autocomplete="off" type="email" id="artist_email_address" name="artist_email_address" placeholder="Email Address">
                                 </label>
                             </div>
                     </fieldset>
@@ -625,4 +625,30 @@ include 'footer.php';
     })
  });
 </script>
+  <!-- <script>  
+ $(document).ready(function(){  
+      $('#artist_last_name').keyup(function(){  
+           var query = $(this).val();  
+           console.log(query);
+           if(query != '')  
+           {  
+                $.ajax({  
+                     url:"auto_complete_firstname.php",  
+                     method:"POST",  
+                     data:{query1:query},  
+                     success:function(data)  
+                     {  
+                          $('#lastnamelist').fadeIn();  
+                          $('#lastnamelist').html(data);  
+                     }  
+                });  
+           }  
+      });  
+      $(document).on('click', 'li', function(){  
+           $('#artist_last_name').val($(this).text());  
+           $('#lastnamelist').fadeOut();  
+      });  
+ });  
+ </script>   -->
+
 </html>
