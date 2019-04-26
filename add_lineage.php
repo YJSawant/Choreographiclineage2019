@@ -93,33 +93,30 @@ $artist_fullname=$artist_fname.' '.$artist_lname;
                                         <div class="medium-3 columns">
                                             <ul class="vertical tabs" data-tabs id="relation-tabs<?php echo '-'.$key ?>">
                                                 <li class="tabs-title is-active"><a href="#panel1v<?php echo '-'.$key ?>" aria-selected="true" aria-controls="panel1v<?php echo '-'.$key ?>">
-                                                        <input class="relationship relation_studied_cb" name="relationship_studied[]" id="relationship_studied<?php echo '-'.$key ?>" type="checkbox" title="studied_with_section"
+                                                        <input class="relationship relation_studied_cb" name="relationship_studied[]" id="relationship_studied<?php echo '-'.$key ?>" type="checkbox" title="studied_with_section" value="<?php echo $key ?>"
                                                             <?php
-                                                            if(isset($_SESSION['studied_duration_months'])){
-                                                                echo (($_SESSION['studied_duration_months'][$key] != '' || $_SESSION['studied_duration_years'][$key] != '') &&
-                                                                ($_SESSION['studied_duration_months'][$key] != 0 || $_SESSION['studied_duration_years'][$key] != 0) ?'checked':'');
+                                                            if(isset($_SESSION['studied_under'])){
+                                                                echo (isset($_SESSION['studied_under'][$key])?'checked':'');
                                                             }
                                                             ?>
                                                         />
                                                         <label for="relationship_studied<?php echo '-'.$key ?>">Studied Under</label><span style = "cursor: pointer;" title="Teachers/people under whom you have studied."><img src="img/help.png" style="height:13px;width:13px;"/></span>
                                                     </a></li>
                                                 <li class="tabs-title"><a href="#panel2v<?php echo '-'.$key ?>" aria-controls="panel2v<?php echo '-'.$key ?>">
-                                                        <input class="relationship relation_danced_cb" name="relationship_danced[]" id="relationship_danced<?php echo '-'.$key ?>" type="checkbox" tilte="danced__with_section"
+                                                        <input class="relationship relation_danced_cb" name="relationship_danced[]" id="relationship_danced<?php echo '-'.$key ?>" type="checkbox" title="danced__with_section" value="<?php echo $key ?>"
                                                             <?php
-                                                            if(isset($_SESSION['danced_duration_months'])){
-                                                                echo (($_SESSION['danced_duration_months'][$key] != '' || $_SESSION['danced_duration_years'][$key] != '') &&
-                                                                ($_SESSION['danced_duration_months'][$key] != 0 || $_SESSION['danced_duration_years'][$key] != 0) ?'checked':'');
+                                                            if(isset($_SESSION['danced_with'])){
+                                                                echo (isset($_SESSION['danced_with'][$key])?'checked':'');
                                                             }
                                                             ?>
                                                         />
                                                         <label for="relationship_danced<?php echo '-'.$key ?>">Danced in the Work of</label><span style = "cursor: pointer;" title="Choreographers whose works you have danced in."><img src="img/help.png" style="height:13px;width:13px;"/></span>
                                                     </a></li>
                                                 <li class="tabs-title"><a href="#panel3v<?php echo '-'.$key ?>" aria-controls="panel3v<?php echo '-'.$key ?>">
-                                                        <input class="relationship relation_collaborated_cb" name="relationship_collaborated[]" id="relationship_collaborated<?php echo '-'.$key ?>" type="checkbox" title="colbrtd_with_section"
+                                                        <input class="relationship relation_collaborated_cb" name="relationship_collaborated[]" id="relationship_collaborated<?php echo '-'.$key ?>" type="checkbox" title="collaborated_with_section" value="<?php echo $key ?>"
                                                             <?php
-                                                            if(isset($_SESSION['collaborated_duration_months'])){
-                                                                echo (($_SESSION['collaborated_duration_months'][$key] != '' || $_SESSION['collaborated_duration_years'][$key] != '') &&
-                                                                ($_SESSION['collaborated_duration_months'][$key] != 0 || $_SESSION['collaborated_duration_years'][$key] != 0) ?'checked':'');
+                                                            if(isset($_SESSION['collaborated_with'])){
+                                                                echo (isset($_SESSION['collaborated_with'][$key])?'checked':'');
                                                             }
                                                             ?>
                                                         />
@@ -188,8 +185,8 @@ $artist_fullname=$artist_fname.' '.$artist_lname;
                                 </label>
                             </div>
                             <div class="small-3 column">
-                                <label for="artist_website">Genre <small></small>
-                                    <input type="text" id="example" placeholder="Select">
+                                <label for="artist_genre">Genre <small></small>
+                                    <input type="text" class="artist_genre" id="artist_genre-1" name="lineage_artist_genre[]" placeholder="Select">
                                 </label>
                             </div>
 
@@ -206,13 +203,13 @@ $artist_fullname=$artist_fname.' '.$artist_lname;
                                     <div class="medium-3 columns">
                                         <ul class="vertical tabs" data-tabs id="relation-tabs-1">
                                             <li class="tabs-title is-active"><a href="#panel1v-1" aria-selected="true">
-                                                    <input class="relationship relation_studied_cb" name="relationship_studied[]" id="relationship_studied-1" type="checkbox" title="studied_with_section"><label for="relationship_studied">Studied Under</label><span style = "cursor: pointer;" title="Teachers/people under whom you have studied."><img src="img/help.png" style="height:13px;width:13px;"/></span>
+                                                    <input class="relationship relation_studied_cb" name="relationship_studied[]" id="relationship_studied-1" type="checkbox" title="studied_with_section" value="0"><label for="relationship_studied">Studied Under</label><span style = "cursor: pointer;" title="Teachers/people under whom you have studied."><img src="img/help.png" style="height:13px;width:13px;"/></span>
                                                 </a></li>
                                             <li class="tabs-title"><a href="#panel2v-1">
-                                                    <input class="relationship relation_danced_cb" name="relationship_danced[]" id="relationship_danced-1" type="checkbox" title="danced_for_section" ><label for="relationship_danced">Danced in the Work of</label><span style = "cursor: pointer;" title="Choreographers whose works you have danced in."><img src="img/help.png" style="height:13px;width:13px;"/></span>
+                                                    <input class="relationship relation_danced_cb" name="relationship_danced[]" id="relationship_danced-1" type="checkbox" title="danced_for_section" value="0"><label for="relationship_danced">Danced in the Work of</label><span style = "cursor: pointer;" title="Choreographers whose works you have danced in."><img src="img/help.png" style="height:13px;width:13px;"/></span>
                                                 </a></li>
                                             <li class="tabs-title"><a href="#panel3v-1">
-                                                    <input class="relationship relation_collaborated_cb" name="relationship_collaborated[]" id="relationship_collaborated-1" type="checkbox" title="collaborated_with_section" ><label for="relationship_collaborated">Collaborated With</label><span style = "cursor: pointer;" title="Artists with whom you have collaborated."><img src="img/help.png" style="height:13px;width:13px;"/></span>
+                                                    <input class="relationship relation_collaborated_cb" name="relationship_collaborated[]" id="relationship_collaborated-1" type="checkbox" title="collaborated_with_section" value="0"><label for="relationship_collaborated">Collaborated With</label><span style = "cursor: pointer;" title="Artists with whom you have collaborated."><img src="img/help.png" style="height:13px;width:13px;"/></span>
                                                 </a></li>
                                             <li class="tabs-title"><a href="#panel4v-1">
                                                     <input class="relationship relation_influenced_cb" name="relationship_influenced[]" id="relationship_influenced-1" type="checkbox" title="influenced_by_section" value="0"><label for="relationship_influenced">Influenced By</label>
@@ -222,446 +219,95 @@ $artist_fullname=$artist_fname.' '.$artist_lname;
                                     <div class="medium-9 columns">
                                         <div class="tabs-content" data-tabs-content="relation-tabs-1">
 
-                                            <!--Studied with tab : New-->
-                                            <div class="studied_with_section tabs-panel is-active" id="panel1v-1" style="display:none;">
-                                                <fieldset id="study_repeat0" style="background-image: linear-gradient(#016400, white); margin-bottom: 5px;">
-                                                    <div class="large-12 columns" >
-                                                        <div class="small-4 column" style="margin-top: 5px;">
-                                                            <legend><strong style="color:white;">Studied Under Details:</strong></legend>
-                                                        </div>
-                                                        <div class="small-8 column" style="background-color: #016400">
-                                                        </div>
-                                                        <div class="row duration_selection" value="studied">
-                                                            <input class="relation_type" title="studied" style="display:none"/>
-                                                            <div class="large-12 columns range_div" id="studied_with_range_div">
-                                                                <div class="large-12 columns" >
-                                                                    <legend><strong style="color:white;">Range: <span style = "cursor: pointer;" title="Provide a specific time range for this relationship: Month and Year, or just Year.  If you don’t recall the specific years, please enter a general decade."><img src="img/help.png" style="height:15px;width:15px;"/></span>
-                                                                        </strong></legend>
 
+                                          <!-- Studied Under tab -->
+                                          <div class="tabs-panel studied_under_section is-active" id="panel1v-1">
+                                              <fieldset>
+                                                  <legend><strong>Studied Under Details:</strong></legend>
+                                                  <div class="row not_studied">
+                                                      <input class="relation_type" title="studied" style="display:none"/>
+                                                      <div class="column">
+                                                          <div class="row">
+                                                              <div class="column">
+                                                                  Studied Under
+                                                              </div>
+                                                          </div>
+                                                          <div class="row">
+                                                              <center>
+                                                                  <button class="primary button studied_under" type="button" style="margin-top:5%">
+                                                                      <span>Studied Under</span>
+                                                                  </button>
+                                                              </center>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <div class="row studied" style="display:none;">
+                                                      <div class="column" style="color:darkgreen;">
+                                                          <center><h3><strong>You have studied under this Artist</h3></strong></center>
+                                                      </div>
+                                                  </div>
+                                              </fieldset>
+                                          </div>
 
-                                                                </div>
-                                                                <div class="large-12 columns">
-                                                                    <div class="medium-6 column">
-                                                                        <legend style="color:white;">From:</legend>
-                                                                        <div class="small-6 column">
-                                                                            <select name="studied_from_months[]" class="range_from_months">
-                                                                            <option value='00'>Month</option>
-                                                                            <option value='01'>January</option>
-                                                                            <option value='02'>February</option>
-                                                                            <option value='03'>March</option>
-                                                                            <option value='04'>April</option>
-                                                                            <option value='05'>May</option>
-                                                                            <option value='06'>June</option>
-                                                                            <option value='07'>July</option>
-                                                                            <option value='08'>August</option>
-                                                                            <option value='09'>September</option>
-                                                                            <option value='10'>October</option>
-                                                                            <option value='11'>November</option>
-                                                                            <option value='12'>December</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="small-6 column">
-                                                                            <select name="studied_from_years[]" class="range_from_years">
-                                                                                <option value>Year</option>
-                                                                                <?php for ($i = 2018; $i >=1000; $i--) : ?>
-                                                                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                                <?php endfor; ?>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
+                                          <!-- Danced In the work of tab -->
+                                          <div class="tabs-panel danced_with_section" id="panel2v-1">
+                                              <fieldset>
+                                                  <legend><strong>Danced in the work of Details:</strong></legend>
+                                                  <div class="row not_danced">
+                                                      <input class="relation_type" title="danced" style="display:none"/>
+                                                      <div class="column">
+                                                          <div class="row">
+                                                              <div class="column">
+                                                                  Danced in the work of
+                                                              </div>
+                                                          </div>
+                                                          <div class="row">
+                                                              <center>
+                                                                  <button class="primary button danced_with" type="button" style="margin-top:5%">
+                                                                      <span>Danced in the work of</span>
+                                                                  </button>
+                                                              </center>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <div class="row danced" style="display:none;">
+                                                      <div class="column" style="color:darkgreen;">
+                                                          <center><h3><strong>You have danced in the work of this Artist</h3></strong></center>
+                                                      </div>
+                                                  </div>
+                                              </fieldset>
+                                          </div>
 
-                                                                    <div class="medium-6 column">
-                                                                        <legend style="color:white;">To:</legend>
-                                                                        <div class="small-6 column">
-                                                                        <select name="studied_to_months[]" class="range_to_months">
-                                                                            <option value='00'>Month</option>
-                                                                            <option value='01'>January</option>
-                                                                            <option value='02'>February</option>
-                                                                            <option value='03'>March</option>
-                                                                            <option value='04'>April</option>
-                                                                            <option value='05'>May</option>
-                                                                            <option value='06'>June</option>
-                                                                            <option value='07'>July</option>
-                                                                            <option value='08'>August</option>
-                                                                            <option value='09'>September</option>
-                                                                            <option value='10'>October</option>
-                                                                            <option value='11'>November</option>
-                                                                            <option value='12'>December</option>
-                                                                            </select>
-                                                                        </div>
+                                          <!-- Collaborated With tab -->
+                                          <div class="tabs-panel collaborated_with_section" id="panel3v-1">
+                                              <fieldset>
+                                                  <legend><strong>Collaborated With Details:</strong></legend>
+                                                  <div class="row not_collaborated">
+                                                      <input class="relation_type" title="collaborated" style="display:none"/>
+                                                      <div class="column">
+                                                          <div class="row">
+                                                              <div class="column">
+                                                                  Collaborated With
+                                                              </div>
+                                                          </div>
+                                                          <div class="row">
+                                                              <center>
+                                                                  <button class="primary button collaborated_with" type="button" style="margin-top:5%">
+                                                                      <span>Collaborated with</span>
+                                                                  </button>
+                                                              </center>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <div class="row collaborated" style="display:none;">
+                                                      <div class="column" style="color:darkgreen;">
+                                                          <center><h3><strong>You have collaborated with this Artist</h3></strong></center>
+                                                      </div>
+                                                  </div>
+                                              </fieldset>
+                                          </div>
 
-                                                                        <div class="small-6 column">
-                                                                            <select name="studied_to_years[]" class="range_to_years">
-                                                                                <option value>Year</option>
-                                                                                <?php for ($i = 2018; $i >=1000; $i--) : ?>
-                                                                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                                <?php endfor; ?>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="large-12 columns duration_div" id="studied_with_duration_div" style="display:none">
-                                                                <div class="large-12 columns">
-                                                                    <legend><strong style="color:white;">Duration: <span style = "cursor: pointer;" title="Provide total number of years and/or months for this relationship. Please also tell us over what time span this total duration was (From/To)."><img src="img/help.png" style="height:15px;width:15px;"/></span>
-                                                                        </strong></legend>
-                                                                </div>
-                                                                <div class="large-12 columns">
-                                                                    <div class="medium-3 column">
-                                                                        <legend style="color:white;">Total Years</legend>
-                                                                        <input type="text" name="studied_duration_years[]" disabled="disabled" class="duration_years" placeholder="Total Years"/>
-                                                                    </div>
-                                                                    <div class="medium-3 column">
-                                                                        <legend style="color:white;">And/Or Months</legend>
-                                                                        <input type="text" name="studied_duration_months[]" disabled="disabled" class="duration_months" placeholder="Total Months"/>
-                                                                    </div>
-                                                                    <div class="small-3 column">
-                                                                        <legend style="color:white;">From:</legend>
-                                                                        <select name="studied_duration_from_years[]" disabled="disabled" class="duration_from_years">
-                                                                            <option value>Year</option>
-                                                                            <?php for ($i = 2018; $i >=1000; $i--) : ?>
-                                                                                <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                            <?php endfor; ?>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="small-3 column">
-                                                                        <legend style="color:white;">To:</legend>
-
-                                                                        <select name="studied_duration_to_years[]" disabled="disabled" class="duration_to_years">
-                                                                            <option value>Year</option>
-                                                                            <?php for ($i = 2018; $i >=1000; $i--) : ?>
-                                                                                <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                            <?php endfor; ?>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="large-12 columns">
-                                                            <div class="medium-5 column">
-                                                                <button type="button" class="btn btn-primary" id="remove_button" onclick="remove(this,4)"
-                                                                        style="padding: 5px 8px; background-color:red; color:ghostwhite; font-weight: bold;" >Remove</button>
-                                                            </div>
-                                                            <div class="medium-1 column"></div>
-                                                            <div class="medium-6 column">
-                                                                <button type="button" class="btn btn-primary" id="studied_with_toggle" class="studied_with_toggle"
-                                                                        style="padding: 5px 8px; background-color:grey; color:ghostwhite; font-weight: bold;" onclick="toggleDuration(this)">
-                                                                    <large >I don’t recall the date range.</large>
-                                                                </button>
-                                                                <span style = "cursor: pointer;" title="Toggle between range and duration for filling details. For specific details - change to range. For vague details - change to duration."><img src="img/help.png" style="height:15px;width:15px;"/></span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="large-12 columns" style="margin-top: 5px">
-                                                            <div class="medium-4 column"></div>
-                                                            <div class="medium-4 column">
-                                                                <button type="button" class="btn btn-primary"
-                                                                        style="padding: 5px 8px; background-color:#62ad61; color:ghostwhite; font-weight: bold;" onclick="duplicate(this)">Add Another Time Frame for this Artist</button>
-                                                            </div>
-                                                            <div class="medium-4 column"></div>
-                                                        </div>
-                                                    </div>
-                                                </fieldset>
-                                            </div>
-
-                                            <!--Danced with tab : Other artist-->
-                                            <div class="danced__with_section tabs-panel" id="panel2v-1" style="display:none;">
-                                                <fieldset id="dance_repeat0" style="background-image: linear-gradient(#0820aa, white); margin-bottom: 5px;">
-                                                    <div class="large-12 columns" >
-                                                        <div class="small-8 column" style="margin-top: 5px;">
-                                                            <legend><strong style="color:white;">Danced In The Work Of Details:</strong></legend>
-                                                        </div>
-                                                        <div class="small-8 column" style="background-color: #0820aa">
-                                                        </div>
-
-                                                        <div class="row duration_selection" value="danced">
-                                                            <input class="relation_type" title="danced" style="display:none"/>
-
-                                                            <div class="large-12 columns range_div" id="danced__with_range_div">
-                                                                <div class="large-12 columns" >
-                                                                    <legend><strong style="color:white;">Range: <span style = "cursor: pointer;" title="Provide a specific time range for this relationship: Month and Year, or just Year.  If you don’t recall the specific years, please enter a general decade."><img src="img/help.png" style="height:15px;width:15px;"/></span>
-                                                                        </strong></legend>
-                                                                </div>
-                                                                <div class="large-12 columns">
-                                                                    <div class="medium-6 column">
-                                                                        <legend style="color:white;">From:</legend>
-                                                                        <div class="small-6 column">
-
-                                                                            <select name="danced_from_months[]" class="range_from_months">
-                                                                                <option value='00'>Month</option>
-                                                                                <option value='01'>January</option>
-                                                                                <option value='02'>February</option>
-                                                                                <option value='03'>March</option>
-                                                                                <option value='04'>April</option>
-                                                                                <option value='05'>May</option>
-                                                                                <option value='06'>June</option>
-                                                                                <option value='07'>July</option>
-                                                                                <option value='08'>August</option>
-                                                                                <option value='09'>September</option>
-                                                                                <option value='10'>October</option>
-                                                                                <option value='11'>November</option>
-                                                                                <option value='12'>December</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="small-6 column">
-
-                                                                            <select name="danced_from_years[]" class="range_from_years">
-                                                                                <option value>Year</option>
-                                                                                <?php for ($i = 2018; $i >=1000; $i--) : ?>
-                                                                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                                <?php endfor; ?>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="medium-6 column">
-                                                                        <legend style="color:white;">To:</legend>
-                                                                        <div class="small-6 column">
-
-                                                                            <select name="danced_to_months[]" class="range_to_months">
-                                                                                <option value='00'>Month</option>
-                                                                                <option value='01'>January</option>
-                                                                                <option value='02'>February</option>
-                                                                                <option value='03'>March</option>
-                                                                                <option value='04'>April</option>
-                                                                                <option value='05'>May</option>
-                                                                                <option value='06'>June</option>
-                                                                                <option value='07'>July</option>
-                                                                                <option value='08'>August</option>
-                                                                                <option value='09'>September</option>
-                                                                                <option value='10'>October</option>
-                                                                                <option value='11'>November</option>
-                                                                                <option value='12'>December</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="small-6 column">
-                                                                            <select name="danced_to_years[]" class="range_to_years">
-                                                                                <option value>Year</option>
-                                                                                <?php for ($i = 2018; $i >=1000; $i--) : ?>
-                                                                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                                <?php endfor; ?>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="large-12 columns duration_div" id="danced__with_duration_div" style="display:none">
-                                                                <div class="large-12 columns">
-                                                                    <legend><strong style="color:white;">Duration: <span style = "cursor: pointer;" title="Provide total number of years and/or months for this relationship. Please also tell us over what time span this total duration was (From/To)."><img src="img/help.png" style="height:15px;width:15px;"/></span>
-                                                                        </strong></legend>
-                                                                </div>
-                                                                <div class="large-12 columns">
-                                                                    <div class="small-3 column">
-                                                                        <legend style="color:white;">Total Years</legend>
-                                                                        <input type="text" name="danced_duration_years[]" disabled="disabled"  class="duration_years" placeholder="Total Years"/>
-                                                                    </div>
-                                                                    <div class="small-3 column">
-                                                                        <legend style="color:white;">And/Or Months</legend>
-                                                                        <input type="text" name="danced_duration_months[]" disabled="disabled"  class="duration_months" placeholder="Total Months"/>
-                                                                    </div>
-                                                                    <div class="small-3 column">
-                                                                        <legend style="color:white;">From:</legend>
-                                                                        <select name="danced_duration_from_years[]" disabled="disabled"  class="duration_from_years">
-                                                                            <option value>Year</option>
-                                                                            <?php for ($i = 2018; $i >=1000; $i--) : ?>
-                                                                                <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                            <?php endfor; ?>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="small-3 column">
-                                                                        <legend style="color:white;">To:</legend>
-                                                                        <select name="danced_duration_to_years[]" disabled="disabled"  class="duration_to_years">
-                                                                            <option value>Year</option>
-                                                                            <?php for ($i = 2018; $i >=1000; $i--) : ?>
-                                                                                <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                            <?php endfor; ?>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="large-12 columns">
-                                                            <div class="medium-5 column">
-                                                                <button type="button" class="btn btn-primary" id="remove_button" onclick="remove(this,4)"
-                                                                        style="padding: 5px 8px; background-color:red; color:ghostwhite; font-weight: bold;" >Remove</button>
-                                                            </div>
-                                                            <div class="medium-1 column"></div>
-                                                            <div class="medium-6 column">
-                                                                <button type="button" class="btn btn-primary" id="danced__with_toggle" class="danced__with_toggle"
-                                                                        style="padding: 5px 8px; background-color:grey; color:ghostwhite; font-weight: bold;" onclick="toggleDuration(this)">
-                                                                    <large> I don’t recall the date range.</large>
-                                                                </button>
-                                                                <span style = "cursor: pointer;" title="Toggle between range and duration for filling details. For specific details - change to range. For vague details - change to duration."><img src="img/help.png" style="height:15px;width:15px;"/></span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="large-12 columns" style="margin-top: 5px">
-                                                            <div class="medium-4 column"></div>
-                                                            <div class="medium-4 column">
-                                                                <button type="button" class="btn btn-primary"
-                                                                        style="padding: 5px 8px; background-color:#62ad61; color:ghostwhite; font-weight: bold;" onclick="duplicate(this)">Add Another Time Frame for this Artist</button>
-                                                            </div>
-                                                            <div class="medium-4 column"></div>
-                                                        </div>
-
-                                                    </div>
-                                                </fieldset>
-                                            </div>
-
-
-                                            <!--Collaborated with tab : Other artist-->
-                                            <div class="colbrtd_with_section tabs-panel" id="panel3v-1" style="display:none;">
-                                                <fieldset id="colab_repeat0" style="background-image: linear-gradient(#969101, white); margin-bottom: 5px;">
-                                                    <div class="large-12 columns" >
-                                                        <div class="small-6 column" style="margin-top: 5px;">
-                                                            <legend><strong style="color:white;">Collaborated With Details:</strong></legend>
-                                                        </div>
-                                                        <div class="small-6 column" style="background-color: #969101">
-                                                        </div>
-
-
-                                                        <div class="row duration_selection" value="collaborated">
-                                                            <input class="relation_type" title="collaborated" style="display:none"/>
-                                                            <div class="large-12 columns range_div" id="colbrtd_with_range_div">
-
-                                                                <div class="large-12 columns" >
-                                                                    <legend><strong style="color:white;">Range: <span style = "cursor: pointer;" title="Provide a specific time range for this relationship: Month and Year, or just Year.  If you don’t recall the specific years, please enter a general decade."><img src="img/help.png" style="height:15px;width:15px;"/></span>
-                                                                        </strong></legend>
-                                                                </div>
-
-                                                                <div class="large-12 columns">
-                                                                    <div class="medium-6 column">
-                                                                        <legend style="color:white;">From:</legend>
-                                                                        <div class="small-6 column">
-
-                                                                            <select name="collaborated_from_months[]" class="range_from_months">
-                                                                                <option value='00'>Month</option>
-                                                                                <option value='01'>January</option>
-                                                                                <option value='02'>February</option>
-                                                                                <option value='03'>March</option>
-                                                                                <option value='04'>April</option>
-                                                                                <option value='05'>May</option>
-                                                                                <option value='06'>June</option>
-                                                                                <option value='07'>July</option>
-                                                                                <option value='08'>August</option>
-                                                                                <option value='09'>September</option>
-                                                                                <option value='10'>October</option>
-                                                                                <option value='11'>November</option>
-                                                                                <option value='12'>December</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="small-6 column">
-
-                                                                            <select name="collaborated_from_years[]" class="range_from_years">
-                                                                                <option value>Year</option>
-                                                                                <?php for ($i = 2018; $i >=1000; $i--) : ?>
-                                                                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                                <?php endfor; ?>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="medium-6 column">
-                                                                        <legend style="color:white;">To:</legend>
-                                                                        <div class="small-6 column">
-
-                                                                            <select name="collaborated_to_months[]" class="range_to_months">
-                                                                                <option value='00'>Month</option>
-                                                                                <option value='01'>January</option>
-                                                                                <option value='02'>February</option>
-                                                                                <option value='03'>March</option>
-                                                                                <option value='04'>April</option>
-                                                                                <option value='05'>May</option>
-                                                                                <option value='06'>June</option>
-                                                                                <option value='07'>July</option>
-                                                                                <option value='08'>August</option>
-                                                                                <option value='09'>September</option>
-                                                                                <option value='10'>October</option>
-                                                                                <option value='11'>November</option>
-                                                                                <option value='12'>December</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="small-6 column">
-                                                                            <select name="collaborated_to_years[]" class="range_to_years">
-                                                                                <option value>Year</option>
-                                                                                <?php for ($i = 2018; $i >=1000; $i--) : ?>
-                                                                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                                <?php endfor; ?>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="large-12 columns duration_div" id="colbrtd_with_duration_div" style="display:none">
-                                                                <div class="large-12 columns">
-                                                                    <legend><strong style="color:white;">Duration: <span style = "cursor: pointer;" title="Provide total number of years and/or months for this relationship. Please also tell us over what time span this total duration was (From/To)."><img src="img/help.png" style="height:15px;width:15px;"/></span>
-                                                                        </strong></legend>
-                                                                </div>
-                                                                <div class="large-12 columns">
-                                                                    <div class="small-3 column">
-                                                                        <legend style="color:white;">Total Years</legend>
-                                                                        <input type="text" name="collaborated_duration_years[]" disabled="disabled" class="duration_years" placeholder="Total Years"/>
-                                                                    </div>
-                                                                    <div class="small-3 column">
-                                                                        <legend style="color:white;">And/Or Months</legend>
-                                                                        <input type="text" name="collaborated_duration_months[]" disabled="disabled" class="duration_months" placeholder="Total Months"/>
-                                                                    </div>
-                                                                    <div class="small-3 column">
-                                                                        <legend style="color:white;">From:</legend>
-                                                                        <select name="collaborated_duration_from_years[]" disabled="disabled" class="duration_from_years">
-                                                                            <option value>Year</option>
-                                                                            <?php for ($i = 2018; $i >=1000; $i--) : ?>
-                                                                                <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                            <?php endfor; ?>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="small-3 column">
-                                                                        <legend style="color:white;">To:</legend>
-
-                                                                        <select name="collaborated_duration_to_years[]" disabled="disabled" class="duration_to_years">
-                                                                            <option value>Year</option>
-                                                                            <?php for ($i = 2018; $i >=1000; $i--) : ?>
-                                                                                <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                                            <?php endfor; ?>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="large-12 columns">
-                                                            <div class="medium-5 column">
-                                                                <button type="button" class="btn btn-primary" id="remove_button" onclick="remove(this,4)"
-                                                                        style="padding: 5px 8px; background-color:red; color:ghostwhite; font-weight: bold;" >Remove</button>
-                                                            </div>
-                                                            <div class="medium-1 column"></div>
-                                                            <div class="medium-6 column">
-                                                                <button type="button" class="btn btn-primary" id="colbrtd_with_toggle" class="colbrtd_with_toggle"
-                                                                        style="padding: 5px 8px; background-color:grey; color:ghostwhite; font-weight: bold;" onclick="toggleDuration(this)">
-                                                                    <large >I don’t recall the date range.</large>
-                                                                </button>
-                                                                <span style = "cursor: pointer;" title="Toggle between range and duration for filling details. For specific details - change to range. For vague details - change to duration."><img src="img/help.png" style="height:15px;width:15px;"/></span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="large-12 columns" style="margin-top: 5px">
-                                                            <div class="medium-4 column"></div>
-                                                            <div class="medium-4 column">
-                                                                <button type="button" class="btn btn-primary"
-                                                                        style="padding: 5px 8px; background-color:#62ad61; color:ghostwhite; font-weight: bold;" onclick="duplicate(this)">Add Another Time Frame for this Artist</button>
-                                                            </div>
-                                                            <div class="medium-4 column"></div>
-                                                        </div>
-
-                                                    </div>
-                                                </fieldset>
-                                            </div>
-
+                                            <!-- Influenced By tab -->
                                             <div class="tabs-panel influenced_by_section" id="panel4v-1">
                                                 <fieldset>
                                                     <legend><strong>Influenced by Details:</strong></legend>
@@ -795,6 +441,11 @@ $artist_fullname=$artist_fname.' '.$artist_lname;
 
 <script type="text/javascript">
     var count = 0;
+
+    function checkfunction(){
+      $('')
+    }
+
     function duplicate(divName) {
         var rootToDuplicate = divName.parentNode.parentNode.parentNode.parentNode;
         var rootsId = divName.parentNode.parentNode.parentNode.parentNode.id;
@@ -1098,185 +749,62 @@ $artist_fullname=$artist_fname.' '.$artist_lname;
 
 
     function dateScripts(){
-        $(function(){
-            $('.start_date').fdatepicker({
-                initialDate: '',
-                format: 'yyyy-mm-dd',
-                disableDblClickSelection: true,
-                leftArrow:'<<',
-                rightArrow:'>>',
-                closeIcon:'X',
-                closeButton: true
-            });
-        });
-        $(".start_date").change(function(){
-            var startDate = $(this).val();
-            var endDate = $(this).closest('.duration_selection').find(".end_date").val();
-            if(startDate != "" && endDate != ""){
-                if ((Date.parse(startDate) >= Date.parse(endDate))) {
-                    alert("Start Date cannot be greater than end date");
-                    $(this).val("");
-                } else {
-                    var st = new Date(startDate);
-                    var et= new Date(endDate);
-                    var millisecondsPerDay = 1000 * 60 * 60 * 24;
-                    var millisBetween = et.getTime() - st.getTime();
-                    var days = millisBetween / millisecondsPerDay;
-                    var years = Math.round(days/365);
-                    var months = Math.round(days/30 - (years*12));
-                    if(months < 0){
-                        years = years - 1;
-                        months = months + 12;
-                    }
-                    $(this).closest('.duration_selection').find(".duration_years").val(years);
-                    $(this).closest('.duration_selection').find(".duration_months").val(months);
-                    $(this).closest('.duration_selection').find(".duration_years").prop("readonly",true);
-                    $(this).closest('.duration_selection').find(".duration_months").prop("readonly",true);
-                    $(this).closest('.duration_selection').find(".duration_months").change();
-                }
-            } else if(startDate == "" && endDate == ""){
-                $(this).closest('.duration_selection').find(".duration_years").prop("readonly",false);
-                $(this).closest('.duration_selection').find(".duration_months").prop("readonly",false);
-            } else {
-                $(this).closest('.duration_selection').find(".duration_years").val(0);
-                $(this).closest('.duration_selection').find(".duration_months").val(0);
-                $(this).closest('.duration_selection').find(".duration_years").prop("readonly",true);
-                $(this).closest('.duration_selection').find(".duration_months").prop("readonly",true);
-                $(this).closest('.duration_selection').find(".duration_months").change();
-            }
-        });
-        $(function(){
-            $('.end_date').fdatepicker({
-                initialDate: '',
-                format: 'yyyy-mm-dd',
-                disableDblClickSelection: true,
-                leftArrow:'<<',
-                rightArrow:'>>',
-                closeIcon:'X',
-                closeButton: true
-            });
-        });
-        $(".end_date").change(function(){
-            var endDate = $(this).val();
-            var startDate = $(this).closest('.duration_selection').find(".start_date").val();
-            if(startDate != "" && endDate != ""){
-                if ((Date.parse(startDate) >= Date.parse(endDate))) {
-                    alert("Start Date cannot be greater than end date");
-                    $(this).val("");
-                } else {
-                    console.log(startDate + " " + endDate);
-                    var st = new Date(startDate);
-                    var et= new Date(endDate);
-                    var millisecondsPerDay = 1000 * 60 * 60 * 24;
-                    var millisBetween = et.getTime() - st.getTime();
-                    var days = millisBetween / millisecondsPerDay;
-                    var years = Math.round(days/365);
-                    var months = Math.round(days/30 - (years*12));
-                    if(months < 0){
-                        years = years - 1;
-                        months = months + 12;
-                    }
-                    $(this).closest('.duration_selection').find(".duration_years").val(years);
-                    $(this).closest('.duration_selection').find(".duration_months").val(months);
-                    $(this).closest('.duration_selection').find(".duration_years").prop("readonly",true);
-                    $(this).closest('.duration_selection').find(".duration_months").prop("readonly",true);
-                    $(this).closest('.duration_selection').find(".duration_months").change();
-                }
-            } else if(startDate == "" && endDate == ""){
-                $(this).closest('.duration_selection').find(".duration_years").prop("readonly",false);
-                $(this).closest('.duration_selection').find(".duration_months").prop("readonly",false);
-            } else {
-                $(this).closest('.duration_selection').find(".duration_years").val(0);
-                $(this).closest('.duration_selection').find(".duration_months").val(0);
-                $(this).closest('.duration_selection').find(".duration_years").prop("readonly",true);
-                $(this).closest('.duration_selection').find(".duration_months").prop("readonly",true);
-                $(this).closest('.duration_selection').find(".duration_months").change();
-            }
-        });
-
-        //Range validation
-        $(".range_from_months").change(function(){
-            var from_months = $(this).val();
-            var from_years = $(this).closest('.duration_selection').find(".range_from_years").val();
-            var to_months = $(this).closest('.duration_selection').find(".range_to_months").val();
-            var to_years = $(this).closest('.duration_selection').find(".range_to_years").val();
-
-            validateRange(from_months, from_years, to_months, to_years, $(this));
-        });
-        $(".range_from_years").change(function(){
-            var from_months = $(this).closest('.duration_selection').find(".range_from_months").val();
-            var from_years = $(this).val();
-            var to_months = $(this).closest('.duration_selection').find(".range_to_months").val();
-            var to_years = $(this).closest('.duration_selection').find(".range_to_years").val();
-
-            validateRange(from_months, from_years, to_months, to_years, $(this));
-        });
-        $(".range_to_months").change(function(){
-            var from_months = $(this).closest('.duration_selection').find(".range_from_months").val();
-            var from_years = $(this).closest('.duration_selection').find(".range_from_years").val();
-            var to_months = $(this).val();
-            var to_years = $(this).closest('.duration_selection').find(".range_to_years").val();
-
-            validateRange(from_months, from_years, to_months, to_years, $(this));
-        });
-        $(".range_to_years").change(function(){
-            var from_months = $(this).closest('.duration_selection').find(".range_from_months").val();
-            var from_years = $(this).closest('.duration_selection').find(".range_from_years").val();
-            var to_months = $(this).closest('.duration_selection').find(".range_to_months").val();
-            var to_years = $(this).val();
-
-            validateRange(from_months, from_years, to_months, to_years, $(this));
-        });
 
 
-        //Duration validation
-        $(".duration_years").change(function(){
-            var num_years = $(this).val();
-            var num_months = $(this).closest('.duration_selection').find(".duration_months").val();
-            var from_years = $(this).closest('.duration_selection').find(".duration_from_years").val();
-            var to_years = $(this).closest('.duration_selection').find(".duration_to_years").val();
-
-            validateDuration(num_years, num_months, from_years, to_years, $(this));
-        });
-        $(".duration_months").change(function(){
-            var num_years = $(this).closest('.duration_selection').find(".duration_years").val();
-            var num_months = $(this).val();
-            var from_years = $(this).closest('.duration_selection').find(".duration_from_years").val();
-            var to_years = $(this).closest('.duration_selection').find(".duration_to_years").val();
-
-            validateDuration(num_years, num_months, from_years, to_years, $(this));
-        });
-
-        $(".duration_from_years").change(function(){
-            var num_years = $(this).closest('.duration_selection').find(".duration_years").val();
-            var num_months = $(this).closest('.duration_selection').find(".duration_months").val();
-            var from_years = $(this).val();
-            var to_years = $(this).closest('.duration_selection').find(".duration_to_years").val();
-
-            validateDuration(num_years, num_months, from_years, to_years, $(this));
-
-        });
-
-        $(".duration_to_years").change(function(){
-            var num_years = $(this).closest('.duration_selection').find(".duration_years").val();
-            var num_months = $(this).closest('.duration_selection').find(".duration_months").val();
-            var from_years = $(this).closest('.duration_selection').find(".duration_from_years").val();
-            var to_years = $(this).val();
-
-            validateDuration(num_years, num_months, from_years, to_years, $(this));
-
-        });
 
         $(".relationship").click(function(){
             console.log($(this).attr("title"));
             var relation_section = $(this).closest(".row").find("."+$(this).attr("title"));
-            if($(this).attr("title") == "influenced_by_section"){
+            if($(this).attr("title") == "studied_under_section"){
+                $(this).prop('checked', false);
+                $(this).hide();
+                $(relation_section).find(".studied").hide();
+                $(relation_section).find(".not_studied").show();
+            }
+            else if($(this).attr("title") == "danced_with_section"){
+                $(this).prop('checked', false);
+                $(this).hide();
+                $(relation_section).find(".danced").hide();
+                $(relation_section).find(".not_danced").show();
+            }
+            else if($(this).attr("title") == "collaborated_with_section"){
+                $(this).prop('checked', false);
+                $(this).hide();
+                $(relation_section).find(".collaborated").hide();
+                $(relation_section).find(".not_collaborated").show();
+            }
+            else if($(this).attr("title") == "influenced_by_section"){
                 $(this).prop('checked', false);
                 $(this).hide();
                 $(relation_section).find(".influenced").hide();
                 $(relation_section).find(".not_influenced").show();
             }
         });
+
+        $(".studied_under").click(function(){
+            var relation_checkbox = $(this).closest(".not_studied").parent().parent().parent().parent().parent().find(".relation_" + "studied" + "_cb");
+            $(relation_checkbox).prop('checked', true);
+            $(relation_checkbox).show();
+            $(this).closest("fieldset").find(".studied").show();
+            $(this).closest("fieldset").find(".not_studied").hide();
+        });
+
+        $(".danced_with").click(function(){
+            var relation_checkbox = $(this).closest(".not_danced").parent().parent().parent().parent().parent().find(".relation_" + "danced" + "_cb");
+            $(relation_checkbox).prop('checked', true);
+            $(relation_checkbox).show();
+            $(this).closest("fieldset").find(".danced").show();
+            $(this).closest("fieldset").find(".not_danced").hide();
+        });
+
+        $(".collaborated_with").click(function(){
+            var relation_checkbox = $(this).closest(".not_collaborated").parent().parent().parent().parent().parent().find(".relation_" + "collaborated" + "_cb");
+            $(relation_checkbox).prop('checked', true);
+            $(relation_checkbox).show();
+            $(this).closest("fieldset").find(".collaborated").show();
+            $(this).closest("fieldset").find(".not_collaborated").hide();
+        });
+
         $(".influenced_by").click(function(){
             var relation_checkbox = $(this).closest(".not_influenced").parent().parent().parent().parent().parent().find(".relation_" + "influenced" + "_cb");
             $(relation_checkbox).prop('checked', true);
@@ -1286,99 +814,7 @@ $artist_fullname=$artist_fname.' '.$artist_lname;
         });
     }
 
-    function validateRange(from_months, from_years, to_months, to_years, curr){
 
-        var relation_type = curr.closest('.duration_selection').find(".relation_type").attr("title");
-        var relation_checkbox = curr.closest(".duration_selection").parent().parent().parent().parent().parent().parent().find(".relation_" + relation_type + "_cb");
-
-        if ((to_years!=0 && from_years!=0) && to_years < from_years) {
-            alert("Start year cannot be greater than end year");
-            curr.val("");
-        }
-        else if((to_years!=0 && from_years!=0) && (to_years == from_years) && (to_months < from_months )){
-            alert("Start month cannot be greater than end month for same year");
-            curr.val("");
-        }
-        validateAllForCheckbox(curr);
-    }
-
-    function validateDuration(num_years, num_months, from_years, to_years, curr){
-
-        var relation_type = curr.closest('.duration_selection').find(".relation_type").attr("title");
-        var relation_checkbox = curr.closest(".duration_selection").parent().parent().parent().parent().parent().parent().find(".relation_" + relation_type + "_cb");
-
-        if (to_years!=0 && to_years < from_years) {
-            alert("Start year cannot be greater than end year");
-            curr.val("");
-        }
-        else if(((num_years != "") || (num_years!=0)) && ((from_years != "") || (from_years!=0)) && ((to_years != "") || (to_years!=0)) ){
-            if((to_years - from_years < num_years)){
-                alert("Duration years can't be more than the start and end years.");
-                curr.val("");
-            }
-        }
-        validateAllForCheckbox(curr);
-    }
-
-    function validateAllForCheckbox(curr){
-        var relation_root = curr.closest(".duration_selection").parent().parent().parent();
-
-        var relation_type = curr.closest('.duration_selection').find(".relation_type").attr("title");
-        var relation_checkbox = curr.closest(".duration_selection").parent().parent().parent().parent().parent().parent().find(".relation_" + relation_type + "_cb");
-
-        //relation_root.childNodes;
-        var childCount ;
-        if(relation_root[0] != undefined)
-            childCount = relation_root[0].childElementCount;
-        else
-            childCount = relation_root.childElementCount;
-
-        var i =0;
-        if(childCount>0) {
-            while(childCount>0){
-                var node = relation_root[0].childNodes[i];
-                if(node.id != null) {
-                    if(!node.querySelector(".duration_years").disabled) {
-                        var num_years = node.querySelector(".duration_years").value;
-                        var num_months = node.querySelector(".duration_months").value;
-                        var from_years = node.querySelector(".duration_from_years").value;
-                        var to_years = node.querySelector(".duration_to_years").value;
-                        if(((from_years == 0) || (to_years == 0) || (from_years == "") || (to_years == "")) || (((num_years == 0) && (num_months==0)) || ((num_years == "") && (num_months=="")))){
-                            $(relation_checkbox).prop('checked', false);
-                            $(relation_checkbox).hide();
-                        }else{
-                            $(relation_checkbox).prop('checked', true);
-                            $(relation_checkbox).show();
-                            return;
-                        }
-                    }
-                    else{
-
-                        var from_months = node.querySelector(".range_from_months").value;
-                        var from_years = node.querySelector(".range_from_years").value;
-                        var to_months = node.querySelector(".range_to_months").value;
-                        var to_years = node.querySelector(".range_to_years").value;
-
-                        if(((from_years == 0) || (to_years == 0) || (from_years == "") || (to_years == "") ||
-                            (to_months == "") || (to_months == "") || (from_months== "") || (from_months == ""))){
-                            $(relation_checkbox).prop('checked', false);
-                            $(relation_checkbox).hide();
-                        }else{
-                            $(relation_checkbox).prop('checked', true);
-                            $(relation_checkbox).show();
-                            return;
-                        }
-
-                    }
-
-                    childCount--;
-                }
-                i++;
-            }
-        }
-
-
-    }
 
 
     $(document).ready(function(){
@@ -1467,86 +903,6 @@ $artist_fullname=$artist_fname.' '.$artist_lname;
         }
     });
 
-
-
-    /*
-    * toggle duration button function to toggle from
-    * range to duration
-    * */
-    function toggleDuration(buttonName) {
-        var _id = buttonName.id;
-
-        var prefix = _id.substring(0, 13);
-        var suffix = _id.charAt(19);
-
-        var dur_div_id = prefix+"duration_div"+suffix;
-        var dur_range_id = prefix+"range_div"+suffix;
-
-
-        var dur_text = "I don’t recall the date range.";
-        var range_text = "Change to Range";
-
-        console.log("dur div id : ", dur_div_id);
-        console.log("dur range id : ", dur_range_id);
-
-        var button = document.getElementById(_id);
-        var button_val = button.innerText;
-
-        var dur_div = document.getElementById(dur_div_id);
-        var range_div = document.getElementById(dur_range_id);
-
-        if(button_val == dur_text){
-            button.innerText = range_text;
-            dur_div.style.display="block";
-            range_div.style.display="none";
-
-            all = range_div.getElementsByTagName('select');
-            for (i = 0; i < all.length; i++) {
-                all[i].setAttribute("disabled", "disabled");
-            }
-
-            all = dur_div.getElementsByTagName('input');
-            for (i = 0; i < all.length; i++) {
-                all[i].removeAttribute("disabled");
-            }
-            all = dur_div.getElementsByTagName('select');
-            for (i = 0; i < all.length; i++) {
-                all[i].removeAttribute("disabled");
-            }
-            var num_years = $(dur_div).closest('.duration_selection').find(".duration_years").val();
-            var num_months = $(dur_div).closest('.duration_selection').find(".duration_months").val();
-            var from_years = $(dur_div).closest('.duration_selection').find(".duration_from_years").val();
-            var to_years = $(dur_div).closest('.duration_selection').find(".duration_to_years").val();
-
-            validateDuration(num_years, num_months, from_years, to_years, $(dur_div));
-
-        }
-        else{
-            button.innerText = dur_text;
-            range_div.style.display="block";
-            dur_div.style.display="none";
-
-            all = range_div.getElementsByTagName('select');
-            for (i = 0; i < all.length; i++) {
-                all[i].removeAttribute("disabled");
-            }
-            all = dur_div.getElementsByTagName('input');
-            for (i = 0; i < all.length; i++) {
-                all[i].setAttribute("disabled", "disabled");
-            }
-            all = dur_div.getElementsByTagName('select');
-            for (i = 0; i < all.length; i++) {
-                all[i].setAttribute("disabled", "disabled");
-            }
-
-            var from_months = $(range_div).closest('.duration_selection').find(".range_from_months").val();
-            var from_years = $(range_div).closest('.duration_selection').find(".range_from_years").val();
-            var to_months = $(range_div).closest('.duration_selection').find(".range_to_months").val();
-            var to_years = $(range_div).closest('.duration_selection').find(".range_to_years").val();
-
-            validateRange(from_months, from_years, to_months, to_years, $(range_div));
-        }
-    }
 </script>
 <?php
 include 'form_links_footer.php';
