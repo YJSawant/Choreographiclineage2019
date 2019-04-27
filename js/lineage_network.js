@@ -192,7 +192,7 @@
           totalNodes.push(nodeDetails);     
       } 
       
-      console.log(totalNodes);     
+      //console.log(totalNodes);     
       for(var i=0; i <allNodes.length; i++) {
         var artistRelation= allNodes[i].artist_relation;
         if(artistRelation){
@@ -382,6 +382,8 @@
           document.getElementById('major-search-box').value = "";
           document.getElementById('degree-search-box').value = "";
           document.getElementById('ethnicity-search-box').value = ""; 
+          $('input:checkbox').removeAttr('checked');
+
           for (var i = 0; i < totalNodes.length; i++){ 
             totalNodes[i]['hidden'] = false;  
           }
@@ -424,7 +426,9 @@
               document.getElementById('country-search-box').value = "";
               document.getElementById('major-search-box').value = "";
               document.getElementById('degree-search-box').value = "";
-              document.getElementById('ethnicity-search-box').value = "";      
+              document.getElementById('ethnicity-search-box').value = "";  
+               $('input:checkbox').removeAttr('checked');
+
           var req_edges= [];
           var edges_to_update = [];
           for (var i = 0; i < totalEdges.length; i++) {
@@ -476,12 +480,10 @@
                 curr_edge.hidden = true;
               }
               edges_to_update.push(curr_edge);
-            }
-            
+            }           
           }
-        }
-        edges.update(edges_to_update);   
-        connected_node = totalNodes;
+          edges.update(edges_to_update);   
+          connected_node = totalNodes;
           for (var i = 0; i < totalNodes.length; i++){ 
             if(req_edges.includes(totalNodes[i].id))
             {
@@ -491,9 +493,8 @@
               connected_node[i]['hidden'] = true; 
             }            
         }
-      nodes.update(connected_node);
-      console.log(connected_node);
-      console.log(edges_to_update);
+        nodes.update(connected_node);
+        }
       });
 
       // code for the autocomplete searchbox
@@ -537,12 +538,11 @@
 
       // method to focus network on the node based on artist name searched for
       $searchbox.keypress(function(e) {
-        // if enter is pressed
         if ((e.keyCode || e.which) == 13) {
-          // get node_id of the artist searched for
           var searched_node_id = $("#searchbox_node_id").val();
-          //console.log(searched_node_id);
+          console.log(searched_node_id);
           var search_text = $("#searchTextValue").val();
+          console.log(search_text);
           if(!searched_node_id)
           {
             $('#search_text').html('&nbsp&nbsp'+"Please correct your search criteria.");
@@ -667,6 +667,20 @@
      
       submit = document.getElementById('submit');
       submit.addEventListener('click',(function(e) {
+        for (var i = 0; i < totalNodes.length; i++){ 
+          totalNodes[i]['hidden'] = false;  
+        }
+        for (var i = 0; i < totalEdges.length; i++){ 
+          totalEdges[i]['hidden'] = false;  
+          totalEdges[i]['color'] = "#C0C0C0";
+        }
+        nodes = new vis.DataSet(totalNodes);
+        edges = new vis.DataSet(totalEdges);
+        var data = {
+          nodes: nodes,
+          edges: edges
+        };
+      createWholeNetwork(container, data, options); 
           var searched_node_id = $("#searchbox_node_id").val();
           var search_text = $("#searchTextValue").val();
           var university_text = $("#uniTextValue").val();
@@ -689,8 +703,8 @@
           // console.log(country_text);
           // console.log(major_text);
           // console.log(degree_text);
-          console.log(living_val);
-          console.log(gender_val);
+          // console.log(living_val);
+          // console.log(gender_val);
 
           if(searched_node_id && !university_text && !state_text && !country_text
             && !major_text && !degree_text && !ethnicity_text && !living_val
@@ -762,25 +776,140 @@
 
   function createWholeNetwork(container, data, options)
   {      
+      options = {
+        nodes: {
+          borderWidth: 10, // thickness of border around nodes
+          color: {
+            background: '#FFFFFF', // default background color of node, visible when artist doesn't have an image
+            hover: {
+              background:'#89082f', // background color of node on hover
+              border: '#000000' // border color of node on hover
+            }
+          },
+          size: 10 // size of node
+        },
+
+        edges: {
+          smooth: {
+            enabled: true, // allows curving of edges between nodes
+            type: "dynamic", // curvature of edges is associated with physics of the network when set to dynamic
+          },
+
+          color: edge_colors_dict["default_color"], // color of the edges
+
+          font: {
+            size: 0 // font size set to zero so that relationship name between nodes isn't desplayed on network
+          },
+
+          arrows: {
+            to: {
+              scaleFactor: 3 // defines size of arrowhead
+            }
+          }
+        },
+
+        interaction: {
+          hover: true, // color of node and its edges change when hovered
+          tooltipDelay: 0 // time delay in displaying tooltip on hovering over a node
+        },
+        physics: {
+          stabilization: {
+            iterations: 200, // maximum number of iteration to stabilize
+            updateInterval: 10, // defines how many iterations the stabilizationProgress event is triggered
+            onlyDynamicEdges: false, // can be set to true if nodes have predefined positions
+            fit: true // forces view to fit all nodes and edges after stabilization
+          },
+          barnesHut: {
+            gravitationalConstant: -30000, // setting repulsion (negative value) between the nodes
+            centralGravity: 0.2,
+            avoidOverlap: 5 // pulls entire network to the center
+          }
+        }
+      };
+
         var container = document.getElementById('my_network');
         network = new vis.Network(container, data, options);  
         network.on("stabilizationIterationsDone", function () {
-          network.setOptions( { physics: false } );
-        });       
-        
+          network.setOptions( { physics: true } );
+          });          
+          
+        network.on('dragging', function(obj){
+          $("#my_network").css("cursor", "-webkit-grabbing");
+        });
+  
         network.on('hoverNode', function (obj) {
-          // console.log("node hovered");
           $("#my_network").css("cursor", "pointer");
           $("#my_network").attr('title','No. of connections= '+network.getConnectedEdges(obj.node).length);
         });
   }
 
   function createVisNetwork(container, data, options)
-  {      
+  {     
+        options = {
+          nodes: {
+            borderWidth: 10, // thickness of border around nodes
+            color: {
+              background: '#FFFFFF', // default background color of node, visible when artist doesn't have an image
+              hover: {
+                background:'#89082f', // background color of node on hover
+                border: '#000000' // border color of node on hover
+              }
+            },
+            size: 10 // size of node
+          },
+
+          edges: {
+            smooth: {
+              enabled: true, // allows curving of edges between nodes
+              type: "dynamic", // curvature of edges is associated with physics of the network when set to dynamic
+            },
+
+            color: edge_colors_dict["default_color"], // color of the edges
+
+            font: {
+              size: 0 // font size set to zero so that relationship name between nodes isn't desplayed on network
+            },
+
+            arrows: {
+              to: {
+                scaleFactor: 3 // defines size of arrowhead
+              }
+            }
+          },
+
+          interaction: {
+            hover: true, // color of node and its edges change when hovered
+            tooltipDelay: 0 // time delay in displaying tooltip on hovering over a node
+          },
+          physics: {
+            stabilization: {
+              iterations: 200, // maximum number of iteration to stabilize
+              updateInterval: 10, // defines how many iterations the stabilizationProgress event is triggered
+              onlyDynamicEdges: false, // can be set to true if nodes have predefined positions
+              fit: true // forces view to fit all nodes and edges after stabilization
+            },
+            barnesHut: {
+              gravitationalConstant: -30000, // setting repulsion (negative value) between the nodes
+              centralGravity: 0.2,
+              avoidOverlap: 5 // pulls entire network to the center
+            }
+          }
+        };
+        var container = document.getElementById('my_network');
         network = new vis.Network(container, data, options);
         network.on("stabilizationIterationsDone", function () {
-        network.setOptions( { physics: false } );
-        });                 
+        network.setOptions( { physics: true } );
+        });          
+        
+        network.on('dragging', function(obj){
+          $("#my_network").css("cursor", "-webkit-grabbing");
+        });
+
+        network.on('hoverNode', function (obj) {
+          $("#my_network").css("cursor", "pointer");
+          $("#my_network").attr('title','No. of connections= '+network.getConnectedEdges(obj.node).length);
+        });
+
         network.on('selectNode', function (obj) {
           var side_nav = document.getElementById("mySidenav");
           side_nav.style.width = "300px";	
