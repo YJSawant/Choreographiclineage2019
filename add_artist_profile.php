@@ -41,6 +41,58 @@ if(isset($_SESSION["contribution_type"])) {
 ?>
 
 <html>
+<style>
+.progressbar {
+      counter-reset: step;
+  }
+  .progressbar li {
+      list-style-type: none;
+      width: 25%;
+      float: left;
+      font-size: 12px;
+      position: relative;
+      text-align: center;
+      text-transform: uppercase;
+      color: #7d7d7d;
+  }
+  .progressbar li:before {
+      width: 30px;
+      height: 30px;
+      content: counter(step);
+      counter-increment: step;
+      line-height: 30px;
+      border: 2px solid #7d7d7d;
+      display: block;
+      text-align: center;
+      margin: 0 auto 10px auto;
+      border-radius: 50%;
+      background-color: white;
+  }
+  .progressbar li:after {
+      width: 100%;
+      height: 2px;
+      content: '';
+      position: absolute;
+      background-color: #7d7d7d;
+      top: 15px;
+      left: -50%;
+      z-index: -1;
+  }
+  .progressbar li:first-child:after {
+      content: none;
+  }
+  .progressbar li.active {
+      color: green;
+  }
+  .progressbar li.active:before {
+      border-color: #55b776;
+  }
+  .progressbar li.active + li:after {
+      background-color: #55b776;
+  }
+
+</style>
+
 <?php if(isset($_SESSION["user_email_address"])): ?>
     <head>
         <title>Add Artist</title> 
@@ -57,11 +109,13 @@ if(isset($_SESSION["contribution_type"])) {
     <body>
     <form id="add_user_profile_form" name="add_user_profile_form" method="post" action="add_artist_personal_information.php" enctype="multipart/form-data">
         <div class="row">
-            <div class="progress" role="progressbar" tabindex="0" aria-valuenow="10" aria-valuemin="0" aria-valuetext="10 percent" aria-valuemax="100">
-                  <span class="progress-meter" style="width: 10%">
-                    <p class="progress-meter-text">10%</p>
-                  </span>
-            </div>
+            <ul class="progressbar">
+          <li class="active">Add Artist Profile</li>
+          <li>Add Artist Personal Info</li>
+          <li>Add Artist Biography</li>
+          <li>Add Lineage</li>
+          
+  </ul>
         </div>
         <div class="row">
             <div class="medium-10 column">
@@ -335,6 +389,12 @@ if(isset($_SESSION["contribution_type"])) {
                     <span><?php echo (($_SESSION['timeline_flow'] == "view")?"":"Save & ") ?>Next</span>
                 </button>
             </div>
+            <div class="large-2 small-8 columns">
+            <button class="primary button expanded" id="next1" type="button">
+                <span>Continue Later</span>
+            </button>
+        </div>
+   
             <div class="column">
             </div>
         </div>
@@ -343,7 +403,7 @@ if(isset($_SESSION["contribution_type"])) {
         function saveAndBack() {
             console.log($("#add_user_profile_form").serialize());
             $.ajax({
-                type: "POST",
+                type: "GET",
                 url: 'save_add_artist_profile_back.php',
                 data: $("#add_user_profile_form").serialize(),
                 success: function() {
@@ -400,6 +460,11 @@ if(isset($_SESSION["contribution_type"])) {
         // $("#next").click(function() {
         //  window.open("add_artist_personal_information.php","_self");
         // });
+              $("#next1").click(function() {
+        window.open("profiles.php","_self");
+         });
+
+
         $(document).ready(function(){
             prepopulated = "<?php echo $prepopulated ?>";
             contribution_form_type = "<?php echo $contribution_form_type ?>";
@@ -624,6 +689,7 @@ include 'footer.php';
         }
     })
  });
+
 </script>
   <!-- <script>  
  $(document).ready(function(){  

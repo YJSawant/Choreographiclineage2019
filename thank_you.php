@@ -4,7 +4,13 @@ include 'menu.php';
 include 'util.php';
 
 my_session_start();
+include 'connection_open.php';
+                    $fname=$_SESSION["artist_first_name"];
+                    $query = "UPDATE artist_profile
+                    SET status=100 WHERE artist_first_name= '$fname'";
 
+                    $result = mysqli_query($dbc,$query)
+                    or die('Error querying database.: ' . mysqli_error());
 
 error_reporting(0);
 

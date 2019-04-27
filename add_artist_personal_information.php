@@ -1,3 +1,53 @@
+<style>
+.progressbar {
+      counter-reset: step;
+  }
+  .progressbar li {
+      list-style-type: none;
+      width: 25%;
+      float: left;
+      font-size: 12px;
+      position: relative;
+      text-align: center;
+      text-transform: uppercase;
+      color: #7d7d7d;
+  }
+  .progressbar li:before {
+      width: 30px;
+      height: 30px;
+      content: counter(step);
+      counter-increment: step;
+      line-height: 30px;
+      border: 2px solid #7d7d7d;
+      display: block;
+      text-align: center;
+      margin: 0 auto 10px auto;
+      border-radius: 50%;
+      background-color: white;
+  }
+  .progressbar li:after {
+      width: 100%;
+      height: 2px;
+      content: '';
+      position: absolute;
+      background-color: #7d7d7d;
+      top: 15px;
+      left: -50%;
+      z-index: -1;
+  }
+  .progressbar li:first-child:after {
+      content: none;
+  }
+  .progressbar li.active {
+      color: green;
+  }
+  .progressbar li.active:before {
+      border-color: #55b776;
+  }
+  .progressbar li.active + li:after {
+      background-color: #55b776;
+  }
+</style>
 <?php
 include 'path.php';
 include 'menu.php';
@@ -23,11 +73,35 @@ if(isset($_SESSION["user_email_address"]) && $_SESSION["timeline_flow"] != "view
         //$_SESSION["profile_selection"] = $_POST["profile_selection"];
         $is_artist= $_SESSION["profile_selection"];
     }
-
+    if(isset($_POST["artist_first_name"]))
+    {
     if(isset($_POST["artist_first_name"]) && !empty($_POST["artist_first_name"])){
         $_SESSION["artist_first_name"] = $_POST["artist_first_name"];
         $first_name = $_POST["artist_first_name"];
+         include 'connection_open.php';
+
+                    $fname=$_SESSION["artist_first_name"];
+                    $query1 = "SELECT STATUS FROM artist_profile
+                    WHERE artist_first_name= '$fname'";
+
+                    $result1 = mysqli_query($dbc,$query1)
+                    or die('Error querying database.: ' . mysqli_error());
+                    $resultant = mysqli_fetch_array($result1);
+
+                    $max=0;
+                    if($resultant['STATUS']>25){
+                        $max=$resultant['STATUS'];
+                    }
+                    else{
+                        $max=25;
+                    }
+                    $query = "UPDATE artist_profile
+                    SET status=$max WHERE artist_first_name= '$fname'";
+
+                    $result = mysqli_query($dbc,$query)
+                    or die('Error querying database.: ' . mysqli_error());
     }
+
 
     if(isset($_POST["artist_last_name"]) && !empty($_POST["artist_last_name"])){
         $_SESSION["artist_last_name"] = $_POST["artist_last_name"];
@@ -48,6 +122,7 @@ if(isset($_SESSION["user_email_address"]) && $_SESSION["timeline_flow"] != "view
         $_SESSION["date_of_birth"] = $_POST["date_of_birth"];
         $dob = $_POST["date_of_birth"];
     }
+    // echo $_SESSION["date_of_birth"];
 
     if(isset($_POST["date_of_death"]) && !empty($_POST["date_of_death"])){
         $_SESSION["date_of_death"] = $_POST["date_of_death"];
@@ -68,7 +143,17 @@ if(isset($_SESSION["user_email_address"]) && $_SESSION["timeline_flow"] != "view
         $_SESSION["other_artist_text_input"] = $_POST["other_artist_text_input"];
         $genre_other = $_POST["other_artist_text_input"];
     }
-
+}
+else{
+    $first_name = $_SESSION["artist_first_name"];
+    $last_name = $_SESSION["artist_last_name"];
+    $email_address = $_SESSION["artist_email_address"];
+    $status = $_SESSION["artist_status"];
+    $dob = $_SESSION["date_of_birth"];
+    $dod = $_SESSION["date_of_death"];
+    $genre = $_SESSION["artist_genre"];
+    $genre_other = $_SESSION["other_artist_text_input"];
+}
 
     if($is_artist != "" || $first_name != "" || $last_name != "" || $email_address != ""
         || $status != "" || $dob != "" || $dod != "" || $genre != "" || $genre_other != ""){
@@ -86,7 +171,8 @@ if(isset($_SESSION["user_email_address"]) && $_SESSION["timeline_flow"] != "view
             artist_dod,
             artist_genre,
             genre_other,
-            profile_name)
+            profile_name,
+            STATUS)
             VALUES
             (
             '$is_artist',
@@ -98,7 +184,8 @@ if(isset($_SESSION["user_email_address"]) && $_SESSION["timeline_flow"] != "view
             '$dod',
             '$genre',
             '$genre_other',
-            '$user_email_address'
+            '$user_email_address',
+            25
             )";
 
             $result = mysqli_query($dbc,$query)
@@ -166,11 +253,13 @@ include 'form_links_header.php'
 <form id="add_artist_personal_id" name="add_artist_personal_id" enctype="multipart/form-data" action="add_artist_biography.php" method="post">
     <!-- Getting gender info-->
     <div class="row">
-        <div class="progress" role="progressbar" tabindex="0" aria-valuenow="20" aria-valuemin="0" aria-valuetext="20 percent" aria-valuemax="100">
-                <span class="progress-meter" style="width: 20%">
-                    <p class="progress-meter-text">20%</p>
-                </span>
-        </div>
+        <ul class="progressbar">
+          <li class="active"><a href="add_artist_profile.php">Add Artist Profile</a></li>
+          <li class="active">Add Artist Personal Info</li>
+          <li>Add Artist Biography</li>
+          <li>Add Lineage</li>
+          
+  </ul>
     </div>
     <div class="row">
         <p align="middle"><h2><strong>PERSONAL INFORMATION</strong></h2></p>
@@ -345,8 +434,8 @@ include 'form_links_header.php'
         <div class="row">
             <fieldset class="large-2 columns">
                 <label><legend><strong>Your Date of Birth</strong><span style="color:red;font-weight: bold;"> *</span></legend>
-                    <input type="date" class="date_of_birth" id="date_of_birth" placeholder="mm-dd-yyyy" name="date_of_birth" required
-                           value="<?php echo isset($_SESSION['date_of_birth'])?$_SESSION['date_of_birth']:'' ?>"
+                    <input type="date" class="date_of_birth" id="date_of_birth" placeholder="yyyy-mm-dd" name="date_of_birth" required
+                           value="<?php echo isset($_SESSION["date_of_birth"])?$_SESSION["date_of_birth"]:'' ?>"
                            onblur="datevalidation()" />
                 </label>
             </fieldset>
@@ -1097,6 +1186,11 @@ include 'form_links_header.php'
                 <span><?php echo (($_SESSION['timeline_flow'] == "view")?"":"Save & ") ?>Next</span>
             </button>
         </div>
+                 <div class="large-2 small-8 columns">
+            <button class="primary button expanded" id="next1" type="button">
+                <span>Continue Later</span>
+            </button>
+        </div>
         <div class="column">
         </div>
     </div>
@@ -1134,6 +1228,7 @@ include 'form_links_header.php'
                 mm = '0' + mm;
             }
             var today = yyyy + '-' + mm + '-' + dd;
+            
             if(today===birthdate.value){
                 alert("Date of Birth cannot be today !!");
                 event.preventDefault();
@@ -1306,6 +1401,9 @@ include 'form_links_header.php'
     // $("#next").click(function() {
     //  window.open("add_artist_biography.php","_self");
     // });
+      $("#next1").click(function() {
+        window.open("profiles.php","_self");
+    });
 
 
     $(document).ready(function(){

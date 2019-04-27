@@ -53,6 +53,7 @@
                                     <tr>
                                         <th width="200">Artist Name</th>
                                         <th width="200">Artist Email Address</th>
+                                        <th width="200">Progress</th>
                                         <th width="300"></th>
                                     </tr>
                                     </thead>
@@ -64,6 +65,7 @@
                                         echo "<tr>";
                                         echo "<td>" . $resultant['artist_first_name'] . " " . $resultant['artist_last_name'] . "</td>";
                                         echo "<td>" . $resultant['artist_email_address'] . "</td>";
+                                        echo "<td>".$resultant['STATUS']."%</td>";
                                         echo "<td>";
                                         echo "<button class='secondary  hollow button' type='submit' name='artist_relation_add' value=" . $resultant['artist_profile_id'] . ">";
                                         echo "<span>Add Lineal Relationships</span>";
@@ -77,7 +79,7 @@
                                         echo "<span>View</span>";
                                         echo "</button>";
 
-                                        echo "<button class='alert  hollow button' type='submit' name='artist_profile_delete' value=" . $resultant['artist_profile_id'] . " onclick='return confirmDelete();'>";
+                                        echo "<button class='alert  hollow button' type='submit' name='artist_profile_delete' value=" . $resultant['artist_profile_id'] . " onclick='confirmDelete();'>";
                                         echo "<span>Delete</span>";
                                         echo "</button>";
 
@@ -91,7 +93,7 @@
 						</div>
 						<div class = "row">
 							<div class="small-3 column">
-								<button class="secondary hollow button" type="submit" name="artist_profile_add" value="<?php echo $user_email_address; ?>">
+								<button class="secondary hollow button" style="display: none;" type="submit" name="artist_profile_add" value="<?php echo $user_email_address; ?>">
 									<span>Add Artist</span>
 								</button>
 							</div>
@@ -130,8 +132,20 @@
 	<script>
 	function confirmDelete(){
 		var c = confirm("Warning: You are about to delete this entire profile! Click 'OK' to cancel.");
-		return c;
+		if(c==true){
+		$.ajax({
+    		type: 'GET',
+    		url: 'logoutdelete.php',
+    		
+});
+
 	}
+	else{
+		event.preventDefault();
+	}
+		
+	}
+	
 	</script>
 
 	<script>
