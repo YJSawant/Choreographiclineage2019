@@ -15,19 +15,23 @@ include 'menu.php';
 		<div id="network_row" class="row">
 			<div id="filter_div" class="small-12 medium-12 large-2 columns">
 				<div id="searchbox_row" class="row">
-					<div class="large-12 columns">
+					<div class="large-13 columns">
 						<label><b>Search</b></label>
-       			<input id="searchbox" type="text" placeholder="Enter Name" />
-						<input style="margin-bottom: 16px;" id="university-search-box" type="text" placeholder="Enter University" />
+       					<input id="searchbox" type="text" placeholder="Enter Name" />
+						<input style="margin-bottom: 10px;" id="university-search-box" type="text" placeholder="Enter University" />
 						<label><b>Living Status</b></label>
-						<label><input id="living" type="checkbox" name="checkbox">Living</label>
-						<label style="margin-bottom: 16px;"><input id="dead" type="checkbox" name="checkbox"></span>Deceased</label>
+						<label style="display:inline-block;"><input id="living" type="checkbox" class="checkbox_living" value="living">Living</label>
+						<label style="display:inline-block;"><input id="dead" type="checkbox" class="checkbox_living" value="deceased"></span>Deceased</label>
 						<label><b>Gender</b></label>
-						<label><input id="male" type="radio" name="radio" value="male"></span>Male</label>
-						<label style="margin-bottom: 16px;"><input id="female" type="radio" name="radio" value="female"></span>Female</label>
-						<input style="margin-bottom: 16px;" id="state-search-box" type="text" placeholder="Enter State Code" />
-						<input style="margin-bottom: 16px;" id="country-search-box" type="text" placeholder="Enter Country" />
-						<input style="margin-bottom: 16px;" id="submit" type="button" value="Submit"/>
+						<label style="display:inline-block;"><input id="male" type="checkbox" class="checkbox_gender" value="male"></span>Male</label>
+						<label style="display:inline-block;"><input id="female" type="checkbox" class="checkbox_gender" value="female"></span>Female</label>
+						<label style="display:inline-block;"><input id="other" type="checkbox" class="checkbox_gender" value="other"></span>Other</label>
+						<input style="margin-bottom: 10px;" id="state-search-box" type="text" placeholder="Enter State Code" />
+						<input style="margin-bottom: 10px;" id="country-search-box" type="text" placeholder="Enter Country" />
+						<input style="margin-bottom: 10px;" id="major-search-box" type="text" placeholder="Enter Major" />
+						<input style="margin-bottom: 10px;" id="degree-search-box" type="text" placeholder="Enter Degree" />
+						<input style="margin-bottom: 10px;" id="ethnicity-search-box" type="text" placeholder="Enter Ethnicity" />
+						<input style="margin-bottom: 10px;" id="submit" type="button" value="Submit"/>
 					</div>
 				</div>
 				<div class='my-legend'style="margin: auto;">
@@ -45,8 +49,6 @@ include 'menu.php';
 			 </div>
 			<div hidden id="searchbox_node_id">
 			</div>
-				<!-- <div hidden id="uni_searchbox_node_id">
-				</div> -->
 			</div>
 			<div id="load" class="loader-frame small-12 medium-12 large-10 columns">
 				<div id="loader_circles_div">
@@ -70,6 +72,12 @@ include 'menu.php';
 				</div>
 				<div hidden id="countryTextValue">
 				</div>
+				<div hidden id="majorTextValue">
+				</div>
+				<div hidden id="degreeTextValue">
+				</div>
+				<div hidden id="ethnicityTextValue">
+				</div>
 				<div id="search_text">
 				</div>
 				<div id="my_network" class="small-12 medium-12 large-14 columns">
@@ -79,7 +87,8 @@ include 'menu.php';
 					<img class="pic" id="artist_pic" src = "">
 					<div id="artist_name" class="name"> </div>
 					<div id="artist_gender" class="gender"> </div>
-					<div id="artist_university" class="university"></div>
+					<div id="artist_status" class="status"> </div>
+					<!-- <a href="http://www.google.com" id="artist_biography" class="biography">Click here for biography</a> -->
 				</div>
 			</div>
 		</div>
@@ -102,8 +111,12 @@ include 'menu.php';
 		text-align : center;
 		margin-bottom: 12px;
 	}
+	.status{
+		text-align : center;
+		margin-bottom: 12px;
+	}
 
-	.university{
+	.biography{
 		text-align : center;
 		margin-bottom: 12px;
 	}
