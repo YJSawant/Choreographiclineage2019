@@ -261,15 +261,15 @@
         },
         physics: {
           stabilization: {
-            iterations: 200, // maximum number of iteration to stabilize
-            updateInterval: 10, // defines how many iterations the stabilizationProgress event is triggered
+            iterations: 40, // maximum number of iteration to stabilize
+            updateInterval: 2, // defines how many iterations the stabilizationProgress event is triggered
             onlyDynamicEdges: false, // can be set to true if nodes have predefined positions
             fit: true // forces view to fit all nodes and edges after stabilization
           },
           barnesHut: {
             gravitationalConstant: -30000, // setting repulsion (negative value) between the nodes
-            centralGravity: 0.2,
-            avoidOverlap: 5 // pulls entire network to the center
+            centralGravity: 0.40,
+            avoidOverlap: 50 // pulls entire network to the center
           }
         }
       };
@@ -519,6 +519,15 @@
             $("#searchTextValue").val("");
             $("#searchbox_node_id").val("");
           }  
+      },
+      change: function( event, ui ) {
+        if(!ui.item){
+          $("#searchTextValue").val("");
+          $("#searchbox_node_id").val("");
+        }else{
+          $("#searchTextValue").val(ui.item.label);
+          $("#searchbox_node_id").val(ui.item.node_id);
+        }         
       }
       });
 
@@ -540,9 +549,7 @@
       $searchbox.keypress(function(e) {
         if ((e.keyCode || e.which) == 13) {
           var searched_node_id = $("#searchbox_node_id").val();
-          console.log(searched_node_id);
           var search_text = $("#searchTextValue").val();
-          console.log(search_text);
           if(!searched_node_id)
           {
             $('#search_text').html('&nbsp&nbsp'+"Please correct your search criteria.");
@@ -575,6 +582,13 @@
           select: function (event, ui) {
               $university_search_box.val(ui.item.label); // display the selected text
               $("#uniTextValue").val(ui.item.label);
+          },
+          change: function( event, ui ) {
+            if(!ui.item){
+              $("#uniTextValue").val("");
+            }else{
+              $("#uniTextValue").val(ui.item.label);
+            }         
           }
         });
 
@@ -592,6 +606,13 @@
           select: function (event, ui) {
               $state_search_box.val(ui.item.label); // display the selected text           
               $("#stateTextValue").val(ui.item.label);
+          },
+          change: function( event, ui ) {
+            if(!ui.item){
+              $("#stateTextValue").val("");
+            }else{
+              $("#stateTextValue").val(ui.item.label);
+            }         
           }
         });
 
@@ -609,6 +630,13 @@
           select: function (event, ui) {
               $country_search_box.val(ui.item.label); // display the selected text
               $("#countryTextValue").val(ui.item.label);
+          },
+          change: function( event, ui ) {
+            if(!ui.item){
+              $("#countryTextValue").val("");
+            }else{
+              $("#countryTextValue").val(ui.item.label);
+            }         
           }
         });
 
@@ -626,6 +654,13 @@
             select: function (event, ui) {
                 $major_search_box.val(ui.item.label); // display the selected text
                 $("#majorTextValue").val(ui.item.label);
+            },
+            change: function( event, ui ) {
+              if(!ui.item){
+                $("#majorTextValue").val("");
+              }else{
+                $("#majorTextValue").val(ui.item.label);
+              }         
             }
           });
 
@@ -643,6 +678,13 @@
               select: function (event, ui) {
                   $degree_search_box.val(ui.item.label); // display the selected text
                   $("#degreeTextValue").val(ui.item.label);
+              },
+              change: function( event, ui ) {
+                if(!ui.item){
+                  $("#degreeTextValue").val("");
+                }else{
+                  $("#degreeTextValue").val(ui.item.label);
+                }         
               }
             });
 
@@ -661,6 +703,13 @@
                 select: function (event, ui) {
                     $ethnicity_search_box.val(ui.item.label); // display the selected text
                     $("#ethnicityTextValue").val(ui.item.label);
+                },
+                change: function( event, ui ) {
+                  if(!ui.item){
+                    $("#ethnicityTextValue").val("");
+                  }else{
+                    $("#ethnicityTextValue").val(ui.item.label);
+                  }         
                 }
               });
 
@@ -697,14 +746,37 @@
             $('.checkbox_gender').not(this).prop('checked', false);
         });
         var gender_val=$("input:checkbox[class=checkbox_gender]:checked").val();
-          // console.log(searched_node_id);
-          // console.log(university_text);
-          // console.log(state_text);
-          // console.log(country_text);
-          // console.log(major_text);
-          // console.log(degree_text);
-          // console.log(living_val);
-          // console.log(gender_val);
+          console.log(searched_node_id);
+          console.log(university_text);
+          console.log(state_text);
+          console.log(country_text);
+          console.log(major_text);
+          console.log(degree_text);
+          console.log(living_val);
+          console.log(gender_val);
+          console.log(ethnicity_text);
+          if(!searched_node_id && !university_text && !state_text && !country_text
+            && !major_text && !degree_text && !ethnicity_text && !living_val
+           && !gender_val){
+            $('#search_text').html('&nbsp&nbsp'+"Please enter a valid search criteria.");
+            var data = {
+              nodes: {}
+            };
+            createVisNetwork(container, data, options);
+            }              
+            else{
+              if(!living_val)
+              {
+                living_val = "";
+              }
+              if(!gender_val)
+              {
+                gender_val = "";
+              }
+              $('#search_text').html('&nbsp&nbsp'+"Results for"+" "+'<span style="font-weight:bold">'+search_text+" "+
+              university_text+" "+living_val+" "+gender_val+" "+state_text+" "+country_text+" "+major_text
+              +" "+degree_text+" "+ethnicity_text+'</span>');
+            }
 
           if(searched_node_id && !university_text && !state_text && !country_text
             && !major_text && !degree_text && !ethnicity_text && !living_val
@@ -786,7 +858,7 @@
               border: '#000000' // border color of node on hover
             }
           },
-          size: 10 // size of node
+          size: 5 // size of node
         },
 
         edges: {
@@ -883,7 +955,7 @@
           },
           physics: {
             stabilization: {
-              iterations: 200, // maximum number of iteration to stabilize
+              iterations: 20, // maximum number of iteration to stabilize
               updateInterval: 10, // defines how many iterations the stabilizationProgress event is triggered
               onlyDynamicEdges: false, // can be set to true if nodes have predefined positions
               fit: true // forces view to fit all nodes and edges after stabilization
@@ -939,8 +1011,10 @@
 
 function createFilteredNetwork(response, nodes, createVisNetwork, container) {
   response = JSON.stringify(response);
+  //console.log(response);
   jsonData = $.parseJSON(response);
   profiles = jsonData.artist_profile;
+  //console.log(profiles);
   var finalNodes = [];
   if (profiles) {
     for (var i = 0; i < profiles.length; i++) {
@@ -964,12 +1038,14 @@ function createFilteredNetwork(response, nodes, createVisNetwork, container) {
       }
       finalNodes.push(nodeDetails);
     }
+      nodes = {};
+      var data = {
+        nodes: finalNodes
+      };
+      createVisNetwork(container, data, options);
+      return { response, nodes };
+  }else{
+    $('#search_text').html('&nbsp&nbsp'+"Please correct a search criteria.");
   }
-  nodes = {};
-  var data = {
-    nodes: finalNodes
-  };
-  createVisNetwork(container, data, options);
-  return { response, nodes };
 }
 
