@@ -1020,6 +1020,7 @@
 }
 
 function createFilteredNetwork(response, nodes, createVisNetwork, container) {
+  var inquiry_text = document.getElementById('search_text');
   inquiry_text.style.visibility="visible";
   response = JSON.stringify(response);
   //console.log(response);
