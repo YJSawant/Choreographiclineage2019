@@ -277,7 +277,7 @@
 
       // set physics to false after stabilization iterations
       network.on("stabilizationIterationsDone", function () {
-        network.setOptions( { physics: false } );
+        network.setOptions( { physics: true } );
       });
 
       // hide the loading div after network is fully loaded
