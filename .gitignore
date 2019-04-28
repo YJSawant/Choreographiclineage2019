@@ -1,3 +1,6 @@
 .DS_Store
 .idea
 connection_open.php
+connect.php
+php_errors.log
+src.txt
