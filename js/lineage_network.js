@@ -931,11 +931,6 @@
         network.on('dragging', function(obj){
           $("#my_network").css("cursor", "-webkit-grabbing");
         });
-  
-        network.on('hoverNode', function (obj) {
-          $("#my_network").css("cursor", "pointer");
-          $("#my_network").attr('title','No. of connections= '+network.getConnectedEdges(obj.node).length);
-        });
 
         network.on('selectNode', function (obj) {
           var side_nav = document.getElementById("mySidenav");
@@ -1064,11 +1059,6 @@
         
         network.on('dragging', function(obj){
           $("#my_network").css("cursor", "-webkit-grabbing");
-        });
-
-        network.on('hoverNode', function (obj) {
-          $("#my_network").css("cursor", "pointer");
-          $("#my_network").attr('title','No. of connections= '+network.getConnectedEdges(obj.node).length);
         });
 
         network.on('selectNode', function (obj) {
