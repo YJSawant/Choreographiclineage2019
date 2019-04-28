@@ -10,7 +10,7 @@
   var edges;
   var totalNodes = [];  
   var totalEdges = [];
-
+  var inquiry_text = document.getElementById('search_text');
   // ajax request to fetch the nodes, edges and border color of nodes from backend
   $.ajax({
     type: "POST",
@@ -213,8 +213,6 @@
   
       // initialize the div in which the network should be displayed
       var container = document.getElementById('my_network');
-      // initialize the search text div
-      var search_text = document.getElementById('search_text');
     
       // add nodes and edges to network data
       var data = {
@@ -374,7 +372,7 @@
         document.getElementById(this.id).style.display = "block";
         this.className += " active";
         if(this.id === "full_network_tab") {
-          search_text.style.visibility="hidden";
+          inquiry_text.style.visibility="hidden";
           document.getElementById('searchbox').value = "";
           document.getElementById('university-search-box').value = "";
           document.getElementById('state-search-box').value = "";
@@ -419,7 +417,7 @@
           };
           createWholeNetwork(container, data, options); 
           var edge_color = edge_colors_dict[(relationship_selected_array[0] + "_" + relationship_selected_array[1] + "_color").toLowerCase()];
-              search_text.style.visibility="hidden";
+              inquiry_text.style.visibility="hidden";
               document.getElementById('searchbox').value = "";
               document.getElementById('university-search-box').value = "";
               document.getElementById('state-search-box').value = "";
@@ -550,6 +548,7 @@
         if ((e.keyCode || e.which) == 13) {
           var searched_node_id = $("#searchbox_node_id").val();
           var search_text = $("#searchTextValue").val();
+          inquiry_text.style.visibility="visible";
           if(!searched_node_id)
           {
             $('#search_text').html('&nbsp&nbsp'+"Please correct your search criteria.");
@@ -712,8 +711,7 @@
                   }         
                 }
               });
-
-     
+    
       submit = document.getElementById('submit');
       submit.addEventListener('click',(function(e) {
         for (var i = 0; i < totalNodes.length; i++){ 
@@ -729,7 +727,8 @@
           nodes: nodes,
           edges: edges
         };
-      createWholeNetwork(container, data, options); 
+        inquiry_text.style.visibility="visible";
+        createWholeNetwork(container, data, options); 
           var searched_node_id = $("#searchbox_node_id").val();
           var search_text = $("#searchTextValue").val();
           var university_text = $("#uniTextValue").val();
@@ -746,6 +745,14 @@
             $('.checkbox_gender').not(this).prop('checked', false);
         });
         var gender_val=$("input:checkbox[class=checkbox_gender]:checked").val();
+              if(!living_val)
+              {
+                living_val = "";
+              }
+              if(!gender_val)
+              {
+                gender_val = "";
+              }
           console.log(searched_node_id);
           console.log(university_text);
           console.log(state_text);
@@ -760,30 +767,14 @@
            && !gender_val){
             $('#search_text').html('&nbsp&nbsp'+"Please enter a valid search criteria.");
             var emptyNodes = [];
-              for (var i = 0; i<1; i++) {
-                var nodeDetails = {};
-                nodeDetails['id'] = "";
-                nodeDetails['title'] = "";
-                nodeDetails['shape'] = "circularImage";
-                nodeDetails['label'] = "";
-                nodeDetails['image'] = "";
-                nodeDetails['hidden'] = true;
-              }
-              emptyNodes.push(nodeDetails);
+            var emptyEdges = [];
             var data = {
-              nodes: emptyNodes
+              nodes: emptyNodes,
+              edges: emptyEdges
             };
-            createVisNetwork(container, data, options);
+            createVisNetwork(container, data, options);            
             }              
             else{
-              if(!living_val)
-              {
-                living_val = "";
-              }
-              if(!gender_val)
-              {
-                gender_val = "";
-              }
               $('#search_text').html('&nbsp&nbsp'+"Results for"+" "+'<span style="font-weight:bold">'+search_text+" "+
               university_text+" "+living_val+" "+gender_val+" "+state_text+" "+country_text+" "+major_text
               +" "+degree_text+" "+ethnicity_text+'</span>');
@@ -822,7 +813,10 @@
                                       }),
                 success:function(response)
                 {
-                    ({ response, nodes } = createFilteredNetwork(response, nodes, createVisNetwork, container));   
+                    ({ response, nodes } = createFilteredNetwork(response, nodes, createVisNetwork, container));
+                    $('#search_text').html('&nbsp&nbsp'+"Results for"+" "+'<span style="font-weight:bold">'+search_text+" "+
+              university_text+" "+living_val+" "+gender_val+" "+state_text+" "+country_text+" "+major_text
+              +" "+degree_text+" "+ethnicity_text+'</span>');   
                 },
                 error:function(response)
                 {
@@ -845,6 +839,9 @@
                 success:function(response)
                 {
                     ({ response, nodes } = createFilteredNetwork(response, nodes, createVisNetwork, container));   
+                    $('#search_text').html('&nbsp&nbsp'+"Results for"+" "+'<span style="font-weight:bold">'+search_text+" "+
+              university_text+" "+living_val+" "+gender_val+" "+state_text+" "+country_text+" "+major_text
+              +" "+degree_text+" "+ethnicity_text+'</span>');
                 },
                 error:function(response)
                 {
@@ -929,6 +926,7 @@
 
   function createVisNetwork(container, data, options)
   {     
+    inquiry_text.style.visibility="visible";
         options = {
           nodes: {
             borderWidth: 10, // thickness of border around nodes
@@ -1022,6 +1020,7 @@
 }
 
 function createFilteredNetwork(response, nodes, createVisNetwork, container) {
+  inquiry_text.style.visibility="visible";
   response = JSON.stringify(response);
   //console.log(response);
   jsonData = $.parseJSON(response);
@@ -1050,14 +1049,14 @@ function createFilteredNetwork(response, nodes, createVisNetwork, container) {
       }
       finalNodes.push(nodeDetails);
     }
+  }else{
+    $('#search_text').html('&nbsp&nbsp'+"Please correct a search criteria.");
+  }
       nodes = {};
       var data = {
         nodes: finalNodes
       };
       createVisNetwork(container, data, options);
       return { response, nodes };
-  }else{
-    $('#search_text').html('&nbsp&nbsp'+"Please correct a search criteria.");
-  }
 }
 
