@@ -77,6 +77,8 @@ include 'menu.php';
 				</div>
 				<div hidden id="ethnicityTextValue">
 				</div>
+				<div hidden id="bioTextValue">
+				</div>
 				<div id="search_text">
 				</div>
 				<div id="my_network" class="small-12 medium-12 large-14 columns">
@@ -87,7 +89,10 @@ include 'menu.php';
 					<div id="artist_name" class="name"> </div>
 					<div id="artist_gender" class="gender"> </div>
 					<div id="artist_status" class="status"> </div>
-					<!-- <a href="http://www.google.com" id="artist_biography" class="biography">Click here for biography</a> -->
+					<div id="artist_bio_div"> 
+					<!-- <a href="javascript:window.open('bioTextValue', '_blank', 'width=400,height=400');" id="artist_biography" class="biography">Click here for biography</a> -->
+					<a href="javascript:void(0)" onclick="openPopUp()" id="artist_biography" class="biography">Click here for biography</a>
+				    </div>
 				</div>
 			</div>
 		</div>
@@ -116,8 +121,9 @@ include 'menu.php';
 	}
 
 	.biography{
-		text-align : center;
+		font-size: 20px;
 		margin-bottom: 12px;
+		color: #4743f7;
 	}
 	.bluenode:before {
 		content: '\26AC';
@@ -209,8 +215,6 @@ body {
 .sidenav a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
-  font-size: 25px;
-  color: #818181;
   display: block;
   transition: 0.3s;
 }
@@ -225,6 +229,7 @@ body {
   right: 25px;
   font-size: 36px;
   margin-left: 50px;
+  color: #383839;
 }
 
 @media screen and (max-height: 450px) {
@@ -236,6 +241,17 @@ body {
 		function closeNav() {
 		document.getElementById("mySidenav").style.display = "none"; 
 		document.getElementById("mySidenav").style.width = "0";	
+		}
+
+		function openPopUp() {
+		var urlVal= document.getElementById("bioTextValue").innerHTML;
+		if(urlVal.startsWith("http") || urlVal.startsWith("https") || urlVal.startsWith("ftp"))
+		{
+			window.open(urlVal, '_blank', 'width=400,height=400');
+		} else{
+			var myWindow= window.open('', '_blank', 'width=400,height=400');
+			myWindow.document.write(urlVal);
+		} 		
 		}
 	</script>
 	<script type="text/javascript" src="dist/vis.js"></script>
