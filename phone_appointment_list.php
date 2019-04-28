@@ -16,7 +16,7 @@
 
         include 'connection_open.php';
 
-        $query = "SELECT * FROM phone_appointments where status='Undone' order by Submitted_Date ASC";
+        $query = "SELECT * FROM phone_appointments where status='Undone' order by submitted_date ASC";
 
 
         $result = mysqli_query($dbc,$query)
@@ -52,7 +52,7 @@
     		$Lastname = $row['last_name'];
     		$Contact = $row['contact'];
     		$Note = $row['note'];
-        $SubmissionDate=$row['Submitted_Date'];
+        $SubmissionDate=$row['submitted_date'];
     		echo "<tr>
         <td style='width: 100px;'>".$ID."</td>
         <td style='width: 200px;'>".$Firstname."</td>
