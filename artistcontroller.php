@@ -462,7 +462,7 @@
     $sql = "SELECT distinct ap.* from artist_profile ap, artist_education ae
     WHERE ap.artist_profile_id = ae.artist_profile_id" ;
     $first = false;
-if (!IsNullOrEmpty($artistProfileId)){
+    if (!IsNullOrEmpty($artistProfileId)){
       if ($first) {
         $sql .= " WHERE ap.artist_profile_id = ? ";
         $first = false;

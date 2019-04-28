@@ -759,8 +759,19 @@
             && !major_text && !degree_text && !ethnicity_text && !living_val
            && !gender_val){
             $('#search_text').html('&nbsp&nbsp'+"Please enter a valid search criteria.");
+            var emptyNodes = [];
+              for (var i = 0; i<1; i++) {
+                var nodeDetails = {};
+                nodeDetails['id'] = "";
+                nodeDetails['title'] = "";
+                nodeDetails['shape'] = "circularImage";
+                nodeDetails['label'] = "";
+                nodeDetails['image'] = "";
+                nodeDetails['hidden'] = true;
+              }
+              emptyNodes.push(nodeDetails);
             var data = {
-              nodes: {}
+              nodes: emptyNodes
             };
             createVisNetwork(container, data, options);
             }              
@@ -818,7 +829,8 @@
                   console.log("Error");
                 }                      
               });
-            } else{
+            } else if(searched_node_id || living_val|| gender_val||
+            state_text|| country_text || ethnicity_text){ 
               $.ajax({
                 type: "POST",
                 url: 'artistcontroller.php',
