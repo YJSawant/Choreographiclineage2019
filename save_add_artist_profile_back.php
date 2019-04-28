@@ -11,7 +11,6 @@
 	if(isset($_GET["artist_first_name"]) && !empty($_GET["artist_first_name"])){
 	  $_SESSION['artist_first_name'] = $_GET["artist_first_name"];
 	}
-
 	echo($_SESSION['artist_first_name']);
 	
 	if(isset($_GET["artist_last_name"]) && !empty($_GET["artist_last_name"])){

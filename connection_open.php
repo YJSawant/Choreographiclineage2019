@@ -7,7 +7,7 @@
 
 $mysqli_hostname = "localhost";
 $mysqli_user="root";
-$mysqli_password="";
+$mysqli_password="root";
 $mysqli_database="choreographiclineage_db";
 
  $dbc = mysqli_connect($mysqli_hostname, $mysqli_user, $mysqli_password, $mysqli_database)

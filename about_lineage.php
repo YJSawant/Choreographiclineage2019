@@ -1,12 +1,69 @@
+<style>
+.progressbar {
+      counter-reset: step;
+  }
+  .progressbar li {
+      list-style-type: none;
+      width: 25%;
+      float: left;
+      font-size: 12px;
+      position: relative;
+      text-align: center;
+      text-transform: uppercase;
+      color: #7d7d7d;
+  }
+  .progressbar li:before {
+      width: 30px;
+      height: 30px;
+      content: counter(step);
+      counter-increment: step;
+      line-height: 30px;
+      border: 2px solid #7d7d7d;
+      display: block;
+      text-align: center;
+      margin: 0 auto 10px auto;
+      border-radius: 50%;
+      background-color: white;
+  }
+  .progressbar li:after {
+      width: 100%;
+      height: 2px;
+      content: '';
+      position: absolute;
+      background-color: #7d7d7d;
+      top: 15px;
+      left: -50%;
+      z-index: -1;
+  }
+  .progressbar li:first-child:after {
+      content: none;
+  }
+  .progressbar li.active {
+      color: green;
+  }
+  .progressbar li.active:before {
+      border-color: #55b776;
+  }
+  .progressbar li.active + li:after {
+      background-color: #55b776;
+  }
+
+</style>
+
 <?php
 include 'path.php';
 include 'menu.php';
 include 'util.php';
 
 my_session_start();
+include 'connection_open.php';
+                    $fname=$_SESSION["artist_first_name"];
+                    $query = "UPDATE artist_profile
+                    SET status=75 WHERE artist_first_name= '$fname'";
 
+                    $result = mysqli_query($dbc,$query);
 
-if(isset($_SESSION["artist_profile_id"]) and isset($_SESSION["user_email_address"])){
+if(isset($_SESSION["artist_profile_id"]) && isset($_SESSION["user_email_address"])){
 	$artist_profile_id = $_SESSION["artist_profile_id"];
 		// echo $artist_profile_id;
 	$user_email_address = $_SESSION["user_email_address"];
@@ -30,11 +87,13 @@ else{
 	?>
 	<form id="biography" class="biography">
 		<div class="row">
-			<div class="progress" role="progressbar" tabindex="0" aria-valuenow="70" aria-valuemin="0" aria-valuetext="70 percent" aria-valuemax="100">
-			  <span class="progress-meter" style="width: 70%">
-			    <p class="progress-meter-text">70%</p>
-			  </span>
-			</div>
+			<ul class="progressbar">
+           <li class="active"><a href="add_artist_profile.php">Add Artist Profile</a></li>
+          <li class="active"><a href="add_artist_personal_information.php">Add Artist Personal Info</a></li>
+          <li><a href="add_artist_biography.php">Add Artist Biography</a></li>
+          <li>Add Lineage</li>
+          
+  </ul>
 		</div>
 		<div class="row">
 			<p align="middle"><h2><strong>ABOUT LINEAGE</strong></h2></p>
@@ -69,12 +128,18 @@ else{
 					<span>Next</span>
 				</button>
 			</div>
+			<div class="large-2 small-8 columns">
+            <button class="primary button expanded" id="next1" type="button">
+                <span>Continue Later</span>
+            </button>
+        </div>
 			<div class="column">
 			</div>
 		</div>
 	</form>
 
 	<script>
+
 
 		$(function() {
 			// this will get the full URL at the address bar
@@ -97,6 +162,11 @@ else{
 			<?php unset($_SESSION['lineage_artist_first_name']);?>
 			window.open("add_lineage.php","_self");
 		});
+
+		      $("#next1").click(function() {
+        window.open("profiles.php","_self");
+    });
+
 	</script>
 
 </body>

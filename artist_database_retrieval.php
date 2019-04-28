@@ -195,10 +195,35 @@ if(isset($_SESSION["artist_profile_id"])){
 
   //$_SESSION["form_1"] = "Completed";
 
-  include 'connection_close.php';
+  //include 'connection_close.php';
+   include 'connection_open.php';
+
+    $fname=$_SESSION["user_firstname"];
+        $query = "SELECT * FROM artist_profile
+    WHERE artist_first_name='$fname'";
+
+        $result = mysqli_query($dbc,$query)
+        or die('Error querying database.: ' . mysqli_error());
+
+        $count = mysqli_num_rows($result);
+        $row = mysqli_fetch_array($result);
+        $status=$row['STATUS'];
+  if($status==25){
+  //print_r($_SESSION["influenced_by"]);
+  $location = "add_artist_personal_information.php";
+}
+else if($status==50)
+$location = "add_artist_biography.php";
+else if($status==75)
+{
+  $location = "about_lineage.php";
+}
+else{
+  $location = "add_artist_profile.php";
+}
 
   //print_r($_SESSION["influenced_by"]);
-  $location = "add_artist_profile.php";
+  //$location = "add_artist_profile.php";
   echo ("<script>location.href='$location'</script>");
   //  header("Location: ".$location."");
 }
