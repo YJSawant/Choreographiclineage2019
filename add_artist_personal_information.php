@@ -1180,7 +1180,7 @@ include 'form_links_header.php'
 
     <div class="row">
         <div class="large-2 small-8 columns">
-            <button class="primary button float-right" id="previous" type="button">
+            <button class="primary button" id="previous" type="button">
                 <span>Previous</span>
             </button>
         </div>
