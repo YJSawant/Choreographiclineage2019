@@ -12,20 +12,28 @@ $user_fname=$_SESSION["user_firstname"];
 $user_lname=$_SESSION["user_lastname"];
 $artist_fullname=$user_fname.' '.$user_lname;
 $user_email=$_SESSION["user_email_address"]
+
 ?>
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Add Lineage</title>
 </head>
-
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="js/combo/Drop-Down-Combo-Tree/style.css">
 <script src="js/combo/Drop-Down-Combo-Tree/comboTreePlugin.js"></script>
 <script src="js/combo/Drop-Down-Combo-Tree/icontains.js"></script>
 <script type="text/javascript" src="js/getData.js"></script>
 
-<body onload="getData()">
+<!-- Libraries for datatables -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 
+<body onload>
+    <!-- Yogesh progressbar -->
     <div class="row">
         <div class="progress" role="progressbar" tabindex="0" aria-valuenow="80" aria-valuemin="0" aria-valuetext="80 percent" aria-valuemax="100">
                 <span class="progress-meter" style="width: 80%">
@@ -70,7 +78,11 @@ $user_email=$_SESSION["user_email_address"]
                                 </div>
                                 <div class="small-3 column">
                                     <label for="lineal_genre">Genre <small></small>
-                                       <input autocomplete="off" type="text" class="lineal_genre" id="lineal_genre" name="lineal_genre" placeholder="Genre"/>
+                                       <!-- <input autocomplete="off" type="text" class="lineal_genre" id="lineal_genre" name="lineal_genre" placeholder="Genre"/> -->
+                                       <select>
+                                         <option value=1>Acadian</option>
+                                         <option value=2></option>
+                                       </select>
                                     </label>
                                 </div>
                                 <div class="small-3 column">
@@ -89,17 +101,24 @@ $user_email=$_SESSION["user_email_address"]
                                     <label>Type of Relationship  (Check All that Apply):</label>
                                 </div>
                           </div>
+                          <br>
                           <div class="row">
                              <div class="small-3 column">
-                             <input type="checkbox" id="studied" name="studied" class="rel_studied">
-                             <label for="studied">Studied Under</label><span style="cursor:pointer;" title="Teachers with whom you have studied."><img src="img/help.png" style="height:13px;width:13px;"/></span>
-                              </div>
-                          </div>
-                          <div class="row">
+                               <input type="checkbox" id="studied" name="studied" class="rel_studied" value="Studied With">
+                               <label for="studied">Studied Under</label><span style="cursor:pointer;" title="Teachers with whom you have studied."><img src="img/help.png" style="height:13px;width:13px;"/></span>
+                             </div>
                              <div class="small-3 column">
-                             <input type="checkbox" id="danced" name="danced" class="rel_danced">
-                             <label for="danced">Danced in the Work of </label><span style="cursor:pointer;" title="Choreographers whose works you have danced in."><img src="img/help.png" style="height:13px;width:13px;"/></span>
-                              </div>
+                               <input type="checkbox" id="danced" name="danced" class="rel_danced" value="Danced For">
+                               <label for="danced">Danced in the Work of </label><span style="cursor:pointer;" title="Choreographers whose works you have danced in."><img src="img/help.png" style="height:13px;width:13px;"/></span>
+                             </div>
+                             <div class="small-3 column">
+                               <input type="checkbox" id="collaborated" name="collaborated" class="rel_collaborated" value="Collaborated With">
+                               <label for="collaborated">Collaborated With </label><span style="cursor:pointer;" title="Artists with whom you have collaborated."><img src="img/help.png" style="height:13px;width:13px;"/></span>
+                             </div>
+                             <div class="small-3 column">
+                               <input type="checkbox" id="influenced" name="influenced" class="rel_influenced" value="Influenced By">
+                               <label for="influenced">Influenced By </label><span style="cursor:pointer;" title="People who have significantly influenced your work such as artists, authors, philosophers, etc.  You do not need to have a personal relationship with this person in order to list them as having an impact on your work."><img src="img/help.png" style="height:13px;width:13px;"/></span>
+                             </div>
                           </div>
                           <div class="row">
                             <div class="small-6 column">
@@ -109,17 +128,7 @@ $user_email=$_SESSION["user_email_address"]
                                </div>
                              </div>
                           </div>
-                          <div class="row">
-                             <div class="small-3 column">
-                             <input type="checkbox" id="collaborated" name="collaborated" class="rel_collaborated">
-                             <label for="collaborated">Collaborated With </label><span style="cursor:pointer;" title="Artists with whom you have collaborated."><img src="img/help.png" style="height:13px;width:13px;"/></span>
-                              </div>
-                          </div>
-                          <div class="row">
-                             <div class="small-3 column">
-                             <input type="checkbox" id="influenced" name="influenced" class="rel_influenced">
-                             <label for="influenced">Influenced By </label><span style="cursor:pointer;" title="People who have significantly influenced your work such as artists, authors, philosophers, etc.  You do not need to have a personal relationship with this person in order to list them as having an impact on your work."><img src="img/help.png" style="height:13px;width:13px;"/></span>
-                              </div>
+
                           </div>
                            <div class="row artist_button">
                              <div class="large-4 columns large-offset-4">
@@ -129,12 +138,27 @@ $user_email=$_SESSION["user_email_address"]
                              </div>
                            </div>
                            <div class="row">
+                             <div class="medium-12 column">
+                               <table id="display_relations" class="display" style="width:100%;margin-left:auto;margin-right:auto;">
+                                  <thead>
+                                      <tr>
+                                          <th>Name</th>
+                                          <th>Email Address</th>
+                                          <th>Website</th>
+                                          <th>Relation</th>
+                                          <th>Edit / Delete</th>
+                                      </tr>
+                                  </thead>
+                             </table>
+                           </div>
+                          </div>
+                           <div class="row">
                               <input type="checkbox" name="terms" id="terms" value="accepted">  Accept <a href="javascript:readTermsConditions();">Terms and Conditions</a></input>
                               <!--<button text="Read terms and conitions here" id="read_terms" name="read_terms" onclick="readTermsConditions()"/>-->
                           </div>
                           <div id="extraControls" style="display: none;">
-                           <div id = "dialog-1" style="font-weight: bold;width:600px;height:700px"
-                               title = "TERMS AND CONDITIONS">
+                           <div id = "dialog-1" style="font-weight: bold;width:600px;height:700px;background-color:#E7FBE9"
+                           title="TERMS AND CONDITIONS">
                               1. You are filling this form out voluntarily.</br>
                               2. You are aware that the information you provide will be used as a global resource, accessible to the general public, unless otherwise noted in the survey. </br>
                               3. Choreographic Lineage will not sell, share or rent your personal information to any third party or use your e-mail address for unsolicited mail. Any emails sent by Choreograhic Lineage will only be in connection with the Choreographic Lineage resource. </br>
@@ -213,6 +237,54 @@ $(document).ready(function(){
         $("#danced_options").fadeOut('slow');
       }
     });
+    jQuery.ajax({
+      type: "POST",
+      url: 'artistrelationcontroller.php',
+      data: JSON.stringify({"action": "getArtistRelation",
+                            "artistprofileid1":<?php echo $_SESSION["artist_profile_id"]?>,
+                            "artistprofileid2":""
+                          }),
+         success: function(response) {
+               response = JSON.stringify(response);
+               jsonData = $.parseJSON(response);
+               jsonData = jsonData.artist_relation;
+               displaydata=jsonData;
+        },
+        async:false
+    });
+    table=$("#display_relations").DataTable({
+      data:displaydata,
+      columns:[
+        { "data": "artist_name_2" },
+        { "data": "artist_email_id_2" },
+        { "data": "artist_website_2" },
+        { "data": "artist_relation" },
+        {
+                data: null,
+                className: "center",
+                defaultContent: '<a href="" class="editor_edit">Edit</a> / <a href="" class="editor_remove">Delete</a>'
+            }
+      ],
+      "bDestroy": true
+    });
+    $('#display_relations').on('click', 'a.editor_remove', function (e) {
+        var deletedrow=table.row($(this).parents('tr')).data();
+        $.ajax({
+          type: "POST",
+          url: 'artistrelationcontroller.php',
+          data: JSON.stringify({"action": "deleteArtistRelation",
+                                "relationid":deletedrow.relation_id
+                              }),
+             success: function(response) {
+               console.log("record deleted from artistrelation");
+            },
+            async:false
+        });
+        table
+        .row( $(this).parents('tr') )
+        .remove()
+        .draw();
+      })
 });
 $('#add_user_profile_form').submit(function(event){
         if($('#terms').is(':checked') == false){
@@ -293,7 +365,7 @@ $('#addArtist').click(function(){
         email1=jsonData.artist_profile[0].profile_name;
         fname1=jsonData.artist_profile[0].artist_first_name;
         lname1=jsonData.artist_profile[0].artist_last_name;
-        fullname1=fname1.concat(lname1);
+        fullname1=fname1.concat('-',lname1);
       },
       async:false
   });
@@ -315,37 +387,91 @@ $('#addArtist').click(function(){
         email2=jsonData.artist_profile[0].profile_name;
         fname2=jsonData.artist_profile[0].artist_first_name;
         lname2=jsonData.artist_profile[0].artist_last_name;
-        fullname2=fname1.concat(lname1);
+        fullname2=fname2.concat('-',lname2);
         website2=jsonData.artist_profile[0].artist_website;
       },
       async:false
   });
   console.log("artist2 details got after ajax :",pid2,fullname2,website2);
 
+  var selected_checkboxes=new Array();
+  var inputs = document.querySelectorAll("input[type='checkbox']");
+  for(var i = 0; i < inputs.length; i++) {
+      if(inputs[i].checked == true){
+        if (inputs[i].value!='checked'){
+          selected_checkboxes.push(inputs[i].value);
+        }
+      }
+  }
+  for (var i=0 ; i <selected_checkboxes.length; i++){
+    $.ajax({
+      type: "POST",
+      url: 'artistrelationcontroller.php',
+      data: JSON.stringify({"action": "addOrEditArtistRelation",
+                            "artistprofileid1":pid1,
+                            "artistprofileid2":pid2,
+                            "artistname1":fullname1,
+                            "artistemailId1":email1,
+                            "artistname2":fullname2,
+                            "artistemailId2":email2,
+                            "artistwebsite2":website2,
+                            "artistrelation":selected_checkboxes[i]
+                          }),
+         success: function(response) {
+           console.log("new artist added to db for artist relation");
+        },
+        error: function(response){
+          console.log(response);
+        }
+    });
+  }
+  $.ajax({
+    type: "POST",
+    url: 'artistrelationcontroller.php',
+    data: JSON.stringify({"action": "getArtistRelation",
+                          "artistprofileid1":pid1,
+                          "artistprofileid2":""
+                        }),
+       success: function(response) {
+             response = JSON.stringify(response);
+             jsonData = $.parseJSON(response);
+             jsonData = jsonData.artist_relation;
+             var oTable = $('#display_relations').dataTable();
+             oTable.fnClearTable();
+             $("#display_relations").DataTable({
+               data:jsonData,
+               columns:[
+                 { "data": "artist_name_2" },
+                 { "data": "artist_email_id_2" },
+                 { "data": "artist_website_2" },
+                 { "data": "artist_relation" },
+               ],
+               "bDestroy": true
+          });
+      },
+      async:false
+  });
+    $('#add_user_profile_form')[0].reset();
+    location=location;
 });
+
 $('#accept').click(function(){
         $( "#dialog-1" ).dialog( "close" );
         document.getElementById("terms").checked = true;
 });
 
 function readTermsConditions(){
-  $( function() {
-      $( "#dialog-1" ).dialog(
-        {
-          width:600
-        }
-      );
-    } );
-
+      $( "#dialog-1" ).dialog({
+        width: 600
+      })
+    $( "#dialog-1" ).dialog( "open" );
 }
 
 $("#previous").click(function() {
-    // onclick event is assigned to the #button element.
     if(disabled_input){
         window.open("add_artist_biography.php","_self");
     }else{
-        //add_user_profile_form
-        //$("#add_artist_personal_id").serialize()
+
         $.ajax({
             type: "POST",
             url: "save_add_artist_pi_back.php",
