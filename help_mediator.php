@@ -55,28 +55,6 @@ if(empty($name)||empty($visitor_email)){
       header("Location: index.php");
     }
     }
-
-// include 'php/lib/PHPMailer/PHPMailerAutoload.php';
-//     $mail = new PHPMailer;
-//     $mail->isSMTP();
-//     $mail->SMTPDebug=1;
-//     $mail->SMTPAuth=false;
-//     $mail->Host = 'hobbes.cse.buffalo.edu';//no-reply@buffalo.edu
-//     //$mail->Port=587;//587
-//     $mail->IsHTML(true);
-//     $mail->Username="rosicky210@gmail.com";
-//     $mail->Password="4Y2ywTfiXjVaAvp";
-//     $mail->setFrom("rosicky210@gmail.com");
-//     $mail->Subject="Choreographic Lineage Help Query";
-//     $mail->Body=$content;
-//     $mail->AddAddress($visitor_email);
-
-//     if(!$mail->send()){
-//       echo"mail not sent";
-//     }
-//     else{
-//       echo"mail sent";
-//     }
 include 'footer.php';
 
 ?>

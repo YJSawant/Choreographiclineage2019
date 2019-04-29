@@ -6,7 +6,7 @@
 </head>
 <?php
 	include 'path.php';
-	include 'AdminMenu.php';
+	include 'admin_menu.php';
 	include 'util.php';
 
 	my_session_start();

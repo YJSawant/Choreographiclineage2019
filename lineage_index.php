@@ -57,6 +57,7 @@ include 'menu.php';
 			</div>
 			<div id="network_display_div" class="small-12 medium-12 large-10 columns">
 				<div id="tab_bar_row" class="row tab">
+					<span style = "cursor: pointer;" title="Use your mouse wheel to zoom in and out"><img src="img/help.png" style="height:20px;width:20px;"/></span>
 					<button class="tablinks medium-offset-1 small-3 medium-2 columns active" id="full_network_tab">Full Network</button>
 					<button class="tablinks small-2 columns" id="studied_with_tab">Studied under</button>
 					<button class="tablinks small-3 medium-2 columns" id="collaborated_with_tab">Collaborated with</button>
@@ -121,9 +122,10 @@ include 'menu.php';
 	}
 
 	.biography{
-		font-size: 20px;
+		font-size: 15px;
 		margin-bottom: 12px;
 		color: #4743f7;
+		text-align : center;
 	}
 	.bluenode:before {
 		content: '\26AC';

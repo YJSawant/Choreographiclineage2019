@@ -29,7 +29,7 @@
 	</header>
 	<nav class="row column menu-centered" id="navbar">
 		<ul class="vertical medium-horizontal menu">
-			<li><a href="AdminIndex.php">Home</a></li>
+			<li><a href="admin_index.php">Home</a></li>
 			<li><a href="add_user_profile.php" id="contri_lineage">Contribute Your Lineage</a></li>
 			<li><a href="lineage_index.php">Explore the Network</a></li>
 			<li><a href="phone_appointment_list.php">See Phone Appointments</a></li>

@@ -34,7 +34,7 @@ if($count==1){
       $location = "profiles.php";
     }
     else
-     $location = "AdminIndex.php";
+     $location = "admin_index.php";
 }
 else{
     $_SESSION["login_message"] = "Incorrect credentials!";

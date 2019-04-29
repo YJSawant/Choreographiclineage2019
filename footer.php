@@ -20,7 +20,7 @@ if(isset($_SESSION["user_email_address"])){
 		<div class="small-6 column">
 			<ul class="vertical medium-horizontal menu">
 				<li><a href="index.php">Home</a></li>
-				<li><a href="ComingSoon.php">FAQ</a></li>
+				<li><a href="faq.php">FAQ</a></li>
 				<li><a href="about.php">About</a></li>
 				<li><a href="contact.php">Contact</a></li>
 				<li><a href="coming_soon.php">Help</a></li>
