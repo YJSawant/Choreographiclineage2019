@@ -378,7 +378,7 @@ if(isset($_SESSION["contribution_type"])) {
         <div class="row">
             <?php if(isset($_SESSION['artist_relation_add'])):?>
                 <div class="large-2 small-8 columns">
-                    <button class="primary button" id="previous" type="button">
+                    <button class="primary button float-right" id="previous" type="button">
                         <span>Previous</span>
                     </button>
                 </div>
@@ -407,7 +407,9 @@ if(isset($_SESSION["contribution_type"])) {
     <script>
  $("#first").click(function() {
             // onclick event is assigned to the #button element.
+            return false;
             window.open("add_artist_profile.php","_self");
+
             //document.location.href = "add_artist_personal_information.php",true;
         });
 

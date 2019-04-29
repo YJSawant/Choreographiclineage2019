@@ -1180,7 +1180,7 @@ include 'form_links_header.php'
 
     <div class="row">
         <div class="large-2 small-8 columns">
-            <button class="primary button" id="previous" type="button">
+            <button class="primary button float-right" id="previous" type="button">
                 <span>Previous</span>
             </button>
         </div>
@@ -1210,6 +1210,7 @@ include 'form_links_header.php'
 
  $("#second").click(function() {
             // onclick event is assigned to the #button element.
+            return false;
             window.open("add_artist_personal_information.php","_self");
             //document.location.href = "add_artist_personal_information.php",true;
         });
