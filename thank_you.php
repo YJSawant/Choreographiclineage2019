@@ -95,8 +95,8 @@ if(isset($_SESSION["user_email_address"])){
     </div>-->
     <div class="row">
         <div class="small-2 columns">
-            <button class="primary button expanded" id="next" type="button">
-                <span><strong>BACK TO PROFILE</strong></span>
+            <button class="primary button" id="next" type="button">
+                <span>Back to Profile</span>
             </button>
         </div>
         <!--<div class="small-3 columns">
