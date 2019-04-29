@@ -262,7 +262,10 @@ include 'form_links_header.php'
   </ul>
     </div>
     <div class="row">
-        <p align="middle"><h2><strong>PERSONAL INFORMATION</strong></h2></p>
+        <div style="clear: both">
+                            <h2  style="display:inline;"><strong>PERSONAL INFORMATION</strong></h2>
+                            <h4  style="display:inline;"><i>[<?php echo $_SESSION['timeline_flow']?>]</i></h4>
+                        </div>
     </div>
     <div class="row">
 

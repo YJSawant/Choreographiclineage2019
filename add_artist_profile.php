@@ -116,13 +116,18 @@ if(isset($_SESSION["contribution_type"])) {
           <li>Add Lineage</li>
           
   </ul>
+
         </div>
         <div class="row">
             <div class="medium-10 column">
                 <section>
                     <fieldset>
                         <!--<legend><strong>Adding artist profile</strong></legend>-->
-                        <legend><strong><?php echo (($_SESSION['contribution_type'] == "own")?'You :':'Adding artist profile :') ?></strong></legend>
+                        <div style="clear: both">
+                            <h2  style="display:inline;"><strong>BASIC INFORMATION</strong></h2>
+                            <h4  style="display:inline;"><i>[<?php echo $_SESSION['timeline_flow']?>]</i></h4>
+                        </div>
+                       <div></div>
                         <div class="row">
                             <div class="medium-4 column">
                                 <!--<label for="artist_first_name">First Name of Artist</span> <span style="color:red;font-weight: bold;"> *</span>-->

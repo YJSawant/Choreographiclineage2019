@@ -96,7 +96,10 @@ else{
   </ul>
 		</div>
 		<div class="row">
-			<p align="middle"><h2><strong>ABOUT LINEAGE</strong></h2></p>
+			<div style="clear: both">
+                            <h2  style="display:inline;"><strong>ABOUT LINEAGE</strong></h2>
+                            <h4  style="display:inline;"><i>[<?php echo $_SESSION['timeline_flow']?>]</i></h4>
+                        </div>
 		</div>
 		<div class="row">
 			<p>There are four types of lineal lines or <strong>Relationships:</strong></p>
