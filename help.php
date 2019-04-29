@@ -18,7 +18,7 @@ else{
 ?>
 <html>
 <head>
-  <title>Coming Soon Page</title>
+  <title>Help Page</title>
   <style>
     .footer{
       margin-top: 2.9%;
