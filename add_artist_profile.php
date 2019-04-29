@@ -375,6 +375,8 @@ if(isset($_SESSION["contribution_type"])) {
         </div>
 
         </div>
+        <br/>
+        <br/>
         <div class="row">
             <?php if(isset($_SESSION['artist_relation_add'])):?>
                 <div class="large-2 small-8 columns">
@@ -384,7 +386,7 @@ if(isset($_SESSION["contribution_type"])) {
                 </div>
             <?php else: ?>
                 <div class="large-2 small-8 columns">
-                    <button class="primary button float-right" type="button" name="home" id="home" onclick="saveAndBack()">
+                    <button class="primary button" type="button" name="home" id="home" onclick="saveAndBack()">
                         <span>Back to Profile</span>
                     </button>
                 </div>

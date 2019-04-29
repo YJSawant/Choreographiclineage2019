@@ -79,7 +79,6 @@ if(isset($_SESSION["user_email_address"]) && $_SESSION["timeline_flow"] != "view
         $_SESSION["artist_first_name"] = $_POST["artist_first_name"];
         $first_name = $_POST["artist_first_name"];
          include 'connection_open.php';
-
                     $fname=$_SESSION["artist_first_name"];
                     $query1 = "SELECT STATUS FROM artist_profile
                     WHERE artist_first_name= '$fname'";
@@ -122,7 +121,7 @@ if(isset($_SESSION["user_email_address"]) && $_SESSION["timeline_flow"] != "view
         $_SESSION["date_of_birth"] = $_POST["date_of_birth"];
         $dob = $_POST["date_of_birth"];
     }
-    // echo $_SESSION["date_of_birth"];
+    echo $_SESSION["date_of_birth"];
 
     if(isset($_POST["date_of_death"]) && !empty($_POST["date_of_death"])){
         $_SESSION["date_of_death"] = $_POST["date_of_death"];
@@ -1177,10 +1176,10 @@ include 'form_links_header.php'
         </div>
     </div>
 
-
+    <br/>
     <div class="row">
         <div class="large-2 small-8 columns">
-            <button class="primary button float-right" id="previous" type="button">
+            <button class="primary button" id="previous" type="button">
                 <span>Previous</span>
             </button>
         </div>
