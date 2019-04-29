@@ -79,6 +79,7 @@ if(isset($_SESSION["user_email_address"]) && $_SESSION["timeline_flow"] != "view
         $_SESSION["artist_first_name"] = $_POST["artist_first_name"];
         $first_name = $_POST["artist_first_name"];
          include 'connection_open.php';
+
                     $fname=$_SESSION["artist_first_name"];
                     $query1 = "SELECT STATUS FROM artist_profile
                     WHERE artist_first_name= '$fname'";
@@ -121,7 +122,7 @@ if(isset($_SESSION["user_email_address"]) && $_SESSION["timeline_flow"] != "view
         $_SESSION["date_of_birth"] = $_POST["date_of_birth"];
         $dob = $_POST["date_of_birth"];
     }
-    echo $_SESSION["date_of_birth"];
+    // echo $_SESSION["date_of_birth"];
 
     if(isset($_POST["date_of_death"]) && !empty($_POST["date_of_death"])){
         $_SESSION["date_of_death"] = $_POST["date_of_death"];
@@ -253,10 +254,10 @@ include 'form_links_header.php'
     <!-- Getting gender info-->
     <div class="row">
         <ul class="progressbar">
-          <li class="active"><a href="add_artist_profile.php">Add Artist Profile</a></li>
-          <li class="active">Add Artist Personal Info</li>
-          <li>Add Artist Biography</li>
-          <li>Add Lineage</li>
+          <li class="active" id="first"><a href="add_artist_profile.php">Add Artist Profile</a></li>
+          <li class="active" id="second"><a href="add_artist_personal_information.php">Add Artist Personal Info</a></li>
+          <li id="third"><a href="add_artist_biography.php">Add Artist Biography</a></li>
+          <li id="fourth"><a href="add_lineage.php">Add Lineage</a></li>
           
   </ul>
     </div>
@@ -1176,10 +1177,10 @@ include 'form_links_header.php'
         </div>
     </div>
 
-    <br/>
+
     <div class="row">
         <div class="large-2 small-8 columns">
-            <button class="primary button" id="previous" type="button">
+            <button class="primary button float-right" id="previous" type="button">
                 <span>Previous</span>
             </button>
         </div>
@@ -1201,6 +1202,30 @@ include 'form_links_header.php'
 
 
 <script type="text/javascript">
+     $("#first").click(function() {
+            // onclick event is assigned to the #button element.
+            window.open("add_artist_profile.php","_self");
+            //document.location.href = "add_artist_personal_information.php",true;
+        });
+
+ $("#second").click(function() {
+            // onclick event is assigned to the #button element.
+            window.open("add_artist_personal_information.php","_self");
+            //document.location.href = "add_artist_personal_information.php",true;
+        });
+  $("#third").click(function() {
+            // onclick event is assigned to the #button element.
+            window.open("add_artist_biography.php","_self");
+            //document.location.href = "add_artist_personal_information.php",true;
+        });
+   $("#fourth").click(function() {
+            // onclick event is assigned to the #button element.
+            window.open("add_lineage.php","_self");
+            //document.location.href = "add_artist_personal_information.php",true;
+        });
+
+
+
     function gendervalidation(){
         var gender=document.getElementById("gender_other_text").value;
         if (gender==""){

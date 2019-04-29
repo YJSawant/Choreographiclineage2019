@@ -271,10 +271,10 @@ if(isset($_SESSION['timeline_flow']) &&  $_SESSION['timeline_flow'] == "edit" ) 
 
 	<div class="row">
 		<ul class="progressbar">
-          <li class="active"><a href="add_artist_profile.php">Add Artist Profile</a></li>
-          <li class="active"><a href="add_artist_personal_information.php">Add Artist Personal Info</a></li>
-          <li>Add Artist Biography</li>
-          <li>Add Lineage</li>
+          <li class="active" id="first"><a href="add_artist_profile.php">Add Artist Profile</a></li>
+          <li class="active" id="second"><a href="add_artist_personal_information.php">Add Artist Personal Info</a></li>
+          <li class="active" id="third"><a href="add_artist_biography.php">Add Artist Biography</a></li>
+          <li id="fourth"><a href="add_lineage.php">Add Lineage</a></li>
           
   </ul>
 	</div>
@@ -444,6 +444,28 @@ if(isset($_SESSION['timeline_flow']) &&  $_SESSION['timeline_flow'] == "edit" ) 
 </body>
 
 <script>
+	 $("#first").click(function() {
+            // onclick event is assigned to the #button element.
+            window.open("add_artist_profile.php","_self");
+            //document.location.href = "add_artist_personal_information.php",true;
+        });
+
+ $("#second").click(function() {
+            // onclick event is assigned to the #button element.
+            window.open("add_artist_personal_information.php","_self");
+            //document.location.href = "add_artist_personal_information.php",true;
+        });
+  $("#third").click(function() {
+            // onclick event is assigned to the #button element.
+            window.open("add_artist_biography.php","_self");
+            //document.location.href = "add_artist_personal_information.php",true;
+        });
+   $("#fourth").click(function() {
+            // onclick event is assigned to the #button element.
+            window.open("add_lineage.php","_self");
+            //document.location.href = "add_artist_personal_information.php",true;
+        });
+
 
     $("#upload_document").click(function() {
         //console.log("hello");

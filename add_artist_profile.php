@@ -110,10 +110,10 @@ if(isset($_SESSION["contribution_type"])) {
     <form id="add_user_profile_form" name="add_user_profile_form" method="post" action="add_artist_personal_information.php" enctype="multipart/form-data">
         <div class="row">
             <ul class="progressbar">
-          <li class="active">Add Artist Profile</li>
-          <li>Add Artist Personal Info</li>
-          <li>Add Artist Biography</li>
-          <li>Add Lineage</li>
+          <li class="active" id="first"><a href="add_artist_profile.php">Add Artist Profile</a></li>
+          <li id="second"><a href="add_artist_personal_information.php">Add Artist Personal Info</a></li>
+          <li id="third"><a href="add_artist_biography.php">Add Artist Biography</a></li>
+          <li id="fourth"><a href="add_lineage.php">Add Lineage</a></li>
           
   </ul>
 
@@ -375,8 +375,6 @@ if(isset($_SESSION["contribution_type"])) {
         </div>
 
         </div>
-        <br/>
-        <br/>
         <div class="row">
             <?php if(isset($_SESSION['artist_relation_add'])):?>
                 <div class="large-2 small-8 columns">
@@ -386,7 +384,7 @@ if(isset($_SESSION["contribution_type"])) {
                 </div>
             <?php else: ?>
                 <div class="large-2 small-8 columns">
-                    <button class="primary button" type="button" name="home" id="home" onclick="saveAndBack()">
+                    <button class="primary button float-right" type="button" name="home" id="home" onclick="saveAndBack()">
                         <span>Back to Profile</span>
                     </button>
                 </div>
@@ -407,6 +405,28 @@ if(isset($_SESSION["contribution_type"])) {
         </div>
     </form>
     <script>
+ $("#first").click(function() {
+            // onclick event is assigned to the #button element.
+            window.open("add_artist_profile.php","_self");
+            //document.location.href = "add_artist_personal_information.php",true;
+        });
+
+ $("#second").click(function() {
+            // onclick event is assigned to the #button element.
+            window.open("add_artist_personal_information.php","_self");
+            //document.location.href = "add_artist_personal_information.php",true;
+        });
+  $("#third").click(function() {
+            // onclick event is assigned to the #button element.
+            window.open("add_artist_biography.php","_self");
+            //document.location.href = "add_artist_personal_information.php",true;
+        });
+   $("#fourth").click(function() {
+            // onclick event is assigned to the #button element.
+            window.open("add_lineage.php","_self");
+            //document.location.href = "add_artist_personal_information.php",true;
+        });
+
         function saveAndBack() {
             console.log($("#add_user_profile_form").serialize());
             $.ajax({
