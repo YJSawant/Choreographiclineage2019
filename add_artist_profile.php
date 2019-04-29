@@ -408,7 +408,9 @@ if(isset($_SESSION["contribution_type"])) {
     <script>
  $("#first").click(function() {
             // onclick event is assigned to the #button element.
+            return false;
             window.open("add_artist_profile.php","_self");
+
             //document.location.href = "add_artist_personal_information.php",true;
         });
 

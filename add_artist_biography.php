@@ -459,6 +459,7 @@ if(isset($_SESSION['timeline_flow']) &&  $_SESSION['timeline_flow'] == "edit" ) 
         });
   $("#third").click(function() {
             // onclick event is assigned to the #button element.
+	    return false;
             window.open("add_artist_biography.php","_self");
             //document.location.href = "add_artist_personal_information.php",true;
         });

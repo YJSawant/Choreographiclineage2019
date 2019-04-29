@@ -1210,6 +1210,7 @@ include 'form_links_header.php'
 
  $("#second").click(function() {
             // onclick event is assigned to the #button element.
+            return false;
             window.open("add_artist_personal_information.php","_self");
             //document.location.href = "add_artist_personal_information.php",true;
         });
