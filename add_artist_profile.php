@@ -379,7 +379,7 @@ if(isset($_SESSION["contribution_type"])) {
         <div class="row">
             <?php if(isset($_SESSION['artist_relation_add'])):?>
                 <div class="large-2 small-8 columns">
-                    <button class="primary button float-right" id="previous" type="button">
+                    <button class="primary button" id="previous" type="button">
                         <span>Previous</span>
                     </button>
                 </div>
