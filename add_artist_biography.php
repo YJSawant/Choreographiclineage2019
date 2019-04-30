@@ -281,7 +281,7 @@ if(isset($_SESSION['timeline_flow']) &&  $_SESSION['timeline_flow'] == "edit" ) 
 	<div class="row">
 		<div style="clear: both">
                             <h2  style="display:inline;"><strong>YOUR BIOGRAPHY</strong></h2>
-                            <h5  style="display:inline; float: right; color: #006400;">(<?php echo "<strong> You are in ".$_SESSION['timeline_flow']." mode</strong>";?>)</h5>
+                            <h5  style="display:inline; float: right; color: #006400;"><?php echo "<strong>(You are in ".$_SESSION['timeline_flow']." mode)</strong>";?></h5>
                         </div>
 	</div>
 
