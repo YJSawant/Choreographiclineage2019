@@ -8,12 +8,11 @@ function getDbConnection(){
   // $username = "cl";
   // $password = "DclSQLwebsiteLineage";
   // $dbname = "choreographiclineage_db";
-  error_log("Connecting to  ".$dbname." as user ".$username, 0);
   $servername = 'localhost';
   $username='root';
   $password='';
   $dbname='choreographiclineage_db';
-  // error_log("Connecting to  ".$dbname." as user ".$username, 0);
+  error_log("Connecting to  ".$dbname." as user ".$username, 0);
   $conn = null;
 
   // Create connection
