@@ -99,7 +99,7 @@ else{
 		<div class="row">
 			<div style="clear: both">
                             <h2  style="display:inline;"><strong>ABOUT LINEAGE</strong></h2>
-                            <h4  style="display:inline;"><i>[<?php echo $_SESSION['timeline_flow']?>]</i></h4>
+                            <h5  style="display:inline; float: right; color: #006400;"><?php echo "<strong>(You are in ".$_SESSION['timeline_flow']." mode)</strong>";?></h5>
                         </div>
 		</div>
 		<div class="row">
@@ -120,10 +120,10 @@ else{
 
 
 
-
+        <br/>
 		<div class="row">
 			<div class="large-2 small-8 columns">
-				<button class="primary button float-right" type="button" name="user_profile_submit" id="previous">
+				<button class="primary button" type="button" name="user_profile_submit" id="previous">
 					<span>Previous</span>
 				</button>
 			</div>
@@ -133,7 +133,7 @@ else{
 				</button>
 			</div>
 			<div class="large-2 small-8 columns">
-            <button class="primary button expanded" id="next1" type="button">
+            <button class="primary button" id="next1" type="button">
                 <span>Continue Later</span>
             </button>
         </div>

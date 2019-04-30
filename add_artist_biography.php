@@ -281,7 +281,7 @@ if(isset($_SESSION['timeline_flow']) &&  $_SESSION['timeline_flow'] == "edit" ) 
 	<div class="row">
 		<div style="clear: both">
                             <h2  style="display:inline;"><strong>YOUR BIOGRAPHY</strong></h2>
-                            <h4  style="display:inline;"><i>[<?php echo $_SESSION['timeline_flow']?>]</i></h4>
+                            <h5  style="display:inline; float: right; color: #006400;"><?php echo "<strong>(You are in ".$_SESSION['timeline_flow']." mode)</strong>";?></h5>
                         </div>
 	</div>
 
@@ -380,9 +380,11 @@ if(isset($_SESSION['timeline_flow']) &&  $_SESSION['timeline_flow'] == "edit" ) 
 
 
 				<div class="row"><!-- INSERT THE "choose file" here FIELDS HERE -->
-					<div class="small-8">
+					<div class="row">
+						<div class="small-8 columns">
 						<label for="file" class="button small expanded action_button">Choose File</label>
 						<input type="file" id="file" name="file" class="show-for-sr" required/>
+						</div>
 					</div>
 					<div class="row small-8 columns">
 						<div id="image_name">
@@ -390,10 +392,10 @@ if(isset($_SESSION['timeline_flow']) &&  $_SESSION['timeline_flow'] == "edit" ) 
 				</div>
 
 				<div class="row"><!-- INSERT THE submit here here FIELDS HERE -->
-					<div class="small-8">
+					<div class="small-8 columns">
 						<div id="message"></div>
 						<br/><br/>
-						<input type="submit" value="Upload" class="button  small expanded submit action_button" />
+						<input type="submit" value="Upload" class="button small expanded submit action_button" />
 					</div>
 				</div>
 			</div>
@@ -417,17 +419,17 @@ if(isset($_SESSION['timeline_flow']) &&  $_SESSION['timeline_flow'] == "edit" ) 
 
 	<div class="row">
 		<div class="large-2 small-8 columns ">
-			<button class="primary button" id="previous" type="button">
+			<button style="font-style: normal;" class="primary button" id="previous" type="button">
 				<span>Previous</span>
 			</button>
 		</div>
 		<div class="large-2 small-8 columns">
-			<button class="primary button" id="next" type="submit">
+			<button style="font-style: normal;" class="primary button" id="next" type="submit">
 				<span><?php echo(($_SESSION['timeline_flow'] == "view")?"":"Save & ") ?>Next</span>
 			</button>
 		</div>
 		<div class="large-2 small-8 columns">
-            <button class="primary button expanded" id="next1" type="button">
+            <button style="font-style: normal;" class="primary button" id="next1" type="button">
                 <span>Continue Later</span>
             </button>
         </div>
@@ -457,6 +459,7 @@ if(isset($_SESSION['timeline_flow']) &&  $_SESSION['timeline_flow'] == "edit" ) 
         });
   $("#third").click(function() {
             // onclick event is assigned to the #button element.
+	    return false;
             window.open("add_artist_biography.php","_self");
             //document.location.href = "add_artist_personal_information.php",true;
         });

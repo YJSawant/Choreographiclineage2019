@@ -123,9 +123,9 @@ if(isset($_SESSION["contribution_type"])) {
                 <section>
                     <fieldset>
                         <!--<legend><strong>Adding artist profile</strong></legend>-->
-                        <div style="clear: both">
-                            <h2  style="display:inline;"><strong>BASIC INFORMATION</strong></h2>
-                            <h4  style="display:inline;"><i>[<?php echo $_SESSION['timeline_flow']?>]</i></h4>
+                        <div class="row">
+                            <h2  style="display:inline; text-align: left;"><strong>BASIC INFORMATION</strong></h2>
+                            <h5  style="display:inline; float: right; color: #006400;"><?php echo "<strong>(You are in ".$_SESSION['timeline_flow']." mode)</strong>";?></h5>
                         </div>
                        <div></div>
                         <div class="row">
@@ -374,6 +374,7 @@ if(isset($_SESSION["contribution_type"])) {
             </div>
         </div>
 
+        <br/>
         </div>
         <div class="row">
             <?php if(isset($_SESSION['artist_relation_add'])):?>
@@ -384,7 +385,7 @@ if(isset($_SESSION["contribution_type"])) {
                 </div>
             <?php else: ?>
                 <div class="large-2 small-8 columns">
-                    <button class="primary button float-right" type="button" name="home" id="home" onclick="saveAndBack()">
+                    <button class="primary button" type="button" name="home" id="home" onclick="saveAndBack()">
                         <span>Back to Profile</span>
                     </button>
                 </div>
@@ -395,7 +396,7 @@ if(isset($_SESSION["contribution_type"])) {
                 </button>
             </div>
             <div class="large-2 small-8 columns">
-            <button class="primary button expanded" id="next1" type="button">
+            <button class="primary button" id="next1" type="button">
                 <span>Continue Later</span>
             </button>
         </div>
@@ -407,7 +408,9 @@ if(isset($_SESSION["contribution_type"])) {
     <script>
  $("#first").click(function() {
             // onclick event is assigned to the #button element.
+            return false;
             window.open("add_artist_profile.php","_self");
+
             //document.location.href = "add_artist_personal_information.php",true;
         });
 

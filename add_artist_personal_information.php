@@ -264,7 +264,7 @@ include 'form_links_header.php'
     <div class="row">
         <div style="clear: both">
                             <h2  style="display:inline;"><strong>PERSONAL INFORMATION</strong></h2>
-                            <h4  style="display:inline;"><i>[<?php echo $_SESSION['timeline_flow']?>]</i></h4>
+                            <h5  style="display:inline; float: right; color: #006400;"><?php echo "<strong>(You are in ".$_SESSION['timeline_flow']." mode)</strong>"?></h5>
                         </div>
     </div>
     <div class="row">
@@ -1179,18 +1179,18 @@ include 'form_links_header.php'
 
 
     <div class="row">
-        <div class="large-2 small-8 columns">
+        <div  style= "font-weight: normal;" class="large-2 small-8 columns">
             <button class="primary button" id="previous" type="button">
                 <span>Previous</span>
             </button>
         </div>
-        <div class="large-2 small-8 columns">
+        <div  style= "font-weight: normal;" class="large-2 small-8 columns">
             <button class="primary button" id="next" type="submit" onclick="submit_validation()">
                 <span><?php echo (($_SESSION['timeline_flow'] == "view")?"":"Save & ") ?>Next</span>
             </button>
         </div>
-                 <div class="large-2 small-8 columns">
-            <button class="primary button expanded" id="next1" type="button">
+        <div style= "font-weight: normal;" class="large-2 small-8 columns">
+            <button class="primary button" id="next1" type="button">
                 <span>Continue Later</span>
             </button>
         </div>
@@ -1210,6 +1210,7 @@ include 'form_links_header.php'
 
  $("#second").click(function() {
             // onclick event is assigned to the #button element.
+            return false;
             window.open("add_artist_personal_information.php","_self");
             //document.location.href = "add_artist_personal_information.php",true;
         });

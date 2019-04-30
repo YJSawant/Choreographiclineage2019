@@ -852,10 +852,10 @@
                                       }),
                 success:function(response)
                 {
-                    ({ response, nodes } = createFilteredNetwork(response, nodes, createVisNetwork, container));   
-                    $('#search_text').html('&nbsp&nbsp'+"Results for"+" "+'<span style="font-weight:bold">'+search_text+" "+
+                      $('#search_text').html('&nbsp&nbsp'+"Results for"+" "+'<span style="font-weight:bold">'+search_text+" "+
               university_text+" "+living_val+" "+gender_val+" "+state_text+" "+country_text+" "+major_text
               +" "+degree_text+" "+ethnicity_text+'</span>');
+                    ({ response, nodes } = createFilteredNetwork(response, nodes, createVisNetwork, container));
                 },
                 error:function(response)
                 {
@@ -1053,6 +1053,10 @@
         };
         var container = document.getElementById('my_network');
         network = new vis.Network(container, data, options);
+        if(data.nodes==0)
+        {
+          $('#search_text').html('&nbsp&nbsp'+"No Results Found. Please change your search criteria.");
+        }
         network.on("stabilizationIterationsDone", function () {
         network.setOptions( { physics: true } );
         });          
@@ -1132,7 +1136,7 @@ function createFilteredNetwork(response, nodes, createVisNetwork, container) {
   var inquiry_text = document.getElementById('search_text');
   inquiry_text.style.visibility="visible";
   response = JSON.stringify(response);
-  //console.log(response);
+  console.log(response);
   jsonData = $.parseJSON(response);
   profiles = jsonData.artist_profile;
   //console.log(profiles);
