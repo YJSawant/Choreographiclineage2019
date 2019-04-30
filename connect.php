@@ -4,15 +4,15 @@ $connections = array();
 
 function getDbConnection(){
 
-  $servername = "stark.cse.buffalo.edu";
-  $username = "cl";
-  $password = "DclSQLwebsiteLineage";
-  $dbname = "choreographiclineage_db";
-  error_log("Connecting to  ".$dbname." as user ".$username, 0);
-  // $servername = 'localhost';
-  // $username='root';
-  // $password='';
-  // $dbname='choreographiclineage_db';
+  //$servername = "stark.cse.buffalo.edu";
+  //$username = "cl";
+  //$password = "DclSQLwebsiteLineage";
+  //$dbname = "choreographiclineage_db";
+  //error_log("Connecting to  ".$dbname." as user ".$username, 0);
+   $servername = 'localhost';
+   $username='root';
+   $password='';
+   $dbname='choreographiclineage_db';
   // error_log("Connecting to  ".$dbname." as user ".$username, 0);
   $conn = null;
 
