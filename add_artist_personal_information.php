@@ -328,10 +328,10 @@ include 'form_links_header.php'
             <label><legend><strong><?php echo ((isset($_SESSION["contribution_type"]) && $_SESSION["contribution_type"] == "own")?"Your":"Artist") ?> Ethnicity</strong></legend></label>
             <div class="medium-3 column">
                 <label for="ethnicity_cw">
-                    <input  autocomplete="off" type="radio" id="ethnicity_cw" name="ethnicity" value="cw"
+                    <input  autocomplete="off" type="radio" id="ethnicity_cw" name="ethnicity" value="Caucasian or White"
                         <?php
                         if(isset($_SESSION["ethnicity"])){
-                            echo (($_SESSION["ethnicity"]=='cw')?'checked':'');
+                            echo (($_SESSION["ethnicity"]=='Caucasian or White')?'checked':'');
                         }
                         ?>
                     />
@@ -340,10 +340,10 @@ include 'form_links_header.php'
             </div>
             <div class="medium-3 column">
                 <label for="ethnicity_aab">
-                    <input  autocomplete="off" type="radio" id="ethnicity_aab" name="ethnicity" value="aab"
+                    <input  autocomplete="off" type="radio" id="ethnicity_aab" name="ethnicity" value="African American or Black"
                         <?php
                         if(isset($_SESSION["ethnicity"])){
-                            echo (($_SESSION["ethnicity"]=='aab')?'checked':'');
+                            echo (($_SESSION["ethnicity"]=='African American or Black')?'checked':'');
                         }
                         ?>
                     />
@@ -352,10 +352,10 @@ include 'form_links_header.php'
             </div>
             <div class="medium-3 column">
                 <label for="ethnicity_hl">
-                    <input  autocomplete="off" type="radio" id="ethnicity_hl" name="ethnicity" value="hl"
+                    <input  autocomplete="off" type="radio" id="ethnicity_hl" name="ethnicity" value="Hispanic or Latino"
                         <?php
                         if(isset($_SESSION["ethnicity"])){
-                            echo (($_SESSION["ethnicity"]=='hl')?'checked':'');
+                            echo (($_SESSION["ethnicity"]=='Hispanic or Latino')?'checked':'');
                         }
                         ?>
                     />
@@ -364,10 +364,10 @@ include 'form_links_header.php'
             </div>
             <div class="medium-3 column">
                 <label for="ethnicity_asian">
-                    <input  autocomplete="off" type="radio" id="ethnicity_asian" name="ethnicity" value="asian"
+                    <input  autocomplete="off" type="radio" id="ethnicity_asian" name="ethnicity" value="Asian"
                         <?php
                         if(isset($_SESSION["ethnicity"])){
-                            echo (($_SESSION["ethnicity"]=='asian')?'checked':'');
+                            echo (($_SESSION["ethnicity"]=='Asian')?'checked':'');
                         }
                         ?>
                     />
@@ -376,10 +376,10 @@ include 'form_links_header.php'
             </div>
             <div class="medium-3 column">
                 <label for="ethnicity_ani">
-                    <input  autocomplete="off" type="radio" id="ethnicity_ani" name="ethnicity" value="ani"
+                    <input  autocomplete="off" type="radio" id="ethnicity_ani" name="ethnicity" value="Alaskan National or Indian"
                         <?php
                         if(isset($_SESSION["ethnicity"])){
-                            echo (($_SESSION["ethnicity"]=='ani')?'checked':'');
+                            echo (($_SESSION["ethnicity"]=='Alaskan National or Indian')?'checked':'');
                         }
                         ?>
                     />
@@ -388,10 +388,10 @@ include 'form_links_header.php'
             </div>
             <div class="medium-3 column">
                 <label for="ethnicity_hpi">
-                    <input  autocomplete="off" type="radio" id="ethnicity_hpi" name="ethnicity" value="hsp"
+                    <input  autocomplete="off" type="radio" id="ethnicity_hpi" name="ethnicity" value="Hawaiian or Pacific Islander"
                         <?php
                         if(isset($_SESSION["ethnicity"])){
-                            echo (($_SESSION["ethnicity"]=='hsp')?'checked':'');
+                            echo (($_SESSION["ethnicity"]=='Hawaiian or Pacific Islander')?'checked':'');
                         }
                         ?>
                     />
@@ -400,10 +400,10 @@ include 'form_links_header.php'
             </div>
             <div class="medium-3 column">
                 <label for="ethnicity_other">
-                    <input  autocomplete="off" type="radio" id="ethnicity_other" name="ethnicity" value="other"
+                    <input  autocomplete="off" type="radio" id="ethnicity_other" name="ethnicity" value="Other"
                         <?php
                         if(isset($_SESSION["ethnicity"])){
-                            echo (($_SESSION["ethnicity"]=='other')?'checked':'');
+                            echo (($_SESSION["ethnicity"]=='Other')?'checked':'');
                         }
                         ?>
                     />
@@ -412,10 +412,10 @@ include 'form_links_header.php'
             </div>
             <div class="medium-3 column">
                 <label for="ethnicity_na">
-                    <input  autocomplete="off" type="radio" id="ethnicity_na" name="ethnicity" value="na"
+                    <input  autocomplete="off" type="radio" id="ethnicity_na" name="ethnicity" value="Prefer not to answer"
                         <?php
                         if(isset($_SESSION["ethnicity"])){
-                            echo (($_SESSION["ethnicity"]=='na')?'checked':'');
+                            echo (($_SESSION["ethnicity"]=='Prefer not to answer')?'checked':'');
                         }
                         ?>
                     />

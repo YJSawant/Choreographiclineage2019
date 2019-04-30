@@ -147,7 +147,7 @@
           console.log("Unable to fetch degree");
         }
       });
-            
+         
       for (var i = 0; i<allNodes.length; i++){
           var nodeDetails= {}; 
           nodeDetails['id']=allNodes[i].artist_profile_id;
@@ -180,7 +180,7 @@
             nodeDetails['color']='#da0067';
           }else{
             nodeDetails['color']='#025457';
-          }      
+          }     
 
           if(allNodes[i].artist_gender)
           {
@@ -259,25 +259,25 @@
         },
         physics: {
           stabilization: {
-            iterations: 40, // maximum number of iteration to stabilize
-            updateInterval: 2, // defines how many iterations the stabilizationProgress event is triggered
+            iterations: 200, // maximum number of iteration to stabilize
+            updateInterval: 10, // defines how many iterations the stabilizationProgress event is triggered
             onlyDynamicEdges: false, // can be set to true if nodes have predefined positions
             fit: true // forces view to fit all nodes and edges after stabilization
           },
           barnesHut: {
             gravitationalConstant: -30000, // setting repulsion (negative value) between the nodes
-            centralGravity: 0.40,
-            avoidOverlap: 50 // pulls entire network to the center
+            centralGravity: 0.2,
+            avoidOverlap: 5 // pulls entire network to the center
           }
         }
       };
 
       // initialize the network object
       network = new vis.Network(container, data, options);
-
+    
       // set physics to false after stabilization iterations
       network.on("stabilizationIterationsDone", function () {
-        network.setOptions( { physics: true } );
+        network.setOptions( { physics: false} );
       });
 
       // hide the loading div after network is fully loaded
@@ -356,8 +356,7 @@
               dobDate = (dobDate.getMonth()+2) + '/' + dobDate.getDate() + '/' +  dobDate.getFullYear();
               dodDate = (dodDate.getMonth()+2) + '/' + dodDate.getDate() + '/' +  dodDate.getFullYear();
               artist_status.innerHTML= dobDate+ "-" +dodDate;
-            } 
-            //console.log(totalNodes);  
+            }  
             if(totalNodes[i]["biography"])
             {
               artist_bio_div.style.visibility="visible";
@@ -374,6 +373,9 @@
         }      
       });
 
+      // var link = document.getElementById('full_network_tab');
+      // link.click();
+
       // event fired on change of tab in tab bar
       $('.tablinks').click(function() {
         // Get all elements with class="tablinks" and remove the class "active"
@@ -381,7 +383,6 @@
         for (i = 0; i < tablinks.length; i++) {
           tablinks[i].className = tablinks[i].className.replace(" active", "");
         }
-
         // Show the current tab, and add an "active" class to the button that opened the tab
         document.getElementById(this.id).style.display = "block";
         this.className += " active";
@@ -925,7 +926,7 @@
         var container = document.getElementById('my_network');
         network = new vis.Network(container, data, options);  
         network.on("stabilizationIterationsDone", function () {
-          network.setOptions( { physics: true } );
+          network.setOptions( { physics: false } );
           });          
           
         network.on('dragging', function(obj){
@@ -1039,7 +1040,7 @@
           },
           physics: {
             stabilization: {
-              iterations: 20, // maximum number of iteration to stabilize
+              iterations: 200, // maximum number of iteration to stabilize
               updateInterval: 10, // defines how many iterations the stabilizationProgress event is triggered
               onlyDynamicEdges: false, // can be set to true if nodes have predefined positions
               fit: true // forces view to fit all nodes and edges after stabilization
@@ -1058,7 +1059,7 @@
           $('#search_text').html('&nbsp&nbsp'+"No Results Found. Please change your search criteria.");
         }
         network.on("stabilizationIterationsDone", function () {
-        network.setOptions( { physics: true } );
+        network.setOptions( { physics: false } );
         });          
         
         network.on('dragging', function(obj){

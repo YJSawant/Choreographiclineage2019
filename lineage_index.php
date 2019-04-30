@@ -17,19 +17,19 @@ include 'menu.php';
 				<div id="searchbox_row" class="row">
 					<div class="large-13 columns">
 						<label><b>Search</b></label>
-       					<input id="searchbox" type="text" placeholder="Enter Name" />
-						<input style="margin-bottom: 10px;" id="university-search-box" type="text" placeholder="Enter University" />
+       					<input id="searchbox" type="search" placeholder="Enter Name" />
+						<input style="margin-bottom: 10px;" id="university-search-box" type="search" placeholder="Enter University" />
 						<label><b>Living Status</b></label>
 						<label style="display:inline-block;"><input id="chk" type="checkbox" class="checkbox_living" value="living">Living</label>
 						<label style="display:inline-block;"><input id="chk" type="checkbox" class="checkbox_living" value="deceased"></span>Deceased</label>
 						<label><b>Gender</b></label>
 						<label style="display:inline-block;"><input id="chk" type="checkbox" class="checkbox_gender" value="male"></span>Male</label>
 						<label style="display:inline-block;"><input id="chk" type="checkbox" class="checkbox_gender" value="female"></span>Female</label>
-						<input style="margin-bottom: 10px;" id="state-search-box" type="text" placeholder="Enter State Code" />
-						<input style="margin-bottom: 10px;" id="country-search-box" type="text" placeholder="Enter Country" />
-						<input style="margin-bottom: 10px;" id="major-search-box" type="text" placeholder="Enter Major" />
-						<input style="margin-bottom: 10px;" id="degree-search-box" type="text" placeholder="Enter Degree" />
-						<input style="margin-bottom: 10px;" id="ethnicity-search-box" type="text" placeholder="Enter Ethnicity" />
+						<input style="margin-bottom: 10px;" id="state-search-box" type="search" placeholder="Enter State Code" />
+						<input style="margin-bottom: 10px;" id="country-search-box" type="search" placeholder="Enter Country" />
+						<input style="margin-bottom: 10px;" id="major-search-box" type="search" placeholder="Enter Major" />
+						<input style="margin-bottom: 10px;" id="degree-search-box" type="search" placeholder="Enter Degree" />
+						<input style="margin-bottom: 10px;" id="ethnicity-search-box" type="search" placeholder="Enter Ethnicity" />
 						<input style="margin-bottom: 10px;" id="submit" type="button" value="Submit"/>
 					</div>
 				</div>
