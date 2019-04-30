@@ -270,7 +270,7 @@ $(document).ready(function(){
         {
                 data: null,
                 className: "center",
-                defaultContent: '<a href="" class="editor_edit">Edit</a> / <a href="" class="editor_remove">Delete</a>'
+                defaultContent: '<a class="editor_edit">Edit</a> / <a class="editor_remove">Delete</a>'
             }
       ],
       "bDestroy": true
@@ -293,6 +293,40 @@ $(document).ready(function(){
         .remove()
         .draw();
       })
+
+      $('#display_relations').on('click', 'a.editor_edit', function (e) {
+          var editedrow=table.row($(this).parents('tr')).data();
+          //console.log(editedrow.artist_profile_id_2);
+          $.ajax({
+            type: "POST",
+            url: 'artistcontroller.php',
+            data: JSON.stringify({"action": "getArtistProfile",
+                                  "artistprofileid":editedrow.artist_profile_id_2
+                                }),
+               success: function(response) {
+                 response = JSON.stringify(response);
+                 jsonData = $.parseJSON(response);
+                 jsonData = jsonData.artist_profile;
+                 jsonData = jsonData[0];
+                 console.log(jsonData);
+                 $('#lineal_first_name').val(jsonData.artist_first_name);
+                 $('#lineal_last_name').val(jsonData.artist_first_name);
+                 $('#lineal_email_address').val(jsonData.artist_email_address);
+                 $('#lineal_website').val(jsonData.artist_website);
+              },
+              async:false
+          });
+
+
+
+        })
+
+
+
+
+
+
+
 });
 $('#add_user_profile_form').submit(function(event){
         if($('#terms').is(':checked') == false){
@@ -506,7 +540,7 @@ $('#addArtist').click(function(){
       async:false
   });
     $('#add_user_profile_form')[0].reset();
-     location=location;
+     // location=location;
 });
 
 $('#accept').click(function(){
