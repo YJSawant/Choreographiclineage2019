@@ -21,72 +21,20 @@ $user_email=$_SESSION["user_email_address"]
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Add Lineage</title>
-    <style>
-    .progressbar {
-          counter-reset: step;
-      }
-      .progressbar li {
-          list-style-type: none;
-          width: 25%;
-          float: left;
-          font-size: 12px;
-          position: relative;
-          text-align: center;
-          text-transform: uppercase;
-          color: #7d7d7d;
-      }
-      .progressbar li:before {
-          width: 30px;
-          height: 30px;
-          content: counter(step);
-          counter-increment: step;
-          line-height: 30px;
-          border: 2px solid #7d7d7d;
-          display: block;
-          text-align: center;
-          margin: 0 auto 10px auto;
-          border-radius: 50%;
-          background-color: white;
-      }
-      .progressbar li:after {
-          width: 100%;
-          height: 2px;
-          content: '';
-          position: absolute;
-          background-color: #7d7d7d;
-          top: 15px;
-          left: -50%;
-          z-index: -1;
-      }
-      .progressbar li:first-child:after {
-          content: none;
-      }
-      .progressbar li.active {
-          color: green;
-      }
-      .progressbar li.active:before {
-          border-color: #55b776;
-      }
-      .progressbar li.active + li:after {
-          background-color: #55b776;
-      }
-
-    </style>
-
 </head>
 
 
 <!-- Libraries for datatables -->
 
 <body onload="getData()">
+    <!-- Yogesh progressbar -->
     <div class="row">
-			<ul class="progressbar">
-          <li class="active"id="first"><a href="add_artist_profile.php">Add Artist Profile</a></li>
-          <li class="active" id="second"><a href="add_artist_personal_information.php">Add Artist Personal Info</a></li>
-          <li class="active" id="third"><a href="add_artist_biography.php">Add Artist Biography</a></li>
-          <li class="active" id="fourth"><a href="add_lineage.php">Add Lineage</a></li>
-     </ul>
-		</div>
+        <div class="progress" role="progressbar" tabindex="0" aria-valuenow="80" aria-valuemin="0" aria-valuetext="80 percent" aria-valuemax="100">
+                <span class="progress-meter" style="width: 80%">
+                    <p class="progress-meter-text">80%</p>
+                </span>
+        </div>
+    </div>
     <div class="row">
       <div class="large-2 columns large-offset-4">
           <h4><strong><center><?php echo ("Enter Your Lineage"); ?></center></strong></h4>
@@ -109,24 +57,17 @@ $user_email=$_SESSION["user_email_address"]
                               <div class="small-3 column">
                                   <p class="lineal_header"><strong>Details of Lineal Artist</strong></p>
                               </div>
-                              <div class="row artist_button">
-                                <div class="large-offset-10">
-                                  <button class="secondary success button " id="clearform" type="button" onclick="clearFormEvent()">
-                                    <span>Clear Form</span>
-                                  </button>
-                                </div>
-                              </div>
                           </div>
                           <div class="row">
                                 <div class="small-2 column">
                                     <label for="lineal_first_name">First Name<large style="color:red;font-weight: bold;"> *</large>
                                         <input autocomplete="off" type="text" class="lineal_first_name"
-                                        id="lineal_first_name" name="lineal_first_name" placeholder="First Name" />
+                                        id="lineal_first_name" name="lineal_first_name" placeholder="First Name" required/>
                                     </label>
                                 </div>
                                 <div class="small-2 column">
                                       <label for="lineal_last_name">Last Name <large style="color:red;font-weight: bold;"> *</large>
-                                          <input autocomplete="off" type="text" class="lineal_last_name" id="lineal_last_name" name="lineal_last_name" placeholder="Last Name" />
+                                          <input autocomplete="off" type="text" class="lineal_last_name" id="lineal_last_name" name="lineal_last_name" placeholder="Last Name" required/>
                                       </label>
                                 </div>
                                 <div class="small-3 column">
@@ -225,40 +166,43 @@ $user_email=$_SESSION["user_email_address"]
                                     <button class="primary button" type="button" name="home" id="home" onclick="window.open('add_user_profile.php','_self');">
                                         <span>Back to Profile</span>
                                     </button>
-                                    &nbsp;
                                     <button class="primary button" type="submit" name="save" id="save">
                                         <span>Save and Contribute Lineage</span>
                                     </button>
                                 </div>
                             <?php endif; ?>
                             <?php if($_SESSION["timeline_flow"] == "artist_add"):?>
-                                <div class="large-10">
-                                    <button class="primary button " type="button" name="previous" id="previous">
+                                <div class="large-2 small-8 column">
+                                    <button class="primary button" type="button" name="previous" id="previous">
                                         <span>Previous</span>
                                     </button>
-                                    &nbsp;
+                                </div>
+                                <div class="large-2 small-8 column">
                                     <button class="primary button" type="submit" name="next" id="next">
-                                        <span>Save and Contribute Lineage</span>
+                                        <span>Save & Next</span>
                                     </button>
                                 </div>
                             <?php endif; ?>
                             <?php if($_SESSION["timeline_flow"] == "edit"):?>
-                                <div class="large-10">
+                                <div class="large-2 small-8 column">
                                     <button class="primary button" type="button" name="previous" id="previous">
                                         <span>Previous</span>
                                     </button>
-                                    &nbsp;
+                                </div>
+                                <div class="large-2 small-8 column">
                                     <button class="primary button" type="submit" name="save" id="save">
-                                        <span>Save and Contribute Lineage</span>
+                                        <span>Save</span>
                                     </button>
                                 </div>
                                 <div id="terms_validation" style="red"></div>
                             <?php endif; ?>
                             <?php if($_SESSION["timeline_flow"] == "view"):?>
-                                <div class="large-10">
-                                    <button class="primary button " type="button" name="previous" id="previous">
+                                <div class="large-2 small-8 column">
+                                    <button class="primary button" type="button" name="previous" id="previous">
                                         <span>Previous</span>
                                     </button>
+                                </div>
+                                <div class="large-2 small-8 column" style="margin-left: 0px;">
                                     <button class="primary button" type="button" name="home" id="home" onclick="window.open('add_user_profile.php','_self');">
                                         <span>Back to Profile</span>
                                     </button>
@@ -284,39 +228,14 @@ include 'form_links_footer.php';
 include 'footer.php';
 ?>
 <script>
-  $("#first").click(function() {
-              // onclick event is assigned to the #button element.
-              window.open("add_artist_profile.php","_self");
-              //document.location.href = "add_artist_personal_information.php",true;
-          });
-   $("#second").click(function() {
-              // onclick event is assigned to the #button element.
-              window.open("add_artist_personal_information.php","_self");
-              //document.location.href = "add_artist_personal_information.php",true;
-          });
-    $("#third").click(function() {
-              // onclick event is assigned to the #button element.
-              window.open("add_artist_biography.php","_self");
-              //document.location.href = "add_artist_personal_information.php",true;
-          });
-     $("#fourth").click(function() {
-              // onclick event is assigned to the #button element.
-              return false;
-              // window.open("add_lineage.php","_self");
-              //document.location.href = "add_artist_personal_information.php",true;
-        });
-  function clearFormEvent(){
-    $('#add_user_profile_form')[0].reset();
+var comboTree1;
+var selectedIds = new Array();
+function testfunction(){
 
-  }
-  var comboTree1;
-  var selectedIds = new Array();
-  function testfunction(){
+  selectedIds = comboTree1.getSelectedItemsId();
+  console.log(selectedIds);
 
-    selectedIds = comboTree1.getSelectedItemsId();
-    console.log(selectedIds);
-
-  }
+}
 $(document).ready(function(){
   $('#danced').change(function() {
     if(this.checked) {
@@ -351,7 +270,7 @@ $(document).ready(function(){
         {
                 data: null,
                 className: "center",
-                defaultContent: '<a href="" class="editor_edit">Edit</a> / <a href="" class="editor_remove">Delete</a>'
+                defaultContent: '<a class="editor_edit">Edit</a> / <a class="editor_remove">Delete</a>'
             }
       ],
       "bDestroy": true
@@ -374,6 +293,40 @@ $(document).ready(function(){
         .remove()
         .draw();
       })
+
+      $('#display_relations').on('click', 'a.editor_edit', function (e) {
+          var editedrow=table.row($(this).parents('tr')).data();
+          //console.log(editedrow.artist_profile_id_2);
+          $.ajax({
+            type: "POST",
+            url: 'artistcontroller.php',
+            data: JSON.stringify({"action": "getArtistProfile",
+                                  "artistprofileid":editedrow.artist_profile_id_2
+                                }),
+               success: function(response) {
+                 response = JSON.stringify(response);
+                 jsonData = $.parseJSON(response);
+                 jsonData = jsonData.artist_profile;
+                 jsonData = jsonData[0];
+                 console.log(jsonData);
+                 $('#lineal_first_name').val(jsonData.artist_first_name);
+                 $('#lineal_last_name').val(jsonData.artist_first_name);
+                 $('#lineal_email_address').val(jsonData.artist_email_address);
+                 $('#lineal_website').val(jsonData.artist_website);
+              },
+              async:false
+          });
+
+
+
+        })
+
+
+
+
+
+
+
 });
 $('#add_user_profile_form').submit(function(event){
         if($('#terms').is(':checked') == false){
@@ -399,21 +352,9 @@ $('#addArtist').click(function(){
   var fullname2="";
   var email2="";
   var website2="";
-  if (fname == ""){
-    alert("Please enter First Name for lineal artist");
-    return;
-  }
-  if(lname == ""){
-    alert("Please enter Last Name for lineal artist");
-    event.preventDefault();
-    return;
-  }
-  if(document.getElementById('studied').checked==false && document.getElementById('danced').checked==false && document.getElementById('collaborated').checked==false && document.getElementById('influenced').checked==false){
-    alert("Please select type of relationship");
-    event.preventDefault();
-    return;
-  }
-    $.ajax({
+  
+  
+  $.ajax({
         type: "POST",
         url: 'artistcontroller.php',
         data: JSON.stringify({"action": "addOrEditArtistProfile",
@@ -430,7 +371,8 @@ $('#addArtist').click(function(){
           error: function(response){
             console.log(response);
           }
-    });
+      });
+  
   //getting your details
   jQuery.ajax({
     type: "POST",
@@ -574,12 +516,11 @@ $('#addArtist').click(function(){
               .remove()
               .draw();
             })
-
       },
       async:false
   });
     $('#add_user_profile_form')[0].reset();
-     location=location;
+     // location=location;
 });
 
 $('#accept').click(function(){

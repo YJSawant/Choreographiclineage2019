@@ -124,7 +124,7 @@ if(isset($_SESSION["contribution_type"])) {
                     <fieldset>
                         <!--<legend><strong>Adding artist profile</strong></legend>-->
                         <div class="row">
-                            <h2  style="display:inline; text-align: left;"><strong>BASIC INFORMATION</strong></h2>
+                            <h2  style="display:inline; text-align: left;"><strong>PROFILE INFORMATION</strong></h2>
                             <h5  style="display:inline; float: right; color: #006400;"><?php echo "<strong>(You are in ".$_SESSION['timeline_flow']." mode)</strong>";?></h5>
                         </div>
                        <div></div>
