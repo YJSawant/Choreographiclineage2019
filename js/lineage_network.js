@@ -189,7 +189,50 @@
           {
             nodeDetails['gender']="";
           }
+
+          if(allNodes[i].artist_genre)
+          {
+            nodeDetails['genre']=allNodes[i].artist_genre;
+          }else
+          {
+            nodeDetails['genre']="";
+          }
+
+          if(allNodes[i].artist_education)
+          {
+            eduNodes = allNodes[i].artist_education;
+            for(var j = 0; j<eduNodes.length; j++)
+            {
+              if(eduNodes[j].education_type === "main"){
+                nodeDetails['university_main']=eduNodes[j].institution_name;
+              } else if(eduNodes[j].education_type === "other") 
+              {
+                nodeDetails['university_other']=eduNodes[j].institution_name;
+              }
+            }       
+          }else{
+            nodeDetails['university_main']="";
+            nodeDetails['university_other']="";
+          }
+
+          if(allNodes[i].artist_relation)
+          {
+            var relNodes = allNodes[i].artist_relation;
+            var artist_relation = [];
+            for(var j = 0; j<relNodes.length; j++)
+            {
+              var relation = {};
+              relation['artist_name'] = relNodes[j].artist_name_2;
+              relation['relationship'] = relNodes[j].artist_relation;
+              artist_relation.push(relation);
+            }            
+            nodeDetails["artist_relation"] = artist_relation;      
+          }else{
+            nodeDetails["artist_relation"]= "";
+          }
+
           totalNodes.push(nodeDetails);     
+          console.log(totalNodes);
       } 
       
       //console.log(totalNodes);     
@@ -211,6 +254,7 @@
       nodes = new vis.DataSet(totalNodes);
       edges = new vis.DataSet(totalEdges);
   
+
       // initialize the div in which the network should be displayed
       var container = document.getElementById('my_network');
     
@@ -318,8 +362,12 @@
         var artist_name = document.getElementById("artist_name");
         var artist_gender = document.getElementById("artist_gender");
         var artist_status = document.getElementById("artist_status");
+        var artist_education = document.getElementById("artist_education");
+        var artist_genre = document.getElementById("artist_genre");
         var artist_bio_div = document.getElementById("artist_bio_div");
         var bio_text_val = document.getElementById("bioTextValue");
+        var artist_lineage_text = document.getElementById("artist_lineage_text");
+        var artist_lineals = document.getElementById("artist_lineals");
         artist_bio_div.style.visibility="hidden";  
         for (var i = 0; i < totalNodes.length; i++) {
           var cur_node = totalNodes[i].id;
@@ -349,7 +397,7 @@
             } else if(dodDate == "Invalid Date")
             {
               dobDate = (dobDate.getMonth()+2) + '/' + dobDate.getDate() + '/' +  dobDate.getFullYear();
-              artist_status.innerHTML= dobDate + " Present";
+              artist_status.innerHTML= dobDate + "-"+" Present";
             }
             else if(dobDate && dodDate)
             {
@@ -369,12 +417,53 @@
                 bio_text_val.innerHTML= bioText;
               }           
             }
+
+            if(totalNodes[i]["genre"])
+            {  
+              genreVal = totalNodes[i]["genre"];
+              artist_genre.innerHTML= "<b>Genres: </b>"+genreVal.substr(1);                  
+            }else{
+              artist_genre.innerHTML= "";
+            }
+
+            if(totalNodes[i]["university_main"])
+            { 
+              artist_education.innerHTML= "<b>University: </b>"+totalNodes[i]["university_main"];                  
+            }else{
+              artist_education.innerHTML= "";
+            }
+           
+            displaydata = totalNodes[i]["artist_relation"];
+            if(displaydata)
+            {
+              artist_lineage_text.style.visibility="visible";
+              artist_lineals.style.visibility="visible";
+              table = $("#artist_lineals").DataTable({
+                paging: false,
+                searching: false,
+                scrollY: 400,
+                info: false,
+                data:displaydata,
+                columns:[
+                  {"data": "artist_name" },
+                  {"data": "relationship"}
+                ],
+                "bDestroy": true           
+              });
+            } else
+            {
+              artist_lineage_text.style.visibility="hidden";
+              artist_lineals.style.visibility="hidden";
+
+              // $("#artist_lineals").dataTable({
+              //   fnDrawCallback: function() {
+              //     $("#artist_lineals thead").remove();
+              //   }
+              // });
+            }
           }
         }      
       });
-
-      // var link = document.getElementById('full_network_tab');
-      // link.click();
 
       // event fired on change of tab in tab bar
       $('.tablinks').click(function() {
@@ -726,7 +815,20 @@
                   }         
                 }
               });
-    
+
+      // clearing the input fields
+      clear = document.getElementById('clear');
+      clear.addEventListener('click',(function(e) {
+          document.getElementById('searchbox').value = "";
+          document.getElementById('university-search-box').value = "";
+          document.getElementById('state-search-box').value = "";
+          document.getElementById('country-search-box').value = "";
+          document.getElementById('major-search-box').value = "";
+          document.getElementById('degree-search-box').value = "";
+          document.getElementById('ethnicity-search-box').value = ""; 
+          $('input:checkbox').removeAttr('checked');
+      })); 
+
       submit = document.getElementById('submit');
       submit.addEventListener('click',(function(e) {
         for (var i = 0; i < totalNodes.length; i++){ 
@@ -828,10 +930,10 @@
                                       }),
                 success:function(response)
                 {
-                    ({ response, nodes } = createFilteredNetwork(response, nodes, createVisNetwork, container));
-                    $('#search_text').html('&nbsp&nbsp'+"Results for"+" "+'<span style="font-weight:bold">'+search_text+" "+
-              university_text+" "+living_val+" "+gender_val+" "+state_text+" "+country_text+" "+major_text
-              +" "+degree_text+" "+ethnicity_text+'</span>');   
+                  $('#search_text').html('&nbsp&nbsp'+"Results for"+" "+'<span style="font-weight:bold">'+search_text+" "+
+                  university_text+" "+living_val+" "+gender_val+" "+state_text+" "+country_text+" "+major_text
+                  +" "+degree_text+" "+ethnicity_text+'</span>'); 
+                    ({ response, nodes } = createFilteredNetwork(response, nodes, createVisNetwork, container));  
                 },
                 error:function(response)
                 {

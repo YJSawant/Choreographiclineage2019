@@ -29,18 +29,15 @@ if(isset($_FILES["file"]["type"]))
 				echo $_FILES["file"]["name"] . " <span id='invalid'><b>already exists.</b></span> ";
 			}
 			else {
-                $sourcePath = $_FILES['file']['tmp_name']; // Storing source path of the file in a variable
-                $targetPath = "upload/photo_upload_data/" . $_FILES['file']['name']; // Target path where file is to be stored
+				$sourcePath = $_FILES['file']['tmp_name']; 
+				$timestamp = time();// Storing source path of the file in a variable
+                $targetPath = "upload/photo_upload_data/".$timestamp .$_FILES['file']['name']; // Target path where file is to be stored
 				// echo("<script>console.log('Target: ".$targetPath."');</script>");
 				// echo("<script>console.log('Source: ".$sourcePath."');</script>");
 				$_SESSION["photo_file_path"] = $targetPath;
 
                 if (move_uploaded_file($sourcePath, $targetPath)){ // Moving Uploaded file
                     echo "<span id='success'>Image Uploaded Successfully...!!</span><br/>";
-                    //echo "<br/><b>File Name:</b> " . $_FILES["file"]["name"] . "<br>";
-                    //echo "<b>Type:</b> " . $_FILES["file"]["type"] . "<br>";
-                    //echo "<b>Size:</b> " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
-                    //echo "<b>Temp file:</b> " . $_FILES["file"]["tmp_name"] . "<br>";
                     include 'connection_open.php';
 
                     $query = "UPDATE artist_profile
@@ -52,8 +49,6 @@ if(isset($_FILES["file"]["type"]))
                 }else{
                     echo "<span id='invalid'>**Some problem occurred please try again later***<span>";
                 }
-				// $location = "about_lineage.php";
-				// header("Location: ".$location."");
 			}
 		}
 	}

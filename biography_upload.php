@@ -6,9 +6,7 @@ my_session_start();
 
 if(isset($_SESSION["artist_profile_id"]) and isset($_SESSION["user_email_address"])){
 	$artist_profile_id = $_SESSION["artist_profile_id"];
-	//echo $artist_profile_id;
 	$user_email_address = $_SESSION["user_email_address"];
-	//echo $user_email_address;
 }
 if(isset($_POST["biography_text"])){
 
@@ -46,7 +44,8 @@ if(isset($_FILES["bio_file"]["type"]))
 			else
 			{
 				$sourcePath = $_FILES['bio_file']['tmp_name']; // Storing source path of the file in a variable
-				$targetPath = "upload/biography_upload_data/".$_FILES['bio_file']['name']; // Target path where file is to be stored
+				$timestamp = time();
+				$targetPath = "upload/biography_upload_data/".$timestamp.$_FILES['bio_file']['name']; // Target path where file is to be stored
 				$_SESSION["biography_file_path"] = $targetPath;
 				if(move_uploaded_file($sourcePath,$targetPath))
 				{
@@ -60,13 +59,7 @@ if(isset($_FILES["bio_file"]["type"]))
 					include 'connection_close.php';
 				}else{
                     echo "<span id='invalid'>**Please try again later***<span>";
-                }  // Moving Uploaded file
-				// echo "<br/><b>File Name:</b> " . $_FILES["bio_file"]["name"] . "<br>";
-				// echo "<b>Type:</b> " . $_FILES["bio_file"]["type"] . "<br>";
-				// echo "<b>Size:</b> " . ($_FILES["bio_file"]["size"] / 1024) . " kB<br>";
-				//echo "<b>Temp file:</b> " . $_FILES["bio_file"]["tmp_name"] . "<br>";
-				// $location = "about_lineage.php";
-				// header("Location: ".$location."");
+                }  
 			}
 		}
 	}

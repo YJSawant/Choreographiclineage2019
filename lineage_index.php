@@ -30,7 +30,8 @@ include 'menu.php';
 						<input style="margin-bottom: 10px;" id="major-search-box" type="search" placeholder="Enter Major" />
 						<input style="margin-bottom: 10px;" id="degree-search-box" type="search" placeholder="Enter Degree" />
 						<input style="margin-bottom: 10px;" id="ethnicity-search-box" type="search" placeholder="Enter Ethnicity" />
-						<input style="margin-bottom: 10px;" id="submit" type="button" value="Submit"/>
+						<input style="display:inline-block; margin-right: 15px;" id="clear" type="submit" value="Clear"/>
+						<input style="display:inline-block; margin-bottom: 15px;" id="submit" type="button" value="Submit"/>
 					</div>
 				</div>
 				<div class='my-legend'style="margin: auto;">
@@ -87,13 +88,26 @@ include 'menu.php';
 				<div hidden id="mySidenav" class="sidenav">
 				<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 					<img class="pic" id="artist_pic" src = "">
+					<div class="info"> Background information</div>
 					<div id="artist_name" class="name"> </div>
 					<div id="artist_gender" class="gender"> </div>
 					<div id="artist_status" class="status"> </div>
+					<div id="artist_genre" class="genre" > </div>
+					<div id="artist_education" class="education" > </div>
 					<div id="artist_bio_div"> 
-					<!-- <a href="javascript:window.open('bioTextValue', '_blank', 'width=400,height=400');" id="artist_biography" class="biography">Click here for biography</a> -->
 					<a href="javascript:void(0)" onclick="openPopUp()" id="artist_biography" class="biography">Click here for biography</a>
-				    </div>
+				    </div>   
+					<div id="artist_lineage_text" class="lineage">Lineage: </div>                         
+					<div class="row"> 
+						<table id="artist_lineals" class="display" style="width:100%;margin-left:8px;margin-right:2px;background-color:#eee;">
+							<thead>
+								<tr>
+									<th data-field="a_name">Artist Names</th>
+									<th data-field="a_relation">Relationship</th>
+								</tr>
+							</thead>
+						</table>				
+					</div>
 				</div>
 			</div>
 		</div>
@@ -101,29 +115,53 @@ include 'menu.php';
 	<style type='text/css'>
 	.pic{
 		height: 240px;
-		margin-bottom: 12px;
 		overflow:hidden;	
-		width: 100%;			
+		width: 100%;	
+		margin-bottom: 1px;		
+	}
+	.info{
+		text-align : center;
+		font-weight: bold;
+		background-color:#FFFFFF;
+		margin-bottom: 5px;
 	}
 
 	.name{
 		text-align : center;
 		font-weight: bold;
-		margin-bottom: 12px;
+		margin-bottom: 2px;
 	}
 
 	.gender{
 		text-align : center;
-		margin-bottom: 12px;
+		margin-bottom: 2px;
 	}
 	.status{
 		text-align : center;
-		margin-bottom: 12px;
+		margin-bottom: 2px;
 	}
+	.education{
+		text-align : center;
+		margin-bottom: 2px;
+		margin-left: 2px;
+	}
+	.genre{
+		text-align : center;
+		margin-bottom: 2px;
+	}
+
+	.lineage{
+		text-align : left;
+		font-weight: bold;
+		margin-left: 2px;
+	}
+	thead {
+		display:none;
+		}
 
 	.biography{
 		font-size: 15px;
-		margin-bottom: 12px;
+		margin-bottom: 2px;
 		color: #4743f7;
 		text-align : center;
 	}
@@ -261,5 +299,7 @@ body {
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript" src="js/lineage_network.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 </body>
 </html>
