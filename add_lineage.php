@@ -341,7 +341,6 @@ $('#addArtist').click(function(){
   var mail=document.getElementById('lineal_email_address').value;
   var website=document.getElementById('lineal_website').value;
   var genre=document.getElementById('lineal_genre').value;
-  var is_record_present="true";
   var pid1=0;
   var fname1="";
   var lname1="";
@@ -353,28 +352,9 @@ $('#addArtist').click(function(){
   var fullname2="";
   var email2="";
   var website2="";
-  jQuery.ajax({
-    type: "POST",
-    url: 'artistcontroller.php',
-    data: JSON.stringify({"action": "getArtistProfile",
-                          "artistfirstname":fname,
-                          "artistlastname":lname,
-                          "artistemailaddress":mail
-                        }),
-       success: function(response) {
-         response = JSON.stringify(response);
-         jsonData = $.parseJSON(response);
-         //console.log(jsonData);
-         if (jsonData.artist_profile==null){
-           is_record_present="false";
-           console.log("Artist does not exist.Will create his lineage");
-         }
-
-      },
-      async:false
-  });
-  if (is_record_present == "false"){
-      $.ajax({
+  
+  
+  $.ajax({
         type: "POST",
         url: 'artistcontroller.php',
         data: JSON.stringify({"action": "addOrEditArtistProfile",
@@ -392,7 +372,7 @@ $('#addArtist').click(function(){
             console.log(response);
           }
       });
-  }
+  
   //getting your details
   jQuery.ajax({
     type: "POST",
