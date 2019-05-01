@@ -97,7 +97,7 @@ include 'menu.php';
 					<div id="artist_bio_div"> 
 					<a href="javascript:void(0)" onclick="openPopUp()" id="artist_biography" class="biography">Click here for biography</a>
 				    </div>   
-					<div id="artist_lineage_text" class="lineage">Lineage: </div>                         
+					<div id="artist_lineage_text" class="lineage">Lineal Lines: </div>                         
 					<div class="row"> 
 						<table id="artist_lineals" class="display" style="width:100%;margin-left:8px;margin-right:2px;background-color:#eee;">
 							<thead>

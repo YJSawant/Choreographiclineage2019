@@ -445,8 +445,8 @@
                 info: false,
                 data:displaydata,
                 columns:[
-                  {"data": "artist_name" },
-                  {"data": "relationship"}
+                  {"data": "relationship"},
+                  {"data": "artist_name" }
                 ],
                 "bDestroy": true           
               });
