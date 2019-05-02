@@ -153,11 +153,11 @@ $user_email=$_SESSION["user_email_address"]
                           <br>
                           <div class="row">
                              <div class="small-3 column">
-                               <input type="checkbox" id="studied" name="studied" class="rel_studied" value="Studied With">
+                               <input type="checkbox" id="studied" name="studied" class="rel_studied" value="Studied Under">
                                <label for="studied">Studied Under</label><span style="cursor:pointer;" title="Teachers with whom you have studied."><img src="img/help.png" style="height:13px;width:13px;"/></span>
                              </div>
                              <div class="small-3 column">
-                               <input type="checkbox" id="danced" name="danced" class="rel_danced" value="Danced For">
+                               <input type="checkbox" id="danced" name="danced" class="rel_danced" value="Danced in the Work of">
                                <label for="danced">Danced in the Work of </label><span style="cursor:pointer;" title="Choreographers whose works you have danced in."><img src="img/help.png" style="height:13px;width:13px;"/></span>
                              </div>
                              <div class="small-3 column">

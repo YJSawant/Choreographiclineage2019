@@ -1,5 +1,4 @@
  <?php  
- #$connect = mysqli_connect("localhost", "root", "", "Choreographiclineage2019"); 
  include 'connection_open.php'; 
  if(isset($_POST["query"]))  
  {  
@@ -13,11 +12,7 @@
            {  
                 $output .= '<li>'.$row["artist_first_name"].'</li>';  
            }  
-      }  
-      // else  
-      // {  
-      //      $output .= '<li>Name Not Found</li>';  
-      // }  
+      }   
       $output .= '</ul>';  
       echo $output;  
  }

@@ -21,6 +21,9 @@ if(isset($_SESSION["user_email_address"])){
     }else{
         echo "<script>var disabled_input=false;</script>";
     }
+    
+    foreach ($_SESSION as $key=>$val)
+    echo $key." ".$val."<br/>";
 }
 if(isset($_SESSION["contribution_type"])) {
     $contribution_form_type = $_SESSION["contribution_type"];
@@ -98,6 +101,9 @@ if(isset($_SESSION["contribution_type"])) {
         <title>Add Artist</title> 
            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
+           <link href="css/fSelect.css" rel="stylesheet">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+            <script src="js/fSelect.js"></script>
            <style>  
            ul{  
                 cursor:pointer;  
@@ -129,7 +135,7 @@ if(isset($_SESSION["contribution_type"])) {
                         </div>
                        <div></div>
                         <div class="row">
-                            <div class="medium-4 column">
+                            <div class="small-3 column">
                                 <!--<label for="artist_first_name">First Name of Artist</span> <span style="color:red;font-weight: bold;"> *</span>-->
                                     <label for="artist_first_name"><?php echo (($_SESSION['contribution_type'] == "own")?'Your First Name':'First Name of Artist') ?></span> <span style="color:red;font-weight: bold;"> *</span>
                                     <input value="<?php echo (($_SESSION['contribution_type'] == "own")?$_SESSION['user_firstname']:$artist_fname) ?>" autocomplete="off" type="text" id="artist_first_name" name="artist_first_name" placeholder="First Name" required>
@@ -137,7 +143,7 @@ if(isset($_SESSION["contribution_type"])) {
 
                                 </label>
                             </div>
-                            <div class="medium-4 column">
+                            <div class="small-3 column">
                                 <!--<label for="artist_last_name">Last Name <span class="other_artist">of Artist</span> <span style="color:red;font-weight: bold;"> *</span>-->
                                     <label for="artist_last_name"><?php echo (($_SESSION['contribution_type'] == "own")?'Your Last Name':'Last Name of Artist') ?></span> <span style="color:red;font-weight: bold;"> *</span>
                                     <input  value="<?php echo (($_SESSION['contribution_type'] == "own")?$_SESSION['user_lastname']:$artist_lname) ?>" autocomplete="off" type="text" id="artist_last_name" name="artist_last_name" placeholder="Last Name" required>
@@ -145,12 +151,32 @@ if(isset($_SESSION["contribution_type"])) {
                                     <div id ="duplication_check" style="color:red" ></div>
                                 </label>
                             </div>
-                            <div class="medium-4 column">
+                            <div class="small-3 column">
                                 <!--<label for="artist_email_address">Email Address <span class="other_artist">of Artist</span>-->
                                     <label for="artist_email_address"><?php echo (($_SESSION['contribution_type'] == "own")?'Your Email Address':'Email Address of Artist') ?></span>
                                     <input value="<?php echo (($_SESSION['contribution_type'] == "own")?$_SESSION['user_email_address']:'') ?>" autocomplete="off" type="email" id="artist_email_address" name="artist_email_address" placeholder="Email Address">
                                 </label>
                             </div>
+                            <div class="small-3 column">
+                            <label for="Genre">Genre</span>
+                                <select name = 'genre[]' class="multi-select-dd small-3 column" multiple="multiple">
+                                    <option value="MySQL">MySQL</option>
+                                    <option value="SQLServer">SQL Server</option>
+                                    <option value="Oracle">Oracle</option>
+                                    <option value="HTML">HTML</option>
+                                    <option value="CSS">CSS</option>
+                                    <option value="jQuery">jQuery</option>
+                                    <option value="Bootstrap">Bootstrap</option>
+                                    <option value="MySQL1">MySQL1</option>
+                                    <option value="SQLServer2">SQL Server2</option>
+                                    <option value="Oracle2">Oracle2</option>
+                                    <option value="HTML2">HTML2</option>
+                                    <option value="CSS2">CSS2</option>
+                                    <option value="jQuery2">jQuery2</option>
+                                    <option value="Bootstrap2">Bootstrap2</option>
+                                </select>                              
+                            </div>   
+                        </div>    
                     </fieldset>
                 </section>
             </div>
@@ -406,6 +432,9 @@ if(isset($_SESSION["contribution_type"])) {
         </div>
     </form>
     <script>
+$('.multi-select-dd').fSelect();
+ var values = $('.multi-select-dd:selected').val();   
+ console.log(values);
  $("#first").click(function() {
             // onclick event is assigned to the #button element.
             return false;
@@ -470,7 +499,7 @@ if(isset($_SESSION["contribution_type"])) {
             $("#artist_first_name").val(first_name);
             $("#artist_last_name").val(last_name);
             $("#artist_email_address").val(email_address);
-            console.log("TEST");
+            //console.log("TEST");
         }
         function artistTypeSelection(){
             if($("#Other_Artist_Type").is(":checked")){
@@ -613,7 +642,6 @@ if(isset($_SESSION["contribution_type"])) {
                 event.preventDefault();
             }
             var text=document.getElementById("duplication_check").innerHTML;
-            console.log(text);
             if(text.trim()===("!! User already exists. Please change artist name").trim()){
                 alert("Cannot submit form with duplicate artist name");
                 event.preventDefault();
@@ -625,9 +653,7 @@ if(isset($_SESSION["contribution_type"])) {
                 $('#checkboxvalidation').html("Please select Type of Artist !!");
                 event.preventDefault();
             }
-        });
-
-        
+        });   
 
         // });
     </script>
@@ -661,6 +687,67 @@ if(isset($_SESSION["contribution_type"])) {
 <?php
 include 'footer.php';
 ?>
+<style type='text/css'>
+.multi-select-container {
+  display: inline-block;
+  position: relative;
+}
+
+.multi-select-menu {
+  position: absolute;
+  left: 0;
+  top: 0.8em;
+  float: left;
+  min-width: 100%;
+  background: #fff;
+  margin: 1em 0;
+  padding: 0.4em 0;
+  border: 1px solid #aaa;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  display: none;
+}
+
+.multi-select-menu input {
+  margin-right: 0.3em;
+  vertical-align: 0.1em;
+}
+
+.multi-select-button {
+  display: inline-block;
+  font-size: 0.875em;
+  padding: 0.2em 0.6em;
+  max-width: 20em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: -0.5em;
+  background-color: #fff;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  cursor: default;
+}
+
+.multi-select-button:after {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0.4em 0.4em 0 0.4em;
+  border-color: #999 transparent transparent transparent;
+  margin-left: 0.4em;
+  vertical-align: 0.1em;
+}
+
+.multi-select-container--open .multi-select-menu { display: block; }
+
+.multi-select-container--open .multi-select-button:after {
+  border-width: 0 0.4em 0.4em 0.4em;
+  border-color: transparent transparent #999 transparent;
+}
+</style>
+
 
 <script>
     $(function() {
@@ -721,30 +808,5 @@ include 'footer.php';
  });
 
 </script>
-  <!-- <script>  
- $(document).ready(function(){  
-      $('#artist_last_name').keyup(function(){  
-           var query = $(this).val();  
-           console.log(query);
-           if(query != '')  
-           {  
-                $.ajax({  
-                     url:"auto_complete_firstname.php",  
-                     method:"POST",  
-                     data:{query1:query},  
-                     success:function(data)  
-                     {  
-                          $('#lastnamelist').fadeIn();  
-                          $('#lastnamelist').html(data);  
-                     }  
-                });  
-           }  
-      });  
-      $(document).on('click', 'li', function(){  
-           $('#artist_last_name').val($(this).text());  
-           $('#lastnamelist').fadeOut();  
-      });  
- });  
- </script>   -->
 
 </html>

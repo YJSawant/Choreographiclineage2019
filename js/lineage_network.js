@@ -536,7 +536,7 @@
           for (var i = 0; i < totalEdges.length; i++) {
             var curr_edge = totalEdges[i];
             if(this.id === "studied_with_tab") {
-              if(curr_edge.label.toLowerCase() === "studied with") {
+              if(curr_edge.label.toLowerCase() === "studied under") {
                 curr_edge.hidden = false;
                 curr_edge.color = edge_color;
                 req_edges.push(curr_edge.from);
@@ -560,7 +560,7 @@
               edges_to_update.push(curr_edge);
             }else if(this.id === "danced_for_tab")
             {
-              if(curr_edge.label.toLowerCase() === "danced for") {
+              if(curr_edge.label.toLowerCase() === "danced in the work of ") {
                 curr_edge.hidden = false;
                 curr_edge.color = edge_color;
                 req_edges.push(curr_edge.from);
