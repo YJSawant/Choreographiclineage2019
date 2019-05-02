@@ -12,8 +12,8 @@
   $json_params = file_get_contents('php://input');
   // check to make sure that the JSON is in a valid format
   if (isValidJSON($json_params)){
-  //load in all the potential parameters.  These should match the database columns for the objects. 
-    $conn = getDbConnection();  
+  //load in all the potential parameters.  These should match the database columns for the objects.
+    $conn = getDbConnection();
     $decoded_params = json_decode($json_params, TRUE);
     $action = $decoded_params['action'];
     $json['action'] = $action;
@@ -99,7 +99,7 @@
   $last_id = $conn->lastInsertId();
   $json['Record Id'] = $last_id;
   $json['Status'] = "SUCCESS - Inserted Id $last_id";
-  }catch (Exception $e) { 
+  }catch (Exception $e) {
       $json['Exception'] =  $e->getMessage();
   }
   }else{
@@ -126,7 +126,7 @@
   } else {
   $json['Status'] = "ERROR - Updated 0 Rows - Check for Valid Ids ";
   }
-  }catch (Exception $e) { 
+  }catch (Exception $e) {
       $json['Exception'] =  $e->getMessage();
   }
   $json['Action'] = $action;
@@ -145,7 +145,7 @@
   } else {
   $json['Status'] = "ERROR - Deleted 0 Rows - Check for Valid Ids ";
   }
-  }catch (Exception $e) { 
+  }catch (Exception $e) {
       $json['Exception'] =  $e->getMessage();
   }
   } else {
@@ -282,26 +282,26 @@
         }
         array_push ($args, $relationIdentifier);
       }
-      $json['SQL'] = $sql; 
+      $json['SQL'] = $sql;
       try{
         $statement = $conn->prepare($sql);
         $statement->setFetchMode(PDO::FETCH_ASSOC);
         $statement->execute($args);
         $result = $statement->fetchAll();
-      }catch (Exception $e) { 
+      }catch (Exception $e) {
         $json['Exception'] =  $e->getMessage();
       }
       foreach($result as $row1 ) {
           $json['artist_relation'][] = $row1;
       }
   }
-   else { 
+   else {
       $json['Exception'] = "Unrecognized Action";
-  } 
-  } 
+  }
+  }
   else{
     $json['Exception'] = "Invalid JSON on Inbound Request";
-  } 
+  }
   echo json_encode($json);
-  closeConnections(); 
+  closeConnections();
   ?>
