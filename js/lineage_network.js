@@ -8,7 +8,7 @@
   //default value of node id before search for artist is performed
   var nodes;
   var edges;
-  var totalNodes = [];  
+  var totalNodes = [];
   var totalEdges = [];
   var inquiry_text = document.getElementById('search_text');
   // ajax request to fetch the nodes, edges and border color of nodes from backend
@@ -17,7 +17,7 @@
     url: 'artistcontroller.php',
     data: JSON.stringify({"action": "getCompleteArtistProfile"}),
     success:function(response) {
-      response = JSON.stringify(response); 
+      response = JSON.stringify(response);
       json_object = $.parseJSON(response);
       allNodes=json_object.artist_profile;
       // get the artist ids, names and images for search suggestions for textbox used to search for artists
@@ -33,7 +33,7 @@
         url: 'artistcontroller.php',
         data: JSON.stringify({"action": "getArtistNames"}),
         success:function(response) {
-          response = JSON.stringify(response); 
+          response = JSON.stringify(response);
           artistNames = $.parseJSON(response);
           finalNames = artistNames.artist_name;
           for(var i=0; i <finalNames.length; i++) {
@@ -51,7 +51,7 @@
         url: 'artistcontroller.php',
         data: JSON.stringify({"action": "getUniversityNames"}),
         success:function(response) {
-          response = JSON.stringify(response); 
+          response = JSON.stringify(response);
           universityNames = $.parseJSON(response);
           finalUniversity = universityNames.university;
           for(var i=0; i <finalUniversity.length; i++) {
@@ -68,7 +68,7 @@
         url: 'artistcontroller.php',
         data: JSON.stringify({"action": "getStateNames"}),
         success:function(response) {
-          response = JSON.stringify(response); 
+          response = JSON.stringify(response);
           stateNames = $.parseJSON(response);
           finalStates = stateNames.state_names;
           for(var i=0; i <finalStates.length; i++) {
@@ -85,7 +85,7 @@
         url: 'artistcontroller.php',
         data: JSON.stringify({"action": "getCountryNames"}),
         success:function(response) {
-          response = JSON.stringify(response); 
+          response = JSON.stringify(response);
           countryNames = $.parseJSON(response);
           finalCountry = countryNames.country_names;
           for(var i=0; i <finalCountry.length; i++) {
@@ -102,7 +102,7 @@
         url: 'artistcontroller.php',
         data: JSON.stringify({"action": "getMajor"}),
         success:function(response) {
-          response = JSON.stringify(response); 
+          response = JSON.stringify(response);
           majorNames = $.parseJSON(response);
           finalMajor = majorNames.major_names;
           for(var i=0; i <finalMajor.length; i++) {
@@ -119,7 +119,7 @@
         url: 'artistcontroller.php',
         data: JSON.stringify({"action": "getDegree"}),
         success:function(response) {
-          response = JSON.stringify(response); 
+          response = JSON.stringify(response);
           degreeNames = $.parseJSON(response);
           finalDegree = degreeNames.degree_names;
           for(var i=0; i <finalDegree.length; i++) {
@@ -136,7 +136,7 @@
         url: 'artistcontroller.php',
         data: JSON.stringify({"action": "getEthnicity"}),
         success:function(response) {
-          response = JSON.stringify(response); 
+          response = JSON.stringify(response);
           ethnicityNames = $.parseJSON(response);
           finalEthnicity = ethnicityNames.ethnicity_names;
           for(var i=0; i <finalEthnicity.length; i++) {
@@ -147,40 +147,40 @@
           console.log("Unable to fetch degree");
         }
       });
-         
+
       for (var i = 0; i<allNodes.length; i++){
-          var nodeDetails= {}; 
+          var nodeDetails= {};
           nodeDetails['id']=allNodes[i].artist_profile_id;
           nodeDetails['title']=allNodes[i].artist_first_name+" "+allNodes[i].artist_last_name;
           nodeDetails['shape']= "circularImage";
           nodeDetails['label']=allNodes[i].artist_first_name+" "+allNodes[i].artist_last_name;
           if(allNodes[i].artist_biography_text){
-            nodeDetails['biography']=allNodes[i].artist_biography_text; 
+            nodeDetails['biography']=allNodes[i].artist_biography_text;
           }else if(allNodes[i].artist_biography)
           {
             nodeDetails['biography']=allNodes[i].artist_biography;
           }
           if(allNodes[i].artist_dob){
-            nodeDetails['dob']=allNodes[i].artist_dob; 
+            nodeDetails['dob']=allNodes[i].artist_dob;
           }
           if(allNodes[i].artist_dod)
           {
             nodeDetails['dod']=allNodes[i].artist_dod;
-          }         
+          }
           if(allNodes[i].artist_photo_path)
           {
             nodeDetails['image']= allNodes[i].artist_photo_path;
           }else{
             nodeDetails['image']= "upload/photo_upload_data/missing_image.jpg";
           }
-          
+
           nodeDetails['size']= "20";
           if(allNodes[i].is_user_artist === "artist")
-          { 
+          {
             nodeDetails['color']='#da0067';
           }else{
             nodeDetails['color']='#025457';
-          }     
+          }
 
           if(allNodes[i].artist_gender)
           {
@@ -190,9 +190,9 @@
             nodeDetails['gender']="";
           }
 
-          if(allNodes[i].artist_genre)
+          if(allNodes[i].genre)
           {
-            nodeDetails['genre']=allNodes[i].artist_genre;
+            nodeDetails['genre']=allNodes[i].genre;
           }else
           {
             nodeDetails['genre']="";
@@ -205,11 +205,11 @@
             {
               if(eduNodes[j].education_type === "main"){
                 nodeDetails['university_main']=eduNodes[j].institution_name;
-              } else if(eduNodes[j].education_type === "other") 
+              } else if(eduNodes[j].education_type === "other")
               {
                 nodeDetails['university_other']=eduNodes[j].institution_name;
               }
-            }       
+            }
           }else{
             nodeDetails['university_main']="";
             nodeDetails['university_other']="";
@@ -225,39 +225,39 @@
               relation['artist_name'] = relNodes[j].artist_name_2;
               relation['relationship'] = relNodes[j].artist_relation;
               artist_relation.push(relation);
-            }            
-            nodeDetails["artist_relation"] = artist_relation;      
+            }
+            nodeDetails["artist_relation"] = artist_relation;
           }else{
             nodeDetails["artist_relation"]= "";
           }
 
-          totalNodes.push(nodeDetails);     
+          totalNodes.push(nodeDetails);
           console.log(totalNodes);
-      } 
-      
-      //console.log(totalNodes);     
+      }
+
+      //console.log(totalNodes);
       for(var i=0; i <allNodes.length; i++) {
         var artistRelation= allNodes[i].artist_relation;
         if(artistRelation){
           for (var j = 0; j<artistRelation.length; j++){
-            var edgeDetails= {}; 
+            var edgeDetails= {};
             edgeDetails['id']=artistRelation[j].relation_id;
             edgeDetails['to']=artistRelation[j].artist_profile_id_1;
             edgeDetails['from']= artistRelation[j].artist_profile_id_2;
             edgeDetails['width']="0";
             edgeDetails['label']= artistRelation[j].artist_relation;
-            totalEdges.push(edgeDetails);     
-          } 
-        }                  
+            totalEdges.push(edgeDetails);
+          }
+        }
       }
       // store the nodes and edges in corresponding vis js objects
       nodes = new vis.DataSet(totalNodes);
       edges = new vis.DataSet(totalEdges);
-  
+
 
       // initialize the div in which the network should be displayed
       var container = document.getElementById('my_network');
-    
+
       // add nodes and edges to network data
       var data = {
         nodes: nodes,
@@ -318,7 +318,7 @@
 
       // initialize the network object
       network = new vis.Network(container, data, options);
-    
+
       // set physics to false after stabilization iterations
       network.on("stabilizationIterationsDone", function () {
         network.setOptions( { physics: false} );
@@ -355,8 +355,8 @@
 
       network.on('selectNode', function (obj) {
         var side_nav = document.getElementById("mySidenav");
-        side_nav.style.width = "300px";	
-        side_nav.style.display = "block"; 
+        side_nav.style.width = "300px";
+        side_nav.style.display = "block";
         var selected_node = obj.nodes;
         var artist_pic = document.getElementById("artist_pic");
         var artist_name = document.getElementById("artist_name");
@@ -368,11 +368,11 @@
         var bio_text_val = document.getElementById("bioTextValue");
         var artist_lineage_text = document.getElementById("artist_lineage_text");
         var artist_lineals = document.getElementById("artist_lineals");
-        artist_bio_div.style.visibility="hidden";  
+        artist_bio_div.style.visibility="hidden";
         for (var i = 0; i < totalNodes.length; i++) {
           var cur_node = totalNodes[i].id;
           if(selected_node[0] === cur_node)
-          {         
+          {
             if(totalNodes[i].image === "upload/photo_upload_data/missing_image.jpg")
             {
               artist_pic.src="upload/photo_upload_data/NoImageAvailable.jpg";
@@ -404,35 +404,35 @@
               dobDate = (dobDate.getMonth()+2) + '/' + dobDate.getDate() + '/' +  dobDate.getFullYear();
               dodDate = (dodDate.getMonth()+2) + '/' + dodDate.getDate() + '/' +  dodDate.getFullYear();
               artist_status.innerHTML= dobDate+ "-" +dodDate;
-            }  
+            }
             if(totalNodes[i]["biography"])
             {
               artist_bio_div.style.visibility="visible";
               if(totalNodes[i]["biography"].startsWith("upload/"))
-              {                   
-                url = "http://stark.cse.buffalo.edu/choreographiclineage/"+totalNodes[i]["biography"];  
-                bio_text_val.innerHTML= url;             
+              {
+                url = "http://stark.cse.buffalo.edu/choreographiclineage/"+totalNodes[i]["biography"];
+                bio_text_val.innerHTML= url;
               }else if(totalNodes[i]["biography"]){
                 bioText= totalNodes[i]["biography"];
                 bio_text_val.innerHTML= bioText;
-              }           
+              }
             }
 
             if(totalNodes[i]["genre"])
-            {  
+            {
               genreVal = totalNodes[i]["genre"];
-              artist_genre.innerHTML= "<b>Genres: </b>"+genreVal.substr(1);                  
+              artist_genre.innerHTML= "<b>Genres: </b>"+genreVal.substr(1);
             }else{
               artist_genre.innerHTML= "";
             }
 
             if(totalNodes[i]["university_main"])
-            { 
-              artist_education.innerHTML= "<b>University: </b>"+totalNodes[i]["university_main"];                  
+            {
+              artist_education.innerHTML= "<b>University: </b>"+totalNodes[i]["university_main"];
             }else{
               artist_education.innerHTML= "";
             }
-           
+
             displaydata = totalNodes[i]["artist_relation"];
             if(displaydata)
             {
@@ -448,7 +448,7 @@
                   {"data": "relationship"},
                   {"data": "artist_name" }
                 ],
-                "bDestroy": true           
+                "bDestroy": true
               });
             } else
             {
@@ -462,7 +462,7 @@
               // });
             }
           }
-        }      
+        }
       });
 
       // event fired on change of tab in tab bar
@@ -483,14 +483,14 @@
           document.getElementById('country-search-box').value = "";
           document.getElementById('major-search-box').value = "";
           document.getElementById('degree-search-box').value = "";
-          document.getElementById('ethnicity-search-box').value = ""; 
+          document.getElementById('ethnicity-search-box').value = "";
           $('input:checkbox').removeAttr('checked');
 
-          for (var i = 0; i < totalNodes.length; i++){ 
-            totalNodes[i]['hidden'] = false;  
+          for (var i = 0; i < totalNodes.length; i++){
+            totalNodes[i]['hidden'] = false;
           }
-          for (var i = 0; i < totalEdges.length; i++){ 
-            totalEdges[i]['hidden'] = false;  
+          for (var i = 0; i < totalEdges.length; i++){
+            totalEdges[i]['hidden'] = false;
             totalEdges[i]['color'] = "#C0C0C0";
           }
           nodes = new vis.DataSet(totalNodes);
@@ -499,18 +499,18 @@
             nodes: nodes,
             edges: edges
           };
-          createWholeNetwork(container, data, options);      
+          createWholeNetwork(container, data, options);
         }
         // if a relationship tab is selected then display only the edges of that relationship
         else {
           var relationship_selected_array = this.id.split("_");
           var relationship_selected = (relationship_selected_array[0] + " " + relationship_selected_array[1]).toLowerCase();
           // get color of the edge based on type of relationship
-          for (var i = 0; i < totalNodes.length; i++){ 
-            totalNodes[i]['hidden'] = false;  
+          for (var i = 0; i < totalNodes.length; i++){
+            totalNodes[i]['hidden'] = false;
           }
-          for (var i = 0; i < totalEdges.length; i++){ 
-            totalEdges[i]['hidden'] = false;  
+          for (var i = 0; i < totalEdges.length; i++){
+            totalEdges[i]['hidden'] = false;
             totalEdges[i]['color'] = "#C0C0C0";
           }
           nodes = new vis.DataSet(totalNodes);
@@ -519,7 +519,7 @@
             nodes: nodes,
             edges: edges
           };
-          createWholeNetwork(container, data, options); 
+          createWholeNetwork(container, data, options);
           var edge_color = edge_colors_dict[(relationship_selected_array[0] + "_" + relationship_selected_array[1] + "_color").toLowerCase()];
               inquiry_text.style.visibility="hidden";
               document.getElementById('searchbox').value = "";
@@ -528,7 +528,7 @@
               document.getElementById('country-search-box').value = "";
               document.getElementById('major-search-box').value = "";
               document.getElementById('degree-search-box').value = "";
-              document.getElementById('ethnicity-search-box').value = "";  
+              document.getElementById('ethnicity-search-box').value = "";
                $('input:checkbox').removeAttr('checked');
 
           var req_edges= [];
@@ -582,18 +582,18 @@
                 curr_edge.hidden = true;
               }
               edges_to_update.push(curr_edge);
-            }           
+            }
           }
-          edges.update(edges_to_update);   
+          edges.update(edges_to_update);
           connected_node = totalNodes;
-          for (var i = 0; i < totalNodes.length; i++){ 
+          for (var i = 0; i < totalNodes.length; i++){
             if(req_edges.includes(totalNodes[i].id))
             {
-              connected_node[i]['hidden'] = false;  
+              connected_node[i]['hidden'] = false;
             }
             else{
-              connected_node[i]['hidden'] = true; 
-            }            
+              connected_node[i]['hidden'] = true;
+            }
         }
         nodes.update(connected_node);
         }
@@ -605,8 +605,8 @@
         {
           $("#searchTextValue").val("");
           $("#searchbox_node_id").val("");
-        }    
-      }); 
+        }
+      });
 
       $searchbox = $("#searchbox");
       $searchbox.autocomplete({
@@ -620,7 +620,7 @@
           } else{
             $("#searchTextValue").val("");
             $("#searchbox_node_id").val("");
-          }  
+          }
       },
       change: function( event, ui ) {
         if(!ui.item){
@@ -629,7 +629,7 @@
         }else{
           $("#searchTextValue").val(ui.item.label);
           $("#searchbox_node_id").val(ui.item.node_id);
-        }         
+        }
       }
       });
 
@@ -667,7 +667,7 @@
                   easingFunction: "easeInOutQuart" // type of animation while focussing
                 }
               });
-            }         
+            }
         }
       });
 
@@ -675,10 +675,10 @@
         if(!isNaN(this.value))
         {
           $("#uniTextValue").val("");
-        }    
-      }); 
+        }
+      });
         // code for the autocomplete university searchbox
-        $university_search_box = $("#university-search-box"); 
+        $university_search_box = $("#university-search-box");
         $university_search_box.autocomplete({
           minLength: 1, // minimum of 1 characters to be entered before suggesting university names
           source: university_names,
@@ -691,7 +691,7 @@
               $("#uniTextValue").val("");
             }else{
               $("#uniTextValue").val(ui.item.label);
-            }         
+            }
           }
         });
 
@@ -699,15 +699,15 @@
         if(!isNaN(this.value))
         {
           $("#stateTextValue").val("");
-        }    
-      }); 
+        }
+      });
         // code for the autocomplete state searchbox
-        $state_search_box = $("#state-search-box"); 
+        $state_search_box = $("#state-search-box");
         $state_search_box.autocomplete({
           minLength: 1, // minimum of 1 characters to be entered before suggesting state names
           source: state_names,
           select: function (event, ui) {
-              $state_search_box.val(ui.item.label); // display the selected text           
+              $state_search_box.val(ui.item.label); // display the selected text
               $("#stateTextValue").val(ui.item.label);
           },
           change: function( event, ui ) {
@@ -715,7 +715,7 @@
               $("#stateTextValue").val("");
             }else{
               $("#stateTextValue").val(ui.item.label);
-            }         
+            }
           }
         });
 
@@ -723,10 +723,10 @@
         if(!isNaN(this.value))
         {
           $("#countryTextValue").val("");
-        }    
-      }); 
+        }
+      });
         // code for the autocomplete country searchbox
-        $country_search_box = $("#country-search-box"); 
+        $country_search_box = $("#country-search-box");
         $country_search_box.autocomplete({
           minLength: 1, // minimum of 1 characters to be entered before suggesting country names
           source: country_names,
@@ -739,7 +739,7 @@
               $("#countryTextValue").val("");
             }else{
               $("#countryTextValue").val(ui.item.label);
-            }         
+            }
           }
         });
 
@@ -747,10 +747,10 @@
           if(!isNaN(this.value))
           {
             $("#majorTextValue").val("");
-          }    
-        }); 
+          }
+        });
           // code for the autocomplete country searchbox
-          $major_search_box = $("#major-search-box"); 
+          $major_search_box = $("#major-search-box");
           $major_search_box.autocomplete({
             minLength: 1, // minimum of 1 characters to be entered before suggesting major names
             source: major_names,
@@ -763,7 +763,7 @@
                 $("#majorTextValue").val("");
               }else{
                 $("#majorTextValue").val(ui.item.label);
-              }         
+              }
             }
           });
 
@@ -771,10 +771,10 @@
             if(!isNaN(this.value))
             {
               $("#degreeTextValue").val("");
-            }    
-          }); 
+            }
+          });
             // code for the autocomplete country searchbox
-            $degree_search_box = $("#degree-search-box"); 
+            $degree_search_box = $("#degree-search-box");
             $degree_search_box.autocomplete({
               minLength: 1, // minimum of 1 characters to be entered before suggesting degree names
               source: degree_names,
@@ -787,7 +787,7 @@
                   $("#degreeTextValue").val("");
                 }else{
                   $("#degreeTextValue").val(ui.item.label);
-                }         
+                }
               }
             });
 
@@ -796,10 +796,10 @@
               if(!isNaN(this.value))
               {
                 $("#ethnicityTextValue").val("");
-              }    
-            }); 
+              }
+            });
               // code for the autocomplete country searchbox
-              $ethnicity_search_box = $("#ethnicity-search-box"); 
+              $ethnicity_search_box = $("#ethnicity-search-box");
               $ethnicity_search_box.autocomplete({
                 minLength: 1, // minimum of 1 characters to be entered before suggesting ethnicity names
                 source: ethnicity_names,
@@ -812,7 +812,7 @@
                     $("#ethnicityTextValue").val("");
                   }else{
                     $("#ethnicityTextValue").val(ui.item.label);
-                  }         
+                  }
                 }
               });
 
@@ -825,17 +825,17 @@
           document.getElementById('country-search-box').value = "";
           document.getElementById('major-search-box').value = "";
           document.getElementById('degree-search-box').value = "";
-          document.getElementById('ethnicity-search-box').value = ""; 
+          document.getElementById('ethnicity-search-box').value = "";
           $('input:checkbox').removeAttr('checked');
-      })); 
+      }));
 
       submit = document.getElementById('submit');
       submit.addEventListener('click',(function(e) {
-        for (var i = 0; i < totalNodes.length; i++){ 
-          totalNodes[i]['hidden'] = false;  
+        for (var i = 0; i < totalNodes.length; i++){
+          totalNodes[i]['hidden'] = false;
         }
-        for (var i = 0; i < totalEdges.length; i++){ 
-          totalEdges[i]['hidden'] = false;  
+        for (var i = 0; i < totalEdges.length; i++){
+          totalEdges[i]['hidden'] = false;
           totalEdges[i]['color'] = "#C0C0C0";
         }
         nodes = new vis.DataSet(totalNodes);
@@ -845,7 +845,7 @@
           edges: edges
         };
         inquiry_text.style.visibility="visible";
-        createWholeNetwork(container, data, options); 
+        createWholeNetwork(container, data, options);
           var searched_node_id = $("#searchbox_node_id").val();
           var search_text = $("#searchTextValue").val();
           var university_text = $("#uniTextValue").val();
@@ -889,8 +889,8 @@
               nodes: emptyNodes,
               edges: emptyEdges
             };
-            createVisNetwork(container, data, options);            
-            }              
+            createVisNetwork(container, data, options);
+            }
             else{
               $('#search_text').html('&nbsp&nbsp'+"Results for"+" "+'<span style="font-weight:bold">'+search_text+" "+
               university_text+" "+living_val+" "+gender_val+" "+state_text+" "+country_text+" "+major_text
@@ -926,22 +926,22 @@
                                         "artistresidencecountry":country_text,
                                         "artistmajor":major_text,
                                         "artistdegree":degree_text,
-                                        "artistethnicity":ethnicity_text                                      
+                                        "artistethnicity":ethnicity_text
                                       }),
                 success:function(response)
                 {
                   $('#search_text').html('&nbsp&nbsp'+"Results for"+" "+'<span style="font-weight:bold">'+search_text+" "+
                   university_text+" "+living_val+" "+gender_val+" "+state_text+" "+country_text+" "+major_text
-                  +" "+degree_text+" "+ethnicity_text+'</span>'); 
-                    ({ response, nodes } = createFilteredNetwork(response, nodes, createVisNetwork, container));  
+                  +" "+degree_text+" "+ethnicity_text+'</span>');
+                    ({ response, nodes } = createFilteredNetwork(response, nodes, createVisNetwork, container));
                 },
                 error:function(response)
                 {
                   console.log("Error");
-                }                      
+                }
               });
             } else if(searched_node_id || living_val|| gender_val||
-            state_text|| country_text || ethnicity_text){ 
+            state_text|| country_text || ethnicity_text){
               $.ajax({
                 type: "POST",
                 url: 'artistcontroller.php',
@@ -951,7 +951,7 @@
                                         "artistgender":gender_val,
                                         "artistresidencestate":state_text,
                                         "artistresidencecountry":country_text,
-                                        "artistethnicity":ethnicity_text                                      
+                                        "artistethnicity":ethnicity_text
                                       }),
                 success:function(response)
                 {
@@ -963,17 +963,17 @@
                 error:function(response)
                 {
                   console.log("Error");
-                }                      
+                }
               });
             }
-            
+
           }
       }));
-    }   
+    }
   });
 
   function createWholeNetwork(container, data, options)
-  {      
+  {
       options = {
         nodes: {
           borderWidth: 10, // thickness of border around nodes
@@ -1026,19 +1026,19 @@
       };
 
         var container = document.getElementById('my_network');
-        network = new vis.Network(container, data, options);  
+        network = new vis.Network(container, data, options);
         network.on("stabilizationIterationsDone", function () {
           network.setOptions( { physics: false } );
-          });          
-          
+          });
+
         network.on('dragging', function(obj){
           $("#my_network").css("cursor", "-webkit-grabbing");
         });
 
         network.on('selectNode', function (obj) {
           var side_nav = document.getElementById("mySidenav");
-          side_nav.style.width = "300px";	
-          side_nav.style.display = "block"; 
+          side_nav.style.width = "300px";
+          side_nav.style.display = "block";
           var selected_node = obj.nodes;
           var artist_pic = document.getElementById("artist_pic");
           var artist_name = document.getElementById("artist_name");
@@ -1046,11 +1046,11 @@
           var artist_status = document.getElementById("artist_status");
           var artist_bio_div = document.getElementById("artist_bio_div");
           var bio_text_val = document.getElementById("bioTextValue");
-          artist_bio_div.style.visibility="hidden";  
+          artist_bio_div.style.visibility="hidden";
           for (var i = 0; i < totalNodes.length; i++) {
             var cur_node = totalNodes[i].id;
             if(selected_node[0] === cur_node)
-            {         
+            {
               if(totalNodes[i].image === "upload/photo_upload_data/missing_image.jpg")
               {
                 artist_pic.src="upload/photo_upload_data/NoImageAvailable.jpg";
@@ -1082,27 +1082,27 @@
                 dobDate = (dobDate.getMonth()+2) + '/' + dobDate.getDate() + '/' +  dobDate.getFullYear();
                 dodDate = (dodDate.getMonth()+2) + '/' + dodDate.getDate() + '/' +  dodDate.getFullYear();
                 artist_status.innerHTML= dobDate+ "-" +dodDate;
-              } 
-              //console.log(totalNodes);  
+              }
+              //console.log(totalNodes);
               if(totalNodes[i]["biography"])
               {
                 artist_bio_div.style.visibility="visible";
                 if(totalNodes[i]["biography"].startsWith("upload/"))
-                {                   
-                  url = "http://stark.cse.buffalo.edu/choreographiclineage/"+totalNodes[i]["biography"];  
-                  bio_text_val.innerHTML= url;             
+                {
+                  url = "http://stark.cse.buffalo.edu/choreographiclineage/"+totalNodes[i]["biography"];
+                  bio_text_val.innerHTML= url;
                 }else if(totalNodes[i]["biography"]){
                   bioText= totalNodes[i]["biography"];
                   bio_text_val.innerHTML= bioText;
-                }           
+                }
               }
             }
-          }      
+          }
         });
   }
 
   function createVisNetwork(container, data, options)
-  {     
+  {
     inquiry_text.style.visibility="visible";
         options = {
           nodes: {
@@ -1162,16 +1162,16 @@
         }
         network.on("stabilizationIterationsDone", function () {
         network.setOptions( { physics: false } );
-        });          
-        
+        });
+
         network.on('dragging', function(obj){
           $("#my_network").css("cursor", "-webkit-grabbing");
         });
 
         network.on('selectNode', function (obj) {
           var side_nav = document.getElementById("mySidenav");
-          side_nav.style.width = "300px";	
-          side_nav.style.display = "block"; 
+          side_nav.style.width = "300px";
+          side_nav.style.display = "block";
           var selected_node = obj.nodes;
           var artist_pic = document.getElementById("artist_pic");
           var artist_name = document.getElementById("artist_name");
@@ -1179,11 +1179,11 @@
           var artist_status = document.getElementById("artist_status");
           var artist_bio_div = document.getElementById("artist_bio_div");
           var bio_text_val = document.getElementById("bioTextValue");
-          artist_bio_div.style.visibility="hidden";  
+          artist_bio_div.style.visibility="hidden";
           for (var i = 0; i < totalNodes.length; i++) {
             var cur_node = totalNodes[i].id;
             if(selected_node[0] === cur_node)
-            {         
+            {
               if(totalNodes[i].image === "upload/photo_upload_data/missing_image.jpg")
               {
                 artist_pic.src="upload/photo_upload_data/NoImageAvailable.jpg";
@@ -1215,22 +1215,22 @@
                 dobDate = (dobDate.getMonth()+2) + '/' + dobDate.getDate() + '/' +  dobDate.getFullYear();
                 dodDate = (dodDate.getMonth()+2) + '/' + dodDate.getDate() + '/' +  dodDate.getFullYear();
                 artist_status.innerHTML= dobDate+ "-" +dodDate;
-              } 
-              //console.log(totalNodes);  
+              }
+              //console.log(totalNodes);
               if(totalNodes[i]["biography"])
               {
                 artist_bio_div.style.visibility="visible";
                 if(totalNodes[i]["biography"].startsWith("upload/"))
-                {                   
-                  url = "http://stark.cse.buffalo.edu/choreographiclineage/"+totalNodes[i]["biography"];  
-                  bio_text_val.innerHTML= url;             
+                {
+                  url = "http://stark.cse.buffalo.edu/choreographiclineage/"+totalNodes[i]["biography"];
+                  bio_text_val.innerHTML= url;
                 }else if(totalNodes[i]["biography"]){
                   bioText= totalNodes[i]["biography"];
                   bio_text_val.innerHTML= bioText;
-                }           
+                }
               }
             }
-          }      
+          }
         });
   }
 }
@@ -1276,4 +1276,3 @@ function createFilteredNetwork(response, nodes, createVisNetwork, container) {
       createVisNetwork(container, data, options);
       return { response, nodes };
 }
-

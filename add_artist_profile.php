@@ -21,7 +21,7 @@ if(isset($_SESSION["user_email_address"])){
     }else{
         echo "<script>var disabled_input=false;</script>";
     }
-    
+
     // foreach ($_SESSION as $key=>$val)
     // echo $key." ".$val."<br/>";
 }
@@ -40,7 +40,9 @@ if(isset($_SESSION["contribution_type"])) {
         $artist_lname="";
     }
 }
-
+if(!isset($_SESSION['genre'])){
+  $_SESSION['genre']="";
+}
 ?>
 
 <html>
@@ -98,18 +100,18 @@ if(isset($_SESSION["contribution_type"])) {
 
 <?php if(isset($_SESSION["user_email_address"])): ?>
     <head>
-        <title>Add Artist</title> 
+        <title>Add Artist</title>
            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
+           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
            <link href="css/fSelect.css" rel="stylesheet">
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
             <script src="js/fSelect.js"></script>
-           <style>  
-           ul{  
-                cursor:pointer;  
+           <style>
+           ul{
+                cursor:pointer;
                 list-style-type:none;
-           }  
-           </style>     
+           }
+           </style>
     </head>
 
     <body>
@@ -120,7 +122,7 @@ if(isset($_SESSION["contribution_type"])) {
           <li id="second"><a href="add_artist_personal_information.php">Add Artist Personal Info</a></li>
           <li id="third"><a href="add_artist_biography.php">Add Artist Biography</a></li>
           <li id="fourth"><a href="add_lineage.php">Add Lineage</a></li>
-          
+
   </ul>
 
         </div>
@@ -139,7 +141,7 @@ if(isset($_SESSION["contribution_type"])) {
                                 <!--<label for="artist_first_name">First Name of Artist</span> <span style="color:red;font-weight: bold;"> *</span>-->
                                     <label for="artist_first_name"><?php echo (($_SESSION['contribution_type'] == "own")?'Your First Name':'First Name of Artist') ?></span> <span style="color:red;font-weight: bold;"> *</span>
                                     <input value="<?php echo (($_SESSION['contribution_type'] == "own")?$_SESSION['user_firstname']:$artist_fname) ?>" autocomplete="off" type="text" id="artist_first_name" name="artist_first_name" placeholder="First Name" required>
-                                    <div id ="firstnamelist" style="background-color:#eee;"></div>  
+                                    <div id ="firstnamelist" style="background-color:#eee;"></div>
 
                                 </label>
                             </div>
@@ -272,9 +274,9 @@ if(isset($_SESSION["contribution_type"])) {
                                     <option value="Waltz">Waltz</option>
                                     <option value="Zouk">Zouk</option>
                                     <option value="Zumba">Zumba</option>
-                                </select>                              
-                            </div>   
-                        </div>    
+                                </select>
+                            </div>
+                        </div>
                     </fieldset>
                 </section>
             </div>
@@ -309,14 +311,14 @@ if(isset($_SESSION["contribution_type"])) {
                         <div class="column medium-6">
                             <fieldset>
                                 <legend><strong>Date of Birth</strong>  <span style="color:red;font-weight: bold;"> *</span></legend>
-                                        <input type="date" value="<?php echo isset($_SESSION['date_of_birth'])?$_SESSION['date_of_birth']:'' ?>" class="span2" id="date_of_birth" name="date_of_birth" placeholder="yyyy-mm-dd" 
+                                        <input type="date" value="<?php echo isset($_SESSION['date_of_birth'])?$_SESSION['date_of_birth']:'' ?>" class="span2" id="date_of_birth" name="date_of_birth" placeholder="yyyy-mm-dd"
                                         onblur="datevalidation()">
                             </fieldset>
                         </div>
                         <div class="column medium-6" id="date_of_death_div" style="display:block">
                             <fieldset  >
                                 <legend><strong>Date of Death</strong><span style="color:red;font-weight: bold;"> *</span></legend>
-                                        <input type="date" value="<?php echo isset($_SESSION['date_of_death'])?$_SESSION['date_of_death']:'' ?>" class="span2" id="date_of_death" name="date_of_death" placeholder="yyyy-mm-dd" 
+                                        <input type="date" value="<?php echo isset($_SESSION['date_of_death'])?$_SESSION['date_of_death']:'' ?>" class="span2" id="date_of_death" name="date_of_death" placeholder="yyyy-mm-dd"
                                         onblur="deathvalidation()"
                                         maxlength="4">
                             </fieldset>
@@ -325,8 +327,8 @@ if(isset($_SESSION["contribution_type"])) {
                 </div>
             </div>
         </div>
-        
-       
+
+
         <div class="row">
                 <fieldset class="large-6 columns">
                     <legend>
@@ -524,12 +526,12 @@ if(isset($_SESSION["contribution_type"])) {
                 <span>Continue Later</span>
             </button>
         </div>
-   
+
             <div class="column">
             </div>
         </div>
     </form>
-    <script>  
+    <script>
 
  $("#first").click(function() {
             // onclick event is assigned to the #button element.
@@ -577,7 +579,7 @@ if(isset($_SESSION["contribution_type"])) {
         }
         var prepopulated;
         var contribution_form_type;
- 
+
         function artistStatusSelection(){
             if($('input[name="artist_status"]:checked').val() == "living"){
                 $("#date_of_death").val("");
@@ -639,8 +641,8 @@ if(isset($_SESSION["contribution_type"])) {
                     genreListOption.selected = false;
                     // genreListOption.setAttribute('selected', "");
                 }
-                } 
-                $('.multi-select-dd').fSelect(); 
+                }
+                $('.multi-select-dd').fSelect();
             } else if(currentFlow ==="view")
             {
                 for(var i=0; i<genreListLength; i++){
@@ -648,16 +650,17 @@ if(isset($_SESSION["contribution_type"])) {
                 genreListValue = genreList.options[i].value;
                 if(newOption.includes(genreListValue))
                 {
-                    genreListOption.selected= true;                                  
+                    genreListOption.selected= true;
                 }else{
                     genreListOption.selected = false;
                     genreListOption.disabled = true;
                 }
-                } 
-                $('.multi-select-dd').fSelect(); 
-                $('#newGenreDiv').addClass("disabledbutton");
+                }
+                $('.multi-select-dd').fSelect();
+                console.log($('#newGenreDiv').next('.div'));
+                // $('#newGenreDiv').addClass("disabledbutton");
             }
-            
+
 
             prepopulated = "<?php echo $prepopulated ?>";
             contribution_form_type = "<?php echo $contribution_form_type ?>";
@@ -698,10 +701,10 @@ if(isset($_SESSION["contribution_type"])) {
             $("input[name='artist_status']").click(artistStatusSelection);
             if(disabled_input){
                 $('input').attr('disabled','true')
-            }               
-            
+            }
+
         });
-        
+
         function datevalidation(){
               var birthdate=document.getElementById('date_of_birth');
               var date = new Date();
@@ -728,7 +731,7 @@ if(isset($_SESSION["contribution_type"])) {
               else{
                 document.getElementById('date_message').style.display="none";
               }
-          }  
+          }
 
         function deathvalidation(){
             var birth=document.getElementById("date_of_birth");
@@ -743,8 +746,8 @@ if(isset($_SESSION["contribution_type"])) {
               document.getElementById('date_message').style.display="none";
             }
           }
-        
-       
+
+
         var submit=document.getElementById("next");
         submit.addEventListener('click',function(event){
             var birthdate=document.getElementById('date_of_birth');
@@ -788,7 +791,7 @@ if(isset($_SESSION["contribution_type"])) {
                 $('#checkboxvalidation').html("Please select Type of Artist !!");
                 event.preventDefault();
             }
-        });   
+        });
     </script>
     <style>
         .button-group input{
@@ -836,31 +839,31 @@ include 'footer.php';
             var lineage_contri = document.getElementById("contri_lineage");
             $(lineage_contri).addClass('active');
         }
-    }); 
+    });
 </script>
-<script>  
- $(document).ready(function(){  
-      $('#artist_first_name').keyup(function(){  
-           var query = $(this).val();  
-           if(query != '')  
-           {  
-                $.ajax({  
-                     url:"auto_complete_firstname.php",  
-                     method:"POST",  
-                     data:{query:query},  
-                     success:function(data)  
-                     {  
-                          $('#firstnamelist').fadeIn();  
-                          $('#firstnamelist').html(data);  
-                     }  
-                });  
-           }  
-      });  
-      $(document).on('click', 'li', function(){  
-           $('#artist_first_name').val($(this).text());  
-           $('#firstnamelist').fadeOut();  
-      });  
- });  
+<script>
+ $(document).ready(function(){
+      $('#artist_first_name').keyup(function(){
+           var query = $(this).val();
+           if(query != '')
+           {
+                $.ajax({
+                     url:"auto_complete_firstname.php",
+                     method:"POST",
+                     data:{query:query},
+                     success:function(data)
+                     {
+                          $('#firstnamelist').fadeIn();
+                          $('#firstnamelist').html(data);
+                     }
+                });
+           }
+      });
+      $(document).on('click', 'li', function(){
+           $('#artist_first_name').val($(this).text());
+           $('#firstnamelist').fadeOut();
+      });
+ });
  $(document).ready(function(){
     $("#artist_last_name").blur(function(){
         var lname=$(this).val();
@@ -874,7 +877,7 @@ include 'footer.php';
                     last:lname
                 },
                 success:function(response)
-                {   
+                {
                     $('#duplication_check').html(response);
                     // if(response=="success")
                         // alert("Artist already exists");
