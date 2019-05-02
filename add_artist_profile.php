@@ -160,20 +160,26 @@ if(isset($_SESSION["contribution_type"])) {
                             <div id = "newGenreDiv" class="small-3 column">
                             <label for="Genre">Genre</span>
                                 <select id="genreList" name = 'genre[]' class="multi-select-dd small-3 column" multiple="multiple">
-                                    <option value="MySQL">MySQL</option>
-                                    <option value="SQLServer">SQL Server</option>
-                                    <option value="Oracle">Oracle</option>
-                                    <option value="HTML">HTML</option>
-                                    <option value="CSS">CSS</option>
-                                    <option value="jQuery">jQuery</option>
-                                    <option value="Bootstrap">Bootstrap</option>
-                                    <option value="MySQL1">MySQL1</option>
-                                    <option value="SQLServer2">SQL Server2</option>
-                                    <option value="Oracle2">Oracle2</option>
-                                    <option value="HTML2">HTML2</option>
-                                    <option value="CSS2">CSS2</option>
-                                    <option value="jQuery2">jQuery2</option>
-                                    <option value="Bootstrap2">Bootstrap2</option>
+                                    <option value="Acro">Acro</option>
+                                    <option value="Aduma(Kenya)">Aduma (Kenya)</option>
+                                    <option value="Aerial">Aerial</option>
+                                    <option value="African">African</option>
+                                    <option value="AfricanContemporary">African Contemporary</option>
+                                    <option value="AfricanTraditionalorFolk">African Traditional or Folk</option>
+                                    <option value="Afro-Caribbean">Afro-Caribbean</option>
+                                    <option value="Arabic/MiddleEastern">Arabic/Middle Eastern</option>
+                                    <option value="Armenian">Armenian</option>
+                                    <option value="Atilogwu(Nigeria)">Atilogwu (Nigeria)</option>
+                                    <option value="Bachata">Bachata</option>
+                                    <option value="Balkan">Balkan</option>
+                                    <option value="Ballet">Ballet</option>
+                                    <option value="Ballroom">Ballroom</option>
+                                    <option value="Bangladeshi">Bangladeshi</option>
+                                    <option value="BboyingorBgirling">Bboying or Bgirling</option>
+                                    <option value="Bhangra">Bhangra</option>
+                                    <option value="BellyDance">Belly Dance</option>
+                                    <option value="Brazilian">Brazilian</option>
+                                    <option value="Burlesque/Cabaret">Burlesque/Cabaret</option>
                                 </select>                              
                             </div>   
                         </div>    
