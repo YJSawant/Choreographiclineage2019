@@ -159,7 +159,7 @@ if(isset($_SESSION["contribution_type"])) {
                             </div>
                             <div class="small-3 column">
                             <label for="Genre">Genre</span>
-                                <select name = 'genre[]' class="multi-select-dd small-3 column" multiple="multiple">
+                                <select id="genreList" name = 'genre[]' class="multi-select-dd small-3 column" multiple="multiple">
                                     <option value="MySQL">MySQL</option>
                                     <option value="SQLServer">SQL Server</option>
                                     <option value="Oracle">Oracle</option>
@@ -170,7 +170,7 @@ if(isset($_SESSION["contribution_type"])) {
                                     <option value="MySQL1">MySQL1</option>
                                     <option value="SQLServer2">SQL Server2</option>
                                     <option value="Oracle2">Oracle2</option>
-                                    <option value="HTML2">HTML2</option>
+                                    <option value="HTML2" selected="selected">HTML2</option>
                                     <option value="CSS2">CSS2</option>
                                     <option value="jQuery2">jQuery2</option>
                                     <option value="Bootstrap2">Bootstrap2</option>
@@ -431,10 +431,8 @@ if(isset($_SESSION["contribution_type"])) {
             </div>
         </div>
     </form>
-    <script>
-$('.multi-select-dd').fSelect();
- var values = $('.multi-select-dd:selected').val();   
- console.log(values);
+    <script>  
+
  $("#first").click(function() {
             // onclick event is assigned to the #button element.
             return false;
@@ -525,6 +523,24 @@ $('.multi-select-dd').fSelect();
 
 
         $(document).ready(function(){
+            var newOption='<?php echo $_SESSION["genre"];?>';
+            var newOption = newOption.split(",");
+            console.log(newOption);
+            genreList = document.getElementById('genreList');
+            genreListLength = genreList.options.length;
+            for(var i=0; i<genreListLength; i++){
+            genreListOption = genreList.options[i];
+            genreListValue = genreList.options[i].value;
+            if(newOption.includes(genreListValue))
+            {
+                genreListOption.selected = true;
+                // genreListOption.setAttribute('selected', 'selected');
+            }else{
+                genreListOption.selected = false;
+                // genreListOption.setAttribute('selected', "");
+            }
+            }
+            $('.multi-select-dd').fSelect();  
             prepopulated = "<?php echo $prepopulated ?>";
             contribution_form_type = "<?php echo $contribution_form_type ?>";
             if(contribution_form_type == "another"){
@@ -654,8 +670,6 @@ $('.multi-select-dd').fSelect();
                 event.preventDefault();
             }
         });   
-
-        // });
     </script>
     <style>
         .button-group input{

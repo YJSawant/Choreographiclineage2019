@@ -15,7 +15,6 @@
 		or die('Error querying database.: '  .mysqli_error($dbc));
 		include 'connection_close.php';
 		$location = "profiles.php";
-		//header("Location: ".$location."");
 	}
 	else if(isset($_POST['artist_profile_add'])){
 
@@ -24,7 +23,6 @@
         $_SESSION["timeline_flow"] = "artist_add";
 		$location = "contribution_introduction.php";
         $_SESSION["artist_profile_id"] = "";
-
         unset($_SESSION["artist_first_name"]);
         unset($_SESSION["artist_last_name"]);
         unset($_SESSION["artist_email_address"]);
@@ -45,6 +43,7 @@
         unset($_SESSION["photo_file_path"]);
         unset($_SESSION["biography_file_path"]);
         unset($_SESSION["biography_text"]);
+        unset($_SESSION["genre"]);
 
         unset($_SESSION["university"]);
         unset($_SESSION["major"]);
@@ -115,6 +114,7 @@
         unset($_SESSION["photo_file_path"]);
         unset($_SESSION["biography_file_path"]);
         unset($_SESSION["biography_text"]);
+        unset($_SESSION["genre"]);
 
         unset($_SESSION["university"]);
         unset($_SESSION["major"]);
