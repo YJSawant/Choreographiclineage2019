@@ -73,8 +73,8 @@ else{
 		// header("Location: add_user_profile.php");
 }
 
-foreach ($_SESSION as $key=>$val)
-	echo $key." ".$val."<br/>";
+// foreach ($_SESSION as $key=>$val)
+// 	echo $key." ".$val."<br/>";
 ?>
 
 <html>

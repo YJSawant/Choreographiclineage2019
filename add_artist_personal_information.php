@@ -103,8 +103,8 @@ if(isset($_SESSION["user_email_address"]) && $_SESSION["timeline_flow"] != "view
                     or die('Error querying database.: ' . mysqli_error());
     }
 
-    foreach ($_SESSION as $key=>$val)
-    echo $key." ".$val."<br/>";
+    // foreach ($_SESSION as $key=>$val)
+    // echo $key." ".$val."<br/>";
 
     if(isset($_POST["artist_last_name"]) && !empty($_POST["artist_last_name"])){
         $_SESSION["artist_last_name"] = $_POST["artist_last_name"];

@@ -282,8 +282,8 @@ $user_email=$_SESSION["user_email_address"]
 <?php
 include 'form_links_footer.php';
 include 'footer.php';
-foreach ($_SESSION as $key=>$val)
-	echo $key." ".$val."<br/>";
+// foreach ($_SESSION as $key=>$val)
+// 	echo $key." ".$val."<br/>";
 ?>
 <script>
   $("#first").click(function() {
