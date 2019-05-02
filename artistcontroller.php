@@ -199,14 +199,10 @@
   try{
   $statement = $conn->prepare($sql);
   $statement->execute($args);
-  $json['statement'] = $statement; 
   $count = $statement->rowCount();
-  $json['count'] = $count; 
   if ($count > 0){
   $json['Status'] = "SUCCESS - Updated $count Rows";
   } else {
-  $json['oldgenre'] = $artistGenre;  
-  $json['genre'] = $newGenre;
   $json['Status'] = "ERROR - Updated 0 Rows - Check for Valid Ids ";
   }
   }catch (Exception $e) { 
@@ -455,6 +451,15 @@
         }
         array_push ($args, $artistWebsite);
       }
+      if (!IsNullOrEmpty($newGenre)){
+        if ($first) {
+          $sql .= " WHERE genre = ? ";
+          $first = false;
+        }else{
+          $sql .= " AND genre = ? ";
+        }
+        array_push ($args, $newGenre);
+      }    
       $json['SQL'] = $sql; 
       try{
         $statement = $conn->prepare($sql);
