@@ -271,9 +271,9 @@ $user_email=$_SESSION["user_email_address"]
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="js/combo/Drop-Down-Combo-Tree/style.css">
-<script src="js/combo/Drop-Down-Combo-Tree/comboTreePlugin.js"></script>
-<script src="js/combo/Drop-Down-Combo-Tree/icontains.js"></script>
+<link href="css/fSelect.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+<script src="js/fSelect.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 

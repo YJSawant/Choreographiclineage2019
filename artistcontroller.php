@@ -127,10 +127,14 @@
   if (array_key_exists('artistdegree', $decoded_params)){
     $artistDegree =  $decoded_params['artistdegree'];
   }
+  $newGenre="";
+  if (array_key_exists('newgenre', $decoded_params)){
+    $newGenre =  $decoded_params['newgenre'];
+  }
   if ($action == "addOrEditArtistProfile"){
   $args = array();
   if (IsNullOrEmpty($artistProfileId)){
-  $sql = "INSERT INTO artist_profile (artist_profile_id,is_user_artist,profile_name,artist_first_name,artist_last_name,artist_email_address,artist_living_status,artist_dob,artist_dod,artist_genre,artist_ethnicity,artist_gender,gender_other,genre_other,ethnicity_other,artist_residence_city,artist_residence_state,artist_residence_province,artist_residence_country,artist_birth_country,artist_biography,artist_biography_text,artist_photo_path,artist_website) VALUES ( ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+  $sql = "INSERT INTO artist_profile (artist_profile_id,is_user_artist,profile_name,artist_first_name,artist_last_name,artist_email_address,artist_living_status,artist_dob,artist_dod,artist_genre,artist_ethnicity,artist_gender,gender_other,genre_other,ethnicity_other,artist_residence_city,artist_residence_state,artist_residence_province,artist_residence_country,artist_birth_country,artist_biography,artist_biography_text,artist_photo_path,artist_website,genre) VALUES ( ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
   array_push($args, $artistProfileId);
   array_push($args, $isUserArtist);
   array_push($args, $profileName);
@@ -155,6 +159,7 @@
   array_push($args, $artistBiographyText);
   array_push($args, $artistPhotoPath);
   array_push($args, $artistWebsite);
+  array_push($args, $newGenre);
   try{
   $statement = $conn->prepare($sql);
   $statement->execute($args);
@@ -165,7 +170,7 @@
       $json['Exception'] =  $e->getMessage();
   }
   }else{
-  $sql = "UPDATE artist_profile SET is_user_artist = ?,profile_name = ?,artist_first_name = ?,artist_last_name = ?,artist_email_address = ?,artist_living_status = ?,artist_dob = ?,artist_dod = ?,artist_genre = ?,artist_ethnicity = ?,artist_gender = ?,gender_other = ?,genre_other = ?,ethnicity_other = ?,artist_residence_city = ?,artist_residence_state = ?,artist_residence_province = ?,artist_residence_country = ?,artist_birth_country = ?,artist_biography = ?,artist_biography_text = ?,artist_photo_path = ?,artist_website = ? WHERE artist_profile_id = ?; ";
+  $sql = "UPDATE artist_profile SET is_user_artist = ?,profile_name = ?,artist_first_name = ?,artist_last_name = ?,artist_email_address = ?,artist_living_status = ?,artist_dob = ?,artist_dod = ?,artist_genre = ?,artist_ethnicity = ?,artist_gender = ?,gender_other = ?,genre_other = ?,ethnicity_other = ?,artist_residence_city = ?,artist_residence_state = ?,artist_residence_province = ?,artist_residence_country = ?,artist_birth_country = ?,artist_biography = ?,artist_biography_text = ?,artist_photo_path = ?,artist_website = ?, genre=? WHERE artist_profile_id = ?; ";
   array_push($args, $isUserArtist);
   array_push($args, $profileName);
   array_push($args, $artistFirstName);
@@ -189,14 +194,19 @@
   array_push($args, $artistBiographyText);
   array_push($args, $artistPhotoPath);
   array_push($args, $artistWebsite);
+  array_push($args, $newGenre);
   array_push($args, $artistProfileId);
   try{
   $statement = $conn->prepare($sql);
   $statement->execute($args);
+  $json['statement'] = $statement; 
   $count = $statement->rowCount();
+  $json['count'] = $count; 
   if ($count > 0){
   $json['Status'] = "SUCCESS - Updated $count Rows";
   } else {
+  $json['oldgenre'] = $artistGenre;  
+  $json['genre'] = $newGenre;
   $json['Status'] = "ERROR - Updated 0 Rows - Check for Valid Ids ";
   }
   }catch (Exception $e) { 
