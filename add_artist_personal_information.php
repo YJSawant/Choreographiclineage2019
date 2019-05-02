@@ -66,6 +66,7 @@ if(isset($_SESSION["user_email_address"]) && $_SESSION["timeline_flow"] != "view
     $dod = "";
     $genre = "";
     $genre_other = "";
+    $newGenre = "";
     $user_email_address=$_SESSION["user_email_address"];
 
     //if(isset($_POST["profile_selection"]) && !empty($_POST["profile_selection"])){
@@ -102,6 +103,8 @@ if(isset($_SESSION["user_email_address"]) && $_SESSION["timeline_flow"] != "view
                     or die('Error querying database.: ' . mysqli_error());
     }
 
+    // foreach ($_SESSION as $key=>$val)
+    // echo $key." ".$val."<br/>";
 
     if(isset($_POST["artist_last_name"]) && !empty($_POST["artist_last_name"])){
         $_SESSION["artist_last_name"] = $_POST["artist_last_name"];
@@ -122,7 +125,6 @@ if(isset($_SESSION["user_email_address"]) && $_SESSION["timeline_flow"] != "view
         $_SESSION["date_of_birth"] = $_POST["date_of_birth"];
         $dob = $_POST["date_of_birth"];
     }
-    // echo $_SESSION["date_of_birth"];
 
     if(isset($_POST["date_of_death"]) && !empty($_POST["date_of_death"])){
         $_SESSION["date_of_death"] = $_POST["date_of_death"];
@@ -136,6 +138,16 @@ if(isset($_SESSION["user_email_address"]) && $_SESSION["timeline_flow"] != "view
                 $_SESSION["artist_genre"] = $_SESSION["artist_genre"] . "," . $genrevar;
             }
             $genre = $_SESSION["artist_genre"];
+        }
+    }
+
+    if(isset($_POST["genre"]) && !empty($_POST["genre"])){
+        if(count($_POST["genre"]) != 0){
+            $_SESSION["genre"] = "";
+            foreach ($_POST["genre"] as $genreval) {
+                $_SESSION["genre"] = $_SESSION["genre"] . "," . $genreval;
+            }
+            $newGenre = $_SESSION["genre"];
         }
     }
 
@@ -153,10 +165,12 @@ else{
     $dod = $_SESSION["date_of_death"];
     $genre = $_SESSION["artist_genre"];
     $genre_other = $_SESSION["other_artist_text_input"];
+    $newGenre = $_SESSION["genre"];
 }
 
     if($is_artist != "" || $first_name != "" || $last_name != "" || $email_address != ""
-        || $status != "" || $dob != "" || $dod != "" || $genre != "" || $genre_other != ""){
+        || $status != "" || $dob != "" || $dod != "" || $genre != "" || $genre_other != ""
+        || $newGenre != ""){
         include 'connection_open.php';
 
         if($_SESSION["artist_profile_id"] == ""){
@@ -172,7 +186,8 @@ else{
             artist_genre,
             genre_other,
             profile_name,
-            STATUS)
+            STATUS,
+            genre)
             VALUES
             (
             '$is_artist',
@@ -185,7 +200,8 @@ else{
             '$genre',
             '$genre_other',
             '$user_email_address',
-            25
+            25,
+            '$newGenre'
             )";
 
             $result = mysqli_query($dbc,$query)
@@ -210,7 +226,8 @@ else{
                 artist_dob='$dob',
                 artist_dod='$dod',
                 artist_genre='$genre',
-                genre_other='$genre_other' WHERE artist_profile_id = '".$_SESSION['artist_profile_id']."'";
+                genre_other='$genre_other',
+                genre='$newGenre' WHERE artist_profile_id = '".$_SESSION['artist_profile_id']."'";
 
             $result = mysqli_query($dbc,$query)
             or die('Error querying database.: '  .mysqli_error($dbc));

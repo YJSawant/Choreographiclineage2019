@@ -84,6 +84,8 @@ if(isset($_SESSION["artist_profile_id"])){
 //  }
 //  if($artist_profile["artist_biography_text"] != ''){
     $_SESSION["biography_text"] = $artist_profile["artist_biography_text"];
+
+    $_SESSION["genre"] = $artist_profile["genre"];
 //  }
 
   // Artist Education

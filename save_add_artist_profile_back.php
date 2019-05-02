@@ -42,6 +42,15 @@
 		}
 	}
 
+	if(isset($_GET["genre"]) && !empty($_GET["genre"])){
+		if(count($_GET["genre"]) != 0){
+			$_SESSION["genre"] = "";
+			foreach ($_GET["genre"] as $genreval) {
+				$_SESSION["genre"] = $_SESSION["genre"] . "," . $genreval;
+			}
+		}
+	}
+
 	if(isset($_GET["other_artist_text_input"]) && !empty($_GET["other_artist_text_input"])){
 	  $_SESSION["other_artist_text_input"] = $_GET["other_artist_text_input"];
 	}

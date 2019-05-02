@@ -73,6 +73,10 @@ if(isset($_SESSION["user_email_address"]) && $_SESSION["timeline_flow"] != "view
 	$other_degree = "";
 	$update_record = false;
 	//echo("PROF IS ".$_SESSION['artist_profile_id']);
+
+	// foreach ($_SESSION as $key=>$val)
+	// echo $key." ".$val."<br/>";
+	
 	if (isset($_SESSION['artist_profile_id'])) {
 		$artist_id = $_SESSION['artist_profile_id'];
 	}
