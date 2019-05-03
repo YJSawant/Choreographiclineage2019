@@ -16,7 +16,6 @@ if(isset($_SESSION["user_email_address"])){
 	</div>
 </div>
 <footer class="row" style="position:relative;height: auto;bottom:0;">
-	<!--<div>-->
 		<div class="small-6 column">
 			<ul class="vertical medium-horizontal menu">
 				<li><a href="index.php">Home</a></li>
@@ -31,6 +30,21 @@ if(isset($_SESSION["user_email_address"])){
 				<li class="menu-text"><small>Choreographic Lineage © 2019</small></li>
 			</ul>
 		</div>
-	<!--</div>-->
 </footer>
 
+<script>
+$(document).ready(function(){
+    $(function() {
+			var url = window.location.href;
+			if(url.search("admin_index.php"))
+			{
+				var home = document.getElementById("admin_home");
+				$(home).addClass('active');
+			}else if(url.search("index.php"))
+			{
+				var home = document.getElementById("home");
+				$(home).addClass('active');
+			}
+		});  
+});
+</script>

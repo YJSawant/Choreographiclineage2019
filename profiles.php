@@ -153,16 +153,19 @@ if($_SESSION["user_type"] == "Admin")
 	
 	</script>
 
-	<script>
+<script>
+	$(document).ready(function(){
     $(function() {
-        // this will get the full URL at the address bar
         var url = window.location.href;
         if(url.search("profiles.php"))
         {
+			var newhome = document.getElementById("admin_home");
+			newhome.classList.remove('active');
             var lineage_contri = document.getElementById("contri_lineage");
-            $(lineage_contri).addClass('active');
+			$(lineage_contri).addClass('active');
         }
-    });
+	});
+});
 </script>
 
 </html>

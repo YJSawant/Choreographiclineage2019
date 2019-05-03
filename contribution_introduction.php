@@ -86,19 +86,8 @@ if(isset($_SESSION["user_email_address"])){
 include 'footer.php';
 ?>
 
-<!-- <script>
-    $("#contribute_online").click(function() {
-        $("#contribution_type").show();
-    });
-    $("#contribute_phone").click(function() {
-        $("#contribution_type").hide();
-    });
-</script> -->
-
 <script>
-
     $(function() {
-        // this will get the full URL at the address bar
         var url = window.location.href;
         if(url.search("contribution_introduction.php"))
         {

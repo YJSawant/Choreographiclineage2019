@@ -1,12 +1,7 @@
 <?php
 include 'util.php';
 my_session_start();
-if($_SESSION["user_type"] == "Admin")
-{
-	include 'admin_menu.php';
-}else{
-	include 'menu.php';
-}
+include 'menu.php';
 
 if(isset($_SESSION["user_email_address"])){
 	//echo "Logged in as: ".$user_email_address;

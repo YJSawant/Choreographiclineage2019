@@ -38,11 +38,11 @@
 				<button class="accordion"><h5>The Choreographic Lineage Team</h5></button>
 					<div class="panel" style="display: block;">
 					  	<small>
-                            <b>Melanie Aceto</b>, Director<br>
+							<b>Melanie Aceto</b>, Director<br>
+							<b>Alan Hunt</b>, Project Manager <br>
                             <b>Dr Bina Ramamurthy</b>, Data Scientist<br>
                             <b>Renee Ruffino</b>, Graphic Designer<br>
                             <b>Domenic Licata</b>, User Experience Designer<br>
-							<b>Alan Hunt</b>, Project Manager<br>
 							<b>Miki Padhiary</b>, Master's Student <br>
 							<b>Shreyas Rajguru</b>, Master's Student<br>
 							<b>Amit Banerjee</b>, Master's Student <br>

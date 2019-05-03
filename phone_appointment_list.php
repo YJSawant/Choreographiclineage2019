@@ -70,12 +70,24 @@
     }
 
 ?>
-    <script>
+<script>
+    $(document).ready(function(){
+    $(function(){
+        $('a').each(function(){
+            if ($(this).prop('href') === window.location.href) {
+                $(this).addClass('active');
+            }
+            else{
+                var home = document.getElementById("admin_home");
+                home.classList.remove('active');
+            }
+        });
+    });
+});
     function confirmDone(){
         location.reload();
     }
-    </script>
-
+</script>
 </html>
 <?php
   include 'footer.php';
