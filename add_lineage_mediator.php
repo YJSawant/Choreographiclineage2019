@@ -1,5 +1,4 @@
 <?php
-include 'path.php';
 include 'menu.php';
 include 'util.php';
 

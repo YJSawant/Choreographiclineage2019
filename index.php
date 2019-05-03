@@ -1,12 +1,13 @@
 <?php
-	include 'path.php';
-	include 'menu.php';
 	include 'util.php';
-
 	my_session_start();
+	if($_SESSION["user_type"] == "Admin")
+	{
+	include 'admin_menu.php';
+	}else{
+	include 'menu.php';
+	}
 ?>
-
-
 		<div class="row">
 			<div class="medium-8 column text-justify">
 				<section>

@@ -1,5 +1,4 @@
 <?php
-include 'path.php';
 include 'util.php';
 
 my_session_start();

@@ -1,18 +1,18 @@
 <?php
-include 'path.php';
-include 'menu.php';
 include 'util.php';
-
 my_session_start();
+if($_SESSION["user_type"] == "Admin")
+{
+	include 'admin_menu.php';
+}else{
+	include 'menu.php';
+}
 
 if(isset($_SESSION["artist_profile_id"]) and isset($_SESSION["user_email_address"])){
 	$artist_profile_id = $_SESSION["artist_profile_id"];
-		// echo $artist_profile_id;
 	$user_email_address = $_SESSION["user_email_address"];
-		// echo $user_email_address;
 }
 else{
-		// header("Location: add_user_profile.php");
 }
 
 ?>

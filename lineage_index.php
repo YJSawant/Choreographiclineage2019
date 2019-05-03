@@ -1,6 +1,14 @@
 <?php
 include 'util.php';
-include 'menu.php';
+my_session_start();
+?>
+<?php
+if($_SESSION["user_type"] == "Admin")
+{
+	include 'admin_menu.php';
+}else{
+	include 'menu.php';
+}
 ?>
 <html>
 <head>

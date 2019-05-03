@@ -1,12 +1,4 @@
 <script>
-// function twoDigits(d) {
-//     if(0 <= d && d < 10) return "0" + d.toString();
-//     if(-10 < d && d < 0) return "-0" + (-1*d).toString();
-//     return d.toString();
-// }
-// Date.prototype.toMysqlFormat = function() {
-//     return this.getUTCFullYear() + "-" + twoDigits(1 + this.getUTCMonth()) + "-" + twoDigits(this.getUTCDate()) + " " + twoDigits(this.getUTCHours()) + ":" + twoDigits(this.getUTCMinutes()) + ":" + twoDigits(this.getUTCSeconds());
-// };
   Date.prototype.yyyymmdd = function() {
     var mm = this.getMonth() + 1; // getMonth() is zero-based
     var dd = this.getDate();
@@ -21,14 +13,16 @@ var date = new Date();
 var a=date.yyyymmdd();
 </script>
 <?php
-include 'path.php';
-include 'menu.php';
 include 'util.php';
+my_session_start();
+if($_SESSION["user_type"] == "Admin")
+{
+	include 'admin_menu.php';
+}else{
+	include 'menu.php';
+}
+include 'connection_open.php';
 
-    my_session_start();
-    include 'connection_open.php';
-
-	//$user_email_address = $_SESSION["user_email_address"];
 	$firstName = mysqli_real_escape_string($dbc,$_POST['first_name']);
 	$lastName =  mysqli_real_escape_string($dbc,$_POST['last_name']);
 	$email =  mysqli_real_escape_string($dbc,$_POST['email_address']);

@@ -1,4 +1,3 @@
-<?php include 'path.php';?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,9 +13,7 @@
 	<link rel="stylesheet" href="css/foundation-datepicker.min.css">
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" >
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" >
-
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/foundation/6.2.1/foundation.min.js"></script>
 	<script src="js/foundation-datepicker.js"></script>
@@ -32,8 +29,6 @@
 			<li><a href="index.php">Home</a></li>
 			<li><a href="add_user_profile.php" id="contri_lineage">Contribute Your Lineage</a></li>
 			<li><a href="lineage_index.php">Explore the Network</a></li>
-			
-			<!-- <li><a href="#">Query</a></li> -->
 		</ul>
 	</nav>
 </body>	

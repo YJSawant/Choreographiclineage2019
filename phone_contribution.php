@@ -1,14 +1,18 @@
 <?php
-include 'path.php';
-include 'menu.php';
 include 'util.php';
 my_session_start();
-    if( isset($_SESSION["user_email_address"]) ){
-        $location = "contribution_introduction.php";
+if($_SESSION["user_type"] == "Admin")
+{
+	include 'admin_menu.php';
+}else{
+	include 'menu.php';
+}
+if( isset($_SESSION["user_email_address"]) ){
+	$location = "contribution_introduction.php";
 
-    }else {
-        $location = "add_user_profile.php";
-    }
+}else {
+	$location = "add_user_profile.php";
+}
 ?>
 
 

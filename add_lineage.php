@@ -1,8 +1,12 @@
 <?php
-include 'path.php';
-include 'menu.php';
 include 'util.php';
 my_session_start();
+if($_SESSION["user_type"] == "Admin")
+{
+	include 'admin_menu.php';
+}else{
+	include 'menu.php';
+}
 if($_SESSION["timeline_flow"] == "view"){
     echo "<script>var disabled_input=true;</script>";
 }else{
@@ -635,6 +639,15 @@ $(document).ready(function(){
               window.open("about_lineage.php","_self");
           }
       });
+
+     $(function() {
+			var url = window.location.href;
+			if(url.search("add_lineage.php"))
+			{
+				var lineage_contri = document.getElementById("contri_lineage");
+				$(lineage_contri).addClass('active');
+			}
+		});  
 });
 </script>
 </html>

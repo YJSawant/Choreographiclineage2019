@@ -1,10 +1,12 @@
 <?php
-
-	include 'path.php';
-	include 'menu.php';
 	include 'util.php';
-	
 	my_session_start();
+	if($_SESSION["user_type"] == "Admin")
+		{
+		include 'admin_menu.php';
+		}else{
+		include 'menu.php';
+		}
 	$_SESSION["user_email_address"] = "test@email.com";
 	
 	if(isset($_SESSION["user_email_address"])){

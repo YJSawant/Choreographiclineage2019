@@ -1,11 +1,15 @@
 <?php
-include 'path.php';
-include 'menu.php';
 include 'util.php';
 my_session_start();
+if($_SESSION["user_type"] == "Admin")
+{
+	include 'admin_menu.php';
+}else{
+	include 'menu.php';
+}
 include 'connection_open.php';
 if(isset($_SESSION["user_password"])){
-    console.log("user password was set");
+   // console.log("user password was set");
     $user_password = $_SESSION["user_password"];
     $user_email_address =  $_SESSION['user_email_address'];
 }
@@ -29,12 +33,18 @@ if($count==1){
     $_SESSION["user_firstname"] = $firstrow["user_first_name"];
     $_SESSION["user_lastname"] = $firstrow["user_last_name"];
     $_SESSION["user_id"] = $firstrow["user_id"];
+    $_SESSION["user_type"] = $firstrow["user_type"];
     //echo "Logged in as: ".$user_email_address;
     if($firstrow['user_type']=='User'){
       $location = "profiles.php";
     }
     else
-     $location = "admin_index.php";
+    {
+        $_SESSION["user_type"] = 'Admin';
+        $location = "admin_index.php";
+       
+    }
+    
 }
 else{
     $_SESSION["login_message"] = "Incorrect credentials!";

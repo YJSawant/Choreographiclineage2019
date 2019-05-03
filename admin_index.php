@@ -1,12 +1,8 @@
 <?php
-	include 'path.php';
 	include 'admin_menu.php';
 	include 'util.php';
-
 	my_session_start();
 ?>
-
-
 		<div class="row">
 			<div class="medium-8 column text-justify">
 				<section>
@@ -46,6 +42,7 @@
                             <b>Dr Bina Ramamurthy</b>, Data Scientist<br>
                             <b>Renee Ruffino</b>, Graphic Designer<br>
                             <b>Domenic Licata</b>, User Experience Designer<br>
+							<b>Alan Hunt</b>, Project Manager<br>
 							<b>Miki Padhiary</b>, Master's Student <br>
 							<b>Shreyas Rajguru</b>, Master's Student<br>
 							<b>Amit Banerjee</b>, Master's Student <br>
@@ -57,10 +54,9 @@
 		</div>
 
 		<div class="row">
-			<div class="medium-6 medium-offset-6 column">
-				<p><img src="data/images/logo_ub.jpg" alt="UB logo"></p>
-				<p><img src="data/images/logo_techne.png" alt="Techne logo"></p>
-			</div>
+			<img src="" alt="" style="width: 33%;">
+			<img src="data/images/logo_ub.jpg" alt="UB logo" style="width: 33%;">		
+			<img src="data/images/logo_techne.png" alt="Techne logo" style="width: 33%;">
 		</div>
 
 <script>

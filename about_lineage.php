@@ -51,17 +51,21 @@
 </style>
 
 <?php
-include 'path.php';
-include 'menu.php';
 include 'util.php';
-
 my_session_start();
 include 'connection_open.php';
-                    $fname=$_SESSION["artist_first_name"];
-                    $query = "UPDATE artist_profile
-                    SET status=75 WHERE artist_first_name= '$fname'";
+if($_SESSION["user_type"] == "Admin")
+{
+	include 'admin_menu.php';
+}else{
+	include 'menu.php';
+}
 
-                    $result = mysqli_query($dbc,$query);
+$fname=$_SESSION["artist_first_name"];
+$query = "UPDATE artist_profile
+SET status=75 WHERE artist_first_name= '$fname'";
+
+$result = mysqli_query($dbc,$query);
 
 if(isset($_SESSION["artist_profile_id"]) && isset($_SESSION["user_email_address"])){
 	$artist_profile_id = $_SESSION["artist_profile_id"];

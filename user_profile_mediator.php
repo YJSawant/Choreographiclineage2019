@@ -1,10 +1,12 @@
 <?php
-include 'path.php';
-include 'menu.php';
 include 'util.php';
-
 my_session_start();
-
+if($_SESSION["user_type"] == "Admin")
+{
+	include 'admin_menu.php';
+}else{
+	include 'menu.php';
+}
 include 'connection_open.php';
 
 $first_name =  mysqli_real_escape_string($dbc,$_POST['first_name']);

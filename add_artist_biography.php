@@ -50,11 +50,14 @@
 
 </style>
 <?php
-include 'path.php';
-include 'menu.php';
 include 'util.php';
-
 my_session_start();
+if($_SESSION["user_type"] == "Admin")
+{
+	include 'admin_menu.php';
+}else{
+	include 'menu.php';
+}
 if(isset($_SESSION["user_email_address"]) && $_SESSION["timeline_flow"] != "view"){
 	$gender = "";
 	$gender_other = "";
@@ -635,7 +638,6 @@ if(isset($_SESSION['timeline_flow']) &&  $_SESSION['timeline_flow'] == "edit" ) 
 	$(document).ready(function (e) {
 
 		$(function() {
-			// this will get the full URL at the address bar
 			var url = window.location.href;
 			if(url.search("add_artist_biography.php"))
 			{
@@ -658,7 +660,6 @@ if(isset($_SESSION['timeline_flow']) &&  $_SESSION['timeline_flow'] == "edit" ) 
 				processData:false,        // To send DOMDocument or non processed data file it is set to false
 				success: function(data)   // A function to be called if request succeeds
 				{
-					//$('#loading').hide();
 					$("#biography_text_message").show();
 					$("#biography_text_message").html(data);
 				}

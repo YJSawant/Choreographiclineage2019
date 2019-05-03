@@ -1,5 +1,4 @@
 <?php
-
 	include 'connection_open.php';
 	//echo ($_POST['mode']);
 	$artist = 'artist';
