@@ -75,10 +75,15 @@
   if (array_key_exists('relationidentifier', $decoded_params)){
     $relationIdentifier =  $decoded_params['relationidentifier'];
   }
+
+  $artistWorks = "";
+  if (array_key_exists('works', $decoded_params)){
+    $artistWorks =  $decoded_params['works'];
+  }
   if ($action == "addOrEditArtistRelation"){
   $args = array();
   if (IsNullOrEmpty($relationId)){
-  $sql = "INSERT INTO artist_relation (relation_id,artist_profile_id_1,artist_profile_id_2,artist_name_1,artist_email_id_1,artist_name_2,artist_email_id_2,artist_website_2,artist_relation,start_date,end_date,duration_years,duration_months,relation_identifier) VALUES ( ?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+  $sql = "INSERT INTO artist_relation (relation_id,artist_profile_id_1,artist_profile_id_2,artist_name_1,artist_email_id_1,artist_name_2,artist_email_id_2,artist_website_2,artist_relation,start_date,end_date,duration_years,duration_months,relation_identifier,works) VALUES ( ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
   array_push($args, $relationId);
   array_push($args, $artistProfileId1);
   array_push($args, $artistProfileId2);
@@ -93,6 +98,7 @@
   array_push($args, $durationYears);
   array_push($args, $durationMonths);
   array_push($args, $relationIdentifier);
+  array_push($args, $artistWorks);
   try{
   $statement = $conn->prepare($sql);
   $statement->execute($args);
@@ -103,7 +109,7 @@
       $json['Exception'] =  $e->getMessage();
   }
   }else{
-  $sql = "UPDATE artist_relation SET artist_profile_id_1 = ?,artist_profile_id_2 = ?,artist_name_1 = ?,artist_email_id_1 = ?,artist_name_2 = ?,artist_email_id_2 = ?,artist_website_2 = ?,artist_relation = ?,start_date = ?,end_date = ?,duration_years = ?,duration_months = ?,relation_identifier = ?; ";
+  $sql = "UPDATE artist_relation SET artist_profile_id_1 = ?,artist_profile_id_2 = ?,artist_name_1 = ?,artist_email_id_1 = ?,artist_name_2 = ?,artist_email_id_2 = ?,artist_website_2 = ?,artist_relation = ?,start_date = ?,end_date = ?,duration_years = ?,duration_months = ?,relation_identifier = ?, works=?; ";
   array_push($args, $artistProfileId1);
   array_push($args, $artistProfileId2);
   array_push($args, $artistName1);
@@ -117,6 +123,7 @@
   array_push($args, $durationYears);
   array_push($args, $durationMonths);
   array_push($args, $relationIdentifier);
+  array_push($args, $artistWorks);
   try{
   $statement = $conn->prepare($sql);
   $statement->execute($args);
@@ -279,6 +286,15 @@
           $first = false;
         }else{
           $sql .= " AND relation_identifier = ? ";
+        }
+        array_push ($args, $relationIdentifier);
+      }
+      if (!IsNullOrEmpty($artistWorks)){
+        if ($first) {
+          $sql .= " WHERE works = ? ";
+          $first = false;
+        }else{
+          $sql .= " AND works = ? ";
         }
         array_push ($args, $relationIdentifier);
       }
