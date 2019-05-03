@@ -9,7 +9,7 @@ if(isset($_SESSION["user_email_address"])){
     $user_email_address = $_SESSION["user_email_address"];
     $user_lastname = $_SESSION["user_lastname"];
     $user_firstname = $_SESSION["user_firstname"];
-    if(isset($_SESSION["timeline_flow"]) &&  ($_SESSION['timeline_flow'] == "edit" || $_SESSION['timeline_flow'] == "view")) {
+    if(isset($_SESSION['timeline_flow']) &&  ($_SESSION['timeline_flow'] == "edit" || $_SESSION['timeline_flow'] == "view")) {
         $prepopulated = "true";
         $user_email_address = $_SESSION["user_email_address"];
         $user_lastname = $_SESSION["user_lastname"];
@@ -95,7 +95,6 @@ if(!isset($_SESSION['genre'])){
   .progressbar li.active + li:after {
       background-color: #55b776;
   }
-
 </style>
 
 <?php if(isset($_SESSION["user_email_address"])): ?>
@@ -117,7 +116,7 @@ if(!isset($_SESSION['genre'])){
     <body>
     <form id="add_user_profile_form" name="add_user_profile_form" method="post" action="add_artist_personal_information.php" enctype="multipart/form-data">
         <div class="row">
-            <ul class="progressbar">
+          <ul class="progressbar">
           <li class="active" id="first"><a href="add_artist_profile.php">Add Artist Profile</a></li>
           <li id="second"><a href="add_artist_personal_information.php">Add Artist Personal Info</a></li>
           <li id="third"><a href="add_artist_biography.php">Add Artist Biography</a></li>
@@ -142,7 +141,6 @@ if(!isset($_SESSION['genre'])){
                                     <label for="artist_first_name"><?php echo (($_SESSION['contribution_type'] == "own")?'Your First Name':'First Name of Artist') ?></span> <span style="color:red;font-weight: bold;"> *</span>
                                     <input value="<?php echo (($_SESSION['contribution_type'] == "own")?$_SESSION['user_firstname']:$artist_fname) ?>" autocomplete="off" type="text" id="artist_first_name" name="artist_first_name" placeholder="First Name" required>
                                     <div id ="firstnamelist" style="background-color:#eee;"></div>
-
                                 </label>
                             </div>
                             <div class="small-3 column">
@@ -536,7 +534,7 @@ if(!isset($_SESSION['genre'])){
  $("#first").click(function() {
             // onclick event is assigned to the #button element.
             return false;
-            window.open("add_artist_profile.php","_self");
+            window.open("add_artist_profile.php");
 
             //document.location.href = "add_artist_personal_information.php",true;
         });
@@ -558,7 +556,7 @@ if(!isset($_SESSION['genre'])){
         });
 
         function saveAndBack() {
-            console.log($("#add_user_profile_form").serialize());
+           // console.log($("#add_user_profile_form").serialize());
             $.ajax({
                 type: "GET",
                 url: 'save_add_artist_profile_back.php',
@@ -657,8 +655,8 @@ if(!isset($_SESSION['genre'])){
                 }
                 }
                 $('.multi-select-dd').fSelect();
-                console.log($('#newGenreDiv').next('.div'));
-                // $('#newGenreDiv').addClass("disabledbutton");
+                //console.log($('#newGenreDiv').next('.div'));
+                $('#newGenreDiv').addClass("disabledbutton");
             }
 
 
@@ -860,7 +858,7 @@ include 'footer.php';
            }
       });
       $(document).on('click', 'li', function(){
-           $('#artist_first_name').val($(this).text());
+          // $('#artist_first_name').val($(this).text());
            $('#firstnamelist').fadeOut();
       });
  });
