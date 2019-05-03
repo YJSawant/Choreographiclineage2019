@@ -75,10 +75,15 @@
   if (array_key_exists('relationidentifier', $decoded_params)){
     $relationIdentifier =  $decoded_params['relationidentifier'];
   }
+
+  $artistWorks = "";
+  if (array_key_exists('works', $decoded_params)){
+    $artistWorks =  $decoded_params['works'];
+  }
   if ($action == "addOrEditArtistRelation"){
   $args = array();
   if (IsNullOrEmpty($relationId)){
-  $sql = "INSERT INTO artist_relation (relation_id,artist_profile_id_1,artist_profile_id_2,artist_name_1,artist_email_id_1,artist_name_2,artist_email_id_2,artist_website_2,artist_relation,start_date,end_date,duration_years,duration_months,relation_identifier) VALUES ( ?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+  $sql = "INSERT INTO artist_relation (relation_id,artist_profile_id_1,artist_profile_id_2,artist_name_1,artist_email_id_1,artist_name_2,artist_email_id_2,artist_website_2,artist_relation,start_date,end_date,duration_years,duration_months,relation_identifier,works) VALUES ( ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
   array_push($args, $relationId);
   array_push($args, $artistProfileId1);
   array_push($args, $artistProfileId2);
@@ -93,6 +98,7 @@
   array_push($args, $durationYears);
   array_push($args, $durationMonths);
   array_push($args, $relationIdentifier);
+  array_push($args, $artistWorks);
   try{
   $statement = $conn->prepare($sql);
   $statement->execute($args);
@@ -103,7 +109,7 @@
       $json['Exception'] =  $e->getMessage();
   }
   }else{
-  $sql = "UPDATE artist_relation SET artist_profile_id_1 = ?,artist_profile_id_2 = ?,artist_name_1 = ?,artist_email_id_1 = ?,artist_name_2 = ?,artist_email_id_2 = ?,artist_website_2 = ?,artist_relation = ?,start_date = ?,end_date = ?,duration_years = ?,duration_months = ?,relation_identifier = ?; ";
+  $sql = "UPDATE artist_relation SET artist_profile_id_1 = ?,artist_profile_id_2 = ?,artist_name_1 = ?,artist_email_id_1 = ?,artist_name_2 = ?,artist_email_id_2 = ?,artist_website_2 = ?,artist_relation = ?,start_date = ?,end_date = ?,duration_years = ?,duration_months = ?,relation_identifier = ?, works=? WHERE relation_id = ?; ";
   array_push($args, $artistProfileId1);
   array_push($args, $artistProfileId2);
   array_push($args, $artistName1);
@@ -117,6 +123,8 @@
   array_push($args, $durationYears);
   array_push($args, $durationMonths);
   array_push($args, $relationIdentifier);
+  array_push($args, $artistWorks);
+  array_push($args, $relationId);
   try{
   $statement = $conn->prepare($sql);
   $statement->execute($args);
@@ -131,46 +139,44 @@
   }
   $json['Action'] = $action;
   }
-} else if ($action == "addOrEditArtistRelationWithOtherFields"){
-  $args = array();
-
-      $sql = "SET   @artist_profile_id_1=?,
-                	  @artist_profile_id_2=?,
-                    @artist_name_1 = ?,
-                    @artist_email_id_1 = ?,
-                	  @artist_name_2 = ?,
-                    @artist_email_id_2 = ?,
-                    @artist_website_2 = ?,
-                    @artist_relation = ?;
-                INSERT INTO artist_relation
-                    (artist_profile_id_1, artist_profile_id_2,artist_name_1,artist_email_id_1, artist_name_2, artist_email_id_2,artist_website_2,artist_relation)
-                VALUES
-                    (@artist_profile_id_1, @artist_profile_id_2,@artist_name_1,@artist_email_id_1, @artist_name_2, @artist_email_id_2,@artist_website_2,@artist_relation)
-                ON DUPLICATE KEY UPDATE
-                	artist_name_1 = @artist_name_1,
-                    artist_email_id_1 = @artist_email_id_1,
-                    artist_name_2 = @artist_name_2,
-                    artist_email_id_2 = @artist_email_id_2,
-                    artist_website_2 = @artist_website_2;";
-      array_push($args, $artistProfileId1);
-      array_push($args, $artistProfileId2);
-      array_push($args, $artistName1);
-      array_push($args, $artistEmailId1);
-      array_push($args, $artistName2);
-      array_push($args, $artistEmailId2);
-      array_push($args, $artistWebsite2);
-      array_push($args, $artistRelation);
-      try{
-          $statement = $conn->prepare($sql);
-          $statement->execute($args);
-          $last_id = $conn->lastInsertId();
-          $json['Record Id'] = $last_id;
-          $json['Status'] = "SUCCESS - Inserted Id $last_id";
-      }catch (Exception $e) {
-          $json['Exception'] =  $e->getMessage();
-      }
+} else if ($action == "addOrEditArtistRelationWithOtherFields"){		
+  $args = array();		
+      $sql = "SET   @artist_profile_id_1=?,		
+                	  @artist_profile_id_2=?,		
+                    @artist_name_1 = ?,		
+                    @artist_email_id_1 = ?,		
+                	  @artist_name_2 = ?,		
+                    @artist_email_id_2 = ?,		
+                    @artist_website_2 = ?,		
+                    @artist_relation = ?;		
+                INSERT INTO artist_relation		
+                    (artist_profile_id_1, artist_profile_id_2,artist_name_1,artist_email_id_1, artist_name_2, artist_email_id_2,artist_website_2,artist_relation)		
+                VALUES		
+                    (@artist_profile_id_1, @artist_profile_id_2,@artist_name_1,@artist_email_id_1, @artist_name_2, @artist_email_id_2,@artist_website_2,@artist_relation)		
+                ON DUPLICATE KEY UPDATE		
+                	artist_name_1 = @artist_name_1,		
+                  artist_email_id_1 = @artist_email_id_1,		
+                  artist_name_2 = @artist_name_2,		
+                  artist_email_id_2 = @artist_email_id_2,		
+                  artist_website_2 = @artist_website_2;";		
+      array_push($args, $artistProfileId1);		
+      array_push($args, $artistProfileId2);		
+      array_push($args, $artistName1);		
+      array_push($args, $artistEmailId1);		
+      array_push($args, $artistName2);		
+      array_push($args, $artistEmailId2);		
+      array_push($args, $artistWebsite2);		
+      array_push($args, $artistRelation);		
+      try{		
+          $statement = $conn->prepare($sql);		
+          $statement->execute($args);		
+          $last_id = $conn->lastInsertId();		
+          $json['Record Id'] = $last_id;		
+          $json['Status'] = "SUCCESS - Inserted Id $last_id";		
+      }catch (Exception $e) {		
+          $json['Exception'] =  $e->getMessage();		
+      }		
       $json['Action'] = $action;
-
   } else if ($action == "deleteArtistRelation"){
   $sql = "DELETE FROM artist_relation WHERE relation_id = ?";
   $args = array();
@@ -192,55 +198,53 @@
   $json['Status'] = "ERROR - Id is required";
   }
   $json['Action'] = $action;
-  } else if ($action == "deleteArtistRelationWithOtherIdentifiers"){
-  $sql = "DELETE FROM artist_relation";
-  $args = array();
-  $first = true;
-
-  if (!IsNullOrEmpty($artistProfileId1)){
-        if ($first) {
-          $sql .= " WHERE artist_profile_id_1 = ? ";
-          $first = false;
-        }else{
-          $sql .= " AND artist_profile_id_1 = ? ";
-        }
-        array_push ($args, $artistProfileId1);
-      }
-  if (!IsNullOrEmpty($artistProfileId2)){
-        if ($first) {
-          $sql .= " WHERE artist_profile_id_2 = ? ";
-          $first = false;
-        }else{
-          $sql .= " AND artist_profile_id_2 = ? ";
-        }
-        array_push ($args, $artistProfileId2);
-      }
-  if (!IsNullOrEmpty($artistRelation)){
-        if ($first) {
-          $sql .= " WHERE artist_relation = ? ";
-          $first = false;
-        }else{
-          $sql .= " AND artist_relation = ? ";
-        }
-        array_push ($args, $artistRelation);
-      }
-
-  if (!IsNullOrEmpty($artistProfileId1) || !IsNullOrEmpty($artistProfileId2)){
-  try{
-    $statement = $conn->prepare($sql);
-    $statement->execute($args);
-  $count = $statement->rowCount();
-  if ($count > 0){
-  $json['Status'] = "SUCCESS - Deleted $count Rows";
-  } else {
-  $json['Status'] = "ERROR - Deleted 0 Rows - Check for Valid Ids ";
-  }
-  }catch (Exception $e) {
-      $json['Exception'] =  $e->getMessage();
-  }
-  } else {
-  $json['Status'] = "ERROR - pID1 or pID2 is required";
-  }
+} else if ($action == "deleteArtistRelationWithOtherIdentifiers"){		
+  $sql = "DELETE FROM artist_relation";		
+  $args = array();		
+  $first = true;		
+  if (!IsNullOrEmpty($artistProfileId1)){		
+        if ($first) {		
+          $sql .= " WHERE artist_profile_id_1 = ? ";		
+          $first = false;		
+        }else{		
+          $sql .= " AND artist_profile_id_1 = ? ";		
+        }		
+        array_push ($args, $artistProfileId1);		
+      }		
+  if (!IsNullOrEmpty($artistProfileId2)){		
+        if ($first) {		
+          $sql .= " WHERE artist_profile_id_2 = ? ";		
+          $first = false;		
+        }else{		
+          $sql .= " AND artist_profile_id_2 = ? ";		
+        }		
+        array_push ($args, $artistProfileId2);		
+      }		
+  if (!IsNullOrEmpty($artistRelation)){		
+        if ($first) {		
+          $sql .= " WHERE artist_relation = ? ";		
+          $first = false;		
+        }else{		
+          $sql .= " AND artist_relation = ? ";		
+        }		
+        array_push ($args, $artistRelation);		
+      }		
+  if (!IsNullOrEmpty($artistProfileId1) || !IsNullOrEmpty($artistProfileId2)){		
+  try{		
+    $statement = $conn->prepare($sql);		
+    $statement->execute($args);		
+  $count = $statement->rowCount();		
+  if ($count > 0){		
+  $json['Status'] = "SUCCESS - Deleted $count Rows";		
+  } else {		
+  $json['Status'] = "ERROR - Deleted 0 Rows - Check for Valid Ids ";		
+  }		
+  }catch (Exception $e) {		
+      $json['Exception'] =  $e->getMessage();		
+  }		
+  } else {		
+  $json['Status'] = "ERROR - pID1 or pID2 is required";		
+  }		
   $json['Action'] = $action;
   } else if ($action == "getArtistRelation"){
       $args = array();
@@ -371,6 +375,15 @@
           $sql .= " AND relation_identifier = ? ";
         }
         array_push ($args, $relationIdentifier);
+      }
+      if (!IsNullOrEmpty($artistWorks)){
+        if ($first) {
+          $sql .= " WHERE works = ? ";
+          $first = false;
+        }else{
+          $sql .= " AND works = ? ";
+        }
+        array_push ($args, $artistWorks);
       }
       $json['SQL'] = $sql;
       try{

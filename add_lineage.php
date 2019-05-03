@@ -1,12 +1,8 @@
 <?php
+include 'path.php';
+include 'menu.php';
 include 'util.php';
 my_session_start();
-if($_SESSION["user_type"] == "Admin")
-{
-	include 'admin_menu.php';
-}else{
-	include 'menu.php';
-}
 if($_SESSION["timeline_flow"] == "view"){
     echo "<script>var disabled_input=true;</script>";
 }else{
@@ -82,7 +78,7 @@ $user_email=$_SESSION["user_email_address"]
 
 <!-- Libraries for datatables -->
 
-<body>
+<body onload="getData()">
     <div class="row">
 			<ul class="progressbar">
           <li class="active"id="first"><a href="add_artist_profile.php">Add Artist Profile</a></li>
@@ -271,11 +267,11 @@ $user_email=$_SESSION["user_email_address"]
                           <br>
                           <div class="row">
                              <div class="small-3 column">
-                               <input type="checkbox" id="studied" name="studied" class="rel_studied" value="Studied Under">
+                               <input type="checkbox" id="studied" name="studied" class="rel_studied" value="Studied With">
                                <label for="studied">Studied Under</label><span style="cursor:pointer;" title="Teachers with whom you have studied."><img src="img/help.png" style="height:13px;width:13px;"/></span>
                              </div>
                              <div class="small-3 column">
-                               <input type="checkbox" id="danced" name="danced" class="rel_danced" value="Danced in the Work of">
+                               <input type="checkbox" id="danced" name="danced" class="rel_danced" value="Danced For">
                                <label for="danced">Danced in the Work of </label><span style="cursor:pointer;" title="Choreographers whose works you have danced in."><img src="img/help.png" style="height:13px;width:13px;"/></span>
                              </div>
                              <div class="small-3 column">
@@ -399,7 +395,6 @@ $user_email=$_SESSION["user_email_address"]
 <?php
 include 'form_links_footer.php';
 include 'footer.php';
-
 ?>
 <script>
   $("#first").click(function() {
@@ -424,20 +419,50 @@ include 'footer.php';
               //document.location.href = "add_artist_personal_information.php",true;
         });
   function clearFormEvent(){
+    isArtistEntryFormPopulated=false;
+    artistIdInForm=null;
+
+    var genreList = document.getElementById('lineal_genre');
+    genreListLength = genreList.options.length;
+    for(var i=0; i<genreListLength; i++){
+        genreListOption = genreList.options[i];
+        genreListValue = genreList.options[i].value;
+
+        genreListOption.selected=false;
+        //console.log(genreListOption.selected);
+    }
+    $('.multi-select-dd').fSelect('reload');
+
     $('#add_user_profile_form')[0].reset();
+
   }
+  var comboTree1;
+  var table;
+  var isArtistEntryFormPopulated=false;
+  var artistIdInForm=null;
+
+
+
+
+  function getData() {
+  		//window.open('/src/load_artists_data.php?'+dta,'_self');
+
+
+  		//console.log(JSON.stringify({"action": "getGenres"}));
+
       table=$("#display_relations").DataTable({
         "ajax": {
                     "type": "POST",
                     "url": "artistrelationcontroller.php",
                     "data": function(d){
-                                      return JSON.stringify({"action": "getArtistRelation",
+                                      return JSON.stringify({"action": "getArtistWithGroupedRelations",
                                                             "artistprofileid1":<?php echo $_SESSION["artist_profile_id"]?>,
                                                             "artistprofileid2":""
                                                           });
                     },
                     "dataSrc" : function (json) {
                                       // manipulate your data (json)
+
                                       response = JSON.stringify(json);
                                       jsonData = $.parseJSON(response);
                                       jsonData = jsonData.artist_relation;
@@ -462,6 +487,9 @@ include 'footer.php';
       });
 
 
+  }
+
+
 $(document).ready(function(){
   $('.multi-select-dd').fSelect();
   $('#danced').change(function() {
@@ -473,14 +501,15 @@ $(document).ready(function(){
       }
     });
 
+    //delete relation
     $('#display_relations').on('click', 'a.editor_remove', function (e) {
         var deletedrow=table.row($(this).parents('tr')).data();
-        //console.log(deletedrow);
+        //console.log(deletedrow.artist_profile_id_2);
         $.ajax({
           type: "POST",
           url: 'artistrelationcontroller.php',
-          data: JSON.stringify({"action": "deleteArtistRelation",
-                                "relationid":deletedrow.relation_id
+          data: JSON.stringify({"action": "deleteArtistRelationWithOtherIdentifiers",
+                                "artistprofileid2":deletedrow.artist_profile_id_2
                               }),
              success: function(response) {
                //console.log("record deleted from artistrelation");
@@ -488,6 +517,98 @@ $(document).ready(function(){
         });
         $('#display_relations').DataTable().ajax.reload();
       })
+
+      //edit existing relations
+      $('#display_relations').on('click', 'a.editor_edit', function (e) {
+          var editedrow=table.row($(this).parents('tr')).data();
+          //console.log(editedrow);
+          isArtistEntryFormPopulated=true;
+          artistIdInForm=editedrow.artist_profile_id_2;
+          var relationString=editedrow.artist_relation;
+          var relation_array=relationString.split(',');
+          //console.log(relation_array);
+
+          if(relation_array.includes('Danced For')){
+            $.ajax({
+              type:"POST",
+              url:'artistrelationcontroller.php',
+              data:JSON.stringify({
+                "action":"getArtistRelation",
+                "artistprofileid1":<?php echo $_SESSION['artist_profile_id']?>,
+                "artistprofileid2":editedrow.artist_profile_id_2,
+                "artistrelation":'Danced For'
+              }),
+              success:function(response){
+                console.log(<?php echo $_SESSION['artist_profile_id']?>);
+                console.log(editedrow.artist_profile_id_2);
+                response = JSON.stringify(response);
+                jsonData = $.parseJSON(response);
+
+                jsonData=jsonData.artist_relation[0];
+                $('#danced_titles').val(jsonData.works);
+                $("#danced_options").fadeIn('slow');
+              }
+            });
+          }
+
+
+          $.ajax({
+            type: "POST",
+            url: 'artistcontroller.php',
+            data: JSON.stringify({"action": "getArtistProfile",
+                                  "artistprofileid":editedrow.artist_profile_id_2
+                                }),
+               success: function(response) {
+                 response = JSON.stringify(response);
+                 jsonData = $.parseJSON(response);
+                 jsonData = jsonData.artist_profile;
+                 jsonData = jsonData[0];
+                 //console.log(jsonData);
+                 $('#lineal_first_name').val(jsonData.artist_first_name);
+                 $('#lineal_last_name').val(jsonData.artist_last_name);
+                 $('#lineal_email_address').val(jsonData.artist_email_address);
+                 $('#lineal_website').val(jsonData.artist_website);
+                 var gstr=jsonData.genre;
+                 gstr = gstr.split(",");
+                 var genreList = document.getElementById('lineal_genre');
+                 genreListLength = genreList.options.length;
+                 for(var i=0; i<genreListLength; i++){
+                     genreListOption = genreList.options[i];
+                     genreListValue = genreList.options[i].value;
+
+                     if(gstr.includes(genreListValue))
+                     {
+                         genreListOption.selected= true;
+                     }else{
+                         genreListOption.selected = false;
+
+                     }
+                 }
+                 $('.multi-select-dd').fSelect('reload');
+              }
+          });
+
+          $('#studied').prop('checked', false);
+          $('#danced').prop('checked', false);
+          $('#collaborated').prop('checked', false);
+          $('#influenced').prop('checked', false);
+          for (var i=0 ; i <relation_array.length; i++){
+              if(relation_array[i]=='Studied With'){
+                  $('#studied').prop('checked', true);
+              }
+              else if(relation_array[i]=='Danced For'){
+                  $('#danced').prop('checked', true);
+              }
+              else if(relation_array[i]=='Collaborated With'){
+                  $('#collaborated').prop('checked', true);
+              }
+              else if(relation_array[i]=='Influenced By'){
+                  $('#influenced').prop('checked', true);
+              }
+          }
+
+        });
+
 
       $('#add_user_profile_form').submit(function(event){
               if($('#terms').is(':checked') == false){
@@ -498,6 +619,7 @@ $(document).ready(function(){
           });
 
       $('#addArtist').click(function(){
+
           var fname=document.getElementById('lineal_first_name').value;
           var lname=document.getElementById('lineal_last_name').value;
           var mail=document.getElementById('lineal_email_address').value;
@@ -514,6 +636,18 @@ $(document).ready(function(){
           var fullname2="";
           var email2="";
           var website2="";
+          var works=document.getElementById("danced_titles").value;
+
+          var g=document.getElementById("lineal_genre");
+          var glength=g.options.length;
+          var glist="";
+          for(var i=0;i<glength;i++){
+            if(g.options[i].selected){
+                glist=glist+','+g.options[i].value;
+            }
+          }
+          glist=glist.substr(1,glist.length);
+
 
           if (fname == ""){
             alert("Please enter First Name for lineal artist");
@@ -530,19 +664,29 @@ $(document).ready(function(){
             return;
           }
 
+
+          //creating new profile or editing existing one
+          var payloadForAristForm= {"action": "addOrEditArtistProfile",
+                                "artistfirstname":fname,
+                                "artistlastname":lname,
+                                "artistemailaddress":mail,
+                                "profilename":mail,
+                                "isuserartist":"other",
+                                "artistwebsite":website,
+                                "newgenre":glist
+                              };
+
+          if(isArtistEntryFormPopulated){
+            payloadForAristForm.artistprofileid = artistIdInForm;
+          }
+
+          //console.log(payloadForAristForm);
           $.ajax({
               type: "POST",
               url: 'artistcontroller.php',
-              data: JSON.stringify({"action": "addOrEditArtistProfile",
-                                    "artistfirstname":fname,
-                                    "artistlastname":lname,
-                                    "artistemailaddress":mail,
-                                    "profilename":mail,
-                                    "isuserartist":"other",
-                                    "artistwebsite":website
-                                  }),
+              data: JSON.stringify(payloadForAristForm),
                 complete: function(response) {
-
+                  // get parent profile
                   $.ajax({
                     type: "POST",
                     url: 'artistcontroller.php',
@@ -558,6 +702,9 @@ $(document).ready(function(){
                         lname1=jsonData.artist_profile[0].artist_last_name;
                         fullname1=fname1.concat('-',lname1);
 
+                        //console.log('parent:'+pid1);
+
+                        //get child profile
                         $.ajax({
                           type: "POST",
                           url: 'artistcontroller.php',
@@ -576,143 +723,95 @@ $(document).ready(function(){
                               fullname2=fname2.concat('-',lname2);
                               website2=jsonData.artist_profile[0].artist_website;
 
+                              //console.log('child:'+pid2);
 
                               var selected_checkboxes=new Array();
-                              var inputs = document.querySelectorAll("input[type='checkbox']");
-                              for(var i = 0; i < inputs.length; i++) {
-                                  if(inputs[i].checked == true){
-                                    if (inputs[i].value!='checked' && inputs[i].value!='on'){
-                                      selected_checkboxes.push(inputs[i].value);
-                                    }
-                                  }
-                              }
+                              var unselected_checkboxes=new Array();
 
-                              var loopLength=selected_checkboxes.length;
-                              var dancedworks="false";
-                              for (var i=0 ; i <selected_checkboxes.length; i++){
-                                if(selected_checkboxes[i]=="Danced in the Work of"){
-                                  dancedworks="true";
-                                }
+                              if($('#studied').is(':checked')){
+                                selected_checkboxes.push($('#studied').val());
+                              }
+                              else{
+                                unselected_checkboxes.push('Studied With');
+                              }
+                              if($('#danced').is(':checked')){
+                                selected_checkboxes.push($('#danced').val());
+                              }
+                              else{
+                                unselected_checkboxes.push('Danced For');
+                              }if($('#collaborated').is(':checked')){
+                                selected_checkboxes.push($('#collaborated').val());
+                              }
+                              else{
+                                unselected_checkboxes.push('Collaborated With');
+                              }if($('#influenced').is(':checked')){
+                                selected_checkboxes.push($('#influenced').val());
+                              }
+                              else{
+                                unselected_checkboxes.push('Influenced By');
+                              }
+                              //console.log(unselected_checkboxes);
+                              for (var i=0 ; i <unselected_checkboxes.length; i++){
                                 $.ajax({
                                   type: "POST",
                                   url: 'artistrelationcontroller.php',
-                                  data: JSON.stringify({"action": "addOrEditArtistRelation",
+                                  data: JSON.stringify({"action": "deleteArtistRelationWithOtherIdentifiers",
                                                         "artistprofileid1":pid1,
                                                         "artistprofileid2":pid2,
-                                                        "artistname1":fullname1,
-                                                        "artistemailId1":email1,
-                                                        "artistname2":fullname2,
-                                                        "artistemailId2":email2,
-                                                        "artistwebsite2":website2,
-                                                        "artistrelation":selected_checkboxes[i]
+                                                        "artistrelation":unselected_checkboxes[i]
                                                       }),
+                                     success: function(response) {
+                                       //console.log("record deleted from artistrelation");
+                                       //console.log('Pseudo Delete done.');
+                                    }
+                                });
+                              }
+
+                                // add reations in artist_relation
+                              var loopLength=selected_checkboxes.length;
+                              for (var i=0 ; i <selected_checkboxes.length; i++){
+
+                                artistRelationPayload = {"action": "addOrEditArtistRelationWithOtherFields",
+                                                      "artistprofileid1":pid1,
+                                                      "artistprofileid2":pid2,
+                                                      "artistname1":fullname1,
+                                                      "artistemailId1":email1,
+                                                      "artistname2":fullname2,
+                                                      "artistemailId2":email2,
+                                                      "artistwebsite2":website2,
+                                                      "artistrelation":selected_checkboxes[i]
+                                                    };
+
+                                if(selected_checkboxes[i]=='Danced For'){
+                                    console.log(works);
+                                    artistRelationPayload.works=works;
+                                }
+
+                                $.ajax({
+                                  type: "POST",
+                                  url: 'artistrelationcontroller.php',
+                                  data: JSON.stringify(artistRelationPayload),
                                      success: function(response) {
                                        //console.log("new artist added to db for artist relation");
                                        loopLength--;
                                        if(loopLength==0){
-                                         if(dancedworks=="true"){
-                                           var dw=document.getElementById("danced_titles").value;
-                                           jQuery.ajax({
-                                             type:"POST",
-                                             url:'artistrelationcontroller.php',
-                                             data:JSON.stringify({
-                                               "action":"getArtistRelation",
-                                               "artistprofileid1":pid1,
-                                               "artistprofileid2":pid2,
-                                               "artistrelation":"Danced in the Work of"
-                                             }),
-                                             success:function(response){
-                                               response = JSON.stringify(response);
-                                               jsonData = $.parseJSON(response);
-                                               jsonData=jsonData.artist_relation[0]
-                                               $.ajax({
-                                                 type:"POST",
-                                                 url:'artistrelationcontroller.php',
-                                                 data:JSON.stringify({
-                                                   "action":"addOrEditArtistRelation",
-                                                   "relationid":jsonData.relation_id,
-                                                   "artistprofileid1":jsonData.artist_profile_id_1,
-                                                   "artistprofileid2":jsonData.artist_profile_id_2,
-                                                   "artistname1":jsonData.artist_name_1,
-                                                   "artistemailId1":jsonData.artist_email_id_1,
-                                                   "artistname2":jsonData.artist_name_2,
-                                                   "artistemailId2":jsonData.artist_email_id_2,
-                                                   "artistwebsite2":jsonData.artist_website_2,
-                                                   "artistrelation":jsonData.artist_relation,
-                                                   "works":dw
-                                                 }),
-                                                 success:function(response){
-                                                   response = JSON.stringify(response);
-                                                   console.log("works added to artist_relation table in db!");
-                                                 }
-                                               });
-                                             }
-                                           });
-                                         }
+                                          // Add genres in artist_genres
 
-                                         var g=document.getElementById("lineal_genre");
-                                         var glength=g.options.length;
-                                         var glist="";
-                                         for(var i=0;i<glength;i++){
-                                           if(g.options[i].selected){
-                                               glist=glist+','+g.options[i].value;
-                                           }
-                                         }
-                                         glist=glist.substr(1,glist.length);
-                                              $.ajax({
-                                                type: "POST",
-                                                url: 'artistcontroller.php',
-                                                data: JSON.stringify({"action": "getArtistProfile",
-                                                                      "artistfirstname":fname2,
-                                                                      "artistlastname":lname2,
-                                                                      "artistemailaddress":email2,
-                                                                    }),
-                                                   success: function(response) {
-                                                     response = JSON.stringify(response);
-                                                     jsonData = $.parseJSON(response);
-                                                     jsonData=jsonData.artist_profile[0]
-                                                     $.ajax({
-                                                       type: "POST",
-                                                       url: 'artistcontroller.php',
-                                                       data: JSON.stringify({"action": "addOrEditArtistProfile",
-                                                                             "artistprofileid":jsonData.artist_profile_id,
-                                                                             "isuserartist":jsonData.is_user_artist,
-                                                                             "profilename":jsonData.profile_name,
-                                                                             "artistfirstname":jsonData.artist_first_name,
-                                                                             "artistlastname":jsonData.artist_last_name,
-                                                                             "artistemailaddress":jsonData.artist_email_address,
-                                                                             "artistlivingstatus":jsonData.artist_living_status,
-                                                                             "artistdob":jsonData.artist_dob,
-                                                                             "artistdod":jsonData.artist_dod,
-                                                                             "artistgenre":jsonData.artist_genre,
-                                                                             "artistethnicity":jsonData.artist_ethnicity,
-                                                                             "artistgender":jsonData.artist_gender,
-                                                                             "genderother":jsonData.gender_other,
-                                                                             "genreother":jsonData.genre_other,
-                                                                             "ethnicityother":jsonData.artist_ethnicity,
-                                                                             "artistresidencecity":jsonData.artist_residence_city,
-                                                                             "artistresidencestate":jsonData.artist_residence_state,
-                                                                             "artistresidenceprovince":jsonData.artist_residence_province,
-                                                                             "artistresidencecountry":jsonData.artist_residence_country,
-                                                                             "artistbirthcountry":jsonData.artist_birth_country,
-                                                                             "artistbiography":jsonData.artist_biography,
-                                                                             "artistbiographytext":jsonData.artist_biography_text,
-                                                                             "artistphotopath":jsonData.artist_photo_path,
-                                                                             "artistwebsite":jsonData.artist_website,
-                                                                             "newgenre":glist
-                                                                           }),
-                                                                           success: function(response) {
-                                                                             response = JSON.stringify(response);
-                                                                               console.log("genre added to artist2 in db!");
-
-                                                                             }
-
-                                                                         });
-                                                  }
-                                              });
-
-
+                                         //reload table
                                            $('#display_relations').DataTable().ajax.reload();
+                                           isArtistEntryFormPopulated=false;
+                                           artistIdInForm=null;
+
+                                           var genreList = document.getElementById('lineal_genre');
+                                           genreListLength = genreList.options.length;
+                                           for(var i=0; i<genreListLength; i++){
+                                               genreListOption = genreList.options[i];
+                                               genreListValue = genreList.options[i].value;
+
+                                               genreListOption.selected=false;
+                                               //console.log(genreListOption.selected);
+                                           }
+                                           $('.multi-select-dd').fSelect('reload');
                                            $('#add_user_profile_form')[0].reset();
 
 
@@ -723,10 +822,15 @@ $(document).ready(function(){
                                     }
                                 });
                               }
+
+
                             }
                         });
+
+
                       }
                   });
+
 
                 }
           });
@@ -763,15 +867,6 @@ $(document).ready(function(){
               window.open("about_lineage.php","_self");
           }
       });
-
-     $(function() {
-			var url = window.location.href;
-			if(url.search("add_lineage.php"))
-			{
-				var lineage_contri = document.getElementById("contri_lineage");
-				$(lineage_contri).addClass('active');
-			}
-		});  
 });
 </script>
 </html>
