@@ -28,7 +28,7 @@
     $artistProfileId1 =  $decoded_params['artistprofileid1'];
   }
   $artistProfileId2 = "";
-  if (array_key_exists('artistprofileid1', $decoded_params)){
+  if (array_key_exists('artistprofileid2', $decoded_params)){
     $artistProfileId2 =  $decoded_params['artistprofileid2'];
   }
   $artistName1 = "";

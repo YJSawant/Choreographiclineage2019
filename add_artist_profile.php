@@ -858,7 +858,6 @@ include 'footer.php';
            }
       });
       $(document).on('click', 'li', function(){
-          // $('#artist_first_name').val($(this).text());
            $('#firstnamelist').fadeOut();
       });
  });
@@ -877,9 +876,6 @@ include 'footer.php';
                 success:function(response)
                 {
                     $('#duplication_check').html(response);
-                    // if(response=="success")
-                        // alert("Artist already exists");
-                        // $("#next").prop("disabled",true);
                 }
             });
         }
