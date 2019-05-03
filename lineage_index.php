@@ -42,7 +42,7 @@ include 'menu.php';
     					<li><span class="rednode"></span>Other's Contribution</li>
     					<li><span class="redarrow"></span>Studied Under</li>
     					<li><span class="yellowarrow"></span>Collaborated With</li>
-    					<li><span class="greenarrow"></span>Danced For</li>
+    					<li><span class="greenarrow"></span>Danced in the work of</li>
 						<li><span class="bluearrow"></span>Influenced By</li>
    				</ul>
 				</div>
