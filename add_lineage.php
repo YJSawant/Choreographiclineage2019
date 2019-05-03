@@ -78,7 +78,7 @@ $user_email=$_SESSION["user_email_address"]
 
 <!-- Libraries for datatables -->
 
-<body onload="getData()">
+<body>
     <div class="row">
 			<ul class="progressbar">
           <li class="active"id="first"><a href="add_artist_profile.php">Add Artist Profile</a></li>
@@ -130,8 +130,122 @@ $user_email=$_SESSION["user_email_address"]
                                       </label>
                                 </div>
                                 <div class="small-3 column">
-                                    <label for="lineal_genre">Genre <small></small>
-                                       <input autocomplete="off" type="text" class="lineal_genre" id="lineal_genre" name="lineal_genre" placeholder="Genre" onfocusout="testfunction()"/>
+                                    <label for="lineal_genre">Genre
+                                      <br>
+                                      <select id="lineal_genre" name = 'genre[]' class="multi-select-dd" multiple="multiple">
+                                          <option value="Acro">Acro</option>
+                                          <option value="Aduma">Aduma (Kenya)</option>
+                                          <option value="Aerial">Aerial</option>
+                                          <option value="African">African</option>
+                                          <option value="AfricanContemporary">African Contemporary</option>
+                                          <option value="AfricanTraditionalorFolk">African Traditional or Folk</option>
+                                          <option value="AfroCaribbean">Afro-Caribbean</option>
+                                          <option value="Arabic">Arabic/Middle Eastern</option>
+                                          <option value="Armenian">Armenian</option>
+                                          <option value="Atilogwu">Atilogwu (Nigeria)</option>
+                                          <option value="Bachata">Bachata</option>
+                                          <option value="Balkan">Balkan</option>
+                                          <option value="Ballet">Ballet</option>
+                                          <option value="Ballroom">Ballroom</option>
+                                          <option value="Bangladeshi">Bangladeshi</option>
+                                          <option value="Bboyingor">Bboying or Bgirling</option>
+                                          <option value="Bhangra">Bhangra</option>
+                                          <option value="BellyDance">Belly Dance</option>
+                                          <option value="Brazilian">Brazilian</option>
+                                          <option value="Burlesque">Burlesque/Cabaret</option>
+                                          <option value="Capoeira">Capoeira</option>
+                                          <option value="Cha">Cha-cha-cha</option>
+                                          <option value="Charleston">Charleston</option>
+                                          <option value="Chilean">Chilean</option>
+                                          <option value="Chinese">Chinese</option>
+                                          <option value="Circus">Circus</option>
+                                          <option value="Clogging">Clogging</option>
+                                          <option value="Colombian">Colombian</option>
+                                          <option value="ContactImprovisation">Contact Improvisation</option>
+                                          <option value="ContemporaryorModern">Contemporary or Modern</option>
+                                          <option value="Contra">Contra</option>
+                                          <option value="CountryWestern">Country Western</option>
+                                          <option value="Croatian">Croatian</option>
+                                          <option value="Dancehall">Dancehall</option>
+                                          <option value="Dancesport">Dancesport</option>
+                                          <option value="Danish">Danish</option>
+                                          <option value="Eskista">Eskista (Ethiopia)</option>
+                                          <option value="EuropeanFolkDance">European Folk Dance</option>
+                                          <option value="Ewegh">Ewegh (Niger)</option>
+                                          <option value="Finnish">Finnish</option>
+                                          <option value="FlamencoorSpanish">Flamenco  or Spanish</option>
+                                          <option value="Foxtrot">Foxtrot</option>
+                                          <option value="Greek">Greek</option>
+                                          <option value="German">German</option>
+                                          <option value="Guinean">Guinean</option>
+                                          <option value="Gumboot">Gumboot</option>
+                                          <option value="GarbaandRaas">Garba and Raas</option>
+                                          <option value="Krumping">Krumping</option>
+                                          <option value="Liturgical">Liturgical</option>
+                                          <option value="Locking">Locking</option>
+                                          <option value="Haitian">Haitian</option>
+                                          <option value="HipHop">Hip Hop</option>
+                                          <option value="Historical">Historical: Baroque, Medieval, Renaissance</option>
+                                          <option value="House">House</option>
+                                          <option value="Hustle">Hustle</option>
+                                          <option value="IceDancing">IceDancing</option>
+                                          <option value="Indian">Indian Classical</option>
+                                          <option value="Indlamu">Indlamu (South Africa)</option>
+                                          <option value="Inuit">Inuit</option>
+                                          <option value="Irish">Irish</option>
+                                          <option value="Israeli">Israeli</option>
+                                          <option value="Italian">Italian</option>
+                                          <option value="Japanese">Japanese</option>
+                                          <option value="Jazz">Jazz</option>
+                                          <option value="Jive">Jive</option>
+                                          <option value="Kizomba">Kizomba</option>
+                                          <option value="Korean">Korean</option>
+                                          <option value="Lebanese">Lebanese</option>
+                                          <option value="LindyHop">Lindy Hop</option>
+                                          <option value="Lyrical">Lyrical</option>
+                                          <option value="Macedonian">Macedonian</option>
+                                          <option value="Malagasy">Malagasy</option>
+                                          <option value="Mbalax">Mbalax </option>
+                                          <option value="Merengue">Merengue </option>
+                                          <option value="Mexican">Mexican</option>
+                                          <option value="Moribayasa">Moribayasa (Guinea)</option>
+                                          <option value="MusicTheater">Music Theater</option>
+                                          <option value="Pakistani">Pakistani</option>
+                                          <option value="Pat">Pat Pat(Senegal)</option>
+                                          <option value="Persian">Persian</option>
+                                          <option value="Peruvian">Peruvian</option>
+                                          <option value="Philippine">Philippine</option>
+                                          <option value="Polish">Polish</option>
+                                          <option value="Polka">Polka</option>
+                                          <option value="Polynesian">Polynesian</option>
+                                          <option value="Popping">Popping</option>
+                                          <option value="Romanian">Romanian</option>
+                                          <option value="Rumba">Rumba</option>
+                                          <option value="Russian">Russian</option>
+                                          <option value="Sacred">Sacred</option>
+                                          <option value="Salsa">Salsa</option>
+                                          <option value="Samba">Samba</option>
+                                          <option value="San">San Dancing (Botswana)</option>
+                                          <option value="Scandinavian">Scandinavian</option>
+                                          <option value="Semba">Semba</option>
+                                          <option value="Serbian">Serbian</option>
+                                          <option value="Shag">Shag</option>
+                                          <option value="Slovak">Slovak</option>
+                                          <option value="Swing">Swing</option>
+                                          <option value="SouthAsian">South Asian</option>
+                                          <option value="Square">Square</option>
+                                          <option value="Tango">Tango</option>
+                                          <option value="Tap">Tap</option>
+                                          <option value="Thai">Thai</option>
+                                          <option value="Turkish">Turkish</option>
+                                          <option value="Ukrainian">Ukrainian</option>
+                                          <option value="Venezuelan">Venezuelan</option>
+                                          <option value="Vietnamese">Vietnamese</option>
+                                          <option value="Waacking">Waacking</option>
+                                          <option value="Waltz">Waltz</option>
+                                          <option value="Zouk">Zouk</option>
+                                          <option value="Zumba">Zumba</option>
+                                      </select>
                                     </label>
                                 </div>
                                 <div class="small-3 column">
@@ -271,7 +385,7 @@ $user_email=$_SESSION["user_email_address"]
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link href="css/fSelect.css" rel="stylesheet">
+<link href="css/fSelect2.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
 <script src="js/fSelect.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
@@ -281,8 +395,7 @@ $user_email=$_SESSION["user_email_address"]
 <?php
 include 'form_links_footer.php';
 include 'footer.php';
-// foreach ($_SESSION as $key=>$val)
-// 	echo $key." ".$val."<br/>";
+
 ?>
 <script>
   $("#first").click(function() {
@@ -308,68 +421,7 @@ include 'footer.php';
         });
   function clearFormEvent(){
     $('#add_user_profile_form')[0].reset();
-
   }
-  var comboTree1;
-  var table;
-  var selectedIds = new Array();
-  function testfunction(){
-
-    selectedIds = comboTree1.getSelectedItemsId();
-    console.log(selectedIds);
-
-  }
-
-
-
-  function getData() {
-  		//window.open('/src/load_artists_data.php?'+dta,'_self');
-
-
-  		//console.log(JSON.stringify({"action": "getGenres"}));
-
-      //loading entire list of genres
-  		$.ajax({
-  			type: "POST",
-  			url: 'genrecontroller.php',
-  			data: JSON.stringify({"action": "getGenres"}),
-  		     success: function(response) {
-  		     	//console.log(response);
-  					response = JSON.stringify(response);
-  		     	jsonData = $.parseJSON(response);
-  					//console.log(jsonData.genres);
-  		     	jsonData = jsonData.genres;
-
-  					var genres  = new Array();
-  					var genreIncrementor=0;
-  					var category_names = new Array();
-
-  					for (var i = 0; i < jsonData.length; i++) {
-
-  						if(genres.some(e  => e.title === jsonData[i].category)){
-  								var tempGenre={id:jsonData[i].genre_id,title:jsonData[i].genre_name};
-  								var someGenre=genres.find(e => e.title === jsonData[i].category);
-  								someGenre.subs.push(tempGenre);
-  						}
-  						else{
-  							category_names.push(jsonData[i].category);
-  							var subs=new Array();
-  							var tempGenre={id:jsonData[i].genre_id,title:jsonData[i].genre_name};
-  							subs.push(tempGenre);
-  						 var objectToinsert={id:i,title:jsonData[i].category,subs:subs};
-  						 genres.push(objectToinsert);
-  						}
-  					}
-  					comboTree1=$('#lineal_genre').comboTree({
-  					  source : genres,
-  					  isMultiple: true
-  					});
-  				},
-  				error: function(response){
-  					console.log(response);
-  				}
-  		});
-
       table=$("#display_relations").DataTable({
         "ajax": {
                     "type": "POST",
@@ -382,7 +434,6 @@ include 'footer.php';
                     },
                     "dataSrc" : function (json) {
                                       // manipulate your data (json)
-
                                       response = JSON.stringify(json);
                                       jsonData = $.parseJSON(response);
                                       jsonData = jsonData.artist_relation;
@@ -407,10 +458,8 @@ include 'footer.php';
       });
 
 
-  }
-
-
 $(document).ready(function(){
+  $('.multi-select-dd').fSelect();
   $('#danced').change(function() {
     if(this.checked) {
       $("#danced_options").fadeIn('slow');
@@ -436,9 +485,6 @@ $(document).ready(function(){
         $('#display_relations').DataTable().ajax.reload();
       })
 
-
-
-
       $('#add_user_profile_form').submit(function(event){
               if($('#terms').is(':checked') == false){
                   event.preventDefault();
@@ -448,7 +494,6 @@ $(document).ready(function(){
           });
 
       $('#addArtist').click(function(){
-
           var fname=document.getElementById('lineal_first_name').value;
           var lname=document.getElementById('lineal_last_name').value;
           var mail=document.getElementById('lineal_email_address').value;
@@ -465,8 +510,6 @@ $(document).ready(function(){
           var fullname2="";
           var email2="";
           var website2="";
-
-          selectedIds = comboTree1.getSelectedItemsId();
 
           if (fname == ""){
             alert("Please enter First Name for lineal artist");
@@ -541,7 +584,11 @@ $(document).ready(function(){
                               }
 
                               var loopLength=selected_checkboxes.length;
+                              var dancedworks="false";
                               for (var i=0 ; i <selected_checkboxes.length; i++){
+                                if(selected_checkboxes[i]=="Danced in the Work of"){
+                                  dancedworks="true";
+                                }
                                 $.ajax({
                                   type: "POST",
                                   url: 'artistrelationcontroller.php',
@@ -559,25 +606,107 @@ $(document).ready(function(){
                                        //console.log("new artist added to db for artist relation");
                                        loopLength--;
                                        if(loopLength==0){
-
-                                         for(var i=0;i<selectedIds.length;i++){
-                                           $.ajax({
-                                             type: "POST",
-                                             url: 'artistgenrecontroller.php',
-                                             data: JSON.stringify({"action": "addOrEditArtistGenres",
-                                                                     "genreid":parseInt(selectedIds[i]),
-                                                                     "artistprofileid":pid2
-                                                                 }),
-                                                success: function(response) {
-                                                  response = JSON.stringify(response);
-                                                  jsonData = $.parseJSON(response);
-                                                  if (jsonData.artist_profile==null){
-                                                    console.log("Artist added to artistgenre table!");
-                                                  }
-
-                                               }
+                                         if(dancedworks=="true"){
+                                           var dw=document.getElementById("danced_titles").value;
+                                           jQuery.ajax({
+                                             type:"POST",
+                                             url:'artistrelationcontroller.php',
+                                             data:JSON.stringify({
+                                               "action":"getArtistRelation",
+                                               "artistprofileid1":pid1,
+                                               "artistprofileid2":pid2,
+                                               "artistrelation":"Danced in the Work of"
+                                             }),
+                                             success:function(response){
+                                               response = JSON.stringify(response);
+                                               jsonData = $.parseJSON(response);
+                                               jsonData=jsonData.artist_relation[0]
+                                               $.ajax({
+                                                 type:"POST",
+                                                 url:'artistrelationcontroller.php',
+                                                 data:JSON.stringify({
+                                                   "action":"addOrEditArtistRelation",
+                                                   "relationid":jsonData.relation_id,
+                                                   "artistprofileid1":jsonData.artist_profile_id_1,
+                                                   "artistprofileid2":jsonData.artist_profile_id_2,
+                                                   "artistname1":jsonData.artist_name_1,
+                                                   "artistemailId1":jsonData.artist_email_id_1,
+                                                   "artistname2":jsonData.artist_name_2,
+                                                   "artistemailId2":jsonData.artist_email_id_2,
+                                                   "artistwebsite2":jsonData.artist_website_2,
+                                                   "artistrelation":jsonData.artist_relation,
+                                                   "works":dw
+                                                 }),
+                                                 success:function(response){
+                                                   response = JSON.stringify(response);
+                                                   console.log("works added to artist_relation table in db!");
+                                                 }
+                                               });
+                                             }
                                            });
                                          }
+
+                                         var g=document.getElementById("lineal_genre");
+                                         var glength=g.options.length;
+                                         var glist="";
+                                         for(var i=0;i<glength;i++){
+                                           if(g.options[i].selected){
+                                               glist=glist+','+g.options[i].value;
+                                           }
+                                         }
+                                         glist=glist.substr(1,glist.length);
+                                              $.ajax({
+                                                type: "POST",
+                                                url: 'artistcontroller.php',
+                                                data: JSON.stringify({"action": "getArtistProfile",
+                                                                      "artistfirstname":fname2,
+                                                                      "artistlastname":lname2,
+                                                                      "artistemailaddress":email2,
+                                                                    }),
+                                                   success: function(response) {
+                                                     response = JSON.stringify(response);
+                                                     jsonData = $.parseJSON(response);
+                                                     jsonData=jsonData.artist_profile[0]
+                                                     $.ajax({
+                                                       type: "POST",
+                                                       url: 'artistcontroller.php',
+                                                       data: JSON.stringify({"action": "addOrEditArtistProfile",
+                                                                             "artistprofileid":jsonData.artist_profile_id,
+                                                                             "isuserartist":jsonData.is_user_artist,
+                                                                             "profilename":jsonData.profile_name,
+                                                                             "artistfirstname":jsonData.artist_first_name,
+                                                                             "artistlastname":jsonData.artist_last_name,
+                                                                             "artistemailaddress":jsonData.artist_email_address,
+                                                                             "artistlivingstatus":jsonData.artist_living_status,
+                                                                             "artistdob":jsonData.artist_dob,
+                                                                             "artistdod":jsonData.artist_dod,
+                                                                             "artistgenre":jsonData.artist_genre,
+                                                                             "artistethnicity":jsonData.artist_ethnicity,
+                                                                             "artistgender":jsonData.artist_gender,
+                                                                             "genderother":jsonData.gender_other,
+                                                                             "genreother":jsonData.genre_other,
+                                                                             "ethnicityother":jsonData.artist_ethnicity,
+                                                                             "artistresidencecity":jsonData.artist_residence_city,
+                                                                             "artistresidencestate":jsonData.artist_residence_state,
+                                                                             "artistresidenceprovince":jsonData.artist_residence_province,
+                                                                             "artistresidencecountry":jsonData.artist_residence_country,
+                                                                             "artistbirthcountry":jsonData.artist_birth_country,
+                                                                             "artistbiography":jsonData.artist_biography,
+                                                                             "artistbiographytext":jsonData.artist_biography_text,
+                                                                             "artistphotopath":jsonData.artist_photo_path,
+                                                                             "artistwebsite":jsonData.artist_website,
+                                                                             "newgenre":glist
+                                                                           }),
+                                                                           success: function(response) {
+                                                                             response = JSON.stringify(response);
+                                                                               console.log("genre added to artist2 in db!");
+
+                                                                             }
+
+                                                                         });
+                                                  }
+                                              });
+
 
                                            $('#display_relations').DataTable().ajax.reload();
                                            $('#add_user_profile_form')[0].reset();
@@ -590,15 +719,10 @@ $(document).ready(function(){
                                     }
                                 });
                               }
-
-
                             }
                         });
-
-
                       }
                   });
-
 
                 }
           });
