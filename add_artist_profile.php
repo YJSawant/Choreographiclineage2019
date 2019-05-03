@@ -215,8 +215,8 @@ if(!isset($_SESSION['genre'])){
                                     <option value="Historical">Historical: Baroque, Medieval, Renaissance</option>
                                     <option value="House">House</option>
                                     <option value="Hustle">Hustle</option>
-                                    <option value="Ice Dancing">Ice Dancing</option>
-                                    <option value="Indian">Indian Classical: Bharatanatyam/Gaudya, Nritya/Kathak/Kuchipudi/Manipuri/Mohiniyattam/Odissi/Sattriya</option>
+                                    <option value="IceDancing">IceDancing</option>
+                                    <option value="Indian Classical">Indian Classical</option>
                                     <option value="Indlamu">Indlamu (South Africa)</option>
                                     <option value="Inuit">Inuit</option>
                                     <option value="Irish">Irish</option>
