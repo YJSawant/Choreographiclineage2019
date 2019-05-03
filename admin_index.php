@@ -54,7 +54,7 @@
 		</div>
 
 		<div class="row">
-			<img src="" alt="" style="width: 33%;">
+			<img src="" style="width: 33%;">
 			<img src="data/images/logo_ub.jpg" alt="UB logo" style="width: 33%;">		
 			<img src="data/images/logo_techne.png" alt="Techne logo" style="width: 33%;">
 		</div>

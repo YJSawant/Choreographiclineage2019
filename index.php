@@ -1,12 +1,7 @@
 <?php
 	include 'util.php';
-	my_session_start();
-	if($_SESSION["user_type"] == "Admin")
-	{
-	include 'admin_menu.php';
-	}else{
 	include 'menu.php';
-	}
+	my_session_start();
 ?>
 		<div class="row">
 			<div class="medium-8 column text-justify">
@@ -59,7 +54,7 @@
 		</div>
 
 		<div class="row">	
-		    <img src="" alt="" style="width: 33%;">
+			<img src="" style="width: 33%;">
 			<img src="data/images/logo_ub.jpg" alt="UB logo" style="width: 33%;">		
 			<img src="data/images/logo_techne.png" alt="Techne logo" style="width: 33%;">
 		</div>

@@ -72,16 +72,35 @@
 ?>
 <script>
     $(document).ready(function(){
+    //     $(function() {
+    //     var url = window.location.href;
+    //     if(url.search("phone_appointment_list.php"))
+    //     {
+    //         var phone_appointment = document.getElementById("phone_appointment");
+	// 		$(phone_appointment).addClass('active');
+    //     }else{
+    //         var home2 = document.getElementById("admin_home");
+	// 		home2.classList.remove('active');
+    //     }
+	// });
     $(function(){
-        $('a').each(function(){
-            if ($(this).prop('href') === window.location.href) {
-                $(this).addClass('active');
-            }
-            else{
-                var home = document.getElementById("admin_home");
-                home.classList.remove('active');
-            }
-        });
+        var url = window.location.href;
+        if(url.search("phone_appointment_list.php"))
+        {
+            var phone_appointment = document.getElementById("phone_appointment");
+            $(phone_appointment).addClass('active');
+            var adminHome = document.getElementById("admin_home");
+            adminHome.classList.remove('active');
+        }
+        // $('a').each(function(){
+        //     if ($(this).prop('href') == window.location.href) {
+        //         $(this).addClass('active');
+        //     }
+        //     else{
+        //         var adminHome = document.getElementById("admin_home");
+        //         adminHome.classList.remove('active');
+        //     }
+        // });
     });
 });
     function confirmDone(){
