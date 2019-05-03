@@ -139,6 +139,44 @@
   }
   $json['Action'] = $action;
   }
+} else if ($action == "addOrEditArtistRelationWithOtherFields"){		
+  $args = array();		
+      $sql = "SET   @artist_profile_id_1=?,		
+                	  @artist_profile_id_2=?,		
+                    @artist_name_1 = ?,		
+                    @artist_email_id_1 = ?,		
+                	  @artist_name_2 = ?,		
+                    @artist_email_id_2 = ?,		
+                    @artist_website_2 = ?,		
+                    @artist_relation = ?;		
+                INSERT INTO artist_relation		
+                    (artist_profile_id_1, artist_profile_id_2,artist_name_1,artist_email_id_1, artist_name_2, artist_email_id_2,artist_website_2,artist_relation)		
+                VALUES		
+                    (@artist_profile_id_1, @artist_profile_id_2,@artist_name_1,@artist_email_id_1, @artist_name_2, @artist_email_id_2,@artist_website_2,@artist_relation)		
+                ON DUPLICATE KEY UPDATE		
+                	artist_name_1 = @artist_name_1,		
+                  artist_email_id_1 = @artist_email_id_1,		
+                  artist_name_2 = @artist_name_2,		
+                  artist_email_id_2 = @artist_email_id_2,		
+                  artist_website_2 = @artist_website_2;";		
+      array_push($args, $artistProfileId1);		
+      array_push($args, $artistProfileId2);		
+      array_push($args, $artistName1);		
+      array_push($args, $artistEmailId1);		
+      array_push($args, $artistName2);		
+      array_push($args, $artistEmailId2);		
+      array_push($args, $artistWebsite2);		
+      array_push($args, $artistRelation);		
+      try{		
+          $statement = $conn->prepare($sql);		
+          $statement->execute($args);		
+          $last_id = $conn->lastInsertId();		
+          $json['Record Id'] = $last_id;		
+          $json['Status'] = "SUCCESS - Inserted Id $last_id";		
+      }catch (Exception $e) {		
+          $json['Exception'] =  $e->getMessage();		
+      }		
+      $json['Action'] = $action;
   } else if ($action == "deleteArtistRelation"){
   $sql = "DELETE FROM artist_relation WHERE relation_id = ?";
   $args = array();
@@ -159,6 +197,54 @@
   } else {
   $json['Status'] = "ERROR - Id is required";
   }
+  $json['Action'] = $action;
+} else if ($action == "deleteArtistRelationWithOtherIdentifiers"){		
+  $sql = "DELETE FROM artist_relation";		
+  $args = array();		
+  $first = true;		
+  if (!IsNullOrEmpty($artistProfileId1)){		
+        if ($first) {		
+          $sql .= " WHERE artist_profile_id_1 = ? ";		
+          $first = false;		
+        }else{		
+          $sql .= " AND artist_profile_id_1 = ? ";		
+        }		
+        array_push ($args, $artistProfileId1);		
+      }		
+  if (!IsNullOrEmpty($artistProfileId2)){		
+        if ($first) {		
+          $sql .= " WHERE artist_profile_id_2 = ? ";		
+          $first = false;		
+        }else{		
+          $sql .= " AND artist_profile_id_2 = ? ";		
+        }		
+        array_push ($args, $artistProfileId2);		
+      }		
+  if (!IsNullOrEmpty($artistRelation)){		
+        if ($first) {		
+          $sql .= " WHERE artist_relation = ? ";		
+          $first = false;		
+        }else{		
+          $sql .= " AND artist_relation = ? ";		
+        }		
+        array_push ($args, $artistRelation);		
+      }		
+  if (!IsNullOrEmpty($artistProfileId1) || !IsNullOrEmpty($artistProfileId2)){		
+  try{		
+    $statement = $conn->prepare($sql);		
+    $statement->execute($args);		
+  $count = $statement->rowCount();		
+  if ($count > 0){		
+  $json['Status'] = "SUCCESS - Deleted $count Rows";		
+  } else {		
+  $json['Status'] = "ERROR - Deleted 0 Rows - Check for Valid Ids ";		
+  }		
+  }catch (Exception $e) {		
+      $json['Exception'] =  $e->getMessage();		
+  }		
+  } else {		
+  $json['Status'] = "ERROR - pID1 or pID2 is required";		
+  }		
   $json['Action'] = $action;
   } else if ($action == "getArtistRelation"){
       $args = array();
@@ -297,7 +383,88 @@
         }else{
           $sql .= " AND works = ? ";
         }
-        array_push ($args, $relationIdentifier);
+        array_push ($args, $artistWorks);
+      }
+      $json['SQL'] = $sql;
+      try{
+        $statement = $conn->prepare($sql);
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $statement->execute($args);
+        $result = $statement->fetchAll();
+      }catch (Exception $e) {
+        $json['Exception'] =  $e->getMessage();
+      }
+      foreach($result as $row1 ) {
+          $json['artist_relation'][] = $row1;
+      }
+  } else if ($action == "getArtistWithGroupedRelations"){
+      $args = array();
+      $sql = "SELECT artist_profile_id_1,artist_profile_id_2,artist_name_1,artist_email_id_1,artist_name_2,artist_email_id_2,artist_website_2, GROUP_CONCAT(artist_relation)
+              as artist_relation FROM artist_relation
+              GROUP BY artist_profile_id_1,artist_profile_id_2";
+      $first = true;
+  if (!IsNullOrEmpty($artistProfileId1)){
+        if ($first) {
+          $sql .= " HAVING artist_profile_id_1 = ? ";
+          $first = false;
+        }else{
+          $sql .= " AND artist_profile_id_1 = ? ";
+        }
+        array_push ($args, $artistProfileId1);
+      }
+  if (!IsNullOrEmpty($artistProfileId2)){
+        if ($first) {
+          $sql .= " HAVING artist_profile_id_2 = ? ";
+          $first = false;
+        }else{
+          $sql .= " AND artist_profile_id_2 = ? ";
+        }
+        array_push ($args, $artistProfileId2);
+      }
+  if (!IsNullOrEmpty($artistName1)){
+        if ($first) {
+          $sql .= " HAVING artist_name_1 = ? ";
+          $first = false;
+        }else{
+          $sql .= " AND artist_name_1 = ? ";
+        }
+        array_push ($args, $artistName1);
+      }
+  if (!IsNullOrEmpty($artistEmailId1)){
+        if ($first) {
+          $sql .= " HAVING artist_email_id_1 = ? ";
+          $first = false;
+        }else{
+          $sql .= " AND artist_email_id_1 = ? ";
+        }
+        array_push ($args, $artistEmailId1);
+      }
+  if (!IsNullOrEmpty($artistName2)){
+        if ($first) {
+          $sql .= " HAVING artist_name_2 = ? ";
+          $first = false;
+        }else{
+          $sql .= " AND artist_name_2 = ? ";
+        }
+        array_push ($args, $artistName2);
+      }
+  if (!IsNullOrEmpty($artistEmailId2)){
+        if ($first) {
+          $sql .= " HAVING artist_email_id_2 = ? ";
+          $first = false;
+        }else{
+          $sql .= " AND artist_email_id_2 = ? ";
+        }
+        array_push ($args, $artistEmailId2);
+      }
+  if (!IsNullOrEmpty($artistWebsite2)){
+        if ($first) {
+          $sql .= " HAVING artist_website_2 = ? ";
+          $first = false;
+        }else{
+          $sql .= " AND artist_website_2 = ? ";
+        }
+        array_push ($args, $artistWebsite2);
       }
       $json['SQL'] = $sql;
       try{
