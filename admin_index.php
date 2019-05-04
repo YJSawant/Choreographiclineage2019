@@ -1,6 +1,6 @@
 <?php
-	include 'admin_menu.php';
 	include 'util.php';
+	include 'admin_menu.php';
 	my_session_start();
 ?>
 		<div class="row">
@@ -60,20 +60,20 @@
 		</div>
 
 <script>
-var acc = document.getElementsByClassName("accordion");
-var i;
+// var acc = document.getElementsByClassName("accordion");
+// var i;
 
-for (i = 0; i < acc.length; i++) {
-    acc[i].onclick = function(){
-        this.classList.toggle("active");
-        var panel = this.nextElementSibling;
-        if (panel.style.display === "block") {
-            panel.style.display = "none";
-        } else {
-            panel.style.display = "block";
-        }
-    }
-}
+// for (i = 0; i < acc.length; i++) {
+//     acc[i].onclick = function(){
+//         this.classList.toggle("active");
+//         var panel = this.nextElementSibling;
+//         if (panel.style.display === "block") {
+//             panel.style.display = "none";
+//         } else {
+//             panel.style.display = "block";
+//         }
+//     }
+// }
 </script>
 <?php
 	include 'footer.php';
