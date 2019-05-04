@@ -7,7 +7,7 @@
 	}else{
 	include 'menu.php';
 	}
-	echo (($_POST["gender"]));
+	// echo (($_POST["gender"]));
 	if(isset($_POST["gender"]) && !empty($_POST["gender"])){
 			$_SESSION["gender"] = $_POST["gender"];
 			echo($_SESSION["gender"]);
@@ -18,7 +18,7 @@
 		}
 
 		if (isset($_POST["date_of_birth"]) && !empty($_POST["date_of_birth"])){
-			$_SESSION["date_of_birth"] = $_POST["date_of_birth"];	
+			$_SESSION["date_of_birth"] = $_POST["date_of_birth"];
 		}
 
 		if(isset($_POST["ethnicity"]) && !empty($_POST["ethnicity"])){
@@ -29,65 +29,65 @@
 		if(isset($_POST["ethnicity_other"]) && !empty($_POST["ethnicity_other"])){
 			$_SESSION["ethnicity_other"] = $_POST["ethnicity_other"];
 
-			
+
 		}
 
 		if(isset($_POST["city_residence"]) && !empty($_POST["city_residence"])){
 			$_SESSION["city_residence"] = $_POST["city_residence"];
 			echo($_SESSION["city_residence"]);
-			
+
 		}
 
 		if(isset($_POST["country_residence"]) && !empty($_POST["country_residence"])){
 			$_SESSION["country_residence"] = $_POST["country_residence"];
-		
+
 		}
 
 		if(isset($_POST["state_residence"]) && !empty($_POST["state_residence"])){
 			$_SESSION["state_residence"] = $_POST["state_residence"];
-			
+
 		}
 
 		if(isset($_POST["state_province"]) && !empty($_POST["state_province"])){
 			$_SESSION["state_province"] = $_POST["state_province"];
-			
+
 		}
 
 		if(isset($_POST["country_birth"]) && !empty($_POST["country_birth"])){
 			$_SESSION["country_birth"] = $_POST["country_birth"];
-			
+
 		}
 
 		if(isset($_POST["university"]) && !empty($_POST["university"])){
 			$_SESSION["university"] = $_POST["university"];
-			
+
 		}
 
 		if(isset($_POST["major"]) && !empty($_POST["major"])){
 			$_SESSION["major"] = $_POST["major"];
-			
+
 		}
 
 		if(isset($_POST["degree"]) && !empty($_POST["degree"])){
 			$_SESSION["degree"] = $_POST["degree"];
-			
+
 		}
 
 		if(isset($_POST["institution_name"]) && !empty($_POST["institution_name"])){
 			$_SESSION["institution_name"] = $_POST["institution_name"];
-			
+
 		}
 
 		if(isset($_POST["other_degree"]) && !empty($_POST["other_degree"])){
 			$_SESSION["other_degree"] = $_POST["other_degree"];
-		
+
 		}
 		if(isset($_POST["biography_text"])) {
 			echo ("INN IFFFF ");
 			$_SESSION["biography_text"] = $_POST["biography_text"];
 			echo ($_SESSION["biography_text"]);
 		}
-		
+
 
 
 	if(isset($_POST["artist_first_name"]) && !empty($_POST["artist_first_name"])){

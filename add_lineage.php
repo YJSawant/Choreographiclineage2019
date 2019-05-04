@@ -386,7 +386,6 @@ $user_email=$_SESSION["user_email_address"]
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link href="css/fSelect2.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
 <script src="js/fSelect.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
@@ -838,35 +837,28 @@ $(document).ready(function(){
       });
 
 
-      $('#accept').click(function(){
-              $( "#dialog-1" ).dialog( "close" );
-              document.getElementById("terms").checked = true;
+
+});
+$('#accept').click(function(){
+        $( "#dialog-1" ).dialog( "close" );
+        document.getElementById("terms").checked = true;
+});
+
+function readTermsConditions(){
+      $( "#dialog-1" ).dialog({
+        width: 600
       });
+    $( "#dialog-1" ).dialog( "open" );
+    console.log("ok")
+}
 
-      function readTermsConditions(){
-            $( "#dialog-1" ).dialog({
-              width: 600
-            })
-          $( "#dialog-1" ).dialog( "open" );
-      }
+$("#previous").click(function() {
+    if(disabled_input){
+        window.open("add_artist_biography.php","_self");
+    }else{
 
-      $("#previous").click(function() {
-          if(disabled_input){
-              window.open("add_artist_biography.php","_self");
-          }else{
-
-              $.ajax({
-                  type: "POST",
-                  url: "save_add_artist_pi_back.php",
-                  data: $("#add_user_profile_form").serialize(),
-                  success: function(response) {
-                      console.log(response);
-                  }
-              });
-               // <?php unset($_SESSION['lineage_artist_first_name']);?>
-              window.open("about_lineage.php","_self");
-          }
-      });
+        window.open("about_lineage.php","_self");
+    }
 });
 </script>
 </html>
