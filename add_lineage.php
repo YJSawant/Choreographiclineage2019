@@ -102,7 +102,7 @@ $user_email=$_SESSION["user_email_address"]
       </i>
     </p>
   </div>
-  <form id="add_user_profile_form" name="add_user_profile_form" method="POST" action="thank_you.php"
+  <form id="add_user_profile_form" name="add_user_profile_form" method="POST" action="thank_you_contribution.php"
   enctype="multipart/form-data">
   <div class="row artist_lineage_container" id="artist_lineage_container" style="margin-bottom:2%">
               <div class="medium-12 column">
@@ -340,6 +340,10 @@ $user_email=$_SESSION["user_email_address"]
                                         <span>Back to Profile</span>
                                     </button>
                                     &nbsp;
+                                    <button class="primary button" type="button" name="next1" id="next1">
+                                        <span>Save and come back later</span>
+                                    </button>
+                                    &nbsp;
                                     <button class="primary button" type="submit" name="save" id="save">
                                         <span>Save and Contribute Lineage</span>
                                     </button>
@@ -349,6 +353,10 @@ $user_email=$_SESSION["user_email_address"]
                                 <div class="large-10">
                                     <button class="primary button " type="button" name="previous" id="previous">
                                         <span>Previous</span>
+                                    </button>
+                                     &nbsp;
+                                    <button class="primary button" type="submit" name="next1" id="next1">
+                                        <span>Save and come back later</span>
                                     </button>
                                     &nbsp;
                                     <button class="primary button" type="submit" name="next" id="next">
@@ -360,6 +368,10 @@ $user_email=$_SESSION["user_email_address"]
                                 <div class="large-10">
                                     <button class="primary button" type="button" name="previous" id="previous">
                                         <span>Previous</span>
+                                    </button>
+                                      &nbsp;
+                                    <button class="primary button" type="button" name="next1" id="next1">
+                                        <span>Save and come back later</span>
                                     </button>
                                     &nbsp;
                                     <button class="primary button" type="submit" name="save" id="save">
@@ -859,6 +871,12 @@ $("#previous").click(function() {
 
         window.open("about_lineage.php","_self");
     }
+});
+
+$("#next1").click(function() {
+    
+        window.open("profiles.php","_self");
+
 });
 
 $(function() {
