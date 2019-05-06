@@ -232,7 +232,7 @@
           }
 
           totalNodes.push(nodeDetails);
-          console.log(totalNodes);
+         // console.log(totalNodes);
       }
 
       //console.log(totalNodes);

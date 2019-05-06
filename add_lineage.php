@@ -84,7 +84,7 @@ $user_email=$_SESSION["user_email_address"]
 
 <body onload="getData()">
     <div class="row">
-			<ul class="progressbar">
+		  <ul class="progressbar">
           <li class="active"id="first"><a href="add_artist_profile.php">Add Artist Profile</a></li>
           <li class="active" id="second"><a href="add_artist_personal_information.php">Add Artist Personal Info</a></li>
           <li class="active" id="third"><a href="add_artist_biography.php">Add Artist Biography</a></li>
@@ -92,10 +92,9 @@ $user_email=$_SESSION["user_email_address"]
      </ul>
 		</div>
     <div class="row">
-      <div class="large-2 columns large-offset-4">
-          <h4><strong><center><?php echo ("Enter Your Lineage"); ?></center></strong></h4>
-      </div>
-  </div>
+          <h4 style="display:inline;  align:center"><strong>ENTER YOUR LINEAGE</strong></h4>
+          <h5 style="display:inline; float: right; color: #006400;"><?php echo "<strong>(You are in ".$_SESSION['timeline_flow']." mode)</strong>";?></h5>
+    </div>
   <div class="medium-9 row">
     <p>
       <i>
@@ -112,13 +111,6 @@ $user_email=$_SESSION["user_email_address"]
                           <div class="row">
                               <div class="small-3 column">
                                   <p class="lineal_header"><strong>Details of Lineal Artist</strong></p>
-                              </div>
-                              <div class="row artist_button">
-                                <div class="large-offset-10">
-                                  <button class="secondary success button " id="clearform" type="button" onclick="clearFormEvent()">
-                                    <span>Clear Form</span>
-                                  </button>
-                                </div>
                               </div>
                           </div>
                           <div class="row">
@@ -271,11 +263,11 @@ $user_email=$_SESSION["user_email_address"]
                           <br>
                           <div class="row">
                              <div class="small-3 column">
-                               <input type="checkbox" id="studied" name="studied" class="rel_studied" value="Studied With">
+                               <input type="checkbox" id="studied" name="studied" class="rel_studied" value="Studied Under">
                                <label for="studied">Studied Under</label><span style="cursor:pointer;" title="Teachers with whom you have studied."><img src="img/help.png" style="height:13px;width:13px;"/></span>
                              </div>
                              <div class="small-3 column">
-                               <input type="checkbox" id="danced" name="danced" class="rel_danced" value="Danced For">
+                               <input type="checkbox" id="danced" name="danced" class="rel_danced" value="Danced in the Work of">
                                <label for="danced">Danced in the Work of </label><span style="cursor:pointer;" title="Choreographers whose works you have danced in."><img src="img/help.png" style="height:13px;width:13px;"/></span>
                              </div>
                              <div class="small-3 column">
@@ -302,7 +294,10 @@ $user_email=$_SESSION["user_email_address"]
                                <button class="secondary success button " id="addArtist" type="button">
                                  <span>Save and Add another Artist</span>
                                </button>
-                             </div>
+                                <button class="secondary success button " id="clearform" type="button" onclick="clearFormEvent()">
+                                <span>Clear Form</span>
+                                </button>
+                              </div>
                            </div>
                            <div class="row">
                              <div class="medium-12 column">
@@ -531,7 +526,7 @@ $(document).ready(function(){
           var relation_array=relationString.split(',');
           //console.log(relation_array);
 
-          if(relation_array.includes('Danced For')){
+          if(relation_array.includes('Danced in the Work of')){
             $.ajax({
               type:"POST",
               url:'artistrelationcontroller.php',
@@ -539,7 +534,7 @@ $(document).ready(function(){
                 "action":"getArtistRelation",
                 "artistprofileid1":<?php echo $_SESSION['artist_profile_id']?>,
                 "artistprofileid2":editedrow.artist_profile_id_2,
-                "artistrelation":'Danced For'
+                "artistrelation":'Danced in the Work of'
               }),
               success:function(response){
                 console.log(<?php echo $_SESSION['artist_profile_id']?>);
@@ -596,10 +591,10 @@ $(document).ready(function(){
           $('#collaborated').prop('checked', false);
           $('#influenced').prop('checked', false);
           for (var i=0 ; i <relation_array.length; i++){
-              if(relation_array[i]=='Studied With'){
+              if(relation_array[i]=='Studied Under'){
                   $('#studied').prop('checked', true);
               }
-              else if(relation_array[i]=='Danced For'){
+              else if(relation_array[i]=='Danced in the Work of'){
                   $('#danced').prop('checked', true);
               }
               else if(relation_array[i]=='Collaborated With'){
@@ -735,13 +730,13 @@ $(document).ready(function(){
                                 selected_checkboxes.push($('#studied').val());
                               }
                               else{
-                                unselected_checkboxes.push('Studied With');
+                                unselected_checkboxes.push('Studied Under');
                               }
                               if($('#danced').is(':checked')){
                                 selected_checkboxes.push($('#danced').val());
                               }
                               else{
-                                unselected_checkboxes.push('Danced For');
+                                unselected_checkboxes.push('Danced in the Work of');
                               }if($('#collaborated').is(':checked')){
                                 selected_checkboxes.push($('#collaborated').val());
                               }
@@ -785,7 +780,7 @@ $(document).ready(function(){
                                                       "artistrelation":selected_checkboxes[i]
                                                     };
 
-                                if(selected_checkboxes[i]=='Danced For'){
+                                if(selected_checkboxes[i]=='Danced in the Work of'){
                                     console.log(works);
                                     artistRelationPayload.works=works;
                                 }
