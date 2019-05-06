@@ -859,5 +859,14 @@ $("#previous").click(function() {
         window.open("about_lineage.php","_self");
     }
 });
+
+$(function() {
+        var url = window.location.href;
+        if(url.search("add_lineage.php"))
+        {
+            var lineage_contri = document.getElementById("contri_lineage");
+            $(lineage_contri).addClass('active');
+        }
+    });
 </script>
 </html>
