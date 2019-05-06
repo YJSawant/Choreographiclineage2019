@@ -32,11 +32,6 @@ if(isset($_SESSION["user_email_address"])){
             represent the rich network of our field. You can complete your lineage over time by saving it and coming back to finish it when you are ready.</p>
     </div>
 </div>
-<div class="row">
-    <div class="column small-12">
-        <p>See the network: <a href="lineage_index.php">Click Here</a></p>
-    </div>
-</div>
 
 <form id="contribution_form" name="contribution_form" method="post" action="contribution_introduction_mediator.php" enctype="multipart/form-data">
     <div class="row">
@@ -80,6 +75,12 @@ if(isset($_SESSION["user_email_address"])){
             <!-- </fieldset> -->
     </div>
     </div>
+
+    <div class="row">
+    <div class="column small-12">
+        <p>See the network: <a href="lineage_index.php" target="_blank">Click Here</a></p>
+    </div>
+</div>
 </form>
 </body>
 <?php

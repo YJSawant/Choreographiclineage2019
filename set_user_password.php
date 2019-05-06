@@ -1,12 +1,8 @@
 <?php
 	include 'util.php';
 	my_session_start();
-	if($_SESSION["user_type"] == "Admin")
-	{
-	include 'admin_menu.php';
-	}else{
 	include 'menu.php';
-	}
+	
 	if(isset($_SESSION["forgot_user_password"])) {
 		$ButtonText = "Change Password";
 		unset($_SESSION["forgot_user_password"]);

@@ -46,8 +46,8 @@ if($_SESSION["user_type"] == "Admin")
 								<div class="small-12 column">
 									<label>Relationship (Artist 1 having Artist 2)<small> Required</small></label>
 								</div>
-								<div class="small-3 column"><input name="relation_list[]" id="1" value="Studied With" type="checkbox"><label for="1">Studied With</label></div>
-								<div class="small-3 column"><input name="relation_list[]" id="2" value="Danced For" type="checkbox"><label for="2">Danced In The Work Of</label></div>
+								<div class="small-3 column"><input name="relation_list[]" id="1" value="Studied Under" type="checkbox"><label for="1">Studied Under</label></div>
+								<div class="small-3 column"><input name="relation_list[]" id="2" value="Danced in the Work of" type="checkbox"><label for="2">Danced in the Work of</label></div>
 								<div class="small-3 column"><input name="relation_list[]" id="3" value="Collaborated With" type="checkbox"><label for="3">Collaborated With</label></div>
 								<div class="small-3 column"><input name="relation_list[]" id="4" value="Infulenced By" type="checkbox"><label for="4">Infulenced By</label></div>
 

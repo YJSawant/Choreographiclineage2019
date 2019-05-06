@@ -16,7 +16,7 @@
 				<section>
 					<h4>Contribute your Lineage</h4>
 					<p>Your thoughtful completion of the lineage survey regarding your dance background and major influences will be invaluable to the creation of this resource.
-						The completion of the Choreographic Lineage survey is voluntary and can be accessed by clicking <a href="add_user_profile.php">here.</a></p>
+						The completion of the Choreographic Lineage survey is voluntary and can be accessed by clicking <a href="add_user_profile.php" target="_blank">here.</a></p>
 				</section>
 				<section>
 					<p>For assistance using this website resource please write to <a href="mailto:choreographiclineage@gmail.com">choreographiclineage@gmail.com</a></p>

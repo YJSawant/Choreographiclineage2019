@@ -274,6 +274,7 @@ if(!isset($_SESSION['genre'])){
                                     <option value="Vietnamese">Vietnamese</option>
                                     <option value="Waacking">Waacking</option>
                                     <option value="Waltz">Waltz</option>
+                                    <option value="Yoga">Yoga</option>
                                     <option value="Zouk">Zouk</option>
                                     <option value="Zumba">Zumba</option>
                                 </select>

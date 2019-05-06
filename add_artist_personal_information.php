@@ -334,7 +334,7 @@ include 'form_links_header.php'
             <div class="medium-4 column" style="float:left !important;">
                 <label for="gender_other_text" id="gender_other_text_label">
                         Please Specify Your Gender:
-                        <input  autocomplete="off" type="text" onblur="gendervalidation()"" id="gender_other_text" name="gender_other"
+                        <input  autocomplete="off" type="text" onblur="gendervalidation()" id="gender_other_text" name="gender_other"
                         value="<?php echo isset($_SESSION['gender_other'])?$_SESSION['gender_other']:'' ?>" />
                     </label>
                     <div id="othergendervalidation" style="color:red;"></div>
@@ -420,7 +420,7 @@ include 'form_links_header.php'
             </div>
             <div class="medium-3 column">
                 <label for="ethnicity_other">
-                    <input  autocomplete="off" type="radio" id="ethnicity_other" name="ethnicity" value="Other"
+                    <input  autocomplete="off" type="radio" id="ethnicity_other" name="ethnicity" value="other"
                         <?php
                         if(isset($_SESSION["ethnicity"])){
                             echo (($_SESSION["ethnicity"]=='Other')?'checked':'');
@@ -1253,6 +1253,13 @@ include 'form_links_header.php'
             $('#othergendervalidation').html("Cannot be Empty !!");
         }
     }
+
+     function ethnicityvalidation(){
+        var ethnicity=document.getElementById("ethnicity_other_text").value;
+        if (ethnicity==""){
+            $('#otherethnicityvalidation').html("Cannot be Empty !!");
+        }
+    }
     function submit_validation(){
         if(document.querySelector('input[id="gender_other"]:checked')) {
             var txt=$("#gender_other_text").val();
@@ -1358,7 +1365,6 @@ include 'form_links_header.php'
     });
 
     $("input[name='ethnicity']").click(function(){
-        //console.log($("input[name='ethnicity']:checked").val());
         if($("input[name='ethnicity']:checked").val() == "other"){
             $("#ethnicity_other_text").val("");
             $("#ethnicity_other_text_label").show();
@@ -1506,7 +1512,7 @@ include 'form_links_header.php'
         $( "#university_name" ).autocomplete({
             source: items
         });
-        $( "#university_name" ).autocomplete( "option", "minLength", 3 );
+        $( "#university_name" ).autocomplete( "option", "minLength", 2 );
 
     });
 
