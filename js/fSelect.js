@@ -35,7 +35,7 @@
                 searchText: 'Search',
                 noResultsText: 'No results found',
                 showSearch: true,
-                optionFormatter: false
+                optionFormatter: true
             }, options);
         }
 
