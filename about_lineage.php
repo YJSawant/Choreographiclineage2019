@@ -172,15 +172,16 @@ else{
         });
 
 
-		$(function() {
-			// this will get the full URL at the address bar
-			var url = window.location.href;
-			if(url.search("about_lineage.php"))
-			{
-				var lineage_contri = document.getElementById("contri_lineage");
-				$(lineage_contri).addClass('active');
-			}
-		}); 
+		$(window).bind("load", function() {
+        var activeElements= document.querySelectorAll(".active");
+        activeElements[0].classList.remove('active');
+        var url = window.location.href;
+            if(url.search("about_lineage.php"))
+            {
+                var phone_appointment = document.getElementById("contri_lineage");
+                $(phone_appointment).addClass('active');
+            }
+        }); 
 
 		$("#previous").click(function() {
 		// onclick event is assigned to the #button element.

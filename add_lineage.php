@@ -879,13 +879,15 @@ $("#next1").click(function() {
 
 });
 
-$(function() {
+$(window).bind("load", function() {
+        var activeElements= document.querySelectorAll(".active");
+        activeElements[0].classList.remove('active');
         var url = window.location.href;
-        if(url.search("add_lineage.php"))
-        {
-            var lineage_contri = document.getElementById("contri_lineage");
-            $(lineage_contri).addClass('active');
-        }
-    });
+            if(url.search("add_lineage.php"))
+            {
+                var phone_appointment = document.getElementById("contri_lineage");
+                $(phone_appointment).addClass('active');
+            }
+        }); 
 </script>
 </html>
