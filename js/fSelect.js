@@ -32,7 +32,7 @@
                 placeholder: 'Select Genres',
                 numDisplayed: 4,
                 overflowText: '{n} selected',
-                searchText: 'Search',
+                searchText: 'Search(Remove and Enter)',
                 noResultsText: 'No results found',
                 showSearch: true,
                 optionFormatter: false
