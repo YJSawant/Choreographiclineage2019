@@ -636,15 +636,16 @@ if(isset($_SESSION['timeline_flow']) &&  $_SESSION['timeline_flow'] == "edit" ) 
 <script type="text/javascript">
 
 	$(document).ready(function (e) {
-
-		$(function() {
-			var url = window.location.href;
-			if(url.search("add_artist_biography.php"))
-			{
-				var lineage_contri = document.getElementById("contri_lineage");
-				$(lineage_contri).addClass('active');
-			}
-		}); 
+		$(window).bind("load", function() {
+        var activeElements= document.querySelectorAll(".active");
+        activeElements[0].classList.remove('active');
+        var url = window.location.href;
+            if(url.search("add_artist_biography.php"))
+            {
+                var phone_appointment = document.getElementById("contri_lineage");
+                $(phone_appointment).addClass('active');
+            }
+        });
 
 
 		$("#upload_bigraphy_text").on('submit',(function(e) {

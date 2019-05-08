@@ -91,7 +91,7 @@ if($_SESSION["user_type"] == "Admin")
 				</div>
 				<div id="search_text">
 				</div>
-				<div id="my_network" class="small-12 medium-12 large-14 columns">
+				<div id="my_network">
 				</div>
 				<div hidden id="mySidenav" class="sidenav">
 				<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>

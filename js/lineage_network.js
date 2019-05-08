@@ -302,6 +302,7 @@
           tooltipDelay: 0 // time delay in displaying tooltip on hovering over a node
         },
         physics: {
+          "enabled": true,
           stabilization: {
             iterations: 200, // maximum number of iteration to stabilize
             updateInterval: 10, // defines how many iterations the stabilizationProgress event is triggered
@@ -310,7 +311,7 @@
           },
           barnesHut: {
             gravitationalConstant: -30000, // setting repulsion (negative value) between the nodes
-            centralGravity: 0.2,
+            centralGravity: 0.5,
             avoidOverlap: 5 // pulls entire network to the center
           }
         }
@@ -653,6 +654,7 @@
           var searched_node_id = $("#searchbox_node_id").val();
           var search_text = $("#searchTextValue").val();
           inquiry_text.style.visibility="visible";
+          //console.log(searched_node_id);
           if(!searched_node_id)
           {
             $('#search_text').html('&nbsp&nbsp'+"No Results Found. Please change your search criteria.");
@@ -661,10 +663,10 @@
             network.focus(
               searched_node_id, // which node to focus on
               {
-                scale: 0.6, // level of zoom while focussing on node
+                scale: 0.8, // level of zoom while focussing on node
                 animation: {
                   duration: 1000, // animation duration in milliseconds (Number)
-                  easingFunction: "easeInOutQuart" // type of animation while focussing
+                  easingFunction: "easeInQuad" // type of animation while focussing
                 }
               });
             }

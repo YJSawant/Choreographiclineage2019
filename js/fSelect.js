@@ -30,12 +30,12 @@
         else {
             var settings = $.extend({
                 placeholder: 'Select Genres',
-                numDisplayed: 3,
+                numDisplayed: 4,
                 overflowText: '{n} selected',
                 searchText: 'Search',
                 noResultsText: 'No results found',
                 showSearch: true,
-                optionFormatter: true
+                optionFormatter: false
             }, options);
         }
 
@@ -113,7 +113,6 @@
                         var val = $el.prop('value');
                         var classes = $el.attr('class');
                         classes = ('undefined' !== typeof classes) ? ' ' + classes : '';
-
                         // exclude the first option in multi-select mode
                         if (0 < $this.idx || '' != val || ! $this.settings.multiple) {
                             var disabled = $el.is(':disabled') ? ' disabled' : '';

@@ -20,7 +20,6 @@ else{
 <html>
 <head>
 	<title>Personal Information</title>
-
 </head>
 
 <body>
@@ -69,11 +68,11 @@ else{
 		});
 	});
 	$("#previous").click(function(){
-		window.location.href = "/src/about_lineage.php";
+		window.location.href = "about_lineage.php";
 	});
 
 	$("#next").click(function(){
-		window.location.href = "/src/add_lineage.php";
+		window.location.href = "add_lineage.php";
 	});
 </script>
 <?php

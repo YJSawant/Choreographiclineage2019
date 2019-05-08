@@ -1320,15 +1320,17 @@ include 'form_links_header.php'
                 document.getElementById('date_message').style.display="none";
               }
     } 
-    $(function() {
-        // this will get the full URL at the address bar
+
+    $(window).bind("load", function() {
+        var activeElements= document.querySelectorAll(".active");
+        activeElements[0].classList.remove('active');
         var url = window.location.href;
-        if(url.search("add_artist_personal_information.php"))
-        {
-            var lineage_contri = document.getElementById("contri_lineage");
-            $(lineage_contri).addClass('active');
-        }
-    }); 
+            if(url.search("add_artist_personal_information.php"))
+            {
+                var phone_appointment = document.getElementById("contri_lineage");
+                $(phone_appointment).addClass('active');
+            }
+        }); 
 
     var items = [];
     var noOfEducation=$(".education_entries").length;

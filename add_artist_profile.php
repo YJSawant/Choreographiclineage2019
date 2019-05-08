@@ -107,7 +107,7 @@ if(!isset($_SESSION['genre'])){
            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
            <link href="css/fSelect.css" rel="stylesheet">
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
             <script src="js/fSelect.js"></script>
            <style>
            ul{
@@ -163,7 +163,7 @@ if(!isset($_SESSION['genre'])){
                             </div>
                             <div id = "newGenreDiv" class="small-3 column">
                             <label for="Genre">Genre</span>
-                                <select id="genreList" name = 'genre[]' class="multi-select-dd small-3 column" multiple="multiple">
+                                <select id="genreList" name = 'genre[]' class="multi-select-dd" multiple="multiple">
                                     <option value="Acro">Acro</option>
                                     <option value="Aduma">Aduma (Kenya)</option>
                                     <option value="Aerial">Aerial</option>
@@ -660,7 +660,6 @@ if(!isset($_SESSION['genre'])){
                 }
                 }
                 $('.multi-select-dd').fSelect();
-                //console.log($('#newGenreDiv').next('.div'));
                 $('#newGenreDiv').addClass("disabledbutton");
             }
 

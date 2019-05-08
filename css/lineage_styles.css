@@ -1,6 +1,6 @@
 #my_network {
 	background-color: #ffffff;
-	height: 100%;
+	height: 70%;
 	margin-right: 0;
 	padding-right: 0;
 	padding-left: 0;
@@ -29,7 +29,7 @@
 }
 
 #network_display_div {
-	height: 100%;
+	height: 70%;
 	position: relative;
 	margin-right: 0;
 	padding-right: 0;
@@ -76,14 +76,14 @@ div.tab button.active {
 
 #network_row {
 	background-color: #ffffff;
-	height: 100%;
+	height: 70%;
     margin-left: auto;
     margin-right: auto;
     position: relative;
 }
 
 #network_div {
-	height: 125%;
+	height: 70%;
 }
 
 #filter_div {

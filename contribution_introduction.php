@@ -88,14 +88,16 @@ include 'footer.php';
 ?>
 
 <script>
-    $(function() {
+    $(window).bind("load", function() {
+        var activeElements= document.querySelectorAll(".active");
+        activeElements[0].classList.remove('active');
         var url = window.location.href;
-        if(url.search("contribution_introduction.php"))
-        {
-            var lineage_contri = document.getElementById("contri_lineage");
-            $(lineage_contri).addClass('active');
-        }
-    });
+            if(url.search("contribution_introduction.php"))
+            {
+                var phone_appointment = document.getElementById("contri_lineage");
+                $(phone_appointment).addClass('active');
+            }
+        }); 
 </script>
 
 </html>
