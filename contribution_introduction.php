@@ -89,8 +89,6 @@ include 'footer.php';
 
 <script>
     $(window).bind("load", function() {
-        var activeElements= document.querySelectorAll(".active");
-        activeElements[0].classList.remove('active');
         var url = window.location.href;
             if(url.search("contribution_introduction.php"))
             {

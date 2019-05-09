@@ -830,22 +830,7 @@ include 'footer.php';
  pointer-events: none;
  }
 </style>
-
-
 <script>
-    $(window).bind("load", function() {
-        var activeElements= document.querySelectorAll(".active");
-        activeElements[0].classList.remove('active');
-        var url = window.location.href;
-            if(url.search("add_artist_profile.php"))
-            {
-                var phone_appointment = document.getElementById("contri_lineage");
-                $(phone_appointment).addClass('active');
-            }
-        }); 
-</script>
-<script>
- $(document).ready(function(){
       $('#artist_first_name').keyup(function(){
            var query = $(this).val();
            if(query != '')
@@ -862,11 +847,11 @@ include 'footer.php';
                 });
            }
       });
+
       $(document).on('click', 'li', function(){
            $('#firstnamelist').fadeOut();
       });
- });
- $(document).ready(function(){
+
     $("#artist_last_name").blur(function(){
         var lname=$(this).val();
         var fname=$("#artist_first_name").val();
@@ -884,9 +869,24 @@ include 'footer.php';
                 }
             });
         }
-    })
- });
+    });
+
+$(window).bind("load", function() {
+   var activeElements= document.querySelectorAll(".active");
+    activeElements[0].classList.remove('active');
+    var url = window.location.href;
+        if(url.search("add_artist_profile.php"))
+        {
+            var phone_appointment = document.getElementById("contri_lineage");
+            $(phone_appointment).addClass('active');
+        }
+});
+
+// $('#home').load(function() {
+//     var activeElements= document.querySelectorAll(".active");
+//     console.log(activeElements);
+// });
+
 
 </script>
-
 </html>

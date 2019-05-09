@@ -25,7 +25,7 @@
 	</header>
 	<nav class="row column menu-centered" id="navbar">
 		<ul class="vertical medium-horizontal menu">
-			<li><a href="admin_index.php" id="admin_home">Home</a></li>
+			<li><a href="admin_index.php" id="home">Home</a></li>
 			<li><a href="add_user_profile.php" id="contri_lineage">Contribute Your Lineage</a></li>
 			<li><a href="lineage_index.php">Explore the Network</a></li>
 			<li><a href="phone_appointment_list.php" id="phone_appointment">See Phone Appointments</a></li>

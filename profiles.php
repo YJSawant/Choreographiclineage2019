@@ -154,18 +154,14 @@ if($_SESSION["user_type"] == "Admin")
 	</script>
 
 <script>
-	$(document).ready(function(){
-    $(function() {
+$(window).bind("load", function() {
         var url = window.location.href;
-        if(url.search("profiles.php"))
-        {
-			var newhome = document.getElementById("admin_home");
-			newhome.classList.remove('active');
-            var lineage_contri = document.getElementById("contri_lineage");
-			$(lineage_contri).addClass('active');
-        }
-	});
-});
+            if(url.search("profiles.php"))
+            {
+                var phone_appointment = document.getElementById("contri_lineage");
+                $(phone_appointment).addClass('active');
+            }
+        }); 
 </script>
 
 </html>

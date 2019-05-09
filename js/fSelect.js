@@ -32,7 +32,7 @@
                 placeholder: 'Select Genres',
                 numDisplayed: 4,
                 overflowText: '{n} selected',
-                searchText: 'Search(Remove and Enter)',
+                searchText: 'Search',
                 noResultsText: 'No results found',
                 showSearch: true,
                 optionFormatter: false
@@ -65,7 +65,7 @@
                 var choices_html = this.buildOptions(this.$select);
 
                 if (this.settings.showSearch) {
-                    search_html = '<div class="fs-search"><input type="search" placeholder="' + this.settings.searchText + '" /></div>';
+                    search_html = '<div class="fs-search"><input type="search" placeholder="Search"/></div >';
                 }
                 if ('' !== this.settings.noResultsText) {
                     no_results_html = '<div class="fs-no-results hidden">' + this.settings.noResultsText + '</div>';
