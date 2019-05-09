@@ -36,9 +36,12 @@
           response = JSON.stringify(response);
           artistNames = $.parseJSON(response);
           finalNames = artistNames.artist_name;
-          for(var i=0; i <finalNames.length; i++) {
-            fullName= finalNames[i].artist_first_name + " " +finalNames[i].artist_last_name;
-            artist_names.push({label: fullName, node_id: finalNames[i].artist_profile_id, image: finalNames[i].artist_photo_path});
+          if(finalNames)
+          {
+              for(var i=0; i <finalNames.length; i++) {
+              fullName= finalNames[i].artist_first_name + " " +finalNames[i].artist_last_name;
+              artist_names.push({label: fullName, node_id: finalNames[i].artist_profile_id, image: finalNames[i].artist_photo_path});
+            }
           }
         },
         error:function(response) {
@@ -54,8 +57,11 @@
           response = JSON.stringify(response);
           universityNames = $.parseJSON(response);
           finalUniversity = universityNames.university;
-          for(var i=0; i <finalUniversity.length; i++) {
-            university_names.push({label: finalUniversity[i].institution_name});
+          if(finalUniversity)
+          {
+            for(var i=0; i <finalUniversity.length; i++) {
+              university_names.push({label: finalUniversity[i].institution_name});
+            }
           }
         },
         error:function(response) {
@@ -71,8 +77,11 @@
           response = JSON.stringify(response);
           stateNames = $.parseJSON(response);
           finalStates = stateNames.state_names;
-          for(var i=0; i <finalStates.length; i++) {
-            state_names.push({label: finalStates[i].artist_residence_state});
+          if(finalStates)
+          {
+            for(var i=0; i <finalStates.length; i++) {
+              state_names.push({label: finalStates[i].artist_residence_state});
+            }
           }
         },
         error:function(response) {
@@ -88,8 +97,11 @@
           response = JSON.stringify(response);
           countryNames = $.parseJSON(response);
           finalCountry = countryNames.country_names;
-          for(var i=0; i <finalCountry.length; i++) {
-            country_names.push({label: finalCountry[i].artist_residence_country});
+          if(finalCountry)
+          {
+            for(var i=0; i <finalCountry.length; i++) {
+              country_names.push({label: finalCountry[i].artist_residence_country});
+            }
           }
         },
         error:function(response) {
@@ -105,8 +117,11 @@
           response = JSON.stringify(response);
           majorNames = $.parseJSON(response);
           finalMajor = majorNames.major_names;
-          for(var i=0; i <finalMajor.length; i++) {
-            major_names.push({label: finalMajor[i].major});
+          if(finalMajor)
+          {
+            for(var i=0; i <finalMajor.length; i++) {
+              major_names.push({label: finalMajor[i].major});
+            }
           }
         },
         error:function(response) {
@@ -122,8 +137,11 @@
           response = JSON.stringify(response);
           degreeNames = $.parseJSON(response);
           finalDegree = degreeNames.degree_names;
-          for(var i=0; i <finalDegree.length; i++) {
-            degree_names.push({label: finalDegree[i].degree});
+          if(finalDegree)
+          {
+            for(var i=0; i <finalDegree.length; i++) {
+              degree_names.push({label: finalDegree[i].degree});
+            }
           }
         },
         error:function(response) {
@@ -139,8 +157,11 @@
           response = JSON.stringify(response);
           ethnicityNames = $.parseJSON(response);
           finalEthnicity = ethnicityNames.ethnicity_names;
-          for(var i=0; i <finalEthnicity.length; i++) {
-            ethnicity_names.push({label: finalEthnicity[i].artist_ethnicity});
+          if(finalEthnicity)
+          {
+            for(var i=0; i <finalEthnicity.length; i++) {
+              ethnicity_names.push({label: finalEthnicity[i].artist_ethnicity});
+            }
           }
         },
         error:function(response) {
@@ -148,7 +169,8 @@
         }
       });
 
-      for (var i = 0; i<allNodes.length; i++){
+      if(allNodes){
+        for (var i = 0; i<allNodes.length; i++){
           var nodeDetails= {};
           nodeDetails['id']=allNodes[i].artist_profile_id;
           nodeDetails['title']=allNodes[i].artist_first_name+" "+allNodes[i].artist_last_name;
@@ -234,22 +256,27 @@
           totalNodes.push(nodeDetails);
          // console.log(totalNodes);
       }
+      }
 
       //console.log(totalNodes);
-      for(var i=0; i <allNodes.length; i++) {
-        var artistRelation= allNodes[i].artist_relation;
-        if(artistRelation){
-          for (var j = 0; j<artistRelation.length; j++){
-            var edgeDetails= {};
-            edgeDetails['id']=artistRelation[j].relation_id;
-            edgeDetails['to']=artistRelation[j].artist_profile_id_1;
-            edgeDetails['from']= artistRelation[j].artist_profile_id_2;
-            edgeDetails['width']="0";
-            edgeDetails['label']= artistRelation[j].artist_relation;
-            totalEdges.push(edgeDetails);
+      if(allNodes)
+      {
+        for(var i=0; i <allNodes.length; i++) {
+          var artistRelation= allNodes[i].artist_relation;
+          if(artistRelation){
+            for (var j = 0; j<artistRelation.length; j++){
+              var edgeDetails= {};
+              edgeDetails['id']=artistRelation[j].relation_id;
+              edgeDetails['to']=artistRelation[j].artist_profile_id_1;
+              edgeDetails['from']= artistRelation[j].artist_profile_id_2;
+              edgeDetails['width']="0";
+              edgeDetails['label']= artistRelation[j].artist_relation;
+              totalEdges.push(edgeDetails);
+            }
           }
         }
       }
+      
       // store the nodes and edges in corresponding vis js objects
       nodes = new vis.DataSet(totalNodes);
       edges = new vis.DataSet(totalEdges);
