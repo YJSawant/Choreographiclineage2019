@@ -682,7 +682,7 @@ $(document).ready(function(){
                                 "artistlastname":lname,
                                 "artistemailaddress":mail,
                                 "profilename":mail,
-                                "isuserartist":"other",
+                                "isuserartist":"artist",
                                 "artistwebsite":website,
                                 "newgenre":glist
                               };
