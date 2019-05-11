@@ -657,7 +657,7 @@ $(document).ready(function(){
                 glist=glist+','+g.options[i].value;
             }
           }
-          glist=glist.substr(1,glist.length);
+          glist=glist.substr(0,glist.length);
 
 
           if (fname == ""){
