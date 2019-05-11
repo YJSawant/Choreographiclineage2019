@@ -26,8 +26,8 @@ if(isset($_SESSION["user_email_address"])){
         echo "<script>var disabled_input=false;</script>";
     }
 
-    foreach ($_SESSION as $key=>$val)
-    echo $key." ".$val."<br/>";
+    // foreach ($_SESSION as $key=>$val)
+    // echo $key." ".$val."<br/>";
 }
 if(isset($_SESSION["contribution_type"])) {
     $contribution_form_type = $_SESSION["contribution_type"];

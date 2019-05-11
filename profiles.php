@@ -8,9 +8,6 @@ if($_SESSION["user_type"] == "Admin")
 	include 'menu.php';
 }
 
-    foreach ($_SESSION as $key=>$val)
-    echo $key." ".$val."<br/>";
-
 	if(isset($_SESSION["user_email_address"])) {
 
         $user_email_address = $_SESSION["user_email_address"];
@@ -35,9 +32,6 @@ if($_SESSION["user_type"] == "Admin")
         $location = "add_user_profile.php";
         echo("<script>location.href='$location'</script>");
     }
-
-	// foreach ($_SESSION as $key=>$val)
-    // echo $key." ".$val."<br/>";
 
 ?>
 
