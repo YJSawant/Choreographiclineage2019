@@ -93,12 +93,21 @@ if(isset($_SESSION["user_email_address"]) && $_SESSION["timeline_flow"] != "view
                     or die('Error querying database.: ' . mysqli_error());
                     $resultant = mysqli_fetch_array($result1);
 
-                    $query2 = "SELECT artist_profile_id FROM artist_profile
-                    WHERE artist_first_name= '$fname' AND artist_last_name= '$newlastname'
-                    AND artist_email_address= '$newemail'";
-                    $result2 = mysqli_query($dbc,$query2)
-                    or die('Error querying database.: ' . mysqli_error());
-                    $resultant2 = mysqli_fetch_array($result2);
+                    // if(isset($_SESSION["artist_email_address"]) && !empty($_SESSION["artist_email_address"])){
+                    //     $query2 = "SELECT artist_profile_id FROM artist_profile
+                    //     WHERE artist_first_name= '$fname' AND artist_last_name= '$newlastname'
+                    //     AND artist_email_address= '$newemail'";
+                    //     $result2 = mysqli_query($dbc,$query2)
+                    //     or die('Error querying database.: ' . mysqli_error());
+                    //     $resultant2 = mysqli_fetch_array($result2);
+                    // } else{
+                        $query2 = "SELECT artist_profile_id FROM artist_profile
+                        WHERE artist_first_name= '$fname' AND artist_last_name= '$newlastname'";
+                        $result2 = mysqli_query($dbc,$query2)
+                        or die('Error querying database.: ' . mysqli_error());
+                        $resultant2 = mysqli_fetch_array($result2);
+                    // }
+                   
 
                     $_SESSION["artist_profile_id"] = $resultant2["artist_profile_id"];
                     
