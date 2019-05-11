@@ -681,7 +681,6 @@ $(document).ready(function(){
                                 "artistfirstname":fname,
                                 "artistlastname":lname,
                                 "artistemailaddress":mail,
-                                "profilename":mail,
                                 "isuserartist":"other",
                                 "artistwebsite":website,
                                 "newgenre":glist

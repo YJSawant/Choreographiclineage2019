@@ -13,6 +13,9 @@ if(isset($_SESSION["user_email_address"])){
     echo("<script>location.href='$location'</script>");
 }
 
+foreach ($_SESSION as $key=>$val)
+    echo $key." ".$val."<br/>";
+
 ?>
 
 <html>

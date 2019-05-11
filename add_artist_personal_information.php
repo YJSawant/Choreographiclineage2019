@@ -58,7 +58,6 @@ if($_SESSION["user_type"] == "Admin")
 	include 'menu.php';
 }
 
-
 if(isset($_SESSION["user_email_address"]) && $_SESSION["timeline_flow"] != "view"){
     $is_artist = "";
     $first_name = "";
@@ -85,6 +84,8 @@ if(isset($_SESSION["user_email_address"]) && $_SESSION["timeline_flow"] != "view
          include 'connection_open.php';
 
                     $fname=$_SESSION["artist_first_name"];
+                    $newlastname=$_SESSION["artist_last_name"];
+                    $newemail=$_SESSION["artist_email_address"];
                     $query1 = "SELECT STATUS FROM artist_profile
                     WHERE artist_first_name= '$fname'";
 
@@ -92,6 +93,15 @@ if(isset($_SESSION["user_email_address"]) && $_SESSION["timeline_flow"] != "view
                     or die('Error querying database.: ' . mysqli_error());
                     $resultant = mysqli_fetch_array($result1);
 
+                    $query2 = "SELECT artist_profile_id FROM artist_profile
+                    WHERE artist_first_name= '$fname' AND artist_last_name= '$newlastname'
+                    AND artist_email_address= '$newemail'";
+                    $result2 = mysqli_query($dbc,$query2)
+                    or die('Error querying database.: ' . mysqli_error());
+                    $resultant2 = mysqli_fetch_array($result2);
+
+                    $_SESSION["artist_profile_id"] = $resultant2["artist_profile_id"];
+                    
                     $max=0;
                     if($resultant['STATUS']>25){
                         $max=$resultant['STATUS'];
