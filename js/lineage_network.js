@@ -582,7 +582,7 @@
               edges_to_update.push(curr_edge);
             }else if(this.id === "danced_for_tab")
             {
-              if(curr_edge.label.toLowerCase() === "danced in the work of ") {
+              if(curr_edge.label.toLowerCase() === "danced in the work of") {
                 curr_edge.hidden = false;
                 curr_edge.color = edge_color;
                 req_edges.push(curr_edge.from);
