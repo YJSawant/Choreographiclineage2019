@@ -482,12 +482,6 @@
             {
               artist_lineage_text.style.visibility="hidden";
               artist_lineals.style.visibility="hidden";
-
-              // $("#artist_lineals").dataTable({
-              //   fnDrawCallback: function() {
-              //     $("#artist_lineals thead").remove();
-              //   }
-              // });
             }
           }
         }
@@ -1065,69 +1059,110 @@
         });
 
         network.on('selectNode', function (obj) {
-          var side_nav = document.getElementById("mySidenav");
-          side_nav.style.width = "300px";
-          side_nav.style.display = "block";
-          var selected_node = obj.nodes;
-          var artist_pic = document.getElementById("artist_pic");
-          var artist_name = document.getElementById("artist_name");
-          var artist_gender = document.getElementById("artist_gender");
-          var artist_status = document.getElementById("artist_status");
-          var artist_bio_div = document.getElementById("artist_bio_div");
-          var bio_text_val = document.getElementById("bioTextValue");
-          artist_bio_div.style.visibility="hidden";
-          for (var i = 0; i < totalNodes.length; i++) {
-            var cur_node = totalNodes[i].id;
-            if(selected_node[0] === cur_node)
+        var side_nav = document.getElementById("mySidenav");
+        side_nav.style.width = "300px";
+        side_nav.style.display = "block";
+        var selected_node = obj.nodes;
+        var artist_pic = document.getElementById("artist_pic");
+        var artist_name = document.getElementById("artist_name");
+        var artist_gender = document.getElementById("artist_gender");
+        var artist_status = document.getElementById("artist_status");
+        var artist_education = document.getElementById("artist_education");
+        var artist_genre = document.getElementById("artist_genre");
+        var artist_bio_div = document.getElementById("artist_bio_div");
+        var bio_text_val = document.getElementById("bioTextValue");
+        var artist_lineage_text = document.getElementById("artist_lineage_text");
+        var artist_lineals = document.getElementById("artist_lineals");
+        artist_bio_div.style.visibility="hidden";
+        for (var i = 0; i < totalNodes.length; i++) {
+          var cur_node = totalNodes[i].id;
+          if(selected_node[0] === cur_node)
+          {
+            if(totalNodes[i].image === "upload/photo_upload_data/missing_image.jpg")
             {
-              if(totalNodes[i].image === "upload/photo_upload_data/missing_image.jpg")
+              artist_pic.src="upload/photo_upload_data/NoImageAvailable.jpg";
+            }else{
+              artist_pic.src= totalNodes[i].image;
+            }
+            artist_name.innerHTML= totalNodes[i].label ;
+            if(totalNodes[i]["gender"] === "male" || totalNodes[i]["gender"] === "Male")
+            {
+              artist_gender.innerHTML= "Male";
+            }else if(totalNodes[i]["gender"] ==="") {
+              artist_gender.innerHTML= "";
+            }else if(totalNodes[i]["gender"] === "female" || totalNodes[i]["gender"] === "Female")
+            {
+              artist_gender.innerHTML= "Female";
+            }
+            var dobDate = new Date(totalNodes[i]["dob"]);
+            var dodDate = new Date(totalNodes[i]["dod"]);
+            if(dobDate == "Invalid Date")
+            {
+              artist_status.innerHTML="";
+            } else if(dodDate == "Invalid Date")
+            {
+              dobDate = (dobDate.getMonth()+2) + '/' + dobDate.getDate() + '/' +  dobDate.getFullYear();
+              artist_status.innerHTML= dobDate + "-"+" Present";
+            }
+            else if(dobDate && dodDate)
+            {
+              dobDate = (dobDate.getMonth()+2) + '/' + dobDate.getDate() + '/' +  dobDate.getFullYear();
+              dodDate = (dodDate.getMonth()+2) + '/' + dodDate.getDate() + '/' +  dodDate.getFullYear();
+              artist_status.innerHTML= dobDate+ "-" +dodDate;
+            }
+            if(totalNodes[i]["biography"])
+            {
+              artist_bio_div.style.visibility="visible";
+              if(totalNodes[i]["biography"].startsWith("upload/"))
               {
-                artist_pic.src="upload/photo_upload_data/NoImageAvailable.jpg";
-              }else{
-                artist_pic.src= totalNodes[i].image;
-              }
-              artist_name.innerHTML= totalNodes[i].label ;
-              if(totalNodes[i]["gender"] === "male" || totalNodes[i]["gender"] === "Male")
-              {
-                artist_gender.innerHTML= "Male";
-              }else if(totalNodes[i]["gender"] ==="") {
-                artist_gender.innerHTML= "";
-              }else if(totalNodes[i]["gender"] === "female" || totalNodes[i]["gender"] === "Female")
-              {
-                artist_gender.innerHTML= "Female";
-              }
-              var dobDate = new Date(totalNodes[i]["dob"]);
-              var dodDate = new Date(totalNodes[i]["dod"]);
-              if(dobDate == "Invalid Date")
-              {
-                artist_status.innerHTML="";
-              } else if(dodDate == "Invalid Date")
-              {
-                dobDate = (dobDate.getMonth()+2) + '/' + dobDate.getDate() + '/' +  dobDate.getFullYear();
-                artist_status.innerHTML= dobDate + " Present";
-              }
-              else if(dobDate && dodDate)
-              {
-                dobDate = (dobDate.getMonth()+2) + '/' + dobDate.getDate() + '/' +  dobDate.getFullYear();
-                dodDate = (dodDate.getMonth()+2) + '/' + dodDate.getDate() + '/' +  dodDate.getFullYear();
-                artist_status.innerHTML= dobDate+ "-" +dodDate;
-              }
-              //console.log(totalNodes);
-              if(totalNodes[i]["biography"])
-              {
-                artist_bio_div.style.visibility="visible";
-                if(totalNodes[i]["biography"].startsWith("upload/"))
-                {
-                  url = "http://stark.cse.buffalo.edu/choreographiclineage/"+totalNodes[i]["biography"];
-                  bio_text_val.innerHTML= url;
-                }else if(totalNodes[i]["biography"]){
-                  bioText= totalNodes[i]["biography"];
-                  bio_text_val.innerHTML= bioText;
-                }
+                url = "http://stark.cse.buffalo.edu/choreographiclineage/"+totalNodes[i]["biography"];
+                bio_text_val.innerHTML= url;
+              }else if(totalNodes[i]["biography"]){
+                bioText= totalNodes[i]["biography"];
+                bio_text_val.innerHTML= bioText;
               }
             }
+
+            if(totalNodes[i]["genre"])
+            {
+              genreVal = totalNodes[i]["genre"];
+              artist_genre.innerHTML= "<b>Genres: </b>"+genreVal.substr(1);
+            }else{
+              artist_genre.innerHTML= "";
+            }
+
+            if(totalNodes[i]["university_main"])
+            {
+              artist_education.innerHTML= "<b>University: </b>"+totalNodes[i]["university_main"];
+            }else{
+              artist_education.innerHTML= "";
+            }
+
+            displaydata = totalNodes[i]["artist_relation"];
+            if(displaydata)
+            {
+              artist_lineage_text.style.visibility="visible";
+              artist_lineals.style.visibility="visible";
+              table = $("#artist_lineals").DataTable({
+                paging: false,
+                searching: false,
+                scrollY: 400,
+                info: false,
+                data:displaydata,
+                columns:[
+                  {"data": "relationship"},
+                  {"data": "artist_name" }
+                ],
+                "bDestroy": true
+              });
+            } else
+            {
+              artist_lineage_text.style.visibility="hidden";
+              artist_lineals.style.visibility="hidden";
+            }
           }
-        });
+        }
+      });
   }
 
   function createVisNetwork(container, data, options)
@@ -1198,68 +1233,109 @@
         });
 
         network.on('selectNode', function (obj) {
-          var side_nav = document.getElementById("mySidenav");
-          side_nav.style.width = "300px";
-          side_nav.style.display = "block";
-          var selected_node = obj.nodes;
-          var artist_pic = document.getElementById("artist_pic");
-          var artist_name = document.getElementById("artist_name");
-          var artist_gender = document.getElementById("artist_gender");
-          var artist_status = document.getElementById("artist_status");
-          var artist_bio_div = document.getElementById("artist_bio_div");
-          var bio_text_val = document.getElementById("bioTextValue");
-          artist_bio_div.style.visibility="hidden";
-          for (var i = 0; i < totalNodes.length; i++) {
-            var cur_node = totalNodes[i].id;
-            if(selected_node[0] === cur_node)
+        var side_nav = document.getElementById("mySidenav");
+        side_nav.style.width = "300px";
+        side_nav.style.display = "block";
+        var selected_node = obj.nodes;
+        var artist_pic = document.getElementById("artist_pic");
+        var artist_name = document.getElementById("artist_name");
+        var artist_gender = document.getElementById("artist_gender");
+        var artist_status = document.getElementById("artist_status");
+        var artist_education = document.getElementById("artist_education");
+        var artist_genre = document.getElementById("artist_genre");
+        var artist_bio_div = document.getElementById("artist_bio_div");
+        var bio_text_val = document.getElementById("bioTextValue");
+        var artist_lineage_text = document.getElementById("artist_lineage_text");
+        var artist_lineals = document.getElementById("artist_lineals");
+        artist_bio_div.style.visibility="hidden";
+        for (var i = 0; i < totalNodes.length; i++) {
+          var cur_node = totalNodes[i].id;
+          if(selected_node[0] === cur_node)
+          {
+            if(totalNodes[i].image === "upload/photo_upload_data/missing_image.jpg")
             {
-              if(totalNodes[i].image === "upload/photo_upload_data/missing_image.jpg")
+              artist_pic.src="upload/photo_upload_data/NoImageAvailable.jpg";
+            }else{
+              artist_pic.src= totalNodes[i].image;
+            }
+            artist_name.innerHTML= totalNodes[i].label ;
+            if(totalNodes[i]["gender"] === "male" || totalNodes[i]["gender"] === "Male")
+            {
+              artist_gender.innerHTML= "Male";
+            }else if(totalNodes[i]["gender"] ==="") {
+              artist_gender.innerHTML= "";
+            }else if(totalNodes[i]["gender"] === "female" || totalNodes[i]["gender"] === "Female")
+            {
+              artist_gender.innerHTML= "Female";
+            }
+            var dobDate = new Date(totalNodes[i]["dob"]);
+            var dodDate = new Date(totalNodes[i]["dod"]);
+            if(dobDate == "Invalid Date")
+            {
+              artist_status.innerHTML="";
+            } else if(dodDate == "Invalid Date")
+            {
+              dobDate = (dobDate.getMonth()+2) + '/' + dobDate.getDate() + '/' +  dobDate.getFullYear();
+              artist_status.innerHTML= dobDate + "-"+" Present";
+            }
+            else if(dobDate && dodDate)
+            {
+              dobDate = (dobDate.getMonth()+2) + '/' + dobDate.getDate() + '/' +  dobDate.getFullYear();
+              dodDate = (dodDate.getMonth()+2) + '/' + dodDate.getDate() + '/' +  dodDate.getFullYear();
+              artist_status.innerHTML= dobDate+ "-" +dodDate;
+            }
+            if(totalNodes[i]["biography"])
+            {
+              artist_bio_div.style.visibility="visible";
+              if(totalNodes[i]["biography"].startsWith("upload/"))
               {
-                artist_pic.src="upload/photo_upload_data/NoImageAvailable.jpg";
-              }else{
-                artist_pic.src= totalNodes[i].image;
-              }
-              artist_name.innerHTML= totalNodes[i].label ;
-              if(totalNodes[i]["gender"] === "male" || totalNodes[i]["gender"] === "Male")
-              {
-                artist_gender.innerHTML= "Male";
-              }else if(totalNodes[i]["gender"] ==="") {
-                artist_gender.innerHTML= "";
-              }else if(totalNodes[i]["gender"] === "female" || totalNodes[i]["gender"] === "Female")
-              {
-                artist_gender.innerHTML= "Female";
-              }
-              var dobDate = new Date(totalNodes[i]["dob"]);
-              var dodDate = new Date(totalNodes[i]["dod"]);
-              if(dobDate == "Invalid Date")
-              {
-                artist_status.innerHTML="";
-              } else if(dodDate == "Invalid Date")
-              {
-                dobDate = (dobDate.getMonth()+2) + '/' + dobDate.getDate() + '/' +  dobDate.getFullYear();
-                artist_status.innerHTML= dobDate + " Present";
-              }
-              else if(dobDate && dodDate)
-              {
-                dobDate = (dobDate.getMonth()+2) + '/' + dobDate.getDate() + '/' +  dobDate.getFullYear();
-                dodDate = (dodDate.getMonth()+2) + '/' + dodDate.getDate() + '/' +  dodDate.getFullYear();
-                artist_status.innerHTML= dobDate+ "-" +dodDate;
-              }
-              //console.log(totalNodes);
-              if(totalNodes[i]["biography"])
-              {
-                artist_bio_div.style.visibility="visible";
-                if(totalNodes[i]["biography"].startsWith("upload/"))
-                {
-                  url = "http://stark.cse.buffalo.edu/choreographiclineage/"+totalNodes[i]["biography"];
-                  bio_text_val.innerHTML= url;
-                }else if(totalNodes[i]["biography"]){
-                  bioText= totalNodes[i]["biography"];
-                  bio_text_val.innerHTML= bioText;
-                }
+                url = "http://stark.cse.buffalo.edu/choreographiclineage/"+totalNodes[i]["biography"];
+                bio_text_val.innerHTML= url;
+              }else if(totalNodes[i]["biography"]){
+                bioText= totalNodes[i]["biography"];
+                bio_text_val.innerHTML= bioText;
               }
             }
+
+            if(totalNodes[i]["genre"])
+            {
+              genreVal = totalNodes[i]["genre"];
+              artist_genre.innerHTML= "<b>Genres: </b>"+genreVal.substr(1);
+            }else{
+              artist_genre.innerHTML= "";
+            }
+
+            if(totalNodes[i]["university_main"])
+            {
+              artist_education.innerHTML= "<b>University: </b>"+totalNodes[i]["university_main"];
+            }else{
+              artist_education.innerHTML= "";
+            }
+
+            displaydata = totalNodes[i]["artist_relation"];
+            if(displaydata)
+            {
+              artist_lineage_text.style.visibility="visible";
+              artist_lineals.style.visibility="visible";
+              table = $("#artist_lineals").DataTable({
+                paging: false,
+                searching: false,
+                scrollY: 400,
+                info: false,
+                data:displaydata,
+                columns:[
+                  {"data": "relationship"},
+                  {"data": "artist_name" }
+                ],
+                "bDestroy": true
+              });
+            } else
+            {
+              artist_lineage_text.style.visibility="hidden";
+              artist_lineals.style.visibility="hidden";
+            }
           }
+        }
         });
   }
 }

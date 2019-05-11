@@ -52,6 +52,7 @@ if($_SESSION["user_type"] == "Admin")
     					<li><span class="yellowarrow"></span>Collaborated With</li>
     					<li><span class="greenarrow"></span>Danced in the work of</li>
 						<li><span class="bluearrow"></span>Influenced By</li>
+						<li><span class="greyarrow"></span>Any Relationship</li>
    				</ul>
 				</div>
 			 </div>
@@ -202,6 +203,11 @@ if($_SESSION["user_type"] == "Admin")
 		content:'\279B';
 		font-size:20px;
 		color:blue;
+	}
+	.greyarrow:before{
+		content:'\279B';
+		font-size:20px;
+		color:grey;
 	}
 
   .my-legend .legend-title {

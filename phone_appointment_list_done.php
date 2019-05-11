@@ -65,6 +65,17 @@ echo "</table></div>";
 
 ?>
     <script>
+    $(window).bind("load", function() {
+   // code here
+   var activeElements= document.querySelectorAll(".active");
+    activeElements[0].classList.remove('active');
+    var url = window.location.href;
+        if(url.search("phone_appointment_list_done.php"))
+        {
+            var phone_appointment = document.getElementById("phone_appointment");
+            $(phone_appointment).addClass('active');
+        }
+});
     function confirmDone(){
 
         //var c = confirm("Warning: You are about to confirm this appointment schedule profile!");
