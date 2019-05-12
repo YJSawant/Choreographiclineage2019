@@ -72,7 +72,6 @@ if($_SESSION["user_type"] == "Admin")
         <section>
           <h4>Advisory Board</h4>
           <ul>
-            <li>Raul P.Martinez, Director, National Museum of Dance</li>
             <li>Sydney Skybetter, Founding Partner of the Edwards & Skybetter | Change Agency, a technology and facilitation consultancy whose clients have included New York University, The University of Southern California, The Mark Morris Dance Group, and The Jerome Robbins Foundation, among many others.</li>
             <li>Libby Smigel, Senior Advisor, Dance Heritage Coalition; Dance Archivist, Music Division, Library of Congress</li>
             <li>Julie Adams Strandberg, Co-Founder, American Dance Legacy Initiative; Senior Lecturer, Theatre Arts and Performance Studies, Brown University</li>
